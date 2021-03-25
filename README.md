@@ -97,4 +97,4 @@ Please make sure to update tests as appropriate.
 
 ## License & copyright
 © Daniel Hajnal
-Licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
+Licensed under the [MIT License](LICENSE).
