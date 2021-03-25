@@ -1,3 +1,10 @@
+/*
+ * Created on Tue June 18 2020
+ *
+ * Copyright (c) 2020 - Daniel Hajnal
+ */
+
+
 #include <stdio.h>
 
 #include "../inc/interpreter.h"

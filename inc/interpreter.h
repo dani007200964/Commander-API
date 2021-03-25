@@ -1,3 +1,10 @@
+/*
+ * Created on Tue June 18 2020
+ *
+ * Copyright (c) 2020 - Daniel Hajnal
+ */
+
+
 //  Include Guard
 #ifndef INTERPRETER_H_
 #define INTERPRETER_H_
