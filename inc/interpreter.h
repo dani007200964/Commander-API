@@ -7,7 +7,9 @@
 #include <stdint.h>
 #include <string.h>
 
-#define NUM_OF_API_FUNCS 7
+#define NUM_OF_API_FUNCS  8
+#define MAX_RESP_LEN      100
+#define CMD_BUFF_LEN      30
 
 //  structure for instruction data
 typedef struct API_t{
@@ -18,6 +20,7 @@ typedef struct API_t{
   const char **name;        //  Name of the instruction
   const char **desc;        //  Description of the command
   void(*func)(char*,char*); //  Function pointer to the command function
+  //void(*resp_fn)(char*, ...)
 
 }API_t;
 
@@ -39,6 +42,8 @@ void optimise_api_tree(API_t *head);
 void swap_api_elements( uint16_t index, uint16_t place );
 
 void recursive_optimiser( int32_t start_index, int32_t stop_index );
+
+void execute( char *cmd, char *response );
 
 void teszt(void);
 

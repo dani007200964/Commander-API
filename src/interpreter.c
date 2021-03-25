@@ -18,6 +18,7 @@ create_instruction_data(majom, "majom fuggveny leirasa, jaaaa :)");
 create_instruction_data(eger, "eger fuggveny leirasa, gyoooo :)");
 create_instruction_data(okor, "eger fuggveny leirasa, gyaaa :)");
 create_instruction_data(csiga, "eger fuggveny leirasa, dikk :)");
+create_instruction_data(v, "Vagod csotany, hihihiiii ;)");
 
 #define add_instruction(name, func) add_interpreter_instruction(&name##_API_NAME, &name##_API_DESC, func);
 
@@ -46,6 +47,7 @@ void init_interpreter(void)
     add_instruction(eger, kutya_func);
     add_instruction(okor, kutya_func);
     add_instruction(csiga, kutya_func);
+    add_instruction(v, kutya_func);
 
     //  Index eache element to find their place in alphabetic order
     index_apis_in_order( &API_tree[0] );
@@ -97,7 +99,7 @@ void add_interpreter_instruction(const char **name, const char **desc, void (*fu
     // if it is ot the first command we have to find it's place in the tree
     else
     {
-        prev = &API_tree[0];                        //  get the address of the root element
+        prev = &API_tree[0];                                        //  get the address of the root element
         comp_res = strcmp( (char*)*(prev->name), (char*)*name );    //  compare the names and save the result to 'comp_res'
 
         //  compare( ABC order ) the root element name and the new element name
@@ -272,5 +274,68 @@ void recursive_optimiser( int32_t start_index, int32_t stop_index ){
     recursive_optimiser( start_index, mid - 1 );
     recursive_optimiser( mid + 1, stop_index );
 
+
+}
+
+void execute( char *cmd, char *response ){
+    
+    API_t *next;
+    API_t *prev;
+    int8_t comp_res;
+    char *arg;
+    uint32_t cmd_name_cntr;
+
+    arg = cmd;          //  'arg' variable will hold the start address of the argument list
+    cmd_name_cntr = 0;
+
+    //  find the first space character or a string-end character.
+    //  At this time count how long is the command name( in characters )
+    while( ( *arg != '\0' ) && ( *arg != ' ' ) ){
+
+        cmd_name_cntr++;
+        arg++;
+
+    }
+
+    //  If space character found increment the 'arg'.
+    //  It is important to do unless the arg list will contain
+    //  a space character at the beginning.
+    if( *arg == ' ' ){
+
+        *arg = '\0';
+        arg++;
+
+    }   
+
+
+    prev = &API_tree[0];
+
+    //comp_res = strncmp( (char*)*(prev->name), cmd, cmd_name_cntr );
+
+    comp_res = strncmp( (char*)*(prev->name), cmd, strlen( (char*)*(prev->name) ) );
+
+    (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
+
+    while( ( comp_res !=0 ) && ( next != NULL ) ){
+
+        prev = next;
+        //comp_res = strncmp( (char*)*(prev->name), cmd, cmd_name_cntr );
+        comp_res = strncmp( (char*)*(prev->name), cmd, strlen( (char*)*(prev->name) ) );
+
+        (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
+
+    }
+
+    if( comp_res == 0 ){
+
+        (prev -> func)( arg, response );
+
+    }
+
+    else{
+
+        printf( "Command \'%s\' not found!!!\r\n", cmd );
+
+    }
 
 }
