@@ -14,7 +14,7 @@ Installation is easy. Jus add __interpreter.h__, and __interpreter.c__ files to 
 
 First you have to add the two files to your project. Than you have to create the instruction data in __interpreter.c__ file under the following comment:
 
-'''c
+'''
 //  +----  Create instruction data for the API  ----+
 //  |                                               |
 //  |       This is where you have to add           |
@@ -29,7 +29,7 @@ Use the __create_instruction_data()__ macro to add your commands to the interpre
 
 The next step is to match the functions to your commands. You have to do it in interpreter.c file, in the init_interpreter() function, under the following comment:
 
-'''c
+'''
 //  +----  Match instruction to it's function   ----+
 //  |                                               |
 //  |       This is where you have to match         |
@@ -44,7 +44,7 @@ Use the __add_instruction()__ macro to match the name and the asociated function
 
 The next thing you have to do is to specify the number of commands you have been added. It can be done in the __interpreter.h__ file under the following comment:
 
-'''c
+'''
 //  +----  Set the correct values  ----+
 //  |                                  |
 //  |     NUM_OF_API_FUNCS value has   |
@@ -59,7 +59,7 @@ Modify the __NUM_OF_API_FUNCS__ value to the right number unless __the program w
 
 The last thing you have to do is to actually create your functions. A simple example function can be like this:
 
-'''c
+'''
 void stop_func(char *args, int(*resp_fn)(const char*, ...))
 {
     printf("STOP!\r\n");
