@@ -10,44 +10,80 @@ uint32_t API_place_cntr;
     const char *name##_API_NAME = (const char *)#name; \
     const char *name##_API_DESC = (const char *)desc;
 
-//  *****  Create instruction data for the API  *****
-create_instruction_data(cica, "cica fuggveny leirasa, jeeee :)");
-create_instruction_data(kutya, "kutya fuggveny leirasa, joooo :)");
-create_instruction_data(tehen, "tehen fuggveny leirasa, jii :)");
-create_instruction_data(majom, "majom fuggveny leirasa, jaaaa :)");
-create_instruction_data(eger, "eger fuggveny leirasa, gyoooo :)");
-create_instruction_data(okor, "eger fuggveny leirasa, gyaaa :)");
-create_instruction_data(csiga, "eger fuggveny leirasa, dikk :)");
-create_instruction_data(v, "Vagod csotany, hihihiiii ;)");
-
 #define add_instruction(name, func) add_interpreter_instruction(&name##_API_NAME, &name##_API_DESC, func);
 
-void cica_func(char *args, char *response)
+
+//  +----  Create instruction data for the API  ----+
+//  |                                               |
+//  |       This is where you have to add           |
+//  |               your commands!                  |
+//  |                                               |
+//  +-----------------------------------------------+
+
+create_instruction_data(stop, "basic stop command");
+create_instruction_data(start, "basic start command");
+create_instruction_data(left, "command used to turn left");
+create_instruction_data(right, "command used to turn right");
+
+
+//  This is an example function for the stop command
+void stop_func(char *args, int(*resp_fn)(const char*, ...))
 {
-    printf("Cica!\r\n");
+    printf("STOP!\r\n");
     printf("Args: %s\r\n", args);
+
+    //  Always check the response function channel!
+    //  If it's a NULL pointer you can't use it,
+    //  because itt will crash your porgram!
+    if( resp_fn != NULL ){
+
+        resp_fn( "Wow! Magic!!!!\r\n" );
+
+    }
 }
 
-void kutya_func(char *args, char *response)
+//  This is an example function for the start command
+void start_func(char *args, int(*resp_fn)(const char*, ...))
 {
-    printf("Kutya!\r\n");
+    printf("START!\r\n");
     printf("Args: %s\r\n", args);
+
 }
+
+//  This is an example function for the left command
+void left_func(char *args, int(*resp_fn)(const char*, ...))
+{
+    printf("Turning left!\r\n");
+    printf("Args: %s\r\n", args);
+
+}
+
+//  This is an example function for the right command
+void right_func(char *args, int(*resp_fn)(const char*, ...))
+{
+    printf("Turning right!\r\n");
+    printf("Args: %s\r\n", args);
+
+}
+
 
 void init_interpreter(void)
 {
     //  Initialize the 'API_cntr' variable as zero before adding new items
     API_cntr = 0;
 
-    //  *****  Create the binary tree of the instructions  *****
-    add_instruction(majom, kutya_func);
-    add_instruction(tehen, kutya_func);
-    add_instruction(cica, cica_func);
-    add_instruction(kutya, kutya_func);
-    add_instruction(eger, kutya_func);
-    add_instruction(okor, kutya_func);
-    add_instruction(csiga, kutya_func);
-    add_instruction(v, kutya_func);
+//  +----  Match instruction to it's function   ----+
+//  |                                               |
+//  |       This is where you have to match         |
+//  |       every instruction name to it's          |
+//  |                   function.                   |
+//  |                                               |
+//  +-----------------------------------------------+
+    add_instruction(stop, stop_func);
+    add_instruction(start, start_func);
+    add_instruction(left, left_func);
+    add_instruction(right, right_func);
+
 
     //  Index eache element to find their place in alphabetic order
     index_apis_in_order( &API_tree[0] );
@@ -59,11 +95,15 @@ void init_interpreter(void)
     print_apis_in_order( &API_tree[0] );
 
     if( API_cntr != NUM_OF_API_FUNCS ){
-        printf("**ERROR**\tAPI function number mismatch!!!\r\n");
+
+        #ifdef INTERPRETER_DBG
+        INTERPRETER_DBG( "**ERROR**\tAPI function number mismatch!!!\r\n" );
+        #endif
+
     }
 }
 
-void add_interpreter_instruction(const char **name, const char **desc, void (*func)(char *, char *))
+void add_interpreter_instruction(const char **name, const char **desc, void (*func)(char *, int(*resp_fn)(const char*, ...)))
 {
     API_t *next;
     API_t *prev;
@@ -74,7 +114,10 @@ void add_interpreter_instruction(const char **name, const char **desc, void (*fu
     if (API_cntr >= NUM_OF_API_FUNCS)
     {
 
-        printf("**ERROR**\tToo many instruction, memory is full!\r\n");
+        #ifdef INTERPRETER_DBG
+        INTERPRETER_DBG( "**ERROR**\tToo many instruction, memory is full!\r\n" );
+        #endif
+
         return;
     }
 
@@ -141,7 +184,10 @@ void index_apis_in_order(API_t *head){
 
     recursive_indexer( head );
 
-    printf( "Indexer finished...\r\n" );
+    #ifdef INTERPRETER_DBG
+    INTERPRETER_DBG( "Indexer finished...\r\n" );
+    #endif
+    
 
 }
 
@@ -173,7 +219,7 @@ void print_apis_in_order(API_t *head){
   }
 
     print_apis_in_order( head -> left );
-    printf( "%d.\t%s\r\n", head -> place , *(head -> name) );
+    INTERPRETER_PRINTF( "%d.\t%s\r\n", head -> place , *(head -> name) );
     print_apis_in_order( head -> right );
 
 }
@@ -277,7 +323,7 @@ void recursive_optimiser( int32_t start_index, int32_t stop_index ){
 
 }
 
-void execute( char *cmd, char *response ){
+void execute( char *cmd, int(*resp_fn)(const char*, ...) ){
     
     API_t *next;
     API_t *prev;
@@ -310,8 +356,6 @@ void execute( char *cmd, char *response ){
 
     prev = &API_tree[0];
 
-    //comp_res = strncmp( (char*)*(prev->name), cmd, cmd_name_cntr );
-
     comp_res = strncmp( (char*)*(prev->name), cmd, strlen( (char*)*(prev->name) ) );
 
     (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
@@ -319,7 +363,7 @@ void execute( char *cmd, char *response ){
     while( ( comp_res !=0 ) && ( next != NULL ) ){
 
         prev = next;
-        //comp_res = strncmp( (char*)*(prev->name), cmd, cmd_name_cntr );
+
         comp_res = strncmp( (char*)*(prev->name), cmd, strlen( (char*)*(prev->name) ) );
 
         (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
@@ -328,13 +372,13 @@ void execute( char *cmd, char *response ){
 
     if( comp_res == 0 ){
 
-        (prev -> func)( arg, response );
+        (prev -> func)( arg, resp_fn );
 
     }
 
     else{
 
-        printf( "Command \'%s\' not found!!!\r\n", cmd );
+        INTERPRETER_PRINTF( "Command \'%s\' not found!!!\r\n", cmd );
 
     }
 
