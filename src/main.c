@@ -2,6 +2,7 @@
  * Created on Tue June 18 2020
  *
  * Copyright (c) 2020 - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
  */
 
 

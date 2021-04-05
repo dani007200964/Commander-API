@@ -2,6 +2,7 @@
  * Created on Tue June 18 2020
  *
  * Copyright (c) 2020 - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
  */
 
 
@@ -142,8 +143,8 @@ void add_interpreter_instruction(const char **name, const char **desc, void (*fu
         API_tree[0].left = NULL;    //  because it is the first element of the tree,
         API_tree[0].right = NULL;   //  left and right branches has to be NULL
 
-        API_tree[0].place = 0;      //  default place = 0  
-        
+        API_tree[0].place = 0;      //  default place = 0
+
     }
 
     // if it is ot the first command we have to find it's place in the tree
@@ -164,7 +165,7 @@ void add_interpreter_instruction(const char **name, const char **desc, void (*fu
         }
 
         //  link the new item on the previous branch
-        ( comp_res > 0 ) ? ( ( prev->left ) = &API_tree[API_cntr] ) : ( ( prev->right ) = &API_tree[API_cntr] );        
+        ( comp_res > 0 ) ? ( ( prev->left ) = &API_tree[API_cntr] ) : ( ( prev->right ) = &API_tree[API_cntr] );
 
         //  Fill the new item parameters
 
@@ -175,7 +176,7 @@ void add_interpreter_instruction(const char **name, const char **desc, void (*fu
         API_tree[API_cntr].left = NULL;     //  close the branch
         API_tree[API_cntr].right = NULL;
 
-        API_tree[API_cntr].place = 0;       //  default place = 0  
+        API_tree[API_cntr].place = 0;       //  default place = 0
 
     }
 
@@ -194,7 +195,7 @@ void index_apis_in_order(API_t *head){
     #ifdef INTERPRETER_DBG
     INTERPRETER_DBG( "Indexer finished...\r\n" );
     #endif
-    
+
 
 }
 
@@ -213,13 +214,13 @@ void recursive_indexer(API_t *head){
     head -> place = API_place_cntr;
     API_place_cntr++;
 
-    recursive_indexer( head -> right );   
+    recursive_indexer( head -> right );
 
 }
 
 //  This function is used to print out the API to the console
 void print_apis_in_order(API_t *head){
-  
+
     //  End of recursive algorythm
     if( head == 0 ){
         return;
@@ -239,7 +240,7 @@ uint16_t find_api_index_by_place( uint16_t place ){
     for( i = 0; i < NUM_OF_API_FUNCS; i++ ){
 
         if( API_tree[i].place == place ){
-            
+
             return i;
 
         }
@@ -331,7 +332,7 @@ void recursive_optimiser( int32_t start_index, int32_t stop_index ){
 }
 
 void execute( char *cmd, int(*resp_fn)(const char*, ...) ){
-    
+
     API_t *next;
     API_t *prev;
     int8_t comp_res;
@@ -358,7 +359,7 @@ void execute( char *cmd, int(*resp_fn)(const char*, ...) ){
         *arg = '\0';
         arg++;
 
-    }   
+    }
 
 
     prev = &API_tree[0];
