@@ -1,5 +1,5 @@
 #
-# Created on Tue June 18 2020
+# Created on June 18 2020
 #
 # Copyright (c) 2020 - Daniel Hajnal
 #
@@ -8,7 +8,7 @@
 # Compiler settings - Can be customized.
 CC = gcc
 CXXFLAGS = -std=c11 -Wall
-LDFLAGS = 
+LDFLAGS =
 
 # Makefile settings - Can be customized.
 APPNAME = myapp
