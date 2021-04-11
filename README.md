@@ -245,6 +245,7 @@ __Congratulations, you have made your first project with Commander API :)__
 # The importance of response function
 
 ![](https://github.com/dani007200964/Commander-API/blob/master/Doc/images/response_function_explained_01.png)
+
 Imagine a system that has a various number of channels to communicate with.
 For example a Linux system, which has its shell redirected to SSH, Serial, GUI...
 If a command arrives in one of the supported channels, you want to generate
@@ -259,6 +260,7 @@ error messages will be redirected to INTERPRETER_PRINTF definition.
 # Print the description
 
 ![](https://github.com/dani007200964/Commander-API/blob/master/Doc/images/description_example.png)
+
 To print the description you just have to add a question mark to the end of the command.
 
 # When and how to use a buffer?
