@@ -1,49 +1,7 @@
-# Commander API
-**Version V0.2A**
+@page usage_with_arduino Usage with Arduino
+@tableofcontents
 
-Commander-API is a simple to use interpreter library and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, __small ARM or AVR devices or some embedded stuff__. The library shows an Arduino implementation and it can be found in the Arduino folder in the repository. The source files are located in the src folder.
-
-# Doxygen documentation
-
-The project has a Doxygen generated documentation. It can be found in Doc/html/index.html.
-The theme that used with the documentation can be found [here](https://jothepro.github.io/doxygen-awesome-css/)
-
-# Arduino installation
-
-__1.__
-
-Download this library as a .zip, or clone it.
-
-__2.__
-
-Create a new sketch in Arduino IDE and open its folder.
-
-__3.__
-
-![](https://github.com/dani007200964/Commander-API/blob/main/Doc/images/arduino_install_lib_install.png)
-Now copy interpreter.c and interpreter.h files from src folder in this repository, to your sketch folder.
-
-__4.__
-
-Because Arduino uses C++ not C, you have to rename the interpreter.c file to interpreter.cpp,
-and the interpreter.h file to interpreter.hpp. My recommendation is to use a text editor for
-this step like [Atom](https://atom.io/) or [Notepad++](https://notepad-plus-plus.org/downloads/).
-
-__5.__
-
-If Arduino IDE is opened __save all your work,__ then restart Arduino IDE.
-
-__6.__
-
-![](https://github.com/dani007200964/Commander-API/blob/main/Doc/images/arduino_install_success.png)
-Now you should see the interpreter.cpp and interpreter.hpp files on the top bar.
-Than you just include interpreter.hpp as usual.
-
-Congratulations you successfully added the library to your sketch.
-
-# Usage with Arduino
-
-**Basic example**
+@section basic_example Basic example
 
 __1.__
 
@@ -242,9 +200,9 @@ and understand this library.
 
 __Congratulations, you have made your first project with Commander API :)__
 
-**The importance of response function**
+@section the_importance_of_responce_func The importance of response function
 
-![](https://github.com/dani007200964/Commander-API/blob/main/Doc/images/response_function_explained_01.png)
+![](response_function_explained_01.png)
 Imagine a system that has a various number of channels to communicate with.
 For example a Linux system, which has its shell redirected to SSH, Serial, GUI...
 If a command arrives in one of the supported channels, you want to generate
@@ -256,12 +214,12 @@ function to it. The advanced demo shows how to add a response function correctly
 If you don't use a response function, please use NULL as argument. In this case the
 error messages will be redirected to INTERPRETER_PRINTF definition.
 
-**Print the description**
+@section print_the_description Print the description
 
-![](https://github.com/dani007200964/Commander-API/blob/main/Doc/images/description_example.png)
+![](description_example.png)
 To print the description you just have to add a question mark to the end of the command.
 
-**When and how to use a buffer?**
+@section when_to_use_a_buffer When and how to use a buffer?
 
 Commander API designed to work mainly on embedded devices. In these devices usually you work
 from RAM. If you work from RAM you have an option to modify the contant of the command that
@@ -290,24 +248,9 @@ If it is too short, than you can't interpret large commands correctly.
 
 If you __does not need a buffer__, than you __MUST uncomment__ INTERPRETER_BUFFER_SIZE!
 
-**Arduino printf function**
+@section arduino_printf_function Arduino printf function
 
 The arduino_printf function is implemented by compatibility reasons. Commander API requires
 a printf like function as a communication channel. This function acts like a printf function,
 but it is redirected to serial. If you need more channels like TCP
 or bluetooth you have to implement a printf like functions for those channels as well.
-
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## Donation
-If this project help you reduce time to develop, you can give me a cup of coffee :)
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=YFGZD78H6K2CS)
-
-## License & copyright
-© Daniel Hajnal
-Licensed under the MIT License
