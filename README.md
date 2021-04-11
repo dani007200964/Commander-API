@@ -20,7 +20,7 @@ Create a new sketch in Arduino IDE and open its folder.
 
 __3.__
 
-![](https://github.com/dani007200964/Commander-API/blob/main/Doc/images/arduino_install_lib_install.png)
+![](https://github.com/dani007200964/Commander-API/blob/master/Doc/images/arduino_install_lib_install.png)
 Now copy interpreter.c and interpreter.h files from src folder in this repository, to your sketch folder.
 
 __4.__
@@ -35,7 +35,7 @@ If Arduino IDE is opened __save all your work,__ then restart Arduino IDE.
 
 __6.__
 
-![](https://github.com/dani007200964/Commander-API/blob/main/Doc/images/arduino_install_success.png)
+![](https://github.com/dani007200964/Commander-API/blob/master/Doc/images/arduino_install_success.png)
 Now you should see the interpreter.cpp and interpreter.hpp files on the top bar.
 Than you just include interpreter.hpp as usual.
 
@@ -244,7 +244,7 @@ __Congratulations, you have made your first project with Commander API :)__
 
 **The importance of response function**
 
-![](https://github.com/dani007200964/Commander-API/blob/main/Doc/images/response_function_explained_01.png)
+![](https://github.com/dani007200964/Commander-API/blob/master/Doc/images/images/response_function_explained_01.png)
 Imagine a system that has a various number of channels to communicate with.
 For example a Linux system, which has its shell redirected to SSH, Serial, GUI...
 If a command arrives in one of the supported channels, you want to generate
@@ -258,7 +258,7 @@ error messages will be redirected to INTERPRETER_PRINTF definition.
 
 **Print the description**
 
-![](https://github.com/dani007200964/Commander-API/blob/main/Doc/images/description_example.png)
+![](https://github.com/dani007200964/Commander-API/blob/master/Doc/images/images/description_example.png)
 To print the description you just have to add a question mark to the end of the command.
 
 **When and how to use a buffer?**
