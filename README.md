@@ -242,9 +242,9 @@ and understand this library.
 
 __Congratulations, you have made your first project with Commander API :)__
 
-**The importance of response function**
+# The importance of response function
 
-![](https://github.com/dani007200964/Commander-API/blob/master/Doc/images/images/response_function_explained_01.png)
+![](https://github.com/dani007200964/Commander-API/blob/master/Doc/images/response_function_explained_01.png)
 Imagine a system that has a various number of channels to communicate with.
 For example a Linux system, which has its shell redirected to SSH, Serial, GUI...
 If a command arrives in one of the supported channels, you want to generate
@@ -256,12 +256,12 @@ function to it. The advanced demo shows how to add a response function correctly
 If you don't use a response function, please use NULL as argument. In this case the
 error messages will be redirected to INTERPRETER_PRINTF definition.
 
-**Print the description**
+# Print the description
 
-![](https://github.com/dani007200964/Commander-API/blob/master/Doc/images/images/description_example.png)
+![](https://github.com/dani007200964/Commander-API/blob/master/Doc/images/description_example.png)
 To print the description you just have to add a question mark to the end of the command.
 
-**When and how to use a buffer?**
+# When and how to use a buffer?
 
 Commander API designed to work mainly on embedded devices. In these devices usually you work
 from RAM. If you work from RAM you have an option to modify the contant of the command that
@@ -290,7 +290,7 @@ If it is too short, than you can't interpret large commands correctly.
 
 If you __does not need a buffer__, than you __MUST uncomment__ INTERPRETER_BUFFER_SIZE!
 
-**Arduino printf function**
+# Arduino printf function
 
 The arduino_printf function is implemented by compatibility reasons. Commander API requires
 a printf like function as a communication channel. This function acts like a printf function,
