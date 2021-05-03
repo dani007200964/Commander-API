@@ -505,7 +505,7 @@ void execute( char *cmd, int(*resp_fn)(const char*, ...) ){
   prev = &API_tree[0];
 
   // Compare the first element in the tree with the command.
-  comp_res = strncmp( (char*)*(prev->name), cmd, strlen( (char*)*(prev->name) ) );
+  comp_res = strcmp( (char*)*(prev->name), cmd );
 
   // Decide where to find the next element in the tree.
   (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
@@ -520,7 +520,7 @@ void execute( char *cmd, int(*resp_fn)(const char*, ...) ){
     prev = next;
 
     // Compare the actual element in the tree with the command.
-    comp_res = strncmp( (char*)*(prev->name), cmd, strlen( (char*)*(prev->name) ) );
+    comp_res = strcmp( (char*)*(prev->name), cmd );
 
     // Decide where to find the next element in the tree.
     // This step will overwrite the next variable and we will lost our address.
