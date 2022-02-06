@@ -1,51 +1,37 @@
 /*
- * commander.cpp
+ * Created on June 18 2020
  *
- *  Created on: Feb 5, 2022
- *      Author: dani0
- */
+ * Copyright (c) 2020 - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Commander-API project.
+ * Modified 2022.02.06
+*/
 
 #include "commander.hpp"
 
 
 void Commander::attachTreeFunction( API_t *API_tree_p, uint32_t API_tree_size_p ){
 
+	// Save parameters to internal variables.
 	API_tree      = API_tree_p;
 	API_tree_size = API_tree_size_p;
 
 }
 
-void Commander::attachDebugPort( Serial *debugPort_p ){
-
-	debugPort = debugPort_p;
-
-}
-
 void Commander::init(){
 
+	// Generic conter variables.
 	uint32_t i;
 	uint32_t  j;
 
+	// Temporary variable, used to flip elements.
 	API_t temp;
 
-	if( debugPort ){
-
-		debugPort -> println( "Rendezes elott:" );
-		for( i = 0; i < API_tree_size; i++ ){
-
-			debugPort -> printf( "%d. %s\r\n", i, API_tree[ i ].name );
-
-		}
-		debugPort -> println();
-
-	}
-
-	// Nev szerint sorba rendezzuk a parancsokat.
+	// Make the tree ordered by alphabet.
 	for( i = 0; i < API_tree_size; i++ ){
 
 		for( j = i + 1; j < API_tree_size; j++ ){
 
-			//if( API_tree[ i ] > API_tree[ j ] ){
 			if( strcmp( API_tree[ i ].name, API_tree[ j ].name ) > 0 ){
 
 				temp = API_tree[ i ];
@@ -58,40 +44,18 @@ void Commander::init(){
 
 	}
 
-	if( debugPort ){
-
-		debugPort -> println( "Rendezes utan:" );
-		for( i = 0; i < API_tree_size; i++ ){
-
-			debugPort -> printf( "%d. %s\r\n", i, API_tree[ i ].name );
-
-		}
-		debugPort -> println();
-
-	}
-
-	// Elmentjuk a nevsorrend szerinti helyet a place valtozoba.
+	// Fill the place variable in the tree with
+	// correct alphabetical place.
 	for( i = 0; i < API_tree_size; i++ ){
 
 		API_tree[ i ].place = i;
 
 	}
 
-	// Optimalizaljuk a sorrendet.
-	optimise_api_tree();
-
-	if( debugPort ){
-
-		debugPort -> println( "Optimalizalas utan:" );
-		for( i = 0; i < API_tree_size; i++ ){
-
-			debugPort -> printf( "%d. %s\r\n", i, API_tree[ i ].name );
-
-		}
-		debugPort -> println();
-
-	}
-
+	// Optimize the tree to make it balanced.
+	// It is necessary to speed up the command
+	// search phase.
+	optimize_api_tree();
 
 }
 
@@ -113,14 +77,13 @@ uint16_t Commander::find_api_index_by_place( uint16_t place ){
 
 	}
 
-	// else return 0
 	return 0;
 
 }
 
 void Commander::swap_api_elements( uint16_t index, uint16_t place ){
 
-  // Buffer that will temporarly hold an element.
+  // Buffer that will temporary hold an element.
   // This is required for a swap.
   API_t buffer;
 
@@ -141,7 +104,7 @@ void Commander::swap_api_elements( uint16_t index, uint16_t place ){
 
 }
 
-void Commander::optimise_api_tree(){
+void Commander::optimize_api_tree(){
 
 	uint32_t i;
 
@@ -153,19 +116,19 @@ void Commander::optimise_api_tree(){
 	// Stores the previous elements address in the tree
 	API_t *prev;
 
-	// It will store string compersation result
+	// It will store string comparison result
 	int32_t comp_res;
 
-	// recursive optimiser need to initialise 'API_cntr' to 0
+	// recursive optimizer need to initialize elementCounter to 0
 	elementCounter = 0;
 
 	// recursively finds the order which is optimal for a balanced tree
-	recursive_optimiser( 0, API_tree_size - 1 );
+	recursive_optimizer( 0, API_tree_size - 1 );
 
 	// The order is good, but the connection between the branches broken,
 	// because we swapped the API_tree array elements.
-	// To fix this problem we have to reinitialise the tree, and use
-	// 'add_interpreter_command' function again for all elements.
+	// To fix this problem we have to add elements from index 1 and
+	// place them in the binary tree.
 	for( i = 1; i < API_tree_size; i++ ){
 
 		prev = &API_tree[ 0 ];
@@ -187,37 +150,36 @@ void Commander::optimise_api_tree(){
 
 }
 
-// This function is used to order the elements in API_tree array to
-// get the fastest search speed
-// this function needs 'API_cntr' to be zeroed out before the first call
-void Commander::recursive_optimiser( int32_t start_index, int32_t stop_index ){
+void Commander::recursive_optimizer( int32_t start_index, int32_t stop_index ){
 
-  int32_t mid;
+	// The middle number between start and stop index
+	// will be stored in this variable.
+	int32_t mid;
 
-  // End of recursive algorythm
-  if( start_index > stop_index ){
+	// Detect the end of recursion.
+	if( start_index > stop_index ){
 
-    return;
+		return;
 
-  }
+	}
 
-  // Find the middle of the intervall
-  mid = ( start_index + stop_index ) / 2;
+	// Find the middle of the interval
+	mid = ( start_index + stop_index ) / 2;
 
-  // Put the right element to it's place
-  swap_api_elements( elementCounter, mid );
-  elementCounter++;
+	// Put the right element to it's place
+	swap_api_elements( elementCounter, mid );
+	elementCounter++;
 
-  // Do some recursion for the other intervalls
-  recursive_optimiser( start_index, mid - 1 );
-  recursive_optimiser( mid + 1, stop_index );
+	// Do some recursion for the other intervals
+	recursive_optimizer( start_index, mid - 1 );
+	recursive_optimizer( mid + 1, stop_index );
 
 
 }
 
 void Commander::executeCommand( char *cmd ){
 
-	// The begining of the argument list will be stored in this pointer
+	// The beginning of the argument list will be stored in this pointer
 	char *arg;
 
 	// This variable tracks the command name length
@@ -227,8 +189,13 @@ void Commander::executeCommand( char *cmd ){
 	// and the commands function won't be called.
 	uint8_t show_description = 0;
 
+	// Pointer to the selected command data.
 	API_t *commandData_ptr;
 
+	// Copy the command data to the internal buffer.
+	// It is necessary because we have to modify the content
+	// of it. If it is points to a const char array we will
+	// get a bus-fault error without a buffer.
 	strncpy( tempBuff, cmd, COMMANDER_MAX_COMMAND_SIZE );
 
 
@@ -240,7 +207,7 @@ void Commander::executeCommand( char *cmd ){
 	// Reset the name counter before we start counting
 	cmd_name_cntr = 0;
 
-	// Find the first space character or a string-end character.
+	// Find the first space, question mark or a string-end character.
 	// At this time count how long is the command name( in characters )
 	while( ( *arg != '\0' ) && ( *arg != ' ' ) && ( *arg != '?' ) ){
 
@@ -252,14 +219,6 @@ void Commander::executeCommand( char *cmd ){
 	// If a space character found we have to terminate the string there.
 	// It is important because strcmp function will search for string terminator
 	// character, and this way we can separate the command name from its arguments.
-	// This method has a downside. If we pass a const char as command
-	// to the execution function it will try to overwrite a character in it.
-	// It is impossible if the input string is constant and it will result hard fault!
-	// To prevent this we nead a buffer. This is why INTERPRETER_BUFFER_SIZE macro has
-	// been created. If you want to pass const chars to your interpreter directly, you
-	// have to define INTERPRETER_BUFFER_SIZE with a resonable size.
-	// But if you can prove it, that there is no chace in your program to use const chars,
-	// you can comment out INTERPRETER_BUFFER_SIZE macro. This can save some space in your RAM.
 	if( *arg == ' ' ){
 
 		*arg = '\0';
@@ -277,9 +236,10 @@ void Commander::executeCommand( char *cmd ){
 
 	}
 
-	// Megnézzük, hogy a parancs létezik-e.
+	// Try to find the command datata.
 	commandData_ptr = (*this)[ tempBuff ];
 
+	// If it is not a NULL pointer, that means we have a mtach.
 	if( commandData_ptr ){
 
 		// Because we have found the command in the API tree we have to choose
@@ -288,7 +248,6 @@ void Commander::executeCommand( char *cmd ){
 		if( show_description ){
 
 			// Print the description text to the output channel.
-
 			response -> printf( "%s: %s\r\n", commandData_ptr -> name, commandData_ptr -> desc );
 
 
@@ -316,22 +275,69 @@ void Commander::executeCommand( char *cmd ){
 
 void Commander::execute( char *cmd ){
 
+	// Default execute handler, so the default response will be chosen.
 	response = &defaultResponse;
+
+	// Execute the command.
 	executeCommand( cmd );
 
 }
+
+#ifdef COMMANDER_USE_SERIAL_RESPONSE
 
 void Commander::execute( char *cmd, Serial *resp ){
 
-	serialResponse.select( resp );
+	// Serial execute handler, so the Serial response will be chosen.
 	response = &serialResponse;
+
+	// Select the right Serial object in the response class.
+	serialResponse.select( resp );
+
+	// Execute the command.
 	executeCommand( cmd );
 
 }
 
+#endif
+
+#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
+
+void Commander::execute( char *cmd, HardwareSerial *resp ){
+
+	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
+	response = &arduinoSerialResponse;
+
+	// Select the right HardwareSerial object in the response class.
+	arduinoSerialResponse.select( resp );
+
+	// Execute the command.
+	executeCommand( cmd );
+
+}
+
+#endif
+
+#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
+
+void Commander::execute( char *cmd, WiFiClient *resp ){
+
+	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
+	response = &WiFiClientResponse;
+
+	// Select the right HardwareSerial object in the response class.
+	WiFiClientResponse.select( resp );
+
+	// Execute the command.
+	executeCommand( cmd );
+
+}
+
+#endif
+
 Commander::API_t* Commander::operator [] ( int i ){
 
-	if( i < 0 ){
+	// Detect wrong addressing.
+	if( ( i < 0 ) || ( i >= (int)API_tree_size ) ){
 
 		return NULL;
 
@@ -376,6 +382,7 @@ Commander::API_t* Commander::operator [] ( char* name ){
 
 	}
 
+	// If we did not found the command we return NULL.
 	return NULL;
 
 }
@@ -385,4 +392,3 @@ Commander::API_t* Commander::operator [] ( const char* name ){
 	return (*this)[ (char*)name ];
 
 }
-
