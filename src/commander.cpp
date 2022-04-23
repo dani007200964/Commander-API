@@ -7,6 +7,31 @@
  * Modified 2022.02.06
 */
 
+/*
+MIT License
+
+Copyright (c) 2020 Daniel Hajnal
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+
 #include "commander.hpp"
 
 
@@ -263,11 +288,30 @@ void Commander::executeCommand( char *cmd ){
 
 	}
 
+	// If it is not an added function, we have to check for internal functions.
+	// 'help' is an internal function that prints the available commands in order.
+	else if( strcmp( tempBuff, (const char*)"help" ) == 0 ){
+
+		// We have to check for single or described help function.
+		if( strcmp( arg, (const char*)"-d" ) == 0 ){
+
+			helpFunction( true );
+
+		}
+
+		else{
+
+			helpFunction();
+
+		}
+
+	}
+
 	else{
 
 		// If we went through the whole tree and we did not found the command in it,
 		// we have to notice the user abut the problem. Maybe a Type-O
-		response -> printf( "Command \'%s\' not found!!!\r\n", tempBuff );
+		response -> printf( (const char*)"Command \'%s\' not found!!!\r\n", tempBuff );
 
 	}
 
@@ -283,6 +327,16 @@ void Commander::execute( char *cmd ){
 
 }
 
+void Commander::execute( const char *cmd ){
+
+	// Default execute handler, so the default response will be chosen.
+	response = &defaultResponse;
+
+	// Execute the command.
+	executeCommand( (char*)cmd );
+
+}
+
 #ifdef COMMANDER_USE_SERIAL_RESPONSE
 
 void Commander::execute( char *cmd, Serial *resp ){
@@ -295,6 +349,19 @@ void Commander::execute( char *cmd, Serial *resp ){
 
 	// Execute the command.
 	executeCommand( cmd );
+
+}
+
+void Commander::execute( const char *cmd, Serial *resp ){
+
+	// Serial execute handler, so the Serial response will be chosen.
+	response = &serialResponse;
+
+	// Select the right Serial object in the response class.
+	serialResponse.select( resp );
+
+	// Execute the command.
+	executeCommand( (char*)cmd );
 
 }
 
@@ -315,6 +382,19 @@ void Commander::execute( char *cmd, HardwareSerial *resp ){
 
 }
 
+void Commander::execute( const char *cmd, HardwareSerial *resp ){
+
+	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
+	response = &arduinoSerialResponse;
+
+	// Select the right HardwareSerial object in the response class.
+	arduinoSerialResponse.select( resp );
+
+	// Execute the command.
+	executeCommand( (char*)cmd );
+
+}
+
 #endif
 
 #ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
@@ -329,6 +409,19 @@ void Commander::execute( char *cmd, WiFiClient *resp ){
 
 	// Execute the command.
 	executeCommand( cmd );
+
+}
+
+void Commander::execute( const char *cmd, WiFiClient *resp ){
+
+	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
+	response = &WiFiClientResponse;
+
+	// Select the right HardwareSerial object in the response class.
+	WiFiClientResponse.select( resp );
+
+	// Execute the command.
+	executeCommand( (char*)cmd );
 
 }
 
@@ -390,5 +483,40 @@ Commander::API_t* Commander::operator [] ( char* name ){
 Commander::API_t* Commander::operator [] ( const char* name ){
 
 	return (*this)[ (char*)name ];
+
+}
+
+void Commander::helpFunction( bool description ){
+
+	uint32_t i;
+	uint32_t j;
+
+	response -> printf( (const char*)"---- Available commands ----\r\n" );
+	for( i = 0; i < API_tree_size; i++ ){
+
+		for( j = 0; j < API_tree_size; j++ ){
+
+			if( API_tree[ j ].place == i ){
+
+				if( description ){
+
+					response -> printf( (const char*)"%s:\r\n", API_tree[ j ].name );
+					response -> printf( (const char*)"\t%s\r\n\r\n", API_tree[ j ].desc );
+
+				}
+
+				else{
+
+					response -> printf( (const char*)"%s\r\n", API_tree[ j ].name );
+
+				}
+
+				continue;
+
+			}
+
+		}
+
+	}
 
 }

@@ -7,6 +7,31 @@
  * Modified 2022.02.06
 */
 
+/*
+MIT License
+
+Copyright (c) 2020 Daniel Hajnal
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+
 #ifndef COMMANDER_API_SRC_COMMANDER_HPP_
 #define COMMANDER_API_SRC_COMMANDER_HPP_
 
@@ -31,7 +56,7 @@
 ///
 /// With this macro you can fill the API tree structure
 /// faster than the traditional {}-way.
-#define apiElement( name, desc, func ) { 0, NULL, NULL, name, desc, func }
+#define apiElement( name, desc, func ) { 0, NULL, NULL, (const char*)name, (const char*)desc, func }
 
 /// This macro simplifies the attachment of the API-tree.
 ///
@@ -113,6 +138,14 @@ public:
 	/// be visible.
 	void execute( char *cmd );
 
+	/// Default execution function.
+	///
+	/// This function tries to execute a command.
+	/// It uses the default response channel, so
+	/// the messages from the command handler wont
+	/// be visible.
+	void execute( const char *cmd );
+
 
 	#ifdef COMMANDER_USE_SERIAL_RESPONSE
 	/// Execution function for Serial response.
@@ -123,6 +156,15 @@ public:
 	/// will be passed to the selected Serial
 	/// object.
 	void execute( char *cmd, Serial *resp );
+
+	/// Execution function for Serial response.
+	///
+	/// This function tries to execute a command.
+	/// It uses the Serial response channel, so
+	/// the messages from the command handler
+	/// will be passed to the selected Serial
+	/// object.
+	void execute( const char *cmd, Serial *resp );
 	#endif
 
 	#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
@@ -134,6 +176,15 @@ public:
 	/// will be passed to the selected Serial
 	/// object.
 	void execute( char *cmd, HardwareSerial *resp );
+
+	/// Execution function for Arduino Serial response.
+	///
+	/// This function tries to execute a command.
+	/// It uses the HardwareSerial response channel, so
+	/// the messages from the command handler
+	/// will be passed to the selected Serial
+	/// object.
+	void execute( const char *cmd, HardwareSerial *resp );
 	#endif
 
 	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
@@ -145,6 +196,14 @@ public:
 	/// will be passed to the selected Serial
 	/// object.
 	void execute( char *cmd, WiFiClient *resp );
+	/// Execution function for WiFi Client response.
+	///
+	/// This function tries to execute a command.
+	/// It uses the WiFi Client response channel, so
+	/// the messages from the command handler
+	/// will be passed to the selected Serial
+	/// object.
+	void execute( const char *cmd, WiFiClient *resp );
 	#endif
 
 private:
@@ -210,7 +269,16 @@ private:
 	/// be configured correctly.
 	void executeCommand( char *cmd );
 
+	/// Help function
+	///
+	/// It prints all the available commands in
+	/// alphabetical order. If the description
+	/// argument is set to true, it also prints
+	/// the description data for all commands.
+	void helpFunction( bool description = false );
+
 };
+
 
 
 #endif /* COMMANDER_API_SRC_COMMANDER_HPP_ */
