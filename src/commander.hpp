@@ -146,7 +146,6 @@ public:
 	/// be visible.
 	void execute( const char *cmd );
 
-
 	#ifdef COMMANDER_USE_SERIAL_RESPONSE
 	/// Execution function for Serial response.
 	///
@@ -165,6 +164,13 @@ public:
 	/// will be passed to the selected Serial
 	/// object.
 	void execute( const char *cmd, Serial *resp );
+
+	/// Debug channel for Serial.
+	///
+	/// This function attaches a Serial channel
+	/// for debug messages. It also enables
+	/// the debug functionality.
+	void attachDebugChannel( Serial *resp );
 	#endif
 
 	#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
@@ -185,6 +191,13 @@ public:
 	/// will be passed to the selected Serial
 	/// object.
 	void execute( const char *cmd, HardwareSerial *resp );
+
+	/// Debug channel for Arduino Serial.
+	///
+	/// This function attaches a HardwareSerial channel
+	/// for debug messages. It also enables
+	/// the debug functionality.
+	void attachDebugChannel( HardwareSerial *resp );
 	#endif
 
 	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
@@ -195,6 +208,7 @@ public:
 	/// the messages from the command handler
 	/// will be passed to the selected Serial
 	/// object.
+
 	void execute( char *cmd, WiFiClient *resp );
 	/// Execution function for WiFi Client response.
 	///
@@ -204,7 +218,20 @@ public:
 	/// will be passed to the selected Serial
 	/// object.
 	void execute( const char *cmd, WiFiClient *resp );
+
+	/// Debug channel for WiFiClient.
+	///
+	/// This function attaches a WiFiClient channel
+	/// for debug messages. It also enables
+	/// the debug functionality.
+	void attachDebugChannel( WiFiClient *resp );
 	#endif
+
+	/// Enables debug messages.
+	void enableDebug();
+
+	/// Disables debug messages.
+	void disableDebug();
 
 private:
 
@@ -244,6 +271,31 @@ private:
 	/// Pointer to response class. By default it
 	/// points to the default response handler.
 	commandResponse *response = &defaultResponse;
+
+	/// Flag to enable or disable debug messages.
+	bool debugEnabled = false;
+
+	/// Default response handler for debug messages.
+	commandResponse defaultDebugResponse;
+
+	#ifdef COMMANDER_USE_SERIAL_RESPONSE
+	/// Serial response handler class.
+	commandResponseSerial serialDebugResponse;
+	#endif
+
+	#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
+	/// Serial response handler class.
+	commandResponseArduinoSerial arduinoSerialDebugResponse;
+	#endif
+
+	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
+	/// WiFi Client response handler class.
+	commandResponseWiFiClient WiFiClientDebugResponse;
+	#endif
+
+	/// Pointer to response class. By default it
+	/// points to the default debug response handler.
+	commandResponse *dbgResponse = &defaultDebugResponse;
 
 	/// Find an API element in the tree by alphabetical place.
 	uint16_t find_api_index_by_place( uint16_t place );
