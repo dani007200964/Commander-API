@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['execute_51',['execute',['../interpreter_8c.html#ab888d7519cad8dabc81354488642f816',1,'execute(char *cmd, int(*resp_fn)(const char *,...)):&#160;interpreter.c'],['../interpreter_8h.html#ab888d7519cad8dabc81354488642f816',1,'execute(char *cmd, int(*resp_fn)(const char *,...)):&#160;interpreter.c']]]
+  ['enabledebug_52',['enableDebug',['../class_commander.html#ae6c6e8eb4bf5f761ed4a2e8da68e97f1',1,'Commander']]],
+  ['execute_53',['execute',['../class_commander.html#aafe1ff979eae34461aaee3aaf8ee474c',1,'Commander::execute(char *cmd)'],['../class_commander.html#af6609b049d9524db60aac35dbba58cec',1,'Commander::execute(const char *cmd)']]]
 ];

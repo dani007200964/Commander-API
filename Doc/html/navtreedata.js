@@ -27,28 +27,20 @@ var NAVTREE =
   [ "Commander-API", "index.html", [
     [ "Commander-API library", "index.html", null ],
     [ "Arduino installation", "arduiono_installation.html", null ],
-    [ "Usage with Arduino", "usage_with_arduino.html", [
-      [ "Basic example", "usage_with_arduino.html#basic_example", null ],
-      [ "The importance of response function", "usage_with_arduino.html#the_importance_of_responce_func", null ],
-      [ "Print the description", "usage_with_arduino.html#print_the_description", null ],
-      [ "When and how to use a buffer?", "usage_with_arduino.html#when_to_use_a_buffer", null ],
-      [ "Arduino printf function", "usage_with_arduino.html#arduino_printf_function", null ]
-    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ],
+        [ "Typedefs", "functions_type.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
-        [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -57,7 +49,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"_commander-_a_p_i_8cpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

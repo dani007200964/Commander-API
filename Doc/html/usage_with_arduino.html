@@ -48,9 +48,9 @@
   <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V0.2A</span>
+   &#160;<span id="projectnumber">V2.0.0</span>
    </div>
-   <div id="projectbrief">Commander-API  is a C API, that interprets character-based commands</div>
+   <div id="projectbrief">Commander-API  is a C++ API, that parses character based commands.</div>
   </td>
  </tr>
  </tbody>
@@ -220,19 +220,19 @@ Basic example</h1>
 <p>Code: </p><div class="fragment"><div class="line">init_interpreter();</div>
 </div><!-- fragment --><p><b>10.</b></p>
 <p>Now you just have to use the execute function every time you want to execute a command. The 3 examples in the Arduino folder in the repository shows 3 detailed example to use and understand this library.</p>
-<p><b>Congratulations, you have made your first project with Commander API :)</b></p>
+<p><b>Congratulations, you have made your first project with <a class="el" href="class_commander.html" title="Commander class.">Commander</a> API :)</b></p>
 <h1><a class="anchor" id="the_importance_of_responce_func"></a>
 The importance of response function</h1>
 <p><img src="response_function_explained_01.png" alt="" class="inline"/>   </p>
-<p>Imagine a system that has a various number of channels to communicate with. For example a Linux system, which has its shell redirected to SSH, Serial, GUI... If a command arrives in one of the supported channels, you want to generate the response to that channel. For example if a command arrives from Serial, you want to generate the answer and the messages from the command to Serial as well, not to any other channels. This is why response function is used. The Commander API handles everything you just have to create a valid response function to it. The advanced demo shows how to add a response function correctly. If you don't use a response function, please use NULL as argument. In this case the error messages will be redirected to INTERPRETER_PRINTF definition.</p>
+<p>Imagine a system that has a various number of channels to communicate with. For example a Linux system, which has its shell redirected to SSH, Serial, GUI... If a command arrives in one of the supported channels, you want to generate the response to that channel. For example if a command arrives from Serial, you want to generate the answer and the messages from the command to Serial as well, not to any other channels. This is why response function is used. The <a class="el" href="class_commander.html" title="Commander class.">Commander</a> API handles everything you just have to create a valid response function to it. The advanced demo shows how to add a response function correctly. If you don't use a response function, please use NULL as argument. In this case the error messages will be redirected to INTERPRETER_PRINTF definition.</p>
 <h1><a class="anchor" id="print_the_description"></a>
 Print the description</h1>
 <p><img src="description_example.png" alt="" class="inline"/>   </p>
 <p>To print the description you just have to add a question mark to the end of the command.</p>
 <h1><a class="anchor" id="when_to_use_a_buffer"></a>
 When and how to use a buffer?</h1>
-<p>Commander API designed to work mainly on embedded devices. In these devices usually you work from RAM. If you work from RAM you have an option to modify the contant of the command that has given to the execute function. There are two cases when you <b>MUST</b> have to use a buffer:</p>
-<p><b>1.</b> When you want to use the execute function with constant data. In this case the Commander API will try to overwrite this data, while executing the command. Why is it work like this is explained in the source file. In this case it will cause Hard Fault, because the software will try to modify the content of the FLASH( or program ) memory. This is restricted.</p>
+<p><a class="el" href="class_commander.html" title="Commander class.">Commander</a> API designed to work mainly on embedded devices. In these devices usually you work from RAM. If you work from RAM you have an option to modify the contant of the command that has given to the execute function. There are two cases when you <b>MUST</b> have to use a buffer:</p>
+<p><b>1.</b> When you want to use the execute function with constant data. In this case the <a class="el" href="class_commander.html" title="Commander class.">Commander</a> API will try to overwrite this data, while executing the command. Why is it work like this is explained in the source file. In this case it will cause Hard Fault, because the software will try to modify the content of the FLASH( or program ) memory. This is restricted.</p>
 <p><b>2.</b> When you don't want to modify the data. In my opinion it is very rare. In most cases you just collect the command string until a terminator character and pass it to the interpreter. If you need the command string after the execute function use a buffer.</p>
 <p>How to setup buffered mode:</p>
 <p><b>1.</b></p>
@@ -242,7 +242,7 @@ When and how to use a buffer?</h1>
 <p>If you <b>does not need a buffer</b>, than you <b>MUST uncomment</b> INTERPRETER_BUFFER_SIZE!</p>
 <h1><a class="anchor" id="arduino_printf_function"></a>
 Arduino printf function</h1>
-<p>The arduino_printf function is implemented by compatibility reasons. Commander API requires a printf like function as a communication channel. This function acts like a printf function, but it is redirected to serial. If you need more channels like TCP or bluetooth you have to implement a printf like functions for those channels as well. </p>
+<p>The arduino_printf function is implemented by compatibility reasons. <a class="el" href="class_commander.html" title="Commander class.">Commander</a> API requires a printf like function as a communication channel. This function acts like a printf function, but it is redirected to serial. If you need more channels like TCP or bluetooth you have to implement a printf like functions for those channels as well. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

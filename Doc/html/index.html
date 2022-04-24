@@ -48,9 +48,9 @@
   <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V0.2A</span>
+   &#160;<span id="projectnumber">V2.0.0</span>
    </div>
-   <div id="projectbrief">Commander-API  is a C API, that interprets character-based commands</div>
+   <div id="projectbrief">Commander-API  is a C++ API, that parses character based commands.</div>
   </td>
  </tr>
  </tbody>
@@ -109,19 +109,34 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title">Commander-API library </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><b>Version V0.2A</b></p>
-<p>Commander-API is a simple to use interpreter library and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, <b>small ARM or AVR devices or some embedded stuff</b>. The library shows an Arduino implementation and it can be found in the Arduino folder in the repository. The source files are located in the src folder.</p>
+<div class="textblock"><p><b>Version V2.0.0</b></p>
+<p>Commander-API is a simple to use parser library and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, <b>small ARM or AVR processors</b>.</p>
 <h2><a class="anchor" id="autotoc_md0"></a>
+Changes in V2</h2>
+<p>Version 2.X is a more refined version of the original Commander-API. The original was working well, but it was a bit flimsy when you had to work with a huge API list. It halso caused Hardfault when the API tree was not created correctly. Besides that if you wanted to add a new command, you had to change the header and the source file as well. The biggest problem was, that it was a C-API, so no overloading, no C++ magic.</p>
+<p>The new version is designed from ground up and the main motivation was to make it as reliable as the original, but make it much simpler to use.</p>
+<p><b>Key changes:</b></p><ul>
+<li>Full C++ API</li>
+<li>Arduino compatible without any modifications</li>
+<li>Platform-IO compatibility( still in progress )</li>
+<li>Simpler usage</li>
+<li>Better example</li>
+<li>Low memory consumption to make it compatible with lower end devices like Arduino UNO, Nano...</li>
+<li>Response function overload. Thanks to C++ the response function can be anything like Serial, WiFiClient...</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md1"></a>
 Contributing</h2>
 <p>Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.</p>
 <p>Please make sure to update tests as appropriate.</p>
-<h2><a class="anchor" id="autotoc_md1"></a>
-Donation</h2>
-<p>If this project help you reduce time to develop, you can give me a cup of coffee :)</p>
-<p><a href="https://www.paypal.com/donate?hosted_button_id=YFGZD78H6K2CS"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="Donate" style="pointer-events: none;" class="inline"/></a></p>
 <h2><a class="anchor" id="autotoc_md2"></a>
+Donation</h2>
+<p>If this project help you reduce time to develop, you can give me a cup of coffee &#x2615; &#x2615; &#x2615;</p>
+<p><a href="https://www.paypal.com/donate?hosted_button_id=YFGZD78H6K2CS"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="Donate" style="pointer-events: none;" class="inline"/></a></p>
+<h2><a class="anchor" id="autotoc_md3"></a>
 License &amp; copyright</h2>
-<p>© Daniel Hajnal Licensed under the MIT License </p>
+<p>© Daniel Hajnal</p>
+<p>&#x2709; <a href="#" onclick="location.href='mai'+'lto:'+'haj'+'na'+'l.d'+'an'+'iel'+'96'+'@gm'+'ai'+'l.c'+'om'; return false;">hajna<span style="display: none;">.nosp@m.</span>l.da<span style="display: none;">.nosp@m.</span>niel9<span style="display: none;">.nosp@m.</span>6@gm<span style="display: none;">.nosp@m.</span>ail.c<span style="display: none;">.nosp@m.</span>om</a></p>
+<p>Licensed under the MIT License </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
