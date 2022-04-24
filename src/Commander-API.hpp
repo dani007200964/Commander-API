@@ -35,6 +35,8 @@ SOFTWARE.
 #ifndef COMMANDER_API_SRC_COMMANDER_HPP_
 #define COMMANDER_API_SRC_COMMANDER_HPP_
 
+#define COMMANDER_API_VERSION (const char*)"2.0.0"
+
 #include "stdint.h"
 #include "string.h"
 
@@ -76,6 +78,9 @@ SOFTWARE.
 class Commander{
 
 public:
+
+	/// Library version string.
+	static const char *version;
 
 	/// Structure for command data
 	///

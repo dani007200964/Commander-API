@@ -34,6 +34,7 @@ SOFTWARE.
 
 #include "Commander-API.hpp"
 
+const char *Commander::version = COMMANDER_API_VERSION;
 
 void Commander::attachTreeFunction( API_t *API_tree_p, uint32_t API_tree_size_p ){
 

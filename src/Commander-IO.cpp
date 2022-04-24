@@ -85,6 +85,7 @@ size_t commandResponseSerial::write( uint8_t b ){
 
 }
 
+//---- print section ----//
 size_t commandResponseSerial::print( char c ){
 
 	if( serialPort ) return serialPort -> print( c );
@@ -105,6 +106,151 @@ size_t commandResponseSerial::print( const char *str ){
 	return 0;
 
 }
+
+size_t commandResponseSerial::print( int8_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::print( uint8_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::print( int16_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::print( uint16_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::commandResponseArduinoSerial::print( int32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::print( uint32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::print( float f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+size_t commandResponseSerial::print( double f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+//---- println section ----//
+
+size_t commandResponseSerial::println(){
+
+	if( serialPort ) return serialPort -> println();
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( char c ){
+
+	if( serialPort ) return serialPort -> println( c );
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( char *str ){
+
+	if( serialPort ) return serialPort -> println( str );
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( const char *str ){
+
+	if( serialPort ) return serialPort -> println( str );
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( int8_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( uint8_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( int16_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( uint16_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( int32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( uint32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( float f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+size_t commandResponseSerial::println( double f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+
+
 
 int commandResponseSerial::printf( const char *fmt, ... ){
 
@@ -185,6 +331,7 @@ size_t commandResponseArduinoSerial::write( uint8_t b ){
 
 }
 
+//---- print section ----//
 size_t commandResponseArduinoSerial::print( char c ){
 
 	if( serialPort ) return serialPort -> print( c );
@@ -205,6 +352,152 @@ size_t commandResponseArduinoSerial::print( const char *str ){
 	return 0;
 
 }
+
+size_t commandResponseArduinoSerial::print( int8_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::print( uint8_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::print( int16_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::print( uint16_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::print( int32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::print( uint32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::print( float f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::print( double f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+//---- println section ----//
+
+size_t commandResponseArduinoSerial::println(){
+
+	if( serialPort ) return serialPort -> println();
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( char c ){
+
+	if( serialPort ) return serialPort -> println( c );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( char *str ){
+
+	if( serialPort ) return serialPort -> println( str );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( const char *str ){
+
+	if( serialPort ) return serialPort -> println( str );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( int8_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( uint8_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( int16_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( uint16_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( int32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( uint32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( float f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+size_t commandResponseArduinoSerial::println( double f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+
+
+
 
 int commandResponseArduinoSerial::printf( const char *fmt, ... ){
 
@@ -285,6 +578,8 @@ size_t commandResponseWiFiClient::write( uint8_t b ){
 
 }
 
+//---- print section ----//
+
 size_t commandResponseWiFiClient::print( char c ){
 
 	if( client ) return client -> print( c );
@@ -305,6 +600,151 @@ size_t commandResponseWiFiClient::print( const char *str ){
 	return 0;
 
 }
+
+size_t commandResponseWiFiClient::print( int8_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::print( uint8_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::print( int16_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::print( uint16_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::print( int32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::print( uint32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::print( float f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::print( double f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+//---- println section ----//
+
+size_t commandResponseWiFiClient::println(){
+
+	if( serialPort ) return serialPort -> println();
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( char c ){
+
+	if( serialPort ) return serialPort -> println( c );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( char *str ){
+
+	if( serialPort ) return serialPort -> println( str );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( const char *str ){
+
+	if( serialPort ) return serialPort -> println( str );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( int8_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( uint8_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( int16_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( uint16_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( int32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( uint32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( float f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+size_t commandResponseWiFiClient::println( double f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+
+
 
 int commandResponseWiFiClient::printf( const char *fmt, ... ){
 

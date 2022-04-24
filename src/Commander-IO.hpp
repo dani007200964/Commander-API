@@ -64,17 +64,41 @@ SOFTWARE.
 class commandResponse{
 
 public:
-	virtual int    available()                               { return 0; }
-	virtual int    read()                                    { return -1; }
-	virtual int    peek()                                    { return 0; }
-	virtual size_t readBytes( uint8_t *buff, uint32_t size ) { return 0; }
-	virtual void   flush()                                   { return;   }
-	virtual size_t write( uint8_t b )                        { return 0; }
-	virtual size_t print( char c )                           { return 0; }
-	virtual size_t print( char *str )                        { return 0; }
-	virtual size_t print( const char *str )                  { return 0; }
+	virtual int    available()                               	{ return 0;  }
+	virtual int    read()                                    	{ return -1; }
+	virtual int    peek()                                    	{ return 0;  }
+	virtual size_t readBytes( uint8_t *buff, uint32_t size ) 	{ return 0;  }
+	virtual void   flush()                                   	{ return;    }
+	virtual size_t write( uint8_t b )                        	{ return 0;  }
 
-	virtual int    printf( const char *fmt, ... )            { return 0; }
+	virtual size_t print( char c )                           	{ return 0;  }
+	virtual size_t print( char *str )                        	{ return 0;  }
+	virtual size_t print( const char *str )                  	{ return 0;  }
+
+	virtual size_t print( int8_t b )							{ return 0;  }
+	virtual size_t print( uint8_t b )							{ return 0;  }
+	virtual size_t print( int16_t b )							{ return 0;  }
+	virtual size_t print( uint16_t b )							{ return 0;  }
+	virtual size_t print( int32_t b )							{ return 0;  }
+	virtual size_t print( uint32_t b )							{ return 0;  }
+	virtual size_t print( float f )								{ return 0;  }
+	virtual size_t print( double f )							{ return 0;  }
+
+	virtual size_t println()                           			{ return 0;  }
+	virtual size_t println( char c )                           	{ return 0;  }
+	virtual size_t println( char *str )                        	{ return 0;  }
+	virtual size_t println( const char *str )                  	{ return 0;  }
+
+	virtual size_t println( int8_t b )							{ return 0;  }
+	virtual size_t println( uint8_t b )							{ return 0;  }
+	virtual size_t println( int16_t b )							{ return 0;  }
+	virtual size_t println( uint16_t b )						{ return 0;  }
+	virtual size_t println( int32_t b )							{ return 0;  }
+	virtual size_t println( uint32_t b )						{ return 0;  }
+	virtual size_t println( float f )							{ return 0;  }
+	virtual size_t println( double f )							{ return 0;  }
+
+	virtual int    printf( const char *fmt, ... )            	{ return 0; }
 
 };
 
@@ -97,9 +121,33 @@ public:
 	size_t readBytes( uint8_t *buff, uint32_t size ) override;
 	void   flush() override;
 	size_t write( uint8_t b ) override;
+
 	size_t print( char c ) override;
 	size_t print( char *str ) override;
 	size_t print( const char *str ) override;
+
+	size_t print( int8_t b ) override;
+	size_t print( uint8_t b ) override;
+	size_t print( int16_t b ) override;
+	size_t print( uint16_t b ) override;
+	size_t print( int32_t b ) override;
+	size_t print( uint32_t b ) override;
+	size_t print( float f ) override;
+	size_t print( double f ) override;
+
+	size_t println() override;
+	size_t println( char c ) override;
+	size_t println( char *str ) override;
+	size_t println( const char *str ) override;
+
+	size_t println( int8_t b ) override;
+	size_t println( uint8_t b ) override;
+	size_t println( int16_t b ) override;
+	size_t println( uint16_t b ) override;
+	size_t println( int32_t b ) override;
+	size_t println( uint32_t b ) override;
+	size_t println( float f ) override;
+	size_t println( double f ) override;
 
 	int    printf( const char *fmt, ... ) override;
 
@@ -133,6 +181,29 @@ public:
 	size_t print( char *str ) override;
 	size_t print( const char *str ) override;
 
+	size_t print( int8_t b ) override;
+	size_t print( uint8_t b ) override;
+	size_t print( int16_t b ) override;
+	size_t print( uint16_t b ) override;
+	size_t print( int32_t b ) override;
+	size_t print( uint32_t b ) override;
+	size_t print( float f ) override;
+	size_t print( double f ) override;
+
+	size_t println() override;
+	size_t println( char c ) override;
+	size_t println( char *str ) override;
+	size_t println( const char *str ) override;
+
+	size_t println( int8_t b ) override;
+	size_t println( uint8_t b ) override;
+	size_t println( int16_t b ) override;
+	size_t println( uint16_t b ) override;
+	size_t println( int32_t b ) override;
+	size_t println( uint32_t b ) override;
+	size_t println( float f ) override;
+	size_t println( double f ) override;
+
 	int    printf( const char *fmt, ... ) override;
 
 private:
@@ -164,6 +235,29 @@ public:
 	size_t print( char c ) override;
 	size_t print( char *str ) override;
 	size_t print( const char *str ) override;
+
+	size_t print( int8_t b ) override;
+	size_t print( uint8_t b ) override;
+	size_t print( int16_t b ) override;
+	size_t print( uint16_t b ) override;
+	size_t print( int32_t b ) override;
+	size_t print( uint32_t b ) override;
+	size_t print( float f ) override;
+	size_t print( double f ) override;
+
+	size_t println() override;
+	size_t println( char c ) override;
+	size_t println( char *str ) override;
+	size_t println( const char *str ) override;
+
+	size_t println( int8_t b ) override;
+	size_t println( uint8_t b ) override;
+	size_t println( int16_t b ) override;
+	size_t println( uint16_t b ) override;
+	size_t println( int32_t b ) override;
+	size_t println( uint32_t b ) override;
+	size_t println( float f ) override;
+	size_t println( double f ) override;
 
 	int    printf( const char *fmt, ... ) override;
 
