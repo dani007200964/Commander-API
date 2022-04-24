@@ -32,7 +32,7 @@ SOFTWARE.
 */
 
 
-#include "commander_io.hpp"
+#include "Commander-IO.hpp"
 
 #ifdef COMMANDER_USE_SERIAL_RESPONSE
 

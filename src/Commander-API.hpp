@@ -38,8 +38,8 @@ SOFTWARE.
 #include "stdint.h"
 #include "string.h"
 
-#include "commander_settings.hpp"
-#include "commander_io.hpp"
+#include "Commander-Settings.hpp"
+#include "Commander-IO.hpp"
 
 /// Like STM32 Class Factory
 #ifdef COMMANDER_USE_SERIAL_RESPONSE

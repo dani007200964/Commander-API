@@ -38,7 +38,7 @@ SOFTWARE.
 #include <stdint.h>
 #include <stddef.h>
 
-#include "commander_settings.hpp"
+#include "Commander-Settings.hpp"
 
 #ifdef COMMANDER_USE_SERIAL_RESPONSE
 #include "Serial.hpp"

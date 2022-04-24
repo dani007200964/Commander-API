@@ -47,13 +47,19 @@ SOFTWARE.
 #endif
 #endif
 
-//#define COMMANDER_USE_SERIAL_RESPONSE
-//#define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-
 /// Maximum length of the terminal command.
+#ifndef COMMANDER_MAX_COMMAND_SIZE
 #define COMMANDER_MAX_COMMAND_SIZE 30
+#endif
 
+/// printf function buffer length
+///
+/// If you use printf function the maximumlength
+/// of the message( including the termination '\0' character )
+/// must be less or equal with COMMAND_PRINTF_BUFF_LEN.
+#ifndef COMMAND_PRINTF_BUFF_LEN
 #define COMMAND_PRINTF_BUFF_LEN 100
+#endif
 
 
 #endif /* COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_ */
