@@ -35,7 +35,7 @@ SOFTWARE.
 #ifndef COMMANDER_API_SRC_COMMANDER_HPP_
 #define COMMANDER_API_SRC_COMMANDER_HPP_
 
-#define COMMANDER_API_VERSION (const char*)"2.0.0"
+#define COMMANDER_API_VERSION (const char*)"2.0.1"
 
 #include "stdint.h"
 #include "string.h"
@@ -53,6 +53,15 @@ SOFTWARE.
 #include "Arduino.h"
 #endif
 
+#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
+	#ifdef ESP8266
+	#include <ESP8266WiFi.h>
+	#endif
+
+	#ifdef ESP32
+	#include <WiFi.h>
+	#endif
+#endif
 
 /// This macro simplifies the API element creation.
 ///
