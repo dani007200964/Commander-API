@@ -22,4 +22,4 @@ Before creating enhancement suggestions, please check the enhancements related i
 
 1. Check that your modifications works as expected.
 2. If it's a new feature please provide an example with it.
-3. Fill [the template](PULL_REQUEST_TEMPLATE.md).
+3. Fill the template.
