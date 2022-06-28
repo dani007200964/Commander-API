@@ -1,12 +1,12 @@
 @mainpage Commander-API library
 **Version V2.0.1**
 
-Commander-API is a simple to use parser library and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, __small ARM or AVR processors__.
+Commander-API is a simple-to-use parser library, and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, __small ARM or AVR processors__.
 
 ## Changes in V2
 
 Version 2.X is a more refined version of the original Commander-API. The original was working well, but it was a bit flimsy when you had to work with a huge API list.
-It halso caused Hardfault when the API tree was not created correctly. Besides that if you wanted to add a new command, you had to change the header and the source
+It also caused Hard-fault when the API tree was not created correctly. Besides that, if you wanted to add a new command, you had to change the header and the source
 file as well. The biggest problem was, that it was a C-API, so no overloading, no C++ magic.
 
 The new version is designed from ground up and the main motivation was to make it as reliable as the original, but make it much simpler to use.

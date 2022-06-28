@@ -2,8 +2,8 @@
 
 __Install from Arduino Library Manager__
 
-Not implemented yet, but I'm working on it.
+You can use [Arduino Library Manager](https://www.arduinolibraries.info/libraries/commander-api).
 
-__Install from Git repository__
+__Install from PlatformIO Registry__
 
-Not documented yet, but I'm working on it.
+You can use [PlatformIO's own registry](https://registry.platformio.org/libraries/dani007200964/Commander-API).
