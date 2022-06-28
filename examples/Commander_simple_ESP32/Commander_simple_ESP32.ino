@@ -5,7 +5,7 @@
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
  * Modified 2022.04.24
- * 
+ *
  * This is a simple example sketch that shows how
  * to use Commander-API library.
 */
@@ -15,26 +15,27 @@
 #include "Commander-API.hpp"
 #include "Commander-IO.hpp"
 
+
 // We have to create an object from Commander class.
 Commander commander;
 
 // We have to create the prototypes functions for our commands.
-// The arguments has to be the same for all command functions.
+// The arguments have to be the same for all command functions.
 void cat_func( char *args, commandResponse *response );
 void dog_func( char *args, commandResponse *response );
 void sum_func( char *args, commandResponse *response );
 void led_func( char *args, commandResponse *response );
 
 // To tell Commander how many commands we have, it is necessary
-// to create an array, that holds soma data that represents our
+// to create an array, that holds some data that represents our
 // commands. The type of this array must be Commander::API_t.
 // To simplify the command registration, there is a macro called
 // apiElement. This macro helps to add command data to this array.
 // -The first argument is the name of the command. Commander will
-//  search the commands by it's name.
+//  search the commands by its name.
 // -The second argument is the description for the command.
 //  If you use the help command, or '?' character after the command
-//  name, Commander will response with it's description.
+//  name, Commander will respond  with its description.
 // -The third argument is the wrapper function, that has been defined
 //  in the previous step.
 Commander::API_t API_tree[] = {
@@ -60,21 +61,21 @@ void setup() {
   // Set the LED pin to output, and turn it off.
   pinMode( LED_BUILTIN, OUTPUT );
   digitalWrite( LED_BUILTIN, 0 );
- 
-  // In this example we will use the Serial for communication,
+
+  // In this example, we will use the Serial for communication,
   // so we have to initialize it.
   Serial.begin( 115200 );
 
   // Step 1.
   Serial.println( "Step 1." );
-  
+
   // There is an option to attach a debug channel to Commander.
   // It can be handy to find any problems during the initialization
-  // phase. In this example we will use Serial for this.
+  // phase. In this example, we will use Serial for this.
   commander.attachDebugChannel( &Serial );
 
-  // At start Commander des not know anything about our commands.
-  // We have to attach the API_tree array from the previus steps
+  // At start, Commander does not know anything about our commands.
+  // We have to attach the API_tree array from the previous steps
   // to Commander to work properly.
   commander.attachTree( API_tree );
 
@@ -82,11 +83,11 @@ void setup() {
   Serial.println();
   Serial.println( "Step 2." );
 
-  // After we attached the API_tree, Commander has to initialise
-  // itself for the fastes runtime possible. It creates a balanced
+  // After we attached the API_tree, Commander has to initialize
+  // itself for the fastest runtime possible. It creates a balanced
   // binary tree from the API_tree to boost the search speed.
   // This part uses some recursion, to make the code space small.
-  // But recursion is a bit stack hungry, so please initialise
+  // But recursion is a bit stack hungry, so please initialize
   // Commander at the beginning of your code to prevent stack-overlow.
   commander.init();
 
@@ -95,16 +96,16 @@ void setup() {
   Serial.println();
   Serial.println( "Example 1." );
 
-  // At this point Commander is initialised and functional, so lets try it.
-  // To execute a command we have to use the execute command. Let's try
-  // the led command. This command just toggles the built-in LED.
+  // At this point, Commander is initialized and functional, so let's try it.
+  // To execute a command, we have to use the execute command. Let's try
+  // the LED command. This command just toggles the built-in LED.
   commander.execute( "led" );
-  
+
   // Example 2.
   Serial.println();
   Serial.println( "Example 2." );
 
-  // The most helpful command is help. It prints out all of the available
+  // The most helpful command is help. It prints out all the available
   // commands.
   commander.execute( "help" );
 
@@ -112,8 +113,8 @@ void setup() {
   Serial.println();
   Serial.println( "Example 3." );
 
-  // After the previous step we can see, that we did not see anything.
-  // This is because we did not gave any response channel to the execute
+  // After the previous step, we can see, that we did not see anything.
+  // This is because we did not give any response channel to the execute
   // function. Let's set Serial as response channel.
   commander.execute( "help", &Serial );
 
@@ -135,7 +136,7 @@ void setup() {
   // Example 6.
   Serial.println();
   Serial.println( "Example 6." );
-  // Now lets try the remaining functions.
+  // Now let's try the remaining functions.
   commander.execute( "cat", &Serial );
   commander.execute( "dog", &Serial );
   commander.execute( "sum", &Serial );
@@ -143,19 +144,19 @@ void setup() {
   // Example 7.
   Serial.println();
   Serial.println( "Example 7." );
-  // As we can see the cat and dog functions worked as expected,
-  // but the sum function gave argument error. This happened
+  // As we can see, the cat and dog functions worked as expected,
+  // but the sum function give argument error. This happened
   // because we did not gave any arguments to that function.
   // Giving arguments to a command is very simple. You just have
   // to give an argument string after the command, separated by
   // a blank space. Commander will transfer the argument string
-  // to the command's function. Lets try to sum 10 and 15.
+  // to the command's function. Let's try to sum 10 and 15.
   commander.execute( "sum 10 15", &Serial );
 
   // Example 8.
   Serial.println();
   Serial.println( "Example 8." );
-  // Now lets try to execute a command that does not exist,
+  // Now let's try to execute a command that does not exist,
   // and see what happens.
   commander.execute( "reboot", &Serial );
 
@@ -184,14 +185,14 @@ void setup() {
   Serial.println( SERVER_PORT );
   Serial.println( "Now you can play with commander with serial port or with socket." );
   Serial.println( "To try socket communication I suggest PuTTY." );
-  
+
 
   server.begin();
-  
+
 }
 
-// Continous example.
-// In the loop function there is a simple example to
+// Continuous example.
+// In the loop function, there is a simple example to
 // read commands from Serial in runtime. You can use
 // the Serial monitor to try it. Set the line ending
 // to new-line and play with the commands.
@@ -214,48 +215,48 @@ void loop() {
     while( client.connected() ){
 
       while( client.available() ){
-        
+
         // Read the next incoming character.
         c = client.read();
-        
+
         // Every command from Serial is terminated with a new-line
-        // character. If a new-line character arrives we have to
+        // character. If a new-line character arrives, we have to
         // terminate the string in the commandFromSerial buffer,
-        // and execute it. After execution we have to reset the
+        // and execute it. After execution, we have to reset the
         // commandIndex counter to zero.
         if( c == '\n' ){
-    
+
           commandFromSerial[ commandIndex ] = '\0';
           commander.execute( commandFromSerial, &client );
           commandIndex = 0;
-          
+
         }
-    
+
         // If we have a carriage-return character we simply
         // ignore it.
         else if( c == '\r' ){
           continue;
         }
-    
+
         // Every other case we just put the data to the next
         // free space in the commandFromSerial buffer, increment
-        // the commandIndex, and check if it want's to overflow.
+        // the commandIndex, and check if it wants to overflow.
         else{
-    
+
           commandFromSerial[ commandIndex ] = c;
           commandIndex++;
           if( commandIndex >= 20 ){
             commandIndex = 19;
           }
-          
+
         }
-        
+
       }
 
       delay( 10 );
-      
+
     }
-    
+
   }
 
   // Check if there is any data incoming.
@@ -265,16 +266,16 @@ void loop() {
     c = Serial.read();
 
     // Every command from Serial is terminated with a new-line
-    // character. If a new-line character arrives we have to
+    // character. If a new-line character arrives, we have to
     // terminate the string in the commandFromSerial buffer,
-    // and execute it. After execution we have to reset the
+    // and execute it. After execution, we have to reset the
     // commandIndex counter to zero.
     if( c == '\n' ){
 
       commandFromSerial[ commandIndex ] = '\0';
       commander.execute( commandFromSerial, &Serial );
       commandIndex = 0;
-      
+
     }
 
     // If we have a carriage-return character we simply
@@ -285,7 +286,7 @@ void loop() {
 
     // Every other case we just put the data to the next
     // free space in the commandFromSerial buffer, increment
-    // the commandIndex, and check if it want's to overflow.
+    // the commandIndex, and check if it wants to overflow.
     else{
 
       commandFromSerial[ commandIndex ] = c;
@@ -293,9 +294,9 @@ void loop() {
       if( commandIndex >= 20 ){
         commandIndex = 19;
       }
-      
+
     }
-    
+
   }
 
 }
@@ -353,7 +354,7 @@ void sum_func(char *args, commandResponse *response )
 
     // Sadly we have to stop the command execution and return.
     return;
-    
+
   }
 
   // Calculate the sum.
