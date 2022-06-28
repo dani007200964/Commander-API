@@ -603,56 +603,56 @@ size_t commandResponseWiFiClient::print( const char *str ){
 
 size_t commandResponseWiFiClient::print( int8_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( client ) return client -> print( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::print( uint8_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( client ) return client -> print( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::print( int16_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( client ) return client -> print( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::print( uint16_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( client ) return client -> print( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::print( int32_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( client ) return client -> print( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::print( uint32_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( client ) return client -> print( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::print( float f ){
 
-	if( serialPort ) return serialPort -> print( f );
+	if( client ) return client -> print( f );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::print( double f ){
 
-	if( serialPort ) return serialPort -> print( f );
+	if( client ) return client -> print( f );
 	return 0;
 
 }
@@ -661,90 +661,87 @@ size_t commandResponseWiFiClient::print( double f ){
 
 size_t commandResponseWiFiClient::println(){
 
-	if( serialPort ) return serialPort -> println();
+	if( client ) return client -> println();
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( char c ){
 
-	if( serialPort ) return serialPort -> println( c );
+	if( client ) return client -> println( c );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( char *str ){
 
-	if( serialPort ) return serialPort -> println( str );
+	if( client ) return client -> println( str );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( const char *str ){
 
-	if( serialPort ) return serialPort -> println( str );
+	if( client ) return client -> println( str );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( int8_t b ){
 
-	if( serialPort ) return serialPort -> println( b );
+	if( client ) return client -> println( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( uint8_t b ){
 
-	if( serialPort ) return serialPort -> println( b );
+	if( client ) return client -> println( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( int16_t b ){
 
-	if( serialPort ) return serialPort -> println( b );
+	if( client ) return client -> println( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( uint16_t b ){
 
-	if( serialPort ) return serialPort -> println( b );
+	if( client ) return client -> println( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( int32_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( client ) return client -> print( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( uint32_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( client ) return client -> print( b );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( float f ){
 
-	if( serialPort ) return serialPort -> print( f );
+	if( client ) return client -> print( f );
 	return 0;
 
 }
 
 size_t commandResponseWiFiClient::println( double f ){
 
-	if( serialPort ) return serialPort -> print( f );
+	if( client ) return client -> print( f );
 	return 0;
 
 }
-
-
-
 
 int commandResponseWiFiClient::printf( const char *fmt, ... ){
 

@@ -47,6 +47,12 @@ SOFTWARE.
 #endif
 #endif
 
+#ifdef ESP8266
+#ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
+#define COMMANDER_USE_WIFI_CLIENT_RESPONSE
+#endif
+#endif
+
 /// Maximum length of the terminal command.
 #ifndef COMMANDER_MAX_COMMAND_SIZE
 #define COMMANDER_MAX_COMMAND_SIZE 30

@@ -1,5 +1,5 @@
 ## Commander-API library
-**Version V2.0.0**
+**Version V2.0.1**
 
 Commander-API is a simple-to-use parser library, and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, __small ARM or AVR processors__.
 
@@ -19,6 +19,8 @@ __Key changes:__
 * Better example
 * Low memory consumption to make it compatible with lower end devices like Arduino UNO, Nano...
 * Response function overload. Thanks to C++ the response function can be anything like Serial, WiFiClient...
+
+#### The detailed documentation can be found [here](https://dani007200964.github.io/Commander-API/html/index.html).
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
