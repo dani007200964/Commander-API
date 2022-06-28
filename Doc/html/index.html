@@ -48,9 +48,9 @@
   <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V2.0.0</span>
+   &#160;<span id="projectnumber">V2.0.1</span>
    </div>
-   <div id="projectbrief">Commander-API  is a C++ API, that parses character based commands.</div>
+   <div id="projectbrief">Commander-API  is a C API, that interprets character-based commands</div>
   </td>
  </tr>
  </tbody>
@@ -109,11 +109,11 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title">Commander-API library </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><b>Version V2.0.0</b></p>
-<p>Commander-API is a simple to use parser library and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, <b>small ARM or AVR processors</b>.</p>
+<div class="textblock"><p><b>Version V2.0.1</b></p>
+<p>Commander-API is a simple-to-use parser library, and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, <b>small ARM or AVR processors</b>.</p>
 <h2><a class="anchor" id="autotoc_md0"></a>
 Changes in V2</h2>
-<p>Version 2.X is a more refined version of the original Commander-API. The original was working well, but it was a bit flimsy when you had to work with a huge API list. It halso caused Hardfault when the API tree was not created correctly. Besides that if you wanted to add a new command, you had to change the header and the source file as well. The biggest problem was, that it was a C-API, so no overloading, no C++ magic.</p>
+<p>Version 2.X is a more refined version of the original Commander-API. The original was working well, but it was a bit flimsy when you had to work with a huge API list. It also caused Hard-fault when the API tree was not created correctly. Besides that, if you wanted to add a new command, you had to change the header and the source file as well. The biggest problem was, that it was a C-API, so no overloading, no C++ magic.</p>
 <p>The new version is designed from ground up and the main motivation was to make it as reliable as the original, but make it much simpler to use.</p>
 <p><b>Key changes:</b></p><ul>
 <li>Full C++ API</li>
