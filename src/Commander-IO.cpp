@@ -223,28 +223,28 @@ size_t commandResponseSerial::println( uint16_t b ){
 
 size_t commandResponseSerial::println( int32_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( serialPort ) return serialPort -> println( b );
 	return 0;
 
 }
 
 size_t commandResponseSerial::println( uint32_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( serialPort ) return serialPort -> println( b );
 	return 0;
 
 }
 
 size_t commandResponseSerial::println( float f ){
 
-	if( serialPort ) return serialPort -> print( f );
+	if( serialPort ) return serialPort -> println( f );
 	return 0;
 
 }
 
 size_t commandResponseSerial::println( double f ){
 
-	if( serialPort ) return serialPort -> print( f );
+	if( serialPort ) return serialPort -> println( f );
 	return 0;
 
 }
@@ -469,28 +469,28 @@ size_t commandResponseArduinoSerial::println( uint16_t b ){
 
 size_t commandResponseArduinoSerial::println( int32_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( serialPort ) return serialPort -> println( b );
 	return 0;
 
 }
 
 size_t commandResponseArduinoSerial::println( uint32_t b ){
 
-	if( serialPort ) return serialPort -> print( b );
+	if( serialPort ) return serialPort -> println( b );
 	return 0;
 
 }
 
 size_t commandResponseArduinoSerial::println( float f ){
 
-	if( serialPort ) return serialPort -> print( f );
+	if( serialPort ) return serialPort -> println( f );
 	return 0;
 
 }
 
 size_t commandResponseArduinoSerial::println( double f ){
 
-	if( serialPort ) return serialPort -> print( f );
+	if( serialPort ) return serialPort -> println( f );
 	return 0;
 
 }
