@@ -26,10 +26,12 @@ var NAVTREE =
 [
   [ "Commander-API", "index.html", [
     [ "Commander-API library", "index.html", null ],
-    [ "Arduino installation", "arduiono_installation.html", null ],
+    [ "Arduino installation", "md_docs_markdown_pages_arduino_installation.html", null ],
+    [ "PlatformIO installation", "md_docs_markdown_pages_platroemio_installation.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],

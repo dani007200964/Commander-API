@@ -36,3 +36,5 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 \emoji :email: hajnal.daniel96@gmail.com
 
 Licensed under the MIT License
+
+![](footer_image.png)

@@ -1,9 +1,8 @@
 @page arduiono_installation Arduino installation
 
-__Install from Arduino Library Manager__
+![Library Manager](library_install.png)
 
-You can use [Arduino Library Manager](https://www.arduinolibraries.info/libraries/commander-api).
+1. Open the __Library Manager__ and search for __Commander-API__.
+2. Install the latest( or the desired ) version.
 
-__Install from PlatformIO Registry__
-
-You can use [PlatformIO's own registry](https://registry.platformio.org/libraries/dani007200964/Commander-API).
+Or you can use [Arduino Library Manager](https://www.arduinolibraries.info/libraries/commander-api).

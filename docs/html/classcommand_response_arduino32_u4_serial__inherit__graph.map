@@ -1,0 +1,4 @@
+<map id="commandResponseArduino32U4Serial" name="commandResponseArduino32U4Serial">
+<area shape="rect" id="node1" title="Arduino Serial_ response subclass." alt="" coords="5,79,200,119"/>
+<area shape="rect" id="node2" href="$classcommand_response.html" title="Default response class." alt="" coords="34,5,171,31"/>
+</map>

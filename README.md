@@ -14,7 +14,7 @@ The new version is designed from ground up and the main motivation was to make i
 __Key changes:__
 * Full C++ API
 * Arduino compatible without any modifications
-* Platform-IO compatibility( still in progress )
+* Platform-IO compatibility
 * Simpler usage
 * Better example
 * Low memory consumption to make it compatible with lower end devices like Arduino UNO, Nano...
@@ -27,6 +27,10 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+## Documentation
+
+The full documentation can be found [here](https://dani007200964.github.io/Commander-API/html/index.html).
+
 ## Donation
 If this project help you reduce time to develop, you can give me a cup of coffee :coffee: :coffee: :coffee:
 
@@ -38,3 +42,5 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 :email: hajnal.daniel96@gmail.com
 
 Licensed under the MIT License
+
+![](/docs/images/footer_image.png)

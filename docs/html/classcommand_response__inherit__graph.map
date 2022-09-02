@@ -1,0 +1,6 @@
+<map id="commandResponse" name="commandResponse">
+<area shape="rect" id="node1" title="Default response class." alt="" coords="5,70,143,95"/>
+<area shape="rect" id="node2" href="$classcommand_response_arduino32_u4_serial.html" title="Arduino Serial_ response subclass." alt="" coords="201,5,395,45"/>
+<area shape="rect" id="node3" href="$classcommand_response_arduino_serial.html" title="Arduino Hardware serial response subclass." alt="" coords="191,70,405,95"/>
+<area shape="rect" id="node4" href="$classcommand_response_wi_fi_client.html" title="Arduino Hardware serial response subclass." alt="" coords="199,119,397,145"/>
+</map>

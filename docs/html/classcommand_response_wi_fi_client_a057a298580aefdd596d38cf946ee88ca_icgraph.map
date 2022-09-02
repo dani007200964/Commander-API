@@ -1,0 +1,5 @@
+<map id="commandResponseWiFiClient::select" name="commandResponseWiFiClient::select">
+<area shape="rect" id="node1" title=" " alt="" coords="273,23,471,63"/>
+<area shape="rect" id="node2" href="$class_commander.html#a38d2a34b7f74faad69817e6b4c1e131a" title="Debug channel for WiFiClient." alt="" coords="5,5,225,31"/>
+<area shape="rect" id="node3" href="$class_commander.html#a1c0e2ee151df6bf5546e2398facb15c6" title="Execution function for WiFi Client response." alt="" coords="42,55,189,80"/>
+</map>
