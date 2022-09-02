@@ -5,7 +5,7 @@
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
  * Modified 2022.04.24
- * 
+ *
  * This is a simple example sketch that shows how
  * to use Commander-API library.
 */
@@ -14,6 +14,10 @@
 #include <ESP8266WiFi.h>
 #include "Commander-API.hpp"
 #include "Commander-IO.hpp"
+
+// This example assumes that there is a LED on GPIO-2,
+// like on ESP32 NodeMCU boards.
+#define LED_PIN 2
 
 // We have to create an object from Commander class.
 Commander commander;
@@ -58,16 +62,16 @@ WiFiServer server( SERVER_PORT );
 void setup() {
 
   // Set the LED pin to output, and turn it off.
-  pinMode( LED_BUILTIN, OUTPUT );
-  digitalWrite( LED_BUILTIN, 0 );
- 
+  pinMode( LED_PIN, OUTPUT );
+  digitalWrite( LED_PIN, 0 );
+
   // In this example we will use the Serial for communication,
   // so we have to initialize it.
   Serial.begin( 115200 );
 
   // Step 1.
   Serial.println( "Step 1." );
-  
+
   // There is an option to attach a debug channel to Commander.
   // It can be handy to find any problems during the initialization
   // phase. In this example we will use Serial for this.
@@ -99,7 +103,7 @@ void setup() {
   // To execute a command we have to use the execute command. Let's try
   // the led command. This command just toggles the built-in LED.
   commander.execute( "led" );
-  
+
   // Example 2.
   Serial.println();
   Serial.println( "Example 2." );
@@ -184,10 +188,10 @@ void setup() {
   Serial.println( SERVER_PORT );
   Serial.println( "Now you can play with commander with serial port or with socket." );
   Serial.println( "To try socket communication I suggest PuTTY." );
-  
+
 
   server.begin();
-  
+
 }
 
 // Continous example.
@@ -214,48 +218,48 @@ void loop() {
     while( client.connected() ){
 
       while( client.available() ){
-        
+
         // Read the next incoming character.
         c = client.read();
-        
+
         // Every command from Serial is terminated with a new-line
         // character. If a new-line character arrives we have to
         // terminate the string in the commandFromSerial buffer,
         // and execute it. After execution we have to reset the
         // commandIndex counter to zero.
         if( c == '\n' ){
-    
+
           commandFromSerial[ commandIndex ] = '\0';
           commander.execute( commandFromSerial, &client );
           commandIndex = 0;
-          
+
         }
-    
+
         // If we have a carriage-return character we simply
         // ignore it.
         else if( c == '\r' ){
           continue;
         }
-    
+
         // Every other case we just put the data to the next
         // free space in the commandFromSerial buffer, increment
         // the commandIndex, and check if it want's to overflow.
         else{
-    
+
           commandFromSerial[ commandIndex ] = c;
           commandIndex++;
           if( commandIndex >= 20 ){
             commandIndex = 19;
           }
-          
+
         }
-        
+
       }
 
       delay( 10 );
-      
+
     }
-    
+
   }
 
   // Check if there is any data incoming.
@@ -274,7 +278,7 @@ void loop() {
       commandFromSerial[ commandIndex ] = '\0';
       commander.execute( commandFromSerial, &Serial );
       commandIndex = 0;
-      
+
     }
 
     // If we have a carriage-return character we simply
@@ -293,9 +297,9 @@ void loop() {
       if( commandIndex >= 20 ){
         commandIndex = 19;
       }
-      
+
     }
-    
+
   }
 
 }
@@ -321,7 +325,7 @@ void dog_func(char *args, commandResponse *response )
 void led_func(char *args, commandResponse *response )
 {
 
-  digitalWrite( LED_BUILTIN, !digitalRead( LED_BUILTIN ) );
+  digitalWrite( LED_PIN, !digitalRead( LED_PIN ) );
 
 }
 
@@ -353,7 +357,7 @@ void sum_func(char *args, commandResponse *response )
 
     // Sadly we have to stop the command execution and return.
     return;
-    
+
   }
 
   // Calculate the sum.

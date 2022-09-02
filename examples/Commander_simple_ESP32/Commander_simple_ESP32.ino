@@ -15,6 +15,9 @@
 #include "Commander-API.hpp"
 #include "Commander-IO.hpp"
 
+// This example assumes that there is a LED on GPIO-2,
+// like on ESP32 NodeMCU boards.
+#define LED_PIN 2
 
 // We have to create an object from Commander class.
 Commander commander;
@@ -59,8 +62,8 @@ WiFiServer server( SERVER_PORT );
 void setup() {
 
   // Set the LED pin to output, and turn it off.
-  pinMode( LED_BUILTIN, OUTPUT );
-  digitalWrite( LED_BUILTIN, 0 );
+  pinMode( LED_PIN, OUTPUT );
+  digitalWrite( LED_PIN, 0 );
 
   // In this example, we will use the Serial for communication,
   // so we have to initialize it.
@@ -322,7 +325,7 @@ void dog_func(char *args, commandResponse *response )
 void led_func(char *args, commandResponse *response )
 {
 
-  digitalWrite( LED_BUILTIN, !digitalRead( LED_BUILTIN ) );
+  digitalWrite( LED_PIN, !digitalRead( LED_PIN ) );
 
 }
 
