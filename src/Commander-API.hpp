@@ -214,6 +214,33 @@ public:
 	void attachDebugChannel( HardwareSerial *resp );
 	#endif
 
+	#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
+	/// Execution function for Arduino Serial response.
+	///
+	/// This function tries to execute a command.
+	/// It uses the HardwareSerial response channel, so
+	/// the messages from the command handler
+	/// will be passed to the selected Serial
+	/// object.
+	void execute( char *cmd, Serial_ *resp );
+
+	/// Execution function for Arduino Serial response.
+	///
+	/// This function tries to execute a command.
+	/// It uses the HardwareSerial response channel, so
+	/// the messages from the command handler
+	/// will be passed to the selected Serial
+	/// object.
+	void execute( const char *cmd, Serial_ *resp );
+
+	/// Debug channel for Arduino Serial.
+	///
+	/// This function attaches a HardwareSerial channel
+	/// for debug messages. It also enables
+	/// the debug functionality.
+	void attachDebugChannel( Serial_ *resp );
+	#endif
+
 	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
 	/// Execution function for WiFi Client response.
 	///
@@ -275,6 +302,11 @@ private:
 	#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
 	/// Serial response handler class.
 	commandResponseArduinoSerial arduinoSerialResponse;
+	#endif
+
+	#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
+	/// Serial response handler class.
+	commandResponseArduino32U4Serial arduino32U4SerialResponse;
 	#endif
 
 	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE

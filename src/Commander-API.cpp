@@ -432,6 +432,48 @@ void Commander::attachDebugChannel( HardwareSerial *resp ){
 
 #endif
 
+#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
+
+void Commander::execute( char *cmd, Serial_ *resp ){
+
+	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
+	response = &arduino32U4SerialResponse;
+
+	// Select the right HardwareSerial object in the response class.
+	arduino32U4SerialResponse.select( resp );
+
+	// Execute the command.
+	executeCommand( cmd );
+
+}
+
+void Commander::execute( const char *cmd, Serial_ *resp ){
+
+	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
+	response = &arduino32U4SerialResponse;
+
+	// Select the right HardwareSerial object in the response class.
+	arduino32U4SerialResponse.select( resp );
+
+	// Execute the command.
+	executeCommand( (char*)cmd );
+
+}
+
+void Commander::attachDebugChannel( Serial_ *resp ){
+
+	dbgResponse = &arduino32U4SerialResponse;
+
+	// Select the right HardwareSerial object in the response class.
+	arduino32U4SerialResponse.select( resp );
+
+	// Enable debug messages.
+	debugEnabled = true;
+
+}
+
+#endif
+
 #ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
 
 void Commander::execute( char *cmd, WiFiClient *resp ){

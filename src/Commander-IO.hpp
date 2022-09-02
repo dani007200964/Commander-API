@@ -223,6 +223,62 @@ private:
 
 #endif
 
+#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
+
+/// Arduino Serial_ response subclass.
+///
+/// This subclass is overrides the communication functions in
+/// the commandResponse class to make it work with a Serial_
+/// like class in Arduino environment. The Serial_ class usually
+/// used by Atmega-32U4 boards with hardware USB support.
+class commandResponseArduino32U4Serial : public commandResponse{
+
+public:
+
+	void select( Serial_ *serialPort_p );
+
+	int    available() override;
+	int    read() override;
+	int    peek() override;
+	size_t readBytes( uint8_t *buff, uint32_t size ) override;
+	void   flush() override;
+	size_t write( uint8_t b ) override;
+	size_t print( char c ) override;
+	size_t print( char *str ) override;
+	size_t print( const char *str ) override;
+
+	size_t print( int8_t b ) override;
+	size_t print( uint8_t b ) override;
+	size_t print( int16_t b ) override;
+	size_t print( uint16_t b ) override;
+	size_t print( int32_t b ) override;
+	size_t print( uint32_t b ) override;
+	size_t print( float f ) override;
+	size_t print( double f ) override;
+
+	size_t println() override;
+	size_t println( char c ) override;
+	size_t println( char *str ) override;
+	size_t println( const char *str ) override;
+
+	size_t println( int8_t b ) override;
+	size_t println( uint8_t b ) override;
+	size_t println( int16_t b ) override;
+	size_t println( uint16_t b ) override;
+	size_t println( int32_t b ) override;
+	size_t println( uint32_t b ) override;
+	size_t println( float f ) override;
+	size_t println( double f ) override;
+
+	int    printf( const char *fmt, ... ) override;
+
+private:
+	Serial_ *serialPort = NULL;
+
+};
+
+#endif
+
 #ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
 
 /// Arduino Hardware serial response subclass.

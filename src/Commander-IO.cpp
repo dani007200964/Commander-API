@@ -495,11 +495,250 @@ size_t commandResponseArduinoSerial::println( double f ){
 
 }
 
-
-
-
-
 int commandResponseArduinoSerial::printf( const char *fmt, ... ){
+
+	char out_buff[ COMMAND_PRINTF_BUFF_LEN ];
+
+	va_list args;
+
+	va_start( args, fmt );
+
+	vsnprintf( out_buff, COMMAND_PRINTF_BUFF_LEN, fmt, args );
+
+	va_end( args );
+
+	if( serialPort ){
+
+		return serialPort -> print( out_buff );
+
+	}
+
+	else{
+
+		return -1;
+
+	}
+
+}
+
+#endif
+
+#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
+
+//----- Response for Arduino Serial Class -----//
+
+void commandResponseArduino32U4Serial::select( Serial_ *serialPort_p ){
+
+	serialPort = serialPort_p;
+
+}
+
+int commandResponseArduino32U4Serial::available(){
+
+	if( serialPort ) return serialPort -> available();
+	return 0;
+
+}
+
+int commandResponseArduino32U4Serial::read(){
+
+	if( serialPort ) return serialPort -> read();
+	return -1;
+
+}
+
+int commandResponseArduino32U4Serial::peek(){
+
+	if( serialPort ) return serialPort -> peek();
+	return -1;
+
+}
+
+size_t commandResponseArduino32U4Serial::readBytes( uint8_t *buff, uint32_t size ){
+
+	if( serialPort ) return serialPort -> readBytes( buff, size );
+	return 0;
+
+}
+
+void commandResponseArduino32U4Serial::flush(){
+
+	if( serialPort ) return serialPort -> flush();
+
+}
+
+size_t commandResponseArduino32U4Serial::write( uint8_t b ){
+
+	if( serialPort ) return serialPort -> write( b );
+	return 0;
+
+}
+
+//---- print section ----//
+size_t commandResponseArduino32U4Serial::print( char c ){
+
+	if( serialPort ) return serialPort -> print( c );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::print( char *str ){
+
+	if( serialPort ) return serialPort -> print( str );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::print( const char *str ){
+
+	if( serialPort ) return serialPort -> print( str );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::print( int8_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::print( uint8_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::print( int16_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::print( uint16_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::print( int32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::print( uint32_t b ){
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::print( float f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::print( double f ){
+
+	if( serialPort ) return serialPort -> print( f );
+	return 0;
+
+}
+
+//---- println section ----//
+
+size_t commandResponseArduino32U4Serial::println(){
+
+	if( serialPort ) return serialPort -> println();
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( char c ){
+
+	if( serialPort ) return serialPort -> println( c );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( char *str ){
+
+	if( serialPort ) return serialPort -> println( str );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( const char *str ){
+
+	if( serialPort ) return serialPort -> println( str );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( int8_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( uint8_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( int16_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( uint16_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( int32_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( uint32_t b ){
+
+	if( serialPort ) return serialPort -> println( b );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( float f ){
+
+	if( serialPort ) return serialPort -> println( f );
+	return 0;
+
+}
+
+size_t commandResponseArduino32U4Serial::println( double f ){
+
+	if( serialPort ) return serialPort -> println( f );
+	return 0;
+
+}
+
+int commandResponseArduino32U4Serial::printf( const char *fmt, ... ){
 
 	char out_buff[ COMMAND_PRINTF_BUFF_LEN ];
 
