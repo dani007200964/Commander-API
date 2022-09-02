@@ -53,6 +53,10 @@ void setup() {
   // so we have to initialize it.
   Serial.begin( 115200 );
 
+  // If you using Atmega32U4, the code will wait, until
+  // you open the serial port.
+  while( !Serial );
+
   // Step 1.
   Serial.println( "Step 1." );
 
