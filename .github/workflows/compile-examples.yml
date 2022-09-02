@@ -10,7 +10,11 @@ jobs:
       matrix:
         fqbn:
           - arduino:avr:uno
+          - arduino:avr:nano
+          - arduino:avr:mega
           - arduino:avr:leonardo
+          - arduino:avr:micro
+          - arduino:avr:mini
 
     steps:
       - uses: actions/checkout@v3
@@ -28,6 +32,8 @@ jobs:
       matrix:
         fqbn:
           - esp32:esp32:esp32
+          - esp32:esp32:esp32s3
+          - esp32:esp32:esp32c3
 
     steps:
       - uses: actions/checkout@v3

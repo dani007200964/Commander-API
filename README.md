@@ -20,8 +20,6 @@ __Key changes:__
 * Low memory consumption to make it compatible with lower end devices like Arduino UNO, Nano...
 * Response function overload. Thanks to C++ the response function can be anything like Serial, WiFiClient...
 
-#### The detailed documentation can be found [here](https://dani007200964.github.io/Commander-API/html/index.html).
-
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
