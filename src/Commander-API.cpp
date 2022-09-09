@@ -228,12 +228,26 @@ void Commander::executeCommand( char *cmd ){
 	// Pointer to the selected command data.
 	API_t *commandData_ptr;
 
+	int32_t pipePos;
+
 	// Copy the command data to the internal buffer.
 	// It is necessary because we have to modify the content
 	// of it. If it is points to a const char array we will
 	// get a bus-fault error without a buffer.
 	strncpy( tempBuff, cmd, COMMANDER_MAX_COMMAND_SIZE );
 
+	// Remove whitespaces at the beginning.
+	while( *tempBuff = ' ' ){
+		tempBuff++;
+	}
+
+	pipePos = hasChar( tempBuff, '|' );
+
+	if( pipePos > 0 ){
+
+		tempBuff[ pipePos ] = '\0';
+
+	}
 
 	// tempBuff is the address of the first character of the incoming command.
 	// If we give arg variable the value stored in tempBuff means arg will point to
@@ -272,6 +286,13 @@ void Commander::executeCommand( char *cmd ){
 
 	}
 
+	else if( *arg == '|' ){
+
+		*arg = '\0';
+		arg++;
+
+	}
+
 	// Try to find the command datata.
 	commandData_ptr = (*this)[ tempBuff ];
 
@@ -289,11 +310,36 @@ void Commander::executeCommand( char *cmd ){
 
 		}
 
+		// Example: random 0 180 | setServo
+
 		// If show_description flag is not set, than we have to execute the commands function.
 		else{
 
+			if( pipePos > 0 ){
+
+				// TODO Switch response to pipe response.
+				response = &pipeResponse;
+
+			}
+
+			// TODO if the internal buffer has data, the arg has to be replaced with that.
+			if( pipeResponse.available() ){
+
+				arg = pipeResponse.getData();
+
+			}
+
 			// Execute commands function.
 			(commandData_ptr -> func)( arg, response );
+
+			pipeResponse.flush();
+
+			// TODO recursive function call.
+			if( pipePos > 0 ){
+
+				executeCommand( cmd + pipePos );
+
+			}
 
 		}
 
@@ -619,5 +665,25 @@ void Commander::helpFunction( bool description ){
 		}
 
 	}
+
+}
+
+int32_t Commander::hasChar( char* str, char c ){
+
+	int32_t cntr = 0;
+
+	while( str[ cntr ] ){
+
+		if( str[ cntr ] == c ){
+
+			return cntr;
+
+		}
+
+		cntr++;
+
+	}
+
+	return -1;
 
 }

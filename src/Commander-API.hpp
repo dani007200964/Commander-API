@@ -35,7 +35,7 @@ SOFTWARE.
 #ifndef COMMANDER_API_SRC_COMMANDER_HPP_
 #define COMMANDER_API_SRC_COMMANDER_HPP_
 
-#define COMMANDER_API_VERSION (const char*)"2.0.1"
+#define COMMANDER_API_VERSION (const char*)"2.1.0"
 
 #include "stdint.h"
 #include "string.h"
@@ -339,6 +339,8 @@ private:
 	commandResponseWiFiClient WiFiClientDebugResponse;
 	#endif
 
+	commandResponsePipe pipeResponse;
+
 	/// Pointer to response class. By default it
 	/// points to the default debug response handler.
 	commandResponse *dbgResponse = &defaultDebugResponse;
@@ -374,6 +376,10 @@ private:
 	/// argument is set to true, it also prints
 	/// the description data for all commands.
 	void helpFunction( bool description = false );
+
+	int32_t hasChar( char* str, char c );
+
+	char pipeBuffer[COMMANDER_MAX_COMMAND_SIZE];
 
 };
 

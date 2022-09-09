@@ -338,4 +338,72 @@ private:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class commandResponsePipe : public commandResponse{
+
+public:
+
+	int    available() override;
+	int    read() override;
+	int    peek() override;
+	size_t readBytes( uint8_t *buff, uint32_t size ) override;
+	void   flush() override;
+	size_t write( uint8_t b ) override;
+	size_t print( char c ) override;
+	size_t print( char *str ) override;
+	size_t print( const char *str ) override;
+
+	size_t print( int8_t b ) override;
+	size_t print( uint8_t b ) override;
+	size_t print( int16_t b ) override;
+	size_t print( uint16_t b ) override;
+	size_t print( int32_t b ) override;
+	size_t print( uint32_t b ) override;
+	size_t print( float f ) override;
+	size_t print( double f ) override;
+
+	size_t println() override;
+	size_t println( char c ) override;
+	size_t println( char *str ) override;
+	size_t println( const char *str ) override;
+
+	size_t println( int8_t b ) override;
+	size_t println( uint8_t b ) override;
+	size_t println( int16_t b ) override;
+	size_t println( uint16_t b ) override;
+	size_t println( int32_t b ) override;
+	size_t println( uint32_t b ) override;
+	size_t println( float f ) override;
+	size_t println( double f ) override;
+
+	int    printf( const char *fmt, ... ) override;
+
+	char* getData();
+
+private:
+	char* buffer[ PIPE_BUFFER_LEN ];
+	uint32_t buffer_cntr = 0;
+
+};
+
+
+
+
+
+
 #endif /* COMMANDER_API_SRC_COMMANDER_IO_HPP_ */

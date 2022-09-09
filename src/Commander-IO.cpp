@@ -1009,3 +1009,312 @@ int commandResponseWiFiClient::printf( const char *fmt, ... ){
 }
 
 #endif
+
+
+
+
+
+
+
+
+
+//----- Response for Pipe Class -----//
+
+int commandResponsePipe::available(){
+
+	return buffer_cntr;
+
+}
+
+int commandResponsePipe::read(){
+
+	return -1;
+
+}
+
+int commandResponsePipe::peek(){
+
+	return -1;
+
+}
+
+size_t commandResponsePipe::readBytes( uint8_t *buff, uint32_t size ){
+
+	return 0;
+
+}
+
+void commandResponsePipe::flush(){
+
+	uint32_t i;
+	buffer_cntr = 0;
+
+	for( i = 0; i < PIPE_BUFFER_LEN; i++ ){
+
+		buffer[ i ] = '\0';
+
+	}
+
+}
+
+size_t commandResponsePipe::write( uint8_t b ){
+
+	if( buffer_cntr < ( PIPE_BUFFER_LEN - 1 ) ){
+
+		buffer[ buffer_cntr ] = b;
+		buffer_cntr++;
+		return 1;
+
+	}
+
+	return 0;
+
+}
+
+//---- print section ----//
+
+size_t commandResponsePipe::print( char c ){
+
+	if( buffer_cntr < ( PIPE_BUFFER_LEN - 1 ) ){
+
+		buffer[ buffer_cntr ] = c;
+		buffer_cntr++;
+		return 1;
+
+	}
+
+	return 0;
+
+}
+
+size_t commandResponsePipe::print( char *str ){
+
+	int result = 0;
+
+	while( *str ){
+
+		result += print( *str );
+		str++;
+
+	}
+
+	return result;
+
+}
+
+size_t commandResponsePipe::print( const char *str ){
+
+	return print( (char*)str );
+
+}
+
+size_t commandResponsePipe::print( int8_t b ){
+
+	char outBuff[ 10 ];
+	snprintf( outBuff, 10, "%d", (int)b );
+
+	return print( outBuff );
+
+}
+
+size_t commandResponsePipe::print( uint8_t b ){
+
+	char outBuff[ 10 ];
+	snprintf( outBuff, 10, "%u", (int)b );
+
+	return print( outBuff );
+
+}
+
+size_t commandResponsePipe::print( int16_t b ){
+
+	char outBuff[ 10 ];
+	snprintf( outBuff, 10, "%d", (int)b );
+
+	return print( outBuff );
+
+}
+
+size_t commandResponsePipe::print( uint16_t b ){
+
+	char outBuff[ 10 ];
+	snprintf( outBuff, 10, "%u", (int)b );
+
+	return print( outBuff );
+
+}
+
+size_t commandResponsePipe::print( int32_t b ){
+
+	char outBuff[ 15 ];
+	snprintf( outBuff, 15, "%ld", b );
+
+	return print( outBuff );
+
+}
+
+size_t commandResponsePipe::print( uint32_t b ){
+
+	char outBuff[ 15 ];
+	snprintf( outBuff, 15, "%lu", b );
+
+	return print( outBuff );
+
+}
+
+size_t commandResponsePipe::print( float f ){
+
+	char outBuff[ 25 ];
+	snprintf( outBuff, 25, "%f", f );
+
+	return print( outBuff );
+
+}
+
+size_t commandResponsePipe::print( double f ){
+
+	char outBuff[ 25 ];
+	snprintf( outBuff, 25, "%lf", f );
+
+	return print( outBuff );
+
+}
+
+//---- println section ----//
+
+size_t commandResponsePipe::println(){
+
+	return print( (const char*)"\r\n" );
+
+}
+
+size_t commandResponsePipe::println( char c ){
+
+	uint32_t ret;
+	ret = print( c );
+	ret += println();
+	return ret;
+
+}
+
+size_t commandResponsePipe::println( char *str ){
+
+	uint32_t ret;
+	ret = print( str );
+	ret += println();
+	return ret;
+
+}
+
+size_t commandResponsePipe::println( const char *str ){
+
+	uint32_t ret;
+	ret = print( str );
+	ret += println();
+	return ret;
+
+}
+
+size_t commandResponsePipe::println( int8_t b ){
+
+	uint32_t ret;
+	ret = print( b );
+	ret += println();
+	return ret;
+
+}
+
+size_t commandResponsePipe::println( uint8_t b ){
+
+	uint32_t ret;
+	ret = print( b );
+	ret += println();
+	return ret;
+
+}
+
+size_t commandResponsePipe::println( int16_t b ){
+
+	uint32_t ret;
+	ret = print( b );
+	ret += println();
+	return ret;
+
+}
+
+size_t commandResponsePipe::println( uint16_t b ){
+
+	uint32_t ret;
+	ret = print( b );
+	ret += println();
+	return ret;
+
+}
+
+size_t commandResponsePipe::println( int32_t b ){
+
+	uint32_t ret;
+	ret = print( b );
+	ret += println();
+	return ret;
+
+}
+
+size_t commandResponsePipe::println( uint32_t b ){
+
+	uint32_t ret;
+	ret = print( b );
+	ret += println();
+	return ret;
+
+}
+
+size_t commandResponsePipe::println( float f ){
+
+	uint32_t ret;
+	ret = print( f );
+	ret += println();
+	return ret;
+
+}
+
+size_t commandResponsePipe::println( double f ){
+
+	uint32_t ret;
+	ret = print( f );
+	ret += println();
+	return ret;
+
+}
+
+int commandResponsePipe::printf( const char *fmt, ... ){
+
+	char out_buff[ COMMAND_PRINTF_BUFF_LEN ];
+
+	va_list args;
+
+	va_start( args, fmt );
+
+	vsnprintf( out_buff, COMMAND_PRINTF_BUFF_LEN, fmt, args );
+
+	va_end( args );
+
+	if( client ){
+
+		return client -> print( out_buff );
+
+	}
+
+	else{
+
+		return -1;
+
+	}
+
+}
+
+char* commandResponsePipe::getData(){
+
+	return buffer;
+
+}
