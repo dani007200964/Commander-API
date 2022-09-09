@@ -237,7 +237,7 @@ void Commander::executeCommand( char *cmd ){
 	strncpy( tempBuff, cmd, COMMANDER_MAX_COMMAND_SIZE );
 
 	// Remove whitespaces at the beginning.
-	while( *tempBuff = ' ' ){
+	while( *tempBuff == ' ' ){
 		tempBuff++;
 	}
 
