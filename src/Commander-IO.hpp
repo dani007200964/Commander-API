@@ -396,7 +396,7 @@ public:
 	char* getData();
 
 private:
-	char* buffer[ PIPE_BUFFER_LEN ];
+	char buffer[ PIPE_BUFFER_LEN ];
 	uint32_t buffer_cntr = 0;
 
 };
