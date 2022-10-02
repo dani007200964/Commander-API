@@ -65,11 +65,21 @@ SOFTWARE.
 	#endif
 #endif
 
+#ifdef __AVR__
+#include <avr/pgmspace.h>
+#endif
+
 /// This macro simplifies the API element creation.
 ///
 /// With this macro you can fill the API tree structure
 /// faster than the traditional {}-way.
 #define apiElement( name, desc, func ) { 0, NULL, NULL, (const char*)name, (const char*)desc, func }
+
+#ifdef __AVR__
+
+#define apiElement_P( element, name, desc, func_arg ) { element.name_P = F( name ); element.desc_P = F( desc ); element.func = func_arg; }
+
+#endif
 
 /// This macro simplifies the attachment of the API-tree.
 ///
@@ -105,9 +115,22 @@ public:
 	  struct API_t *right;                              //  Right element on a binary tree branch
 	  const char *name;                                 //  Name of the command
 	  const char *desc;                                 //  Description of the command
+
 	  void(*func)( char*, Stream *response );  					//  Function pointer to the command function
 
+		#ifdef __AVR__
+		__FlashStringHelper *name_P;
+		__FlashStringHelper *desc_P;
+		#endif
+
 	}API_t;
+
+	enum memoryType_t{
+		MEMORY_REGULAR,
+		MEMORY_PROGMEM
+	};
+
+	memoryType_t memoryType = MEMORY_REGULAR;
 
 	/// Attach API-tree to the object.
 	///
@@ -193,6 +216,8 @@ public:
 	/// Disables debug messages.
 	void disableDebug();
 
+	void printHelp( Stream* out );
+
 private:
 
 	/// Starting address of the API-tree.
@@ -209,6 +234,20 @@ private:
 	/// because the execute function has to modify the
 	/// content of the command.
 	char tempBuff[ COMMANDER_MAX_COMMAND_SIZE ];
+
+	#ifdef __AVR__
+
+	char progmemBuffer[ COMMANDER_MAX_COMMAND_SIZE ];
+	int commander_strcmp_progmem( API_t* element1, API_t* element2 );
+	int commander_strcmp_tree_ram_progmem( API_t* element1, char* element2 );
+
+	#endif
+
+	int commander_strcmp_regular( API_t* element1, API_t* element2 );
+	int commander_strcmp_tree_ram_regular( API_t* element1, char* element2 );
+
+	int( Commander::*commander_strcmp )( API_t* element1, API_t* element2 ) = &Commander::commander_strcmp_regular;
+	int( Commander::*commander_strcmp_tree_ram )( API_t* element1, char* element2 ) = &Commander::commander_strcmp_tree_ram_regular;
 
 	/// Default response handler class.
 	commandResponse defaultResponse;
@@ -257,7 +296,17 @@ private:
 	/// alphabetical order. If the description
 	/// argument is set to true, it also prints
 	/// the description data for all commands.
+	/// todo Finish description.
 	void helpFunction( bool description = false );
+
+	/// Help function
+	///
+	/// It prints all the available commands in
+	/// alphabetical order. If the description
+	/// argument is set to true, it also prints
+	/// the description data for all commands.
+	/// todo Finish description.
+	void helpFunction( bool description, Stream* out, bool style = false );
 
 	int32_t hasChar( char* str, char c );
 
