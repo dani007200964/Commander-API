@@ -19,10 +19,10 @@ Commander commander;
 
 // We have to create the prototypes functions for our commands.
 // The arguments have to be the same for all command functions.
-void cat_func( char *args, commandResponse *response );
-void dog_func( char *args, commandResponse *response );
-void sum_func( char *args, commandResponse *response );
-void led_func( char *args, commandResponse *response );
+void cat_func( char *args, Stream *response );
+void dog_func( char *args, Stream *response );
+void sum_func( char *args, Stream *response );
+void led_func( char *args, Stream *response );
 
 // To tell Commander how many commands we have, it is necessary
 // to create an array, that holds some data that represents our
@@ -216,7 +216,7 @@ void loop() {
 
 
 /// This is an example function for the cat command
-void cat_func(char *args, commandResponse *response )
+void cat_func(char *args, Stream *response )
 {
 
   response -> print("Hello from cat function!\r\n");
@@ -224,7 +224,7 @@ void cat_func(char *args, commandResponse *response )
 }
 
 /// This is an example function for the dog command
-void dog_func(char *args, commandResponse *response )
+void dog_func(char *args, Stream *response )
 {
 
   response -> print("Hello from dog function!\r\n");
@@ -232,7 +232,7 @@ void dog_func(char *args, commandResponse *response )
 }
 
 /// This is an example function for the led command
-void led_func(char *args, commandResponse *response )
+void led_func(char *args, Stream *response )
 {
 
   digitalWrite( LED_BUILTIN, !digitalRead( LED_BUILTIN ) );
@@ -240,7 +240,7 @@ void led_func(char *args, commandResponse *response )
 }
 
 /// This is an example function for the sum command
-void sum_func(char *args, commandResponse *response )
+void sum_func(char *args, Stream *response )
 {
 
   // These variables will hold the value of the
@@ -274,6 +274,10 @@ void sum_func(char *args, commandResponse *response )
   sum = a + b;
 
   // Print out the result.
-  response -> printf( "%d + %d = %d\r\n", a, b, sum );
+  response -> print( a );
+  response -> print( " + " );
+  response -> print( b );
+  response -> print( " = " );
+  response -> println( sum );
 
 }
