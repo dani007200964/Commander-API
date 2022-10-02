@@ -53,6 +53,8 @@ SOFTWARE.
 #include "Arduino.h"
 #endif
 
+#include "Stream.h"
+
 #ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
 	#ifdef ESP8266
 	#include <ESP8266WiFi.h>
@@ -103,7 +105,7 @@ public:
 	  struct API_t *right;                              //  Right element on a binary tree branch
 	  const char *name;                                 //  Name of the command
 	  const char *desc;                                 //  Description of the command
-	  void(*func)( char*, commandResponse *response );  //  Function pointer to the command function
+	  void(*func)( char*, Stream *response );  					//  Function pointer to the command function
 
 	}API_t;
 
@@ -160,7 +162,6 @@ public:
 	/// be visible.
 	void execute( const char *cmd );
 
-	#ifdef COMMANDER_USE_SERIAL_RESPONSE
 	/// Execution function for Serial response.
 	///
 	/// This function tries to execute a command.
@@ -168,7 +169,7 @@ public:
 	/// the messages from the command handler
 	/// will be passed to the selected Serial
 	/// object.
-	void execute( char *cmd, Serial *resp );
+	void execute( char *cmd, Stream *resp );
 
 	/// Execution function for Serial response.
 	///
@@ -177,96 +178,14 @@ public:
 	/// the messages from the command handler
 	/// will be passed to the selected Serial
 	/// object.
-	void execute( const char *cmd, Serial *resp );
+	void execute( const char *cmd, Stream *resp );
 
 	/// Debug channel for Serial.
 	///
 	/// This function attaches a Serial channel
 	/// for debug messages. It also enables
 	/// the debug functionality.
-	void attachDebugChannel( Serial *resp );
-	#endif
-
-	#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-	/// Execution function for Arduino Serial response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the HardwareSerial response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-	void execute( char *cmd, HardwareSerial *resp );
-
-	/// Execution function for Arduino Serial response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the HardwareSerial response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-	void execute( const char *cmd, HardwareSerial *resp );
-
-	/// Debug channel for Arduino Serial.
-	///
-	/// This function attaches a HardwareSerial channel
-	/// for debug messages. It also enables
-	/// the debug functionality.
-	void attachDebugChannel( HardwareSerial *resp );
-	#endif
-
-	#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
-	/// Execution function for Arduino Serial response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the HardwareSerial response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-	void execute( char *cmd, Serial_ *resp );
-
-	/// Execution function for Arduino Serial response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the HardwareSerial response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-	void execute( const char *cmd, Serial_ *resp );
-
-	/// Debug channel for Arduino Serial.
-	///
-	/// This function attaches a HardwareSerial channel
-	/// for debug messages. It also enables
-	/// the debug functionality.
-	void attachDebugChannel( Serial_ *resp );
-	#endif
-
-	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-	/// Execution function for WiFi Client response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the WiFi Client response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-
-	void execute( char *cmd, WiFiClient *resp );
-	/// Execution function for WiFi Client response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the WiFi Client response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-	void execute( const char *cmd, WiFiClient *resp );
-
-	/// Debug channel for WiFiClient.
-	///
-	/// This function attaches a WiFiClient channel
-	/// for debug messages. It also enables
-	/// the debug functionality.
-	void attachDebugChannel( WiFiClient *resp );
-	#endif
+	void attachDebugChannel( Stream *resp );
 
 	/// Enables debug messages.
 	void enableDebug();
@@ -294,29 +213,9 @@ private:
 	/// Default response handler class.
 	commandResponse defaultResponse;
 
-	#ifdef COMMANDER_USE_SERIAL_RESPONSE
-	/// Serial response handler class.
-	commandResponseSerial serialResponse;
-	#endif
-
-	#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-	/// Serial response handler class.
-	commandResponseArduinoSerial arduinoSerialResponse;
-	#endif
-
-	#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
-	/// Serial response handler class.
-	commandResponseArduino32U4Serial arduino32U4SerialResponse;
-	#endif
-
-	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-	/// WiFi Client response handler class.
-	commandResponseWiFiClient WiFiClientResponse;
-	#endif
-
 	/// Pointer to response class. By default it
 	/// points to the default response handler.
-	commandResponse *response = &defaultResponse;
+	Stream *response = &defaultResponse;
 
 	/// Flag to enable or disable debug messages.
 	bool debugEnabled = false;
@@ -324,26 +223,9 @@ private:
 	/// Default response handler for debug messages.
 	commandResponse defaultDebugResponse;
 
-	#ifdef COMMANDER_USE_SERIAL_RESPONSE
-	/// Serial response handler class.
-	commandResponseSerial serialDebugResponse;
-	#endif
-
-	#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-	/// Serial response handler class.
-	commandResponseArduinoSerial arduinoSerialDebugResponse;
-	#endif
-
-	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-	/// WiFi Client response handler class.
-	commandResponseWiFiClient WiFiClientDebugResponse;
-	#endif
-
-	commandResponsePipe pipeResponse;
-
 	/// Pointer to response class. By default it
 	/// points to the default debug response handler.
-	commandResponse *dbgResponse = &defaultDebugResponse;
+	Stream *dbgResponse = &defaultDebugResponse;
 
 	/// Find an API element in the tree by alphabetical place.
 	uint16_t find_api_index_by_place( uint16_t place );

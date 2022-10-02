@@ -42,7 +42,9 @@ void Commander::attachTreeFunction( API_t *API_tree_p, uint32_t API_tree_size_p 
 	API_tree      = API_tree_p;
 	API_tree_size = API_tree_size_p;
 
-	dbgResponse -> printf( (const char*)"API tree attached with %d commands.\r\n", API_tree_size );
+	dbgResponse -> print( (const char*)"API tree attached with "  );
+	dbgResponse -> print( API_tree_size );
+	dbgResponse -> println( " commands." );
 
 }
 
@@ -55,10 +57,10 @@ void Commander::init(){
 	// Temporary variable, used to flip elements.
 	API_t temp;
 
-	dbgResponse -> printf( (const char*)"Commander init start\r\n" );
+	dbgResponse -> println( (const char*)"Commander init start" );
 
 	// Make the tree ordered by alphabet.
-	dbgResponse -> printf( (const char*)"\tCreating alphabetical order...      " );
+	dbgResponse -> print( (const char*)"\tCreating alphabetical order...      " );
 	for( i = 0; i < API_tree_size; i++ ){
 
 		for( j = i + 1; j < API_tree_size; j++ ){
@@ -82,16 +84,16 @@ void Commander::init(){
 		API_tree[ i ].place = i;
 
 	}
-	dbgResponse -> printf( (const char*)"[ OK ]\r\n" );
+	dbgResponse -> println( (const char*)"[ OK ]" );
 
 	// Optimize the tree to make it balanced.
 	// It is necessary to speed up the command
 	// search phase.
-	dbgResponse -> printf( (const char*)"\tCreate balanced binary structure... " );
+	dbgResponse -> print( (const char*)"\tCreate balanced binary structure... " );
 	optimize_api_tree();
-	dbgResponse -> printf( (const char*)"[ OK ]\r\n" );
+	dbgResponse -> println( (const char*)"[ OK ]" );
 
-	dbgResponse -> printf( (const char*)"Commander init finished!\r\n" );
+	dbgResponse -> println( (const char*)"Commander init finished!" );
 
 }
 
@@ -236,18 +238,7 @@ void Commander::executeCommand( char *cmd ){
 	// get a bus-fault error without a buffer.
 	strncpy( tempBuff, cmd, COMMANDER_MAX_COMMAND_SIZE );
 
-	// Remove whitespaces at the beginning.
-	while( *tempBuff == ' ' ){
-		tempBuff++;
-	}
-
 	pipePos = hasChar( tempBuff, '|' );
-
-	if( pipePos > 0 ){
-
-		tempBuff[ pipePos ] = '\0';
-
-	}
 
 	// tempBuff is the address of the first character of the incoming command.
 	// If we give arg variable the value stored in tempBuff means arg will point to
@@ -305,41 +296,26 @@ void Commander::executeCommand( char *cmd ){
 		if( show_description ){
 
 			// Print the description text to the output channel.
-			response -> printf( "%s: %s\r\n", commandData_ptr -> name, commandData_ptr -> desc );
+			response -> print( commandData_ptr -> name );
+			response -> print( ": " );
+			response -> println( commandData_ptr -> desc );
 
 
 		}
-
-		// Example: random 0 180 | setServo
 
 		// If show_description flag is not set, than we have to execute the commands function.
 		else{
 
 			if( pipePos > 0 ){
 
-				// TODO Switch response to pipe response.
-				response = &pipeResponse;
+				// TODO Switch response to internal buffer.
 
 			}
 
-			// TODO if the internal buffer has data, the arg has to be replaced with that.
-			if( pipeResponse.available() ){
-
-				arg = pipeResponse.getData();
-
-			}
+			// TODO if the internal buffer has data, the arg has to be replaced to that.
 
 			// Execute commands function.
 			(commandData_ptr -> func)( arg, response );
-
-			pipeResponse.flush();
-
-			// TODO recursive function call.
-			if( pipePos > 0 ){
-
-				executeCommand( cmd + pipePos );
-
-			}
 
 		}
 
@@ -368,7 +344,9 @@ void Commander::executeCommand( char *cmd ){
 
 		// If we went through the whole tree and we did not found the command in it,
 		// we have to notice the user abut the problem. Maybe a Type-O
-		response -> printf( (const char*)"Command \'%s\' not found!!!\r\n", tempBuff );
+		response -> print( (const char*)"Command \'" );
+		response -> print( tempBuff );
+		response -> println( "\' not found!" );
 
 	}
 
@@ -394,173 +372,32 @@ void Commander::execute( const char *cmd ){
 
 }
 
-#ifdef COMMANDER_USE_SERIAL_RESPONSE
+void Commander::execute( char *cmd, Stream *resp ){
 
-void Commander::execute( char *cmd, Serial *resp ){
-
-	// Serial execute handler, so the Serial response will be chosen.
-	response = &serialResponse;
-
-	// Select the right Serial object in the response class.
-	serialResponse.select( resp );
+	response = resp;
 
 	// Execute the command.
 	executeCommand( cmd );
 
 }
 
-void Commander::execute( const char *cmd, Serial *resp ){
+void Commander::execute( const char *cmd, Stream *resp ){
 
-	// Serial execute handler, so the Serial response will be chosen.
-	response = &serialResponse;
-
-	// Select the right Serial object in the response class.
-	serialResponse.select( resp );
+	response = resp;
 
 	// Execute the command.
 	executeCommand( (char*)cmd );
 
 }
 
-void Commander::attachDebugChannel( Serial *resp ){
+void Commander::attachDebugChannel( Stream *resp ){
 
-	dbgResponse = &serialDebugResponse;
-
-	// Select the right Serial object in the response class.
-	serialDebugResponse.select( resp );
+	dbgResponse = resp;
 
 	// Enable debug messages.
 	debugEnabled = true;
 
 }
-
-#endif
-
-#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-
-void Commander::execute( char *cmd, HardwareSerial *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &arduinoSerialResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduinoSerialResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( cmd );
-
-}
-
-void Commander::execute( const char *cmd, HardwareSerial *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &arduinoSerialResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduinoSerialResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( (char*)cmd );
-
-}
-
-void Commander::attachDebugChannel( HardwareSerial *resp ){
-
-	dbgResponse = &arduinoSerialDebugResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduinoSerialDebugResponse.select( resp );
-
-	// Enable debug messages.
-	debugEnabled = true;
-
-}
-
-#endif
-
-#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
-
-void Commander::execute( char *cmd, Serial_ *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &arduino32U4SerialResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduino32U4SerialResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( cmd );
-
-}
-
-void Commander::execute( const char *cmd, Serial_ *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &arduino32U4SerialResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduino32U4SerialResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( (char*)cmd );
-
-}
-
-void Commander::attachDebugChannel( Serial_ *resp ){
-
-	dbgResponse = &arduino32U4SerialResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduino32U4SerialResponse.select( resp );
-
-	// Enable debug messages.
-	debugEnabled = true;
-
-}
-
-#endif
-
-#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-
-void Commander::execute( char *cmd, WiFiClient *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &WiFiClientResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	WiFiClientResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( cmd );
-
-}
-
-void Commander::execute( const char *cmd, WiFiClient *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &WiFiClientResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	WiFiClientResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( (char*)cmd );
-
-}
-
-void Commander::attachDebugChannel( WiFiClient *resp ){
-
-	dbgResponse = &WiFiClientDebugResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	WiFiClientDebugResponse.select( resp );
-
-	// Enable debug messages.
-	debugEnabled = true;
-
-}
-
-#endif
 
 void Commander::enableDebug(){
 
@@ -638,7 +475,7 @@ void Commander::helpFunction( bool description ){
 	uint32_t i;
 	uint32_t j;
 
-	response -> printf( (const char*)"---- Available commands ----\r\n" );
+	response -> println( (const char*)"---- Available commands ----" );
 	for( i = 0; i < API_tree_size; i++ ){
 
 		for( j = 0; j < API_tree_size; j++ ){
@@ -647,14 +484,18 @@ void Commander::helpFunction( bool description ){
 
 				if( description ){
 
-					response -> printf( (const char*)"%s:\r\n", API_tree[ j ].name );
-					response -> printf( (const char*)"\t%s\r\n\r\n", API_tree[ j ].desc );
+					response -> print( API_tree[ j ].name );
+					response -> println( ':' );
+					response -> print( '\t' );
+					response -> print( API_tree[ j ].desc );
+					response -> println();
+					response -> println();
 
 				}
 
 				else{
 
-					response -> printf( (const char*)"%s\r\n", API_tree[ j ].name );
+					response -> println( API_tree[ j ].name );
 
 				}
 
