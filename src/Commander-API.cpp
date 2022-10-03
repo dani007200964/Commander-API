@@ -299,6 +299,8 @@ void Commander::executeCommand( char *cmd ){
 
 	int32_t pipePos;
 
+	uint32_t i;
+
 	// Copy the command data to the internal buffer.
 	// It is necessary because we have to modify the content
 	// of it. If it is points to a const char array we will
@@ -306,6 +308,13 @@ void Commander::executeCommand( char *cmd ){
 	strncpy( tempBuff, cmd, COMMANDER_MAX_COMMAND_SIZE );
 
 	pipePos = hasChar( tempBuff, '|' );
+
+	if( pipePos >= 0 ){
+
+		// Terminate where pip is found.
+		tempBuff[ pipePos ] = '\0';
+
+	}
 
 	// tempBuff is the address of the first character of the incoming command.
 	// If we give arg variable the value stored in tempBuff means arg will point to
@@ -341,13 +350,6 @@ void Commander::executeCommand( char *cmd ){
 		*arg = '\0';
 		arg++;
 		show_description = 1;
-
-	}
-
-	else if( *arg == '|' ){
-
-		*arg = '\0';
-		arg++;
 
 	}
 
@@ -392,16 +394,66 @@ void Commander::executeCommand( char *cmd ){
 		// If show_description flag is not set, than we have to execute the commands function.
 		else{
 
-			if( pipePos > 0 ){
+			// TODO if the pipe buffer has data, the arg has to be replaced with that.
+			if( pipeChannel.available() > 0 ){
 
-				// TODO Switch response to internal buffer.
+				// pipeChannel.readBytesUntil( '\0', pipeArgBuffer, COMMANDER_MAX_COMMAND_SIZE );
+
+				i = 0;
+
+				while( pipeChannel.available() ){
+
+					if( i < COMMANDER_MAX_COMMAND_SIZE ){
+
+						pipeArgBuffer[ i ] = pipeChannel.read();
+
+					}
+
+					else{
+
+						pipeChannel.read();
+
+					}
+
+					i++;
+
+				}
+
+				if( i < COMMANDER_MAX_COMMAND_SIZE ){
+
+					pipeArgBuffer[ i ] = '\0';
+
+				}
+
+				pipeArgBuffer[ COMMANDER_MAX_COMMAND_SIZE - 1 ] = '\0';
+
+				arg = pipeArgBuffer;
 
 			}
 
-			// TODO if the internal buffer has data, the arg has to be replaced to that.
+			if( pipePos > 0 ){
 
-			// Execute commands function.
-			(commandData_ptr -> func)( arg, response );
+				// Execute commands function and redirect the output to pipe.
+				(commandData_ptr -> func)( arg, &pipeChannel );
+
+			}
+
+			else{
+
+				(commandData_ptr -> func)( arg, response );
+
+			}
+
+			if( pipePos > 0 ){
+
+				// To remowe whitespace from the new command begin.
+				while( tempBuff[ pipePos + 1 ] == ' ' ){
+					pipePos++;
+				}
+
+				executeCommand( &tempBuff[ pipePos + 1 ] );
+
+			}
 
 		}
 
@@ -443,6 +495,13 @@ void Commander::executeCommand( char *cmd ){
 		response -> println( (const char*)"\' not found!" );
 
 		#endif
+
+		// Clear the pipe at error.
+		while( pipeChannel.available() ){
+
+			pipeChannel.read();
+
+		}
 
 	}
 

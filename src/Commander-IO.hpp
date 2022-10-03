@@ -99,4 +99,42 @@ public:
 
 };
 
+class commanderPipeChannel : public Stream{
+
+public:
+
+  /// Available bytes in the channel.
+  ///
+  /// @returns The available bytes in the channel.
+  int    available() override;
+
+  /// Read one byte form the channel.
+  ///
+  /// @returns Read and return one byte form the channel. The byte will be removed from the channel.
+	int    read() override;
+
+  /// Peek the firtst byte from the channel.
+  ///
+  /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel.
+	int    peek() override;
+
+  /// Flush the channel.
+	void   flush() override;
+
+  /// Write one byte to the channel.
+  ///
+  /// @param b The value that has to be written to the channel.
+  /// @returns The number of bytes that has been sucessfully written to the channel. Because it is the base class, it returns 0.
+	size_t write( uint8_t b ) override;
+
+	size_t write( const uint8_t *buffer, size_t size ) override;
+
+private:
+	uint8_t buffer[ COMMANDER_MAX_COMMAND_SIZE ];
+	uint32_t readPointer = 0;
+	uint32_t writePointer = 0;
+
+};
+
+
 #endif /* COMMANDER_API_SRC_COMMANDER_IO_HPP_ */

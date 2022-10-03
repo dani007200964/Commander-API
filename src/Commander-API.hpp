@@ -310,7 +310,8 @@ private:
 
 	int32_t hasChar( char* str, char c );
 
-	char pipeBuffer[COMMANDER_MAX_COMMAND_SIZE];
+	commanderPipeChannel pipeChannel;
+	char pipeArgBuffer[ COMMANDER_MAX_COMMAND_SIZE ];
 
 };
 

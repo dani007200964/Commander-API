@@ -33,3 +33,98 @@ SOFTWARE.
 
 
 #include "Commander-IO.hpp"
+
+int commanderPipeChannel::available(){
+
+	if( writePointer == readPointer ){
+		return 0;
+	}
+
+	else if( writePointer > readPointer ){
+		return writePointer - readPointer;
+	}
+
+	else{
+
+		return COMMANDER_MAX_COMMAND_SIZE - readPointer + writePointer;
+
+	}
+
+}
+
+int commanderPipeChannel::read(){
+
+	int ret;
+
+	if( writePointer == readPointer ){
+
+		return -1;
+
+	}
+
+	else{
+
+		ret = (uint8_t)buffer[ readPointer ];
+		readPointer++;
+
+		if( readPointer >= COMMANDER_MAX_COMMAND_SIZE ){
+			readPointer = 0;
+		}
+
+	}
+
+	return ret;
+
+}
+
+/// Flush the channel.
+void commanderPipeChannel::flush(){
+	// Hinestly I don't know what to do.
+	// Arduino flush methods are wierd.
+}
+
+int commanderPipeChannel::peek(){
+
+	if( writePointer == readPointer ){
+
+		return -1;
+
+	}
+
+	else{
+
+		return (uint8_t)buffer[ readPointer ];
+
+	}
+
+}
+
+size_t commanderPipeChannel::write( uint8_t data ){
+
+  buffer[ writePointer ] = data;
+	writePointer++;
+	if( writePointer >= COMMANDER_MAX_COMMAND_SIZE ){
+		writePointer = 0;
+	}
+
+  return 1;
+
+}
+
+size_t commanderPipeChannel::write( const uint8_t *data, size_t size ){
+
+  uint32_t i;
+
+	for( i = 0; i < size; i++ ){
+
+		buffer[ writePointer ] = data[ i ];
+		writePointer++;
+		if( writePointer >= COMMANDER_MAX_COMMAND_SIZE ){
+			writePointer = 0;
+		}
+
+	}
+
+  return size;
+
+}
