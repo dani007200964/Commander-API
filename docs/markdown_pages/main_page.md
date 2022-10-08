@@ -1,5 +1,5 @@
 @mainpage Commander-API library
-**Version V2.0.2**
+**Version V2.1.0**
 
 Commander-API is a simple-to-use parser library, and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, __small ARM or AVR processors__.
 
@@ -36,5 +36,3 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 \emoji :email: hajnal.daniel96@gmail.com
 
 Licensed under the MIT License
-
-![](footer_image.png)

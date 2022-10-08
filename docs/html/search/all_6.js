@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['left_0',['left',['../struct_commander_1_1_a_p_i__t.html#a5336f0be7493690579380d4e82b55987',1,'Commander::API_t']]]
+  ['haschar_0',['hasChar',['../class_commander.html#a79a36c570d33547d859fa0c9c6fc99d6',1,'Commander']]],
+  ['helpfunction_1',['helpFunction',['../class_commander.html#a578efc09c061fd0c784fabc2844d2c40',1,'Commander::helpFunction(bool description=false)'],['../class_commander.html#a9c8d932df75a2e74ef49ba7bc23a1956',1,'Commander::helpFunction(bool description, Stream *out, bool style=false)']]]
 ];

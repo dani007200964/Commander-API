@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['enabledebug_0',['enableDebug',['../class_commander.html#ae6c6e8eb4bf5f761ed4a2e8da68e97f1',1,'Commander']]],
-  ['execute_1',['execute',['../class_commander.html#aafe1ff979eae34461aaee3aaf8ee474c',1,'Commander::execute(char *cmd)'],['../class_commander.html#af6609b049d9524db60aac35dbba58cec',1,'Commander::execute(const char *cmd)'],['../class_commander.html#ad1fb718dc56e8ef95f068fac3694eed9',1,'Commander::execute(char *cmd, HardwareSerial *resp)'],['../class_commander.html#a6833a724ab6d9a3cdd35d38272b58a0d',1,'Commander::execute(const char *cmd, HardwareSerial *resp)'],['../class_commander.html#a54cf671149f35864fceb1ef1646f8db6',1,'Commander::execute(char *cmd, Serial_ *resp)'],['../class_commander.html#a4de74f322f9dd1095d089afab0c05449',1,'Commander::execute(const char *cmd, Serial_ *resp)'],['../class_commander.html#a1c0e2ee151df6bf5546e2398facb15c6',1,'Commander::execute(char *cmd, WiFiClient *resp)'],['../class_commander.html#ad56bf1025c487c4099fec32ba0d03817',1,'Commander::execute(const char *cmd, WiFiClient *resp)']]]
+  ['dbgresponse_0',['dbgResponse',['../class_commander.html#a8a1138af7c0b168fe741f343c8871a2c',1,'Commander']]],
+  ['debugenabled_1',['debugEnabled',['../class_commander.html#aa5a04a5a48d2ac5e7ff5f2fa11447703',1,'Commander']]],
+  ['defaultdebugresponse_2',['defaultDebugResponse',['../class_commander.html#a3dbb9b76cfec2ed4082d943599be82ba',1,'Commander']]],
+  ['defaultresponse_3',['defaultResponse',['../class_commander.html#a37d16f549c5329c4a42999ee2704f49d',1,'Commander']]],
+  ['desc_4',['desc',['../struct_commander_1_1_a_p_i__t.html#aa4555d2193a840c4df06df3f4e3e99ae',1,'Commander::API_t']]],
+  ['desc_5fp_5',['desc_P',['../struct_commander_1_1_a_p_i__t.html#ac9774886449c31cb663f8917af614f4d',1,'Commander::API_t']]],
+  ['disabledebug_6',['disableDebug',['../class_commander.html#a18bf6e9e04d750a901fad2f046d37b15',1,'Commander']]]
 ];

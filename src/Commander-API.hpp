@@ -43,11 +43,6 @@ SOFTWARE.
 #include "Commander-Settings.hpp"
 #include "Commander-IO.hpp"
 
-/// Like STM32 Class Factory
-#ifdef COMMANDER_USE_SERIAL_RESPONSE
-#include "Serial.hpp"
-#endif
-
 /// Arduino detection
 #ifdef ARDUINO
 #include "Arduino.h"
@@ -71,12 +66,15 @@ SOFTWARE.
 
 /// This macro simplifies the API element creation.
 ///
-/// With this macro you can fill the API tree structure
-/// faster than the traditional {}-way.
+/// With this macro you can fill the API tree structure easily.
 #define apiElement( name, desc, func ) { 0, NULL, NULL, (const char*)name, (const char*)desc, func }
 
 #ifdef __AVR__
 
+/// This macro simplifies the API element creation for PROGMEM implementation.
+///
+/// With this macro you can fill the API tree structure easily.
+/// It is used for PROGMEM implementation.
 #define apiElement_P( element, name, desc, func_arg ) { element.name_P = F( name ); element.desc_P = F( desc ); element.func = func_arg; }
 
 #endif
@@ -119,17 +117,18 @@ public:
 	  void(*func)( char*, Stream *response );  					//  Function pointer to the command function
 
 		#ifdef __AVR__
-		__FlashStringHelper *name_P;
-		__FlashStringHelper *desc_P;
+		__FlashStringHelper *name_P;											// Name of the command( stored in PROGMEM )
+		__FlashStringHelper *desc_P;											// Description of the command( stored in PROGMEM )
 		#endif
 
 	}API_t;
 
 	enum memoryType_t{
-		MEMORY_REGULAR,
-		MEMORY_PROGMEM
+		MEMORY_REGULAR,		///< Regular memory implementation
+		MEMORY_PROGMEM		///< Progmem memory implementation
 	};
 
+	/// Flag for memory type.
 	memoryType_t memoryType = MEMORY_REGULAR;
 
 	/// Attach API-tree to the object.
@@ -216,6 +215,8 @@ public:
 	/// Disables debug messages.
 	void disableDebug();
 
+	/// Prints out the help string to the specified Stream.
+	/// @param out The help information will be printed to this Stream.
 	void printHelp( Stream* out );
 
 private:
@@ -237,16 +238,53 @@ private:
 
 	#ifdef __AVR__
 
+	/// With the PROGMEM implementation we need to copy the
+	/// data from the PROGMEM area to a buffer for compersation.
 	char progmemBuffer[ COMMANDER_MAX_COMMAND_SIZE ];
+
+	/// Compare two API-tree element's name.
+	///
+	/// It compares two API-tree element's name like a regular strcmp.
+	/// It compares the names stored in the name_P
+	/// variable. This names are stored in PROGMEM space.
+	/// @param element1 Pointer to an API-tree element.
+	/// @param element2 Pointer to an API-tree element.
+	/// @returns Returns an int value indicating the [relationship](https://cplusplus.com/reference/cstring/strcmp/) between the strings.
 	int commander_strcmp_progmem( API_t* element1, API_t* element2 );
+
+	/// Compare an API-tree element's name with a regular string.
+	///
+	/// It compares an API-tree element's name with a regular string like a regular strcmp.
+	/// @param element1 Pointer to an API-tree element.
+	/// @param element2 Character array.
+	/// @returns Returns an int value indicating the [relationship](https://cplusplus.com/reference/cstring/strcmp/) between the strings.
 	int commander_strcmp_tree_ram_progmem( API_t* element1, char* element2 );
 
 	#endif
 
+	/// Compare two API-tree element's name.
+	///
+	/// It compares two API-tree element's name like a regular strcmp.
+	/// variable. This names are stored in PROGMEM space.
+	/// @param element1 Pointer to an API-tree element.
+	/// @param element2 Pointer to an API-tree element.
+	/// @returns Returns an int value indicating the [relationship](https://cplusplus.com/reference/cstring/strcmp/) between the strings.
 	int commander_strcmp_regular( API_t* element1, API_t* element2 );
+
+	/// Compare an API-tree element's name with a regular string.
+	///
+	/// It compares an API-tree element's name with a regular string like a regular strcmp.
+	/// @param element1 Pointer to an API-tree element.
+	/// @param element2 Character array.
+	/// @returns Returns an int value indicating the [relationship](https://cplusplus.com/reference/cstring/strcmp/) between the strings.
 	int commander_strcmp_tree_ram_regular( API_t* element1, char* element2 );
 
+	/// Function pointer to an internal strcmp like function.
+	/// It uses the regular version by default.
 	int( Commander::*commander_strcmp )( API_t* element1, API_t* element2 ) = &Commander::commander_strcmp_regular;
+
+	/// Function pointer to an internal strcmp like function.
+	/// It uses the regular version by default.
 	int( Commander::*commander_strcmp_tree_ram )( API_t* element1, char* element2 ) = &Commander::commander_strcmp_tree_ram_regular;
 
 	/// Default response handler class.
@@ -308,9 +346,17 @@ private:
 	/// todo Finish description.
 	void helpFunction( bool description, Stream* out, bool style = false );
 
+	/// Search for a character in a string.
+	/// @param str Pointer to a character array where the search will be.
+	/// @param c This character will be searched in the string.
+	/// @returns If the character found in the string, the poisition of the first occurance will be returned.
 	int32_t hasChar( char* str, char c );
 
+	/// Channel for the internal piping.
 	commanderPipeChannel pipeChannel;
+
+	/// If piping happenes the output of the first command will be copied to this buffer.
+	/// This way it can be passed to the second command and so on.
 	char pipeArgBuffer[ COMMANDER_MAX_COMMAND_SIZE ];
 
 };

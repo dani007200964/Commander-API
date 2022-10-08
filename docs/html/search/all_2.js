@@ -1,5 +1,25 @@
 var searchData=
 [
-  ['desc_0',['desc',['../struct_commander_1_1_a_p_i__t.html#aa4555d2193a840c4df06df3f4e3e99ae',1,'Commander::API_t']]],
-  ['disabledebug_1',['disableDebug',['../class_commander.html#a18bf6e9e04d750a901fad2f046d37b15',1,'Commander']]]
+  ['command_5fprintf_5fbuff_5flen_0',['COMMAND_PRINTF_BUFF_LEN',['../_commander-_settings_8hpp.html#ae64629cab79366fca60d3c159d708bc8',1,'Commander-Settings.hpp']]],
+  ['commander_1',['Commander',['../class_commander.html',1,'']]],
+  ['commander_2dapi_20library_2',['Commander-API library',['../index.html',1,'']]],
+  ['commander_2dapi_2dcommands_2ecpp_3',['Commander-API-Commands.cpp',['../_commander-_a_p_i-_commands_8cpp.html',1,'']]],
+  ['commander_2dapi_2dcommands_2ehpp_4',['Commander-API-Commands.hpp',['../_commander-_a_p_i-_commands_8hpp.html',1,'']]],
+  ['commander_2dapi_2ecpp_5',['Commander-API.cpp',['../_commander-_a_p_i_8cpp.html',1,'']]],
+  ['commander_2dapi_2ehpp_6',['Commander-API.hpp',['../_commander-_a_p_i_8hpp.html',1,'']]],
+  ['commander_2dio_2ecpp_7',['Commander-IO.cpp',['../_commander-_i_o_8cpp.html',1,'']]],
+  ['commander_2dio_2ehpp_8',['Commander-IO.hpp',['../_commander-_i_o_8hpp.html',1,'']]],
+  ['commander_2dsettings_2ehpp_9',['Commander-Settings.hpp',['../_commander-_settings_8hpp.html',1,'']]],
+  ['commander_5fapi_5fversion_10',['COMMANDER_API_VERSION',['../_commander-_a_p_i_8hpp.html#a9dda1700b3dad0727a9042fec8405d53',1,'Commander-API.hpp']]],
+  ['commander_5fmax_5fcommand_5fsize_11',['COMMANDER_MAX_COMMAND_SIZE',['../_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456',1,'Commander-Settings.hpp']]],
+  ['commander_5fmillis_5ffunc_12',['commander_millis_func',['../_commander-_a_p_i-_commands_8cpp.html#a359b49c07f4f7b0dccfd81c6bef5b873',1,'commander_millis_func(char *args, Stream *response):&#160;Commander-API-Commands.cpp'],['../_commander-_a_p_i-_commands_8hpp.html#a359b49c07f4f7b0dccfd81c6bef5b873',1,'commander_millis_func(char *args, Stream *response):&#160;Commander-API-Commands.cpp']]],
+  ['commander_5fstrcmp_13',['commander_strcmp',['../class_commander.html#a2ae218566be0e1de395bfec46a03ba79',1,'Commander']]],
+  ['commander_5fstrcmp_5fprogmem_14',['commander_strcmp_progmem',['../class_commander.html#a427d055d672b7bbfc7f70005d48c372f',1,'Commander']]],
+  ['commander_5fstrcmp_5fregular_15',['commander_strcmp_regular',['../class_commander.html#ac1f57477577657c1df6fc30efaa05c7e',1,'Commander']]],
+  ['commander_5fstrcmp_5ftree_5fram_16',['commander_strcmp_tree_ram',['../class_commander.html#a3e21c86ee2dc3ea6ce7a8792bd2a0d20',1,'Commander']]],
+  ['commander_5fstrcmp_5ftree_5fram_5fprogmem_17',['commander_strcmp_tree_ram_progmem',['../class_commander.html#a2762a5be3813cd54c9091487829bdf8b',1,'Commander']]],
+  ['commander_5fstrcmp_5ftree_5fram_5fregular_18',['commander_strcmp_tree_ram_regular',['../class_commander.html#a962d4b484b29957648c55a271463473a',1,'Commander']]],
+  ['commander_5fuse_5fwifi_5fclient_5fresponse_19',['COMMANDER_USE_WIFI_CLIENT_RESPONSE',['../_commander-_settings_8hpp.html#a7392802e05ee3ce93237a2d2d619e787',1,'Commander-Settings.hpp']]],
+  ['commanderpipechannel_20',['commanderPipeChannel',['../classcommander_pipe_channel.html',1,'']]],
+  ['commandresponse_21',['commandResponse',['../classcommand_response.html',1,'']]]
 ];

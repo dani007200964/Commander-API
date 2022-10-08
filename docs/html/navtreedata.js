@@ -26,8 +26,6 @@ var NAVTREE =
 [
   [ "Commander-API", "index.html", [
     [ "Commander-API library", "index.html", null ],
-    [ "Arduino installation", "md_docs_markdown_pages_arduino_installation.html", null ],
-    [ "PlatformIO installation", "md_docs_markdown_pages_platroemio_installation.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -36,13 +34,16 @@ var NAVTREE =
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
-        [ "Typedefs", "functions_type.html", null ]
+        [ "Typedefs", "functions_type.html", null ],
+        [ "Enumerations", "functions_enum.html", null ],
+        [ "Enumerator", "functions_eval.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -51,7 +52,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_commander-_a_p_i_8cpp.html"
+"_commander-_a_p_i-_commands_8cpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

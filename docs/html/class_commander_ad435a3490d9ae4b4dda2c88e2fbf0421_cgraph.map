@@ -1,0 +1,6 @@
+<map id="Commander::optimize_api_tree" name="Commander::optimize_api_tree">
+<area shape="rect" id="node1" title="Optimizes the tree to make it balanced." alt="" coords="5,29,155,69"/>
+<area shape="rect" id="node2" href="$class_commander.html#a8415264e9cdf820c7ad1872cc36811bd" title="Recursive function optimize a section in the tree." alt="" coords="203,29,353,69"/>
+<area shape="rect" id="node3" href="$class_commander.html#a05f64743655f673fb18871e71ae75c9c" title="Swap two API elements in the tree." alt="" coords="401,29,556,69"/>
+<area shape="rect" id="node4" href="$class_commander.html#aec3ddca4426c77b7ac39c0eaea641f68" title="Find an API element in the tree by alphabetical place." alt="" coords="604,29,748,69"/>
+</map>

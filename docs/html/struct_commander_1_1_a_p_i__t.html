@@ -54,10 +54,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V2.0.2</span>
+   &#160;<span id="projectnumber">V2.1.0</span>
    </div>
    <div id="projectbrief">Simple Command Parser</div>
   </td>
@@ -151,14 +151,18 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a7b91a8bdba77b1a0e3e2ac7d91a39587"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4555d2193a840c4df06df3f4e3e99ae"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_commander_1_1_a_p_i__t.html#aa4555d2193a840c4df06df3f4e3e99ae">desc</a></td></tr>
 <tr class="separator:aa4555d2193a840c4df06df3f4e3e99ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60ab333b7d3cced2dad83815f4c05c09"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_commander_1_1_a_p_i__t.html#a60ab333b7d3cced2dad83815f4c05c09">func</a> )(char *, <a class="el" href="classcommand_response.html">commandResponse</a> *response)</td></tr>
-<tr class="separator:a60ab333b7d3cced2dad83815f4c05c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0f8c77479ecd6f177f7925bc58efbb0"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_commander_1_1_a_p_i__t.html#ad0f8c77479ecd6f177f7925bc58efbb0">func</a> )(char *, Stream *<a class="el" href="class_commander.html#a487e398f6d3510ac5d39d3d778a3db51">response</a>)</td></tr>
+<tr class="separator:ad0f8c77479ecd6f177f7925bc58efbb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed94edd0385fde9d7f1a54a3d036c2f"><td class="memItemLeft" align="right" valign="top">__FlashStringHelper *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_commander_1_1_a_p_i__t.html#a9ed94edd0385fde9d7f1a54a3d036c2f">name_P</a></td></tr>
+<tr class="separator:a9ed94edd0385fde9d7f1a54a3d036c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9774886449c31cb663f8917af614f4d"><td class="memItemLeft" align="right" valign="top">__FlashStringHelper *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_commander_1_1_a_p_i__t.html#ac9774886449c31cb663f8917af614f4d">desc_P</a></td></tr>
+<tr class="separator:ac9774886449c31cb663f8917af614f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Structure for command data. </p>
 <p >Every command will get a structure like this. This structure is used to store your commands in a balanced binary tree. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00099">99</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00109">109</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="aa4555d2193a840c4df06df3f4e3e99ae" name="aa4555d2193a840c4df06df3f4e3e99ae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa4555d2193a840c4df06df3f4e3e99ae">&#9670;&#160;</a></span>desc</h2>
@@ -172,23 +176,39 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00105">105</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00115">115</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a60ab333b7d3cced2dad83815f4c05c09" name="a60ab333b7d3cced2dad83815f4c05c09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60ab333b7d3cced2dad83815f4c05c09">&#9670;&#160;</a></span>func</h2>
+<a id="ac9774886449c31cb663f8917af614f4d" name="ac9774886449c31cb663f8917af614f4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9774886449c31cb663f8917af614f4d">&#9670;&#160;</a></span>desc_P</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* Commander::API_t::func) (char *, <a class="el" href="classcommand_response.html">commandResponse</a> *response)</td>
+          <td class="memname">__FlashStringHelper* Commander::API_t::desc_P</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00106">106</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00121">121</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad0f8c77479ecd6f177f7925bc58efbb0" name="ad0f8c77479ecd6f177f7925bc58efbb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0f8c77479ecd6f177f7925bc58efbb0">&#9670;&#160;</a></span>func</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* Commander::API_t::func) (char *, Stream *<a class="el" href="class_commander.html#a487e398f6d3510ac5d39d3d778a3db51">response</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00117">117</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -204,7 +224,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00102">102</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00112">112</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -220,7 +240,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00104">104</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00114">114</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9ed94edd0385fde9d7f1a54a3d036c2f" name="a9ed94edd0385fde9d7f1a54a3d036c2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed94edd0385fde9d7f1a54a3d036c2f">&#9670;&#160;</a></span>name_P</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">__FlashStringHelper* Commander::API_t::name_P</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00120">120</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -236,7 +272,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00101">101</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00111">111</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -252,17 +288,50 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00103">103</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00113">113</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+
+<!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_commander.html">Commander</a></li><li class="navelem"><a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="footer">
+      <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
+        <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/commander-api/">
+        <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Shellminator" href="https://github.com/dani007200964/Commander-API">
+        <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2022 Daniel Hajnal </a> &nbsp;|&nbsp;
+      <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+      <a href="http://www.doxygen.org/index.html">
+        <img class="footer" src="doxygen.svg" alt="doxygen"/>
+      </a> on Sat Oct 8 2022
+      <hr class="footer"/><address class="footer"><small>
+        <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
+          <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/commander-api/">
+          <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Shellminator" href="https://github.com/dani007200964/Commander-API">
+          <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2022 Daniel Hajnal </a> &nbsp;|&nbsp;
+        <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+        <a href="http://www.doxygen.org/index.html">
+          <img class="footer" src="doxygen.svg" alt="doxygen"/>
+        </a> on Sat Oct 8 2022
+      </small></address>
+    </li>
   </ul>
 </div>
 </body>
