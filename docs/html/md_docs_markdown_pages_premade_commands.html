@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="Doxygen Awesome" />
 <meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
 <!-- END twitter metadata -->
-<title>Commander-API: src/Commander-IO.hpp File Reference</title>
+<title>Commander-API: Premade Commands</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -96,7 +96,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('_commander-_i_o_8hpp.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('md_docs_markdown_pages_premade_commands.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,38 +121,69 @@ $(document).ready(function(){initNavTree('_commander-_i_o_8hpp.html',''); initRe
 </div>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
-  <div class="headertitle"><div class="title">Commander-IO.hpp File Reference</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Premade Commands </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>&quot;</code><br />
-<code>#include &quot;Stream.h&quot;</code><br />
-<code>#include &quot;Arduino.h&quot;</code><br />
-<code>#include &lt;ESP8266WiFi.h&gt;</code><br />
-<code>#include &lt;WiFi.h&gt;</code><br />
-</div>
-<p><a href="_commander-_i_o_8hpp_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommand_response.html">commandResponse</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default response class.  <a href="classcommand_response.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html">commanderPipeChannel</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<div class="textblock"><p ><a class="anchor" id="premade_commands"></a> There are some premade commands already to make your development easier. Please read the documentation carefully, some commands are platform dependent.</p>
+<h1><a class="anchor" id="how_to_add_premade_commands"></a>
+How To Add Premade Commands</h1>
+<h1><a class="anchor" id="system_commands"></a>
+System Commands</h1>
+<h2><a class="anchor" id="reboot_command"></a>
+reboot Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>reboot</code></li>
+<li><b>Arguments:</b> none</li>
+</ul>
+<p >This command reboots the device.</p>
+<h1><a class="anchor" id="timing_commands"></a>
+Timing Commands</h1>
+<h2><a class="anchor" id="micros_command"></a>
+micros Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>micros</code></li>
+<li><b>Arguments:</b> none</li>
+</ul>
+<p >This command returns the number of microseconds passed since the program started.</p>
+<h2><a class="anchor" id="millis_command"></a>
+millis Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>millis</code></li>
+<li><b>Arguments:</b> none</li>
+</ul>
+<p >This command returns the number of milliseconds passed since the program started.</p>
+<h2><a class="anchor" id="neofetch_command"></a>
+neofetch Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>neofetch</code></li>
+<li><b>Arguments:</b> none</li>
+</ul>
+<p >This command is inspired by the original <a href="https://github.com/dylanaraps/neofetch">neofetch</a> bash script. It is a visually pleasing system information tool.</p>
+<h2><a class="anchor" id="pinMode_command"></a>
+pinMode Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>pinMode</code></li>
+<li><b>Arguments:</b><ul>
+<li>Pin Number</li>
+<li>State</li>
+</ul>
+</li>
+<li><b>Example:</b><ul>
+<li><code>pinMode 2 1</code> -&gt; Set pin 2 to output.</li>
+<li><code>pinMode 3 0</code> -&gt; Set pin 3 to input.</li>
+</ul>
+</li>
+</ul>
+<p >This command sets the direction of any pin on the microcontroller. </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 
 <!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_commander-_i_o_8hpp.html">Commander-IO.hpp</a></li>
     <li class="footer">
       <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
         <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>

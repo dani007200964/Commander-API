@@ -26,6 +26,24 @@ var NAVTREE =
 [
   [ "Commander-API", "index.html", [
     [ "Commander-API library", "index.html", null ],
+    [ "Piping", "md_docs_markdown_pages_piping.html", [
+      [ "What Is Piping?", "md_docs_markdown_pages_piping.html#what_is_piping", null ],
+      [ "How To Use Piping?", "md_docs_markdown_pages_piping.html#how_to_use_piping", null ],
+      [ "Piped Command With Arguments", "md_docs_markdown_pages_piping.html#piped_command_with_arguments", null ],
+      [ "Error During Piping", "md_docs_markdown_pages_piping.html#error_during_pipin", null ]
+    ] ],
+    [ "Premade Commands", "md_docs_markdown_pages_premade_commands.html", [
+      [ "How To Add Premade Commands", "md_docs_markdown_pages_premade_commands.html#how_to_add_premade_commands", null ],
+      [ "System Commands", "md_docs_markdown_pages_premade_commands.html#system_commands", [
+        [ "reboot Command", "md_docs_markdown_pages_premade_commands.html#reboot_command", null ]
+      ] ],
+      [ "Timing Commands", "md_docs_markdown_pages_premade_commands.html#timing_commands", [
+        [ "micros Command", "md_docs_markdown_pages_premade_commands.html#micros_command", null ],
+        [ "millis Command", "md_docs_markdown_pages_premade_commands.html#millis_command", null ],
+        [ "neofetch Command", "md_docs_markdown_pages_premade_commands.html#neofetch_command", null ],
+        [ "pinMode Command", "md_docs_markdown_pages_premade_commands.html#pinMode_command", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

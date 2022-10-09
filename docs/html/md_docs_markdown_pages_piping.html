@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="Doxygen Awesome" />
 <meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
 <!-- END twitter metadata -->
-<title>Commander-API: src/Commander-IO.hpp File Reference</title>
+<title>Commander-API: Piping</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -96,7 +96,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('_commander-_i_o_8hpp.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('md_docs_markdown_pages_piping.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,38 +121,52 @@ $(document).ready(function(){initNavTree('_commander-_i_o_8hpp.html',''); initRe
 </div>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
-  <div class="headertitle"><div class="title">Commander-IO.hpp File Reference</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Piping </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>&quot;</code><br />
-<code>#include &quot;Stream.h&quot;</code><br />
-<code>#include &quot;Arduino.h&quot;</code><br />
-<code>#include &lt;ESP8266WiFi.h&gt;</code><br />
-<code>#include &lt;WiFi.h&gt;</code><br />
-</div>
-<p><a href="_commander-_i_o_8hpp_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommand_response.html">commandResponse</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default response class.  <a href="classcommand_response.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html">commanderPipeChannel</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<div class="textblock"><p ><a class="anchor" id="piping"></a> </p>
+<h1><a class="anchor" id="what_is_piping"></a>
+What Is Piping?</h1>
+<p >By default, if you run a command and that command has some output, it will be printed on the terminal screen. With a pipe, you can redirect the output of one command, to the input of another one. It is called piping.</p>
+<h1><a class="anchor" id="how_to_use_piping"></a>
+How To Use Piping?</h1>
+<p >To redirect the output from one command to another you have to use the '|' operator. For example, you have to generate a sine value from an ADC sample. In this case, you can use <code>analogRead 0 | sin</code>.</p>
+<p ><b>Let's see how it works:</b></p><ol type="1">
+<li>Firstly the analogRead 0 command will be executed. It generates an ADC measurement from channel 0.</li>
+<li>Then the result is pushed into the pipe. Let's say the sample value was 171.</li>
+<li>When the sin command gets parsed, the parser detects that there is some data in the pipe, so it redirects it to the sin command as an argument.</li>
+<li>The sin function gets executed with 171 value.</li>
+<li>The result of the sin command will be printed on the output.</li>
+</ol>
+<p >You can use as many pipes in one command as you want.</p>
+<h1><a class="anchor" id="piped_command_with_arguments"></a>
+Piped Command With Arguments</h1>
+<p >What happens when you execute this: <code>analogRead 0 | cos 0</code>?</p>
+<ol type="1">
+<li>Firstly the analogRead 0 command will be executed. It generates an ADC measurement from channel 0.</li>
+<li>Then the result is pushed into the pipe. Lets say the sample value was 171.</li>
+<li>When the cos command gets parsed, the parser detects that, there is some data in the pipe, so it redirects it to the cos command as an argument. The specified 0 argument will be ignored.</li>
+<li>The cos function gets executed with 171 value, <b>not with 0</b>.</li>
+<li>The result of the sin command will be printed on the output.</li>
+</ol>
+<h1><a class="anchor" id="error_during_pipin"></a>
+Error During Piping</h1>
+<p >What happens when a command generates an error in the middle of the pipe?</p>
+<p >In this case, the command execution stops at the error. It is important to understand, that the commands before the error will be executed. It is not a compiler, which means it does not detect errors before execution.</p>
+<p >There are two kinds of errors:</p><ul>
+<li>Command parser error. It happens when you type a command name wrong, and the parser can't locate it. In this scenario, the command execution stops immediately.</li>
+<li>Internal command error. It happens when you specify the arguments wrongly for a command. In this way, the command usually prints an error message. It is important to understand, that this message will be pushed into the pipe and it will be carried to the next command in the pipe as the argument. <dl class="section warning"><dt>Warning</dt><dd>Because of this, every command, that has arguments needs to be protected against wrong input! </dd></dl>
+</li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 
 <!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_commander-_i_o_8hpp.html">Commander-IO.hpp</a></li>
     <li class="footer">
       <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
         <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>

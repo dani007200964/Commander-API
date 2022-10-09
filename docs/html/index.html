@@ -125,30 +125,34 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Commander-API library </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><b>Version V2.1.0</b></p>
-<p >Commander-API is a simple-to-use parser library, and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, <b>small ARM or AVR processors</b>.</p>
-<h2><a class="anchor" id="autotoc_md0"></a>
-Changes in V2</h2>
-<p >Version 2.X is a more refined version of the original Commander-API. The original was working well, but it was a bit flimsy when you had to work with a huge API list. It also caused Hard-fault when the API tree was not created correctly. Besides that, if you wanted to add a new command, you had to change the header and the source file as well. The biggest problem was, that it was a C-API, so no overloading, no C++ magic.</p>
-<p >The new version is designed from ground up and the main motivation was to make it as reliable as the original, but make it much simpler to use.</p>
-<p ><b>Key changes:</b></p><ul>
-<li>Full C++ API</li>
-<li>Arduino compatible without any modifications</li>
-<li>Platform-IO compatibility( still in progress )</li>
-<li>Simpler usage</li>
-<li>Better example</li>
-<li>Low memory consumption to make it compatible with lower end devices like Arduino UNO, Nano...</li>
-<li>Response function overload. Thanks to C++ the response function can be anything like Serial, WiFiClient...</li>
+<div class="textblock"><p ><img src="https://github.com/dani007200964/Commander-API/actions/workflows/compile-examples.yml/badge.svg?branch=main" alt="Build Status" style="pointer-events: none;" class="inline"/></p>
+<p ><b>Version V2.1.0</b></p>
+<p >Commander-API is a simple-to-use parser library, and you can easily use it to process character-based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, <b>small ARM or AVR processors</b>.</p>
+<p ><b>Changes in V2.1.X</b></p>
+<ul>
+<li>Response function changed to <b>Stream</b> type. This way it supports almost anything in the Arduino ecosystem. I believe it supports all platforms now.</li>
+<li>Pipe support enabled. To use it, check out the <a class="el" href="md_docs_markdown_pages_piping.html#what_is_piping">pipes guide</a>.</li>
+<li>AVR PROGMEM support. This library was very resource-hungry in the previous versions of the AVR platform. Strings are stored in the RAM area by default in the AVR controllers. There is a macro called PROGMEM to store them in the FLASH, but you can't access them like a regular string. For this reason, a compatibility layer was added inside Commander-API.</li>
+<li>Internal debug and status messages are automatically stored in PROGMEM on AVR. The overall memory consumption reduced on UNO from 67% to 21% with the same example.</li>
+<li><a class="el" href="md_docs_markdown_pages_premade_commands.html#premade_commands">Premade terminal commands</a>. It can be useful when you want to create a system from the ground up as quickly as possible. For this reason, some premade terminal commands are available, you can add them to the API-tree with a macro. Of course, you can select which one you need. This is totally optional you can implement your own versions.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1"></a>
-Contributing</h2>
-<p >Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.</p>
+<p ><b>Video Tutorial</b></p>
+<p > 
+
+
+<iframe width="1024" height="786" src="https://www.youtube.com/embed/O2su8kXg1X8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</p>
+<dl class="section note"><dt>Note</dt><dd>This video is made for the previous version. There are some minor changes. Please check the updated examples.</dd></dl>
+<p><b>Documentation</b></p>
+<p >The full documentation can be found <a href="https://dani007200964.github.io/Commander-API/html/index.html">here</a>.</p>
+<p ><b>Contributing</b> Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.</p>
 <p >Please make sure to update tests as appropriate.</p>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md0"></a>
 Donation</h2>
 <p >If this project help you reduce time to develop, you can give me a cup of coffee <span class="emoji">&#x2615;</span> <span class="emoji">&#x2615;</span> <span class="emoji">&#x2615;</span></p>
 <p ><a href="https://www.paypal.com/donate?hosted_button_id=YFGZD78H6K2CS"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="Donate" style="pointer-events: none;" class="inline"/></a></p>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md1"></a>
 License &amp; copyright</h2>
 <p >© Daniel Hajnal</p>
 <p ><span class="emoji">&#x1f4e7;</span> <a href="#" onclick="location.href='mai'+'lto:'+'haj'+'na'+'l.d'+'an'+'iel'+'96'+'@gm'+'ai'+'l.c'+'om'; return false;">hajna<span class="obfuscator">.nosp@m.</span>l.da<span class="obfuscator">.nosp@m.</span>niel9<span class="obfuscator">.nosp@m.</span>6@gm<span class="obfuscator">.nosp@m.</span>ail.c<span class="obfuscator">.nosp@m.</span>om</a></p>
@@ -175,7 +179,7 @@ License &amp; copyright</h2>
       <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sat Oct 8 2022
+      </a> on Sun Oct 9 2022
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -190,7 +194,7 @@ License &amp; copyright</h2>
         <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sat Oct 8 2022
+        </a> on Sun Oct 9 2022
       </small></address>
     </li>
   </ul>

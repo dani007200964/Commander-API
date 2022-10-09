@@ -366,7 +366,7 @@ void commander_analogRead_func( char *args, Stream *response ){
 
 #endif
 
-#ifdef ESP32
+#if defined( ESP32 ) || ( ESP8266 )
 
 void commander_analogRead_func( char *args, Stream *response ){
 
@@ -396,7 +396,7 @@ void commander_analogRead_func( char *args, Stream *response ){
 
 #endif
 
-#ifdef ESP32
+#if defined( ESP32 ) || ( ESP8266 )
 
 void commander_ipconfig_func( char *args, Stream *response ){
 
@@ -702,7 +702,13 @@ void commander_neofetch_func( char *args, Stream *response ){
 
 void commander_reboot_func( char *args, Stream *response ){
 
-  #ifdef ESP32
+  #ifdef __AVR__
+  response -> println( F( "Rebooting..." ) );
+  #else
+  response -> println( (const char*)"Rebooting..." );
+  #endif
+
+  #if defined( ESP32 ) || ( ESP8266 )
 
   ESP.restart();
 
@@ -712,8 +718,6 @@ void commander_reboot_func( char *args, Stream *response ){
   while( 1 );
 
   #endif
-
-
 
 }
 
