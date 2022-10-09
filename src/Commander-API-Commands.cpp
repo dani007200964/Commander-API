@@ -93,14 +93,24 @@ void commander_pinMode_func( char *args, Stream *response ){
 
   if( argResult != 2 ){
 
-    response -> print( "Argument error!" );
+    #ifdef __AVR__
+    response -> print( F( "Argument error!" ) );
+    #else
+    response -> print( (const char*)"Argument error!" );
+    #endif
+
     return;
 
   }
 
   if( pin < 0 || direction < 0 ){
 
-    response -> print( "Argument error!" );
+    #ifdef __AVR__
+    response -> print( F( "Argument error!" ) );
+    #else
+    response -> print( (const char*)"Argument error!" );
+    #endif
+
     return;
 
   }
@@ -119,7 +129,11 @@ void commander_pinMode_func( char *args, Stream *response ){
 
   else{
 
-    response -> print( "Argument error! Second argument has to be 1 or 0!" );
+    #ifdef __AVR__
+    response -> print( F( "Argument error! Second argument has to be 1 or 0!" ) );
+    #else
+    response -> print( (const char*)"Argument error! Second argument has to be 1 or 0!" );
+    #endif
 
   }
 
@@ -136,14 +150,24 @@ void commander_digitalWrite_func( char *args, Stream *response ){
 
   if( argResult != 2 ){
 
-    response -> print( "Argument error!" );
+    #ifdef __AVR__
+    response -> print( F( "Argument error!" ) );
+    #else
+    response -> print( (const char*)"Argument error!" );
+    #endif
+
     return;
 
   }
 
   if( pin < 0 || state < 0 ){
 
-    response -> print( "Argument error!" );
+    #ifdef __AVR__
+    response -> print( F( "Argument error!" ) );
+    #else
+    response -> print( (const char*)"Argument error!" );
+    #endif
+
     return;
 
   }
@@ -162,7 +186,11 @@ void commander_digitalWrite_func( char *args, Stream *response ){
 
   else{
 
-    response -> print( "Argument error! Second argument has to be 1 or 0!" );
+    #ifdef __AVR__
+    response -> print( F( "Argument error! Second argument has to be 1 or 0!" ) );
+    #else
+    response -> print( (const char*)"Argument error! Second argument has to be 1 or 0!" );
+    #endif
 
   }
 
@@ -178,14 +206,24 @@ void commander_digitalRead_func( char *args, Stream *response ){
 
   if( argResult != 1 ){
 
-    response -> print( "Argument error!" );
+    #ifdef __AVR__
+    response -> print( F( "Argument error!" ) );
+    #else
+    response -> print( (const char*)"Argument error!" );
+    #endif
+
     return;
 
   }
 
   if( pin < 0 ){
 
-    response -> print( "Argument error!" );
+    #ifdef __AVR__
+    response -> print( F( "Argument error!" ) );
+    #else
+    response -> print( (const char*)"Argument error!" );
+    #endif
+
     return;
 
   }
@@ -194,14 +232,171 @@ void commander_digitalRead_func( char *args, Stream *response ){
 
 }
 
+#ifdef ARDUINO_AVR_UNO
 
+void commander_analogRead_func( char *args, Stream *response ){
 
+  int pin;
 
+  int argResult;
 
+  argResult = sscanf( args, "%d", &pin );
 
+  if( argResult != 1 ){
 
+    response -> print( F( "Argument error!" ) );
+    return;
 
+  }
 
+  switch( pin ){
+
+    case 0:
+      pin = A0;
+      break;
+
+    case 1:
+      pin = A1;
+      break;
+
+    case 2:
+      pin = A2;
+      break;
+
+    case 3:
+      pin = A3;
+      break;
+
+    case 4:
+      pin = A5;
+      break;
+
+    case 5:
+      pin = A5;
+      break;
+
+    default:
+      response -> print( F( "Argument error!" ) );
+      return;
+
+  }
+
+  response -> print( analogRead( pin ) );
+
+}
+
+#endif
+
+#ifdef ARDUINO_AVR_LEONARDO
+
+void commander_analogRead_func( char *args, Stream *response ){
+
+  int pin;
+
+  int argResult;
+
+  argResult = sscanf( args, "%d", &pin );
+
+  if( argResult != 1 ){
+
+    response -> print( F( "Argument error!" ) );
+    return;
+
+  }
+
+  switch( pin ){
+
+    case 0:
+      pin = A0;
+      break;
+
+    case 1:
+      pin = A1;
+      break;
+
+    case 2:
+      pin = A2;
+      break;
+
+    case 3:
+      pin = A3;
+      break;
+
+    case 4:
+      pin = A5;
+      break;
+
+    case 5:
+      pin = A5;
+      break;
+
+    case 6:
+      pin = A6;
+      break;
+
+    case 7:
+      pin = A7;
+      break;
+
+    case 8:
+      pin = A8;
+      break;
+
+    case 9:
+      pin = A9;
+      break;
+
+    case 10:
+      pin = A10;
+      break;
+
+    case 11:
+      pin = A11;
+      break;
+
+    default:
+      response -> print( F( "Argument error!" ) );
+      return;
+
+  }
+
+  response -> print( analogRead( pin ) );
+
+}
+
+#endif
+
+#ifdef ESP32
+
+void commander_analogRead_func( char *args, Stream *response ){
+
+  int pin;
+
+  int argResult;
+
+  argResult = sscanf( args, "%d", &pin );
+
+  if( argResult != 1 ){
+
+    response -> print( (const char*)"Argument error!" );
+    return;
+
+  }
+
+  if( pin < 0 ){
+
+    response -> print( (const char*)"Argument error!" );
+    return;
+
+  }
+
+  response -> print( analogRead( pin ) );
+
+}
+
+#endif
+
+#ifdef ESP32
 
 void commander_ipconfig_func( char *args, Stream *response ){
 
@@ -292,8 +487,115 @@ void commander_wifiScan_func( char *args, Stream *response ){
 
 }
 
+#endif
+
+#ifdef __AVR__
+
+void commander_neofetch_func( char *args, Stream *response ){
+
+  uint32_t rowCounter = 0;
+
+  response -> print( F(
+      "\r\n\033[1;36m"
+      "      :=*%@@@@%#+-             :=*%@@@@%#+-       \r\n"
+      "    +%@@@@@@@@@@@@@#-       :*@@@@@@@@@@@@@@*:    \r\n"
+      "  =@@@@@*=-:::-+#@@@@@=   :#@@@@%*=::::-+%@@@@#.  \r\n"
+      " *@@@@-          .=@@@@%:*@@@@*:          .#@@@@. \r\n"
+      "+@@@%               +@@@@@@@%:     .##      +@@@% \r\n"
+      "@@@@-   .+++++++     -@@@@@*     -+*@@++-    @@@@:\r\n"
+      "@@@@-   .+++++++     .%@@@@+     =+*@@*+-    %@@@:\r\n"
+      "*@@@#               =@@@@@@@#.     .##      -@@@@ \r\n"
+      " #@@@%:           -%@@@@=#@@@@+.           +@@@@: \r\n"
+      "  *@@@@%=:.   :-*@@@@@*   -%@@@@#=:.  .:-*@@@@%:  \r\n"
+      "   :*@@@@@@@@@@@@@@@+.      -#@@@@@@@@@@@@@@%=    \r\n"
+      "      -+#@@@@@@%*=:            -+#@@@@@@%*=.      \r\n"
+      "\033[0;37m" ) );
+
+  response -> print( F( "\033[" ) );
+  response -> print( NEOFETCH_LOGO_HEIGHT );
+  response -> print( F( "A\033[51C" ) );
+
+  #ifdef NEOFETCH_FW_NAME
+  response -> print( F( "\033[1;31mFW\033[0;37m: " ) );
+  response -> print( F( NEOFETCH_FW_NAME ) );
+  response -> print( F( "\r\n\033[51C" ) );
+  rowCounter++;
+  #endif
+
+  #ifdef NEOFETCH_CPU_TYPE
+  response -> print( F( "\033[1;31mCPU\033[0;37m: " ) );
+  response -> print( F( NEOFETCH_CPU_TYPE ) );
+  response -> print( F( "\r\n\033[51C" ) );
+  rowCounter++;
+  #endif
+
+  #ifdef NEOFETCH_CPU_TYPE_AUTO
+  response -> print( F( "\033[1;31mCPU\033[0;37m: " ) );
+
+  #ifdef ARDUINO_AVR_UNO
+  response -> print( F( "AVR - Arduino UNO" ) );
+  #elif ARDUINO_AVR_LEONARDO
+  response -> print( F( "AVR - Arduino Leonardo" ) );
+  #else
+  response -> print( F( "Unknown" ) );
+  #endif
+
+  response -> print( F( "\r\n\033[51C" ) );
+  rowCounter++;
+  #endif
+
+  #ifdef NEOFETCH_COMPILER
+  response -> print( F( "\033[1;31mCompiler\033[0;37m: GCC " ) );
+  response -> print( F( NEOFETCH_COMPILER ) );
+  response -> print( F( "\r\n\033[51C" ) );
+  rowCounter++;
+  #endif
+
+  #ifdef NEOFETCH_COMPILE_DATE
+  response -> print( F( "\033[1;31mCompile Date\033[0;37m: " ) );
+  response -> print( F( NEOFETCH_COMPILE_DATE ) );
+  response -> print( F( "\r\n\033[51C" ) );
+  rowCounter++;
+  #endif
+
+  #ifdef NEOFETCH_TERMINAL
+  response -> print( F( "\033[1;31mTerminal\033[0;37m: " ) );
+  response -> print( F( NEOFETCH_TERMINAL ) );
+  response -> print( F( "\r\n\033[51C" ) );
+  rowCounter++;
+  #endif
+
+  #ifdef NEOFETCH_COMMAND_PARSER
+  response -> print( F( "\033[1;31mCMD Parser\033[0;37m: " ) );
+  response -> print( F( NEOFETCH_COMMAND_PARSER ) );
+  response -> print( F( "\r\n\033[51C" ) );
+  rowCounter++;
+  #endif
+
+  #ifdef NEOFETCH_AUTHOR
+  response -> print( F( "\033[1;31mAuthor\033[0;37m: " ) );
+  response -> print( F( NEOFETCH_AUTHOR ) );
+  response -> print( F( "\r\n\033[51C" ) );
+  rowCounter++;
+  #endif
+
+  #ifdef NEOFETCH_LICENSE
+  response -> print( F( "\033[1;31mLicense\033[0;37m: " ) );
+  response -> print( F( NEOFETCH_LICENSE ) );
+  response -> print( F( "\r\n\033[51C" ) );
+  rowCounter++;
+  #endif
+
+  response -> print( F( "\033[" ) );
+  response -> print( NEOFETCH_LOGO_HEIGHT - rowCounter );
+  response -> print( 'B' );
+
+}
+
+#else
+
 const char* neofetchLogo = {
-  "\033[1;36m"
+  "\r\n\033[1;36m"
   "      :=*%@@@@%#+-             :=*%@@@@%#+-       \r\n"
   "    +%@@@@@@@@@@@@@#-       :*@@@@@@@@@@@@@@*:    \r\n"
   "  =@@@@@*=-:::-+#@@@@@=   :#@@@@%*=::::-+%@@@@#.  \r\n"
@@ -396,6 +698,25 @@ void commander_neofetch_func( char *args, Stream *response ){
 
 }
 
+#endif
+
+void commander_reboot_func( char *args, Stream *response ){
+
+  #ifdef ESP32
+
+  ESP.restart();
+
+  #elif __AVR__
+
+  wdt_enable( WDTO_15MS );
+  while( 1 );
+
+  #endif
+
+
+
+}
+
 
 void commander_sin_func( char *args, Stream *response ){
 
@@ -410,5 +731,72 @@ void commander_cos_func( char *args, Stream *response ){
   float f = atof( args );
 
   response -> print( cos( f ), 6 );
+
+}
+
+void commander_not_func( char *args, Stream *response ){
+
+  int num;
+  int argResult;
+
+  argResult = sscanf( args, "%d", &num );
+
+  if( argResult != 1 ){
+
+    #ifdef __AVR__
+    response -> print( F( "Argument error!" ) );
+    #else
+    response -> print( (const char*)"Argument error!" );
+    #endif
+
+    return;
+
+  }
+
+  response -> print( !num );
+
+}
+
+void commander_random_func( char *args, Stream *response ){
+
+  int min;
+  int max;
+  int argResult;
+
+  argResult = sscanf( args, "%d %d", &min, &max );
+
+  if( argResult != 2 ){
+
+    #ifdef __AVR__
+    response -> print( F( "Argument error!" ) );
+    #else
+    response -> print( (const char*)"Argument error!" );
+    #endif
+
+    return;
+
+  }
+
+  if( min >= max ){
+
+    #ifdef __AVR__
+    response -> print( F( "Argument erro! First argument is min, second is max!" ) );
+    #else
+    response -> print( (const char*)"Argument erro! First argument is min, second is max!" );
+    #endif
+
+    return;
+
+  }
+
+  response -> print( random( min, max ) );
+
+}
+
+void commander_abs_func( char *args, Stream *response ){
+
+  float f = atof( args );
+
+  response -> print( abs( f ) );
 
 }

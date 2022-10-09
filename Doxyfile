@@ -505,7 +505,7 @@ EXTRACT_ALL            = YES
 # be included in the documentation.
 # The default value is: NO.
 
-EXTRACT_PRIVATE        = NO
+EXTRACT_PRIVATE        = YES
 
 # If the EXTRACT_PRIV_VIRTUAL tag is set to YES, documented private virtual
 # methods of a class will be included in the documentation.
@@ -2377,7 +2377,8 @@ INCLUDE_FILE_PATTERNS  =
 PREDEFINED             = ARDUINO \
                          ESP32 \
                          ESP8266 \
-                         ARDUINO_AVR_LEONARDO
+                         ARDUINO_AVR_LEONARDO \
+                         __AVR__
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The

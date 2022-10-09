@@ -38,26 +38,46 @@ SOFTWARE.
 
 #include <math.h>
 
+#ifdef __AVR__
+  #include <avr/wdt.h>
+#endif
+
 #include "Commander-API.hpp"
+
+//-------- System functions --------//
+
+#define API_ELEMENT_REBOOT apiElement( "reboot", "Reboots the device.", commander_reboot_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_REBOOT( element ) apiElement_P( element, "reboot", "Reboots the device.", commander_reboot_func )
+#endif
+void commander_reboot_func( char *args, Stream *response );
 
 //-------- Timing functions --------//
 
 #define API_ELEMENT_MICROS apiElement( "micros", "Returns the number of microseconds passed since the program started.", commander_micros_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_MICROS( element ) apiElement_P( element, "micros", "Returns the number of microseconds passed since the program started.", commander_micros_func )
+#endif
 void commander_micros_func( char *args, Stream *response );
 
 #define API_ELEMENT_MILLIS apiElement( "millis", "Returns the number of milliseconds passed since the program started.", commander_millis_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_MILLIS( element ) apiElement_P( element, "millis", "Returns the number of milliseconds passed since the program started.", commander_millis_func )
+#endif
 void commander_millis_func( char *args, Stream *response );
 
 #define API_ELEMENT_UPTIME apiElement( "uptime", "Returns the time passed since the program started.", commander_uptime_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_UPTIME( element ) apiElement_P( element, "uptime", "Returns the time passed since the program started.", commander_uptime_func )
+#endif
 void commander_uptime_func( char *args, Stream *response );
-
-
-
-
 
 //-------- Pure awesomeness --------//
 
 #define API_ELEMENT_NEOFETCH apiElement( "neofetch", "Nice looking system information.", commander_neofetch_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_NEOFETCH( element ) apiElement_P( element, "neofetch", "Nice looking system information.", commander_neofetch_func )
+#endif
 void commander_neofetch_func( char *args, Stream *response );
 
 
@@ -65,13 +85,30 @@ void commander_neofetch_func( char *args, Stream *response );
 //-------- Digital I-O functions --------//
 
 #define API_ELEMENT_PINMODE apiElement( "pinMode", "Set the direction of a pin.\r\n\tExample: pinMode [ Pin Number ] [ Direction ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Direction ] - 0 means input, 1 means output.", commander_pinMode_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_PINMODE( element ) apiElement_P( element, "pinMode", "Set the direction of a pin.\r\n\tExample: pinMode [ Pin Number ] [ Direction ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Direction ] - 0 means input, 1 means output.", commander_pinMode_func )
+#endif
 void commander_pinMode_func( char *args, Stream *response );
 
 #define API_ELEMENT_DIGITALWRITE apiElement( "digitalWrite", "Set the state of an output pin.\r\n\tExample: digitalWrite [ Pin Number ] [ State ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ State ] - 0 means low, 1 means high.", commander_digitalWrite_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_DIGITALWRITE( element ) apiElement_P( element, "digitalWrite", "Set the state of an output pin.\r\n\tExample: digitalWrite [ Pin Number ] [ State ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ State ] - 0 means low, 1 means high.", commander_digitalWrite_func )
+#endif
 void commander_digitalWrite_func( char *args, Stream *response );
 
 #define API_ELEMENT_DIGITALREAD apiElement( "digitalRead", "Read the state of a pin.\r\n\tExample: digitalRead [ Pin Number ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Returns ] - 0 means low, 1 means high.", commander_digitalRead_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_DIGITALREAD( element ) apiElement_P( element, "digitalRead", "Read the state of a pin.\r\n\tExample: digitalRead [ Pin Number ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Returns ] - 0 means low, 1 means high.", commander_digitalRead_func )
+#endif
 void commander_digitalRead_func( char *args, Stream *response );
+
+//-------- Analog I-O functions --------//
+
+#define API_ELEMENT_ANALOGREAD apiElement( "analogRead", "Generate an ADC measurement on a pin.\r\n\tExample: analogRead [ Pin Number ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Returns ] - The raw ADC sample.", commander_analogRead_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_ANALOGREAD( element ) apiElement_P( element, "analogRead", "Generate an ADC measurement on a pin.\r\n\tExample: analogRead [ Pin Number ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Returns ] - The raw ADC sample.", commander_analogRead_func )
+#endif
+void commander_analogRead_func( char *args, Stream *response );
 
 //-------- WiFi functions --------//
 
@@ -88,10 +125,34 @@ void commander_wifiScan_func( char *args, Stream *response );
 //-------- Math functions --------//
 
 #define API_ELEMENT_SIN apiElement( "sin", "Sine function. The input is in radians.", commander_sin_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_SIN( element ) apiElement_P( element, "sin", "Sine function. The input is in radians.", commander_sin_func )
+#endif
 void commander_sin_func( char *args, Stream *response );
 
 #define API_ELEMENT_COS apiElement( "cos", "Cosine function. The input is in radians.", commander_cos_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_COS( element ) apiElement_P( element, "cos", "Cosine function. The input is in radians.", commander_cos_func )
+#endif
 void commander_cos_func( char *args, Stream *response );
+
+#define API_ELEMENT_ABS apiElement( "abs", "Calculates the absolute value of a number.", commander_abs_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_ABS( element ) apiElement_P( element, "abs", "Calculates the absolute value of a number.", commander_abs_func )
+#endif
+void commander_abs_func( char *args, Stream *response );
+
+#define API_ELEMENT_RANDOM apiElement( "random", "Generates a random number between the parameters.\r\n\tExample: random [ min ] [ max ]\r\n\t[ min ] - Lower integer bound\r\n\t[ max ] - Upper integer bound", commander_random_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_RANDOM( element ) apiElement_P( element, "random", "Generates a random number between the parameters.\r\n\tExample: random [ min ] [ max ]\r\n\t[ min ] - Lower integer bound\r\n\t[ max ] - Upper integer bound", commander_random_func )
+#endif
+void commander_random_func( char *args, Stream *response );
+
+#define API_ELEMENT_NOT apiElement( "not", "Logical not. If the input is 0 returns 1. Any other cases it returns 0.", commander_not_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_NOT( element ) apiElement_P( element, "not", "Logical not. If the input is 0 returns 1. Any other cases it returns 0.", commander_not_func )
+#endif
+void commander_not_func( char *args, Stream *response );
 
 
 #define NEOFETCH_LOGO_HEIGHT 12

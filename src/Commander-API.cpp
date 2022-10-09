@@ -311,8 +311,20 @@ void Commander::executeCommand( char *cmd ){
 
 	if( pipePos >= 0 ){
 
+		#ifdef COMMANDER_ENABLE_PIPE_MODULE
 		// Terminate where pip is found.
 		tempBuff[ pipePos ] = '\0';
+		#else
+
+			#ifdef __AVR__
+			response -> println( F( "Piping not available on this device!" ) );
+			#else
+			response -> println( (const char*)"Piping not available on this device!" );
+			#endif
+
+			return;
+
+		#endif
 
 	}
 
@@ -394,7 +406,8 @@ void Commander::executeCommand( char *cmd ){
 		// If show_description flag is not set, than we have to execute the commands function.
 		else{
 
-			// TODO if the pipe buffer has data, the arg has to be replaced with that.
+			#ifdef COMMANDER_ENABLE_PIPE_MODULE
+
 			if( pipeChannel.available() > 0 ){
 
 				// pipeChannel.readBytesUntil( '\0', pipeArgBuffer, COMMANDER_MAX_COMMAND_SIZE );
@@ -440,6 +453,7 @@ void Commander::executeCommand( char *cmd ){
 
 			else{
 
+				// Execute command function.
 				(commandData_ptr -> func)( arg, response );
 
 			}
@@ -454,6 +468,13 @@ void Commander::executeCommand( char *cmd ){
 				executeCommand( &tempBuff[ pipePos + 1 ] );
 
 			}
+
+			#else
+
+			// Execute command function.
+			(commandData_ptr -> func)( arg, response );
+
+			#endif
 
 		}
 
@@ -496,12 +517,16 @@ void Commander::executeCommand( char *cmd ){
 
 		#endif
 
+		#ifdef COMMANDER_ENABLE_PIPE_MODULE
+
 		// Clear the pipe at error.
 		while( pipeChannel.available() ){
 
 			pipeChannel.read();
 
 		}
+		
+		#endif
 
 	}
 

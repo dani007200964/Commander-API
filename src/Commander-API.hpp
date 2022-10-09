@@ -352,12 +352,16 @@ private:
 	/// @returns If the character found in the string, the poisition of the first occurance will be returned.
 	int32_t hasChar( char* str, char c );
 
+	#ifdef COMMANDER_ENABLE_PIPE_MODULE
+
 	/// Channel for the internal piping.
 	commanderPipeChannel pipeChannel;
 
 	/// If piping happenes the output of the first command will be copied to this buffer.
 	/// This way it can be passed to the second command and so on.
 	char pipeArgBuffer[ COMMANDER_MAX_COMMAND_SIZE ];
+
+	#endif
 
 };
 
