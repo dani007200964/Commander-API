@@ -137,6 +137,18 @@ reboot Command</h2>
 <li><b>Arguments:</b> none</li>
 </ul>
 <p >This command reboots the device.</p>
+<h2><a class="anchor" id="neofetch_command"></a>
+neofetch Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>neofetch</code></li>
+<li><b>Arguments:</b> none</li>
+</ul>
+<p >This command is inspired by the original <a href="https://github.com/dylanaraps/neofetch">neofetch</a> bash script. It is a visually pleasing system information tool.</p>
+<div class="image">
+<img src="neofetch_output.png" alt=""/>
+<div class="caption">
+neofetch Output </div></div>
+    <hr  />
 <h1><a class="anchor" id="timing_commands"></a>
 Timing Commands</h1>
 <h2><a class="anchor" id="micros_command"></a>
@@ -153,13 +165,9 @@ millis Command</h2>
 <li><b>Arguments:</b> none</li>
 </ul>
 <p >This command returns the number of milliseconds passed since the program started.</p>
-<h2><a class="anchor" id="neofetch_command"></a>
-neofetch Command</h2>
-<ul>
-<li><b>Syntax:</b> <code>neofetch</code></li>
-<li><b>Arguments:</b> none</li>
-</ul>
-<p >This command is inspired by the original <a href="https://github.com/dylanaraps/neofetch">neofetch</a> bash script. It is a visually pleasing system information tool.</p>
+<hr  />
+<h1><a class="anchor" id="digital_io_commands"></a>
+Digital I/O Commands</h1>
 <h2><a class="anchor" id="pinMode_command"></a>
 pinMode Command</h2>
 <ul>
@@ -175,7 +183,172 @@ pinMode Command</h2>
 </ul>
 </li>
 </ul>
-<p >This command sets the direction of any pin on the microcontroller. </p>
+<p >This command sets the direction of any pin on the microcontroller.</p>
+<h2><a class="anchor" id="digitalWrite_command"></a>
+digitalWrite Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>digitalWrite</code></li>
+<li><b>Arguments:</b><ul>
+<li>Pin Number</li>
+<li>State</li>
+</ul>
+</li>
+<li><b>Example:</b><ul>
+<li><code>digitalWrite 2 1</code> -&gt; Set pin 2 output state to high.</li>
+<li><code>digitalWrite 3 0</code> -&gt; Set pin 3 output state to low.</li>
+</ul>
+</li>
+</ul>
+<p >This command sets the state of any output pin. </p><dl class="section note"><dt>Note</dt><dd>To make it work, the specified pin has to be configured to be an output. Check <a class="el" href="md_docs_markdown_pages_premade_commands.html#pinMode_command">pinMode comand</a>.</dd></dl>
+<h2><a class="anchor" id="digitalRead_command"></a>
+digitalRead Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>digitalRead</code></li>
+<li><b>Arguments:</b><ul>
+<li>Pin Number</li>
+</ul>
+</li>
+<li><b>Example:</b><ul>
+<li><code>digitalRead 2</code> -&gt; Read the state of pin 2.</li>
+<li><code>digitalRead 3</code> -&gt; Read the state of pin 3.</li>
+</ul>
+</li>
+</ul>
+<p >This command reads the state of any input or output pin.</p>
+<hr  />
+<h1><a class="anchor" id="analog_io_commands"></a>
+Analog I/O Commands</h1>
+<h2><a class="anchor" id="analogRead_command"></a>
+analogRead Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>analogRead</code></li>
+<li><b>Arguments:</b><ul>
+<li>Pin Number</li>
+</ul>
+</li>
+<li><b>Example:</b><ul>
+<li><code>analogRead 0</code> -&gt; Create an ADC measurement on analog pin 0</li>
+<li><code>analogRead 5</code> -&gt; Create an ADC measurement on analog pin 5</li>
+</ul>
+</li>
+</ul>
+<p >This command creates an ADC measurement on any ADC pin. </p><dl class="section note"><dt>Note</dt><dd>On Arduino boards the ADC pins usually marked as A0, A1... etc. To select A0, you have to pass 0 as argument, to select A3, you have to pass 3 as argument and so on.</dd></dl>
+<hr  />
+<h1><a class="anchor" id="wifi_specific_commands"></a>
+WiFi Specific Commands</h1>
+<dl class="section note"><dt>Note</dt><dd>These commands are made for ESP8266 and ESP32. They do not work on any other platforms!</dd></dl>
+<h2><a class="anchor" id="ipconfig_command"></a>
+ipconfig Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>ipconfig</code></li>
+<li><b>Arguments:</b> none</li>
+</ul>
+<p >Displays current TCP/IP network configuration.</p>
+<div class="image">
+<img src="ipconfig_output.png" alt=""/>
+<div class="caption">
+ipconfig Output </div></div>
+    <h2><a class="anchor" id="wifiStat_command"></a>
+wifiStat Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>wifiStat</code></li>
+<li><b>Arguments:</b> none</li>
+</ul>
+<p >Displays WiFi mode, signal strength and MAC address.</p>
+<div class="image">
+<img src="wifiStat_output.png" alt=""/>
+<div class="caption">
+wifiStat Output </div></div>
+    <h2><a class="anchor" id="wifiScan_command"></a>
+wifiScan Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>wifiScan</code></li>
+<li><b>Arguments:</b> none</li>
+</ul>
+<p >Scans for the nearby WiFi networks and print them as a list.</p>
+<div class="image">
+<img src="wifiScan_output.png" alt=""/>
+<div class="caption">
+wifiScan Output </div></div>
+    <hr  />
+<h1><a class="anchor" id="math_commands"></a>
+Math Commands</h1>
+<h2><a class="anchor" id="sin_command"></a>
+sin Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>sin</code></li>
+<li><b>Arguments:</b><ul>
+<li>rad -&gt; Input number in <b>radians</b>.</li>
+</ul>
+</li>
+<li><b>Example:</b><ul>
+<li><code>sin 0</code> -&gt; Returns <b>0.000000</b></li>
+<li><code>sin 1.570796</code> -&gt; Returns <b>1.000000</b></li>
+</ul>
+</li>
+</ul>
+<p >Calculates the sine of an angle which is given in radians. </p><dl class="section note"><dt>Note</dt><dd>The output precision is 6 digit after the decimal point.</dd></dl>
+<h2><a class="anchor" id="cos_command"></a>
+cos Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>cos</code></li>
+<li><b>Arguments:</b><ul>
+<li>rad -&gt; Input number in <b>radians</b>.</li>
+</ul>
+</li>
+<li><b>Example:</b><ul>
+<li><code>cos 0</code> -&gt; Returns <b>1.000000</b></li>
+<li><code>cos 1.570796</code> -&gt; Returns <b>0.000000</b></li>
+</ul>
+</li>
+</ul>
+<p >Calculates the cosine of an angle which is given in radians. </p><dl class="section note"><dt>Note</dt><dd>The output precision is 6 digit after the decimal point.</dd></dl>
+<h2><a class="anchor" id="abs_command"></a>
+abs Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>abs</code></li>
+<li><b>Arguments:</b><ul>
+<li>num -&gt; Input float umber.</li>
+</ul>
+</li>
+<li><b>Example:</b><ul>
+<li><code>abs 10.5</code> -&gt; Returns <b>10.500000</b></li>
+<li><code>abs -6.3</code> -&gt; Returns <b>6.300000</b></li>
+</ul>
+</li>
+</ul>
+<p >Calculates the absolute value of an input number. </p><dl class="section note"><dt>Note</dt><dd>The output precision is 6 digit after the decimal point.</dd></dl>
+<h2><a class="anchor" id="random_command"></a>
+random Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>random</code></li>
+<li><b>Arguments:</b><ul>
+<li>min -&gt; Lower integer bound</li>
+<li>max -&gt; Upper integer bound</li>
+</ul>
+</li>
+<li><b>Example:</b><ul>
+<li><code>random 1 5</code> -&gt; Returns a random integer between 1 and 5( 5 is the upper limit, so actually 4 will be the largest number )</li>
+</ul>
+</li>
+</ul>
+<p >Generates a random number between the given bounds.</p>
+<h2><a class="anchor" id="not_command"></a>
+not Command</h2>
+<ul>
+<li><b>Syntax:</b> <code>not</code></li>
+<li><b>Arguments:</b><ul>
+<li>state -&gt; Input logical state</li>
+</ul>
+</li>
+<li><b>Example:</b><ul>
+<li><code>not 0</code> -&gt; Returns 1</li>
+<li><code>not 1</code> -&gt; Returns 0</li>
+<li><code>not 2</code> -&gt; Returns 0</li>
+</ul>
+</li>
+</ul>
+<p >Generates a logical NOT from the input. It follows the C-like true-false logic, so 0 is false, everything else is true. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
@@ -198,7 +371,7 @@ pinMode Command</h2>
       <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sun Oct 9 2022
+      </a> on Mon Oct 10 2022
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -213,7 +386,7 @@ pinMode Command</h2>
         <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sun Oct 9 2022
+        </a> on Mon Oct 10 2022
       </small></address>
     </li>
   </ul>

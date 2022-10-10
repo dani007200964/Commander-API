@@ -35,13 +35,32 @@ var NAVTREE =
     [ "Premade Commands", "md_docs_markdown_pages_premade_commands.html", [
       [ "How To Add Premade Commands", "md_docs_markdown_pages_premade_commands.html#how_to_add_premade_commands", null ],
       [ "System Commands", "md_docs_markdown_pages_premade_commands.html#system_commands", [
-        [ "reboot Command", "md_docs_markdown_pages_premade_commands.html#reboot_command", null ]
+        [ "reboot Command", "md_docs_markdown_pages_premade_commands.html#reboot_command", null ],
+        [ "neofetch Command", "md_docs_markdown_pages_premade_commands.html#neofetch_command", null ]
       ] ],
       [ "Timing Commands", "md_docs_markdown_pages_premade_commands.html#timing_commands", [
         [ "micros Command", "md_docs_markdown_pages_premade_commands.html#micros_command", null ],
-        [ "millis Command", "md_docs_markdown_pages_premade_commands.html#millis_command", null ],
-        [ "neofetch Command", "md_docs_markdown_pages_premade_commands.html#neofetch_command", null ],
-        [ "pinMode Command", "md_docs_markdown_pages_premade_commands.html#pinMode_command", null ]
+        [ "millis Command", "md_docs_markdown_pages_premade_commands.html#millis_command", null ]
+      ] ],
+      [ "Digital I/O Commands", "md_docs_markdown_pages_premade_commands.html#digital_io_commands", [
+        [ "pinMode Command", "md_docs_markdown_pages_premade_commands.html#pinMode_command", null ],
+        [ "digitalWrite Command", "md_docs_markdown_pages_premade_commands.html#digitalWrite_command", null ],
+        [ "digitalRead Command", "md_docs_markdown_pages_premade_commands.html#digitalRead_command", null ]
+      ] ],
+      [ "Analog I/O Commands", "md_docs_markdown_pages_premade_commands.html#analog_io_commands", [
+        [ "analogRead Command", "md_docs_markdown_pages_premade_commands.html#analogRead_command", null ]
+      ] ],
+      [ "WiFi Specific Commands", "md_docs_markdown_pages_premade_commands.html#wifi_specific_commands", [
+        [ "ipconfig Command", "md_docs_markdown_pages_premade_commands.html#ipconfig_command", null ],
+        [ "wifiStat Command", "md_docs_markdown_pages_premade_commands.html#wifiStat_command", null ],
+        [ "wifiScan Command", "md_docs_markdown_pages_premade_commands.html#wifiScan_command", null ]
+      ] ],
+      [ "Math Commands", "md_docs_markdown_pages_premade_commands.html#math_commands", [
+        [ "sin Command", "md_docs_markdown_pages_premade_commands.html#sin_command", null ],
+        [ "cos Command", "md_docs_markdown_pages_premade_commands.html#cos_command", null ],
+        [ "abs Command", "md_docs_markdown_pages_premade_commands.html#abs_command", null ],
+        [ "random Command", "md_docs_markdown_pages_premade_commands.html#random_command", null ],
+        [ "not Command", "md_docs_markdown_pages_premade_commands.html#not_command", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [
