@@ -34,12 +34,19 @@ SOFTWARE.
 /// Arduino detection
 #ifdef ARDUINO
 #include "Arduino.h"
+#include "Wire.h"
 #endif
 
 #include <math.h>
 
 #ifdef __AVR__
   #include <avr/wdt.h>
+#endif
+
+#ifdef ESP32
+
+  #include "time.h"
+
 #endif
 
 #include "Commander-API.hpp"
@@ -158,6 +165,37 @@ void commander_wifiStat_func( char *args, Stream *response );
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
 void commander_wifiScan_func( char *args, Stream *response );
+
+#endif
+
+#ifdef ESP32
+
+#define API_ELEMENT_CONFIGTIME apiElement( "configTime", "Configure NTP time settings.\r\n\tExample: configTime [ GMT Offset Sec ] [ DL Offset Sec ] [ Server ]\r\n\t[ GMT Offset Sec ] - UTC offset for your timezone in seconds.\r\n\t[ GMT Offset Sec ] - Daylight offset in sec.\r\n\t[ Server ] - NTP Server Address( optional, default: pool.ntp.org )", commander_configTime_func )
+/// Premade function for wifiScan command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+void commander_configTime_func( char *args, Stream *response );
+
+#define API_ELEMENT_DATETIME apiElement( "dateTime", "Returns the NTP synchronised date and time.", commander_dateTime_func )
+/// Premade function for wifiScan command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+void commander_dateTime_func( char *args, Stream *response );
+
+#endif
+
+#ifdef ARDUINO
+
+#ifdef __AVR__
+
+#define API_ELEMENT_I2C_BEGIN apiElement( "i2cBegin", "Initialize I2C peripheral as bus master.", commander_i2cBegin_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_I2C_BEGIN( element ) apiElement_P( element, "i2cBegin", "Initialize I2C peripheral as bus master.", commander_i2cBegin_func )
+#endif
+/// Premade function for sin command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+void commander_i2cBegin_func( char *args, Stream *response );
 
 #endif
 

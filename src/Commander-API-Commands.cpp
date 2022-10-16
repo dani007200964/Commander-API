@@ -489,6 +489,61 @@ void commander_wifiScan_func( char *args, Stream *response ){
 
 #endif
 
+#ifdef ESP32
+
+void commander_configTime_func( char *args, Stream *response ){
+
+  int gmtOffset_sec;
+  int daylightOffset_sec;
+  char ntpServer[32] = "";
+  int argResult;
+
+  argResult = sscanf( args, "%d %d %s", &gmtOffset_sec, &daylightOffset_sec, ntpServer );
+
+  if( argResult == 3 ){
+
+    configTime( gmtOffset_sec, daylightOffset_sec, ntpServer );
+    response -> print( (const char*)"Time configured." );
+    return;
+
+  }
+
+  argResult = sscanf( args, "%d %d", &gmtOffset_sec, &daylightOffset_sec );
+
+  if( argResult == 2 ){
+
+    configTime( gmtOffset_sec, daylightOffset_sec, (const char*)"pool.ntp.org" );
+    response -> print( (const char*)"Time configured with default NTP server: pool.ntp.org" );
+    return;
+
+  }
+
+  else{
+
+    response -> print( (const char*)"Argument error!" );
+    return;
+
+  }
+
+}
+
+void commander_dateTime_func( char *args, Stream *response ){
+
+  struct tm timeInfo;
+
+  if( !getLocalTime( &timeInfo ) ){
+
+    response -> print( "Failed to obtain time!" );
+    return;
+
+  }
+
+  response -> print( &timeInfo, "%A, %B %d %Y %H:%M:%S" );
+
+}
+
+#endif
+
 #ifdef __AVR__
 
 void commander_neofetch_func( char *args, Stream *response ){
@@ -720,6 +775,12 @@ void commander_reboot_func( char *args, Stream *response ){
   #endif
 
 }
+
+#ifdef ARDUINO
+
+
+
+#endif
 
 
 void commander_sin_func( char *args, Stream *response ){
