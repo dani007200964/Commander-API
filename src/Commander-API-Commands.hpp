@@ -184,21 +184,6 @@ void commander_dateTime_func( char *args, Stream *response );
 
 #endif
 
-#ifdef ARDUINO
-
-#ifdef __AVR__
-
-#define API_ELEMENT_I2C_BEGIN apiElement( "i2cBegin", "Initialize I2C peripheral as bus master.", commander_i2cBegin_func )
-#ifdef __AVR__
-  #define API_ELEMENT_P_I2C_BEGIN( element ) apiElement_P( element, "i2cBegin", "Initialize I2C peripheral as bus master.", commander_i2cBegin_func )
-#endif
-/// Premade function for sin command.
-/// @param args Pointer to the argument string.
-/// @param response Response channel for messages.
-void commander_i2cBegin_func( char *args, Stream *response );
-
-#endif
-
 //-------- Math functions --------//
 
 #define API_ELEMENT_SIN apiElement( "sin", "Sine function. The input is in radians.", commander_sin_func )
