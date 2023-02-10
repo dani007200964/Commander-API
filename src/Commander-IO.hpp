@@ -37,6 +37,7 @@ SOFTWARE.
 
 #include <stdint.h>
 #include <stddef.h>
+#include <stdarg.h>
 
 #include "Commander-Settings.hpp"
 
