@@ -484,12 +484,27 @@ void commander_wifiScan_func( char *args, Stream *response ){
 
   for( i = 0; i < num; i++ ){
 
+    #ifdef ESP32
+
     if( WiFi.encryptionType( i ) != WIFI_AUTH_OPEN ){
 
       response -> print( "\t* " );
       hasLocked = true;
 
     }
+
+    #endif
+
+    #ifdef ESP8266
+
+    if( WiFi.encryptionType( i ) != ENC_TYPE_NONE ){
+
+      response -> print( "\t* " );
+      hasLocked = true;
+
+    }
+
+    #endif
 
     else{
 
