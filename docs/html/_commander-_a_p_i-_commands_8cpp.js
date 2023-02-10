@@ -2,7 +2,9 @@ var _commander__a_p_i__commands_8cpp =
 [
     [ "commander_abs_func", "_commander-_a_p_i-_commands_8cpp.html#ac12b28f732724d7b0149e99927664af0", null ],
     [ "commander_analogRead_func", "_commander-_a_p_i-_commands_8cpp.html#ad50e2da8c65464fded53e4f101c12df4", null ],
+    [ "commander_configTime_func", "_commander-_a_p_i-_commands_8cpp.html#a89464d6a1bd02945dc651ed287eb0a9a", null ],
     [ "commander_cos_func", "_commander-_a_p_i-_commands_8cpp.html#ab6780710f945ac78f9b54630663f4e75", null ],
+    [ "commander_dateTime_func", "_commander-_a_p_i-_commands_8cpp.html#a841d50286418ffc91a2820f93a757ae7", null ],
     [ "commander_digitalRead_func", "_commander-_a_p_i-_commands_8cpp.html#a2ddb2545106085b4c45b9d7d6e0271c2", null ],
     [ "commander_digitalWrite_func", "_commander-_a_p_i-_commands_8cpp.html#a25104d380b58889aabc445a89372e298", null ],
     [ "commander_ipconfig_func", "_commander-_a_p_i-_commands_8cpp.html#af2d007a0ffedbcbb4e50e5e455f2b580", null ],

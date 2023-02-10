@@ -3,7 +3,7 @@
 There are some premade commands already to make your development easier. Please
 read the documentation carefully, some commands are platform dependent.
 
-@section how_to_add_premade_commands How To Add Premade Commands
+@note Please check Commander_simple_stream_pipe or Commander_Shellminator_Advanced_WebSocket_ESP32 example.
 
 
 @section system_commands System Commands

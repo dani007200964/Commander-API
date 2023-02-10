@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['platroemio_5finstallation_2emd_0',['platroemio_installation.md',['../platroemio__installation_8md.html',1,'']]]
+  ['supported_5fplatforms_2emd_0',['supported_platforms.md',['../supported__platforms_8md.html',1,'']]]
 ];

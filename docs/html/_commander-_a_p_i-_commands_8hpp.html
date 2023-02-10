@@ -129,8 +129,10 @@ $(document).ready(function(){initNavTree('_commander-_a_p_i-_commands_8hpp.html'
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;Arduino.h&quot;</code><br />
+<code>#include &quot;Wire.h&quot;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
 <code>#include &lt;avr/wdt.h&gt;</code><br />
+<code>#include &quot;time.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>&quot;</code><br />
 </div>
 <p><a href="_commander-_a_p_i-_commands_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -180,6 +182,14 @@ Macros</h2></td></tr>
 <tr class="separator:ab6f962b1bfd332c107b84e4b17fbc3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f7c2dbd12ec524b2f873298ec320642"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a6f7c2dbd12ec524b2f873298ec320642">API_ELEMENT_WIFISCAN</a>&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a>( &quot;wifiScan&quot;, &quot;Search for available networks around.&quot;, <a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a9ce486c9f6cc8f9d32719dde240cc9dd">commander_wifiScan_func</a> )</td></tr>
 <tr class="separator:a6f7c2dbd12ec524b2f873298ec320642"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7721e0ebd3627a792c319aec6e4ae7bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a7721e0ebd3627a792c319aec6e4ae7bc">API_ELEMENT_CONFIGTIME</a>&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a>( &quot;configTime&quot;, &quot;Configure NTP time settings.\r\n\tExample: configTime [ GMT Offset Sec ] [ DL Offset Sec ] [ Server ]\r\n\t[ GMT Offset Sec ] - UTC offset for your timezone in seconds.\r\n\t[ GMT Offset Sec ] - Daylight offset in sec.\r\n\t[ Server ] - NTP Server Address( optional, default: pool.ntp.org )&quot;, commander_configTime_func )</td></tr>
+<tr class="separator:a7721e0ebd3627a792c319aec6e4ae7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c1a9fca8539deaab497712942954bb2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a6c1a9fca8539deaab497712942954bb2">API_ELEMENT_DATETIME</a>&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a>( &quot;dateTime&quot;, &quot;Returns the NTP synchronised date and time.&quot;, <a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a841d50286418ffc91a2820f93a757ae7">commander_dateTime_func</a> )</td></tr>
+<tr class="separator:a6c1a9fca8539deaab497712942954bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72408bbba8332e0475915f393642bd16"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a72408bbba8332e0475915f393642bd16">API_ELEMENT_I2C_BEGIN</a>&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a>( &quot;i2cBegin&quot;, &quot;Initialize I2C peripheral as bus master.&quot;, <a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a69bf409bd99996e94e1ad0d196656983">commander_i2cBegin_func</a> )</td></tr>
+<tr class="separator:a72408bbba8332e0475915f393642bd16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b3f8947ca936bca3f57a790592ca136"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a2b3f8947ca936bca3f57a790592ca136">API_ELEMENT_P_I2C_BEGIN</a>(element)&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#af41e042ac899c0299b632f7843841479">apiElement_P</a>( element, &quot;i2cBegin&quot;, &quot;Initialize I2C peripheral as bus master.&quot;, <a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a69bf409bd99996e94e1ad0d196656983">commander_i2cBegin_func</a> )</td></tr>
+<tr class="separator:a2b3f8947ca936bca3f57a790592ca136"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19aca848d8f260f275f266276024fc25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a19aca848d8f260f275f266276024fc25">API_ELEMENT_SIN</a>&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a>( &quot;sin&quot;, &quot;Sine function. The input is in radians.&quot;, <a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a1a754007529f61db96b2ac3bd76d0d45">commander_sin_func</a> )</td></tr>
 <tr class="separator:a19aca848d8f260f275f266276024fc25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2a0871eb4e8189b6714b0e21234da3d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#af2a0871eb4e8189b6714b0e21234da3d">API_ELEMENT_P_SIN</a>(element)&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#af41e042ac899c0299b632f7843841479">apiElement_P</a>( element, &quot;sin&quot;, &quot;Sine function. The input is in radians.&quot;, <a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a1a754007529f61db96b2ac3bd76d0d45">commander_sin_func</a> )</td></tr>
@@ -258,6 +268,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a9ce486c9f6cc8f9d32719dde240cc9dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a9ce486c9f6cc8f9d32719dde240cc9dd">commander_wifiScan_func</a> (char *args, Stream *response)</td></tr>
 <tr class="memdesc:a9ce486c9f6cc8f9d32719dde240cc9dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiScan command.  <a href="_commander-_a_p_i-_commands_8hpp.html#a9ce486c9f6cc8f9d32719dde240cc9dd">More...</a><br /></td></tr>
 <tr class="separator:a9ce486c9f6cc8f9d32719dde240cc9dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89464d6a1bd02945dc651ed287eb0a9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a89464d6a1bd02945dc651ed287eb0a9a">commander_configTime_func</a> (char *args, Stream *response)</td></tr>
+<tr class="memdesc:a89464d6a1bd02945dc651ed287eb0a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiScan command.  <a href="_commander-_a_p_i-_commands_8hpp.html#a89464d6a1bd02945dc651ed287eb0a9a">More...</a><br /></td></tr>
+<tr class="separator:a89464d6a1bd02945dc651ed287eb0a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a841d50286418ffc91a2820f93a757ae7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a841d50286418ffc91a2820f93a757ae7">commander_dateTime_func</a> (char *args, Stream *response)</td></tr>
+<tr class="memdesc:a841d50286418ffc91a2820f93a757ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiScan command.  <a href="_commander-_a_p_i-_commands_8hpp.html#a841d50286418ffc91a2820f93a757ae7">More...</a><br /></td></tr>
+<tr class="separator:a841d50286418ffc91a2820f93a757ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69bf409bd99996e94e1ad0d196656983"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a69bf409bd99996e94e1ad0d196656983">commander_i2cBegin_func</a> (char *args, Stream *response)</td></tr>
+<tr class="memdesc:a69bf409bd99996e94e1ad0d196656983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for sin command.  <a href="_commander-_a_p_i-_commands_8hpp.html#a69bf409bd99996e94e1ad0d196656983">More...</a><br /></td></tr>
+<tr class="separator:a69bf409bd99996e94e1ad0d196656983"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a754007529f61db96b2ac3bd76d0d45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a1a754007529f61db96b2ac3bd76d0d45">commander_sin_func</a> (char *args, Stream *response)</td></tr>
 <tr class="memdesc:a1a754007529f61db96b2ac3bd76d0d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for sin command.  <a href="_commander-_a_p_i-_commands_8hpp.html#a1a754007529f61db96b2ac3bd76d0d45">More...</a><br /></td></tr>
 <tr class="separator:a1a754007529f61db96b2ac3bd76d0d45"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -287,7 +306,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00184">184</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00222">222</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -303,7 +322,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00131">131</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00138">138</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7721e0ebd3627a792c319aec6e4ae7bc" name="a7721e0ebd3627a792c319aec6e4ae7bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7721e0ebd3627a792c319aec6e4ae7bc">&#9670;&#160;</a></span>API_ELEMENT_CONFIGTIME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_ELEMENT_CONFIGTIME&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a>( &quot;configTime&quot;, &quot;Configure NTP time settings.\r\n\tExample: configTime [ GMT Offset Sec ] [ DL Offset Sec ] [ Server ]\r\n\t[ GMT Offset Sec ] - UTC offset for your timezone in seconds.\r\n\t[ GMT Offset Sec ] - Daylight offset in sec.\r\n\t[ Server ] - NTP Server Address( optional, default: pool.ntp.org )&quot;, commander_configTime_func )</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00173">173</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -319,7 +354,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00175">175</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00213">213</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6c1a9fca8539deaab497712942954bb2" name="a6c1a9fca8539deaab497712942954bb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c1a9fca8539deaab497712942954bb2">&#9670;&#160;</a></span>API_ELEMENT_DATETIME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_ELEMENT_DATETIME&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a>( &quot;dateTime&quot;, &quot;Returns the NTP synchronised date and time.&quot;, <a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a841d50286418ffc91a2820f93a757ae7">commander_dateTime_func</a> )</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00179">179</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -335,7 +386,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00120">120</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00127">127</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -351,7 +402,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00111">111</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00118">118</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a72408bbba8332e0475915f393642bd16" name="a72408bbba8332e0475915f393642bd16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72408bbba8332e0475915f393642bd16">&#9670;&#160;</a></span>API_ELEMENT_I2C_BEGIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_ELEMENT_I2C_BEGIN&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a>( &quot;i2cBegin&quot;, &quot;Initialize I2C peripheral as bus master.&quot;, <a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a69bf409bd99996e94e1ad0d196656983">commander_i2cBegin_func</a> )</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00191">191</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -367,7 +434,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00144">144</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00151">151</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -383,7 +450,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00060">60</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00067">67</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -399,7 +466,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00069">69</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00076">76</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -415,7 +482,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00089">89</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00096">96</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -431,7 +498,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00202">202</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00240">240</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -451,7 +518,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00186">186</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00224">224</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -471,7 +538,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00133">133</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00140">140</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -491,7 +558,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00177">177</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00215">215</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -511,7 +578,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00122">122</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00129">129</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -531,7 +598,27 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00113">113</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00120">120</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2b3f8947ca936bca3f57a790592ca136" name="a2b3f8947ca936bca3f57a790592ca136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3f8947ca936bca3f57a790592ca136">&#9670;&#160;</a></span>API_ELEMENT_P_I2C_BEGIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_ELEMENT_P_I2C_BEGIN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">element</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="_commander-_a_p_i_8hpp.html#af41e042ac899c0299b632f7843841479">apiElement_P</a>( element, &quot;i2cBegin&quot;, &quot;Initialize I2C peripheral as bus master.&quot;, <a class="el" href="_commander-_a_p_i-_commands_8hpp.html#a69bf409bd99996e94e1ad0d196656983">commander_i2cBegin_func</a> )</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00193">193</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -551,7 +638,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00062">62</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00069">69</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -571,7 +658,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00071">71</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00078">78</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -591,7 +678,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00091">91</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00098">98</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -611,7 +698,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00204">204</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00242">242</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -631,7 +718,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00104">104</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00111">111</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -651,7 +738,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00195">195</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00233">233</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -671,7 +758,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00051">51</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00058">58</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -691,7 +778,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00168">168</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00206">206</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -711,7 +798,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00080">80</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00087">87</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -727,7 +814,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00102">102</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00109">109</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -743,7 +830,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00193">193</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00231">231</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -761,7 +848,7 @@ Functions</h2></td></tr>
 
 <p>Arduino detection. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00049">49</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00056">56</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -777,7 +864,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00166">166</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00204">204</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -793,7 +880,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00078">78</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00085">85</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -809,7 +896,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00156">156</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00163">163</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -825,7 +912,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00150">150</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00157">157</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -841,7 +928,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00223">223</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00261">261</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -857,7 +944,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00222">222</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00260">260</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -873,7 +960,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00220">220</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00258">258</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -889,7 +976,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00219">219</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00257">257</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -905,7 +992,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00218">218</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00256">256</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -921,7 +1008,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00216">216</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00254">254</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -937,7 +1024,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00224">224</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00262">262</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -955,7 +1042,7 @@ Functions</h2></td></tr>
 
 <p>The neofetch logo have this many lines. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00212">212</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00250">250</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -971,7 +1058,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00221">221</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html#l00259">259</a> of file <a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>.</p>
 
 </div>
 </div>
@@ -1011,7 +1098,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00800">800</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00861">861</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
@@ -1054,6 +1141,45 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a89464d6a1bd02945dc651ed287eb0a9a" name="a89464d6a1bd02945dc651ed287eb0a9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89464d6a1bd02945dc651ed287eb0a9a">&#9670;&#160;</a></span>commander_configTime_func()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void commander_configTime_func </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>response</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Premade function for wifiScan command. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
+    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00494">494</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+
+</div>
+</div>
 <a id="ab6780710f945ac78f9b54630663f4e75" name="ab6780710f945ac78f9b54630663f4e75"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab6780710f945ac78f9b54630663f4e75">&#9670;&#160;</a></span>commander_cos_func()</h2>
 
@@ -1089,7 +1215,46 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00733">733</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00794">794</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a841d50286418ffc91a2820f93a757ae7" name="a841d50286418ffc91a2820f93a757ae7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a841d50286418ffc91a2820f93a757ae7">&#9670;&#160;</a></span>commander_dateTime_func()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void commander_dateTime_func </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>response</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Premade function for wifiScan command. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
+    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00530">530</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
@@ -1168,6 +1333,43 @@ Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00142">142</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a69bf409bd99996e94e1ad0d196656983" name="a69bf409bd99996e94e1ad0d196656983"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69bf409bd99996e94e1ad0d196656983">&#9670;&#160;</a></span>commander_i2cBegin_func()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void commander_i2cBegin_func </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>response</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Premade function for sin command. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
+    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1323,7 +1525,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00494">494</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00549">549</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
@@ -1362,7 +1564,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00741">741</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00802">802</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
@@ -1440,7 +1642,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00764">764</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00825">825</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
@@ -1479,7 +1681,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00703">703</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00758">758</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
@@ -1518,7 +1720,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00725">725</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00786">786</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
@@ -1657,11 +1859,11 @@ Functions</h2></td></tr>
       <a title="Shellminator" href="https://github.com/dani007200964/Commander-API">
         <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
       </a> &nbsp;|&nbsp;
-      <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2022 Daniel Hajnal </a> &nbsp;|&nbsp;
+      <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
       <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Mon Oct 10 2022
+      </a> on Fri Feb 10 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -1672,11 +1874,11 @@ Functions</h2></td></tr>
         <a title="Shellminator" href="https://github.com/dani007200964/Commander-API">
           <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
         </a> &nbsp;|&nbsp;
-        <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2022 Daniel Hajnal </a> &nbsp;|&nbsp;
+        <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
         <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Mon Oct 10 2022
+        </a> on Fri Feb 10 2023
       </small></address>
     </li>
   </ul>

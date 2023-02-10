@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['platformio_20installation_0',['PlatformIO installation',['../md_docs_markdown_pages_platroemio_installation.html',1,'']]]
+  ['supported_20platforms_0',['Supported Platforms',['../md_docs_markdown_pages_supported_platforms.html',1,'']]]
 ];

@@ -33,7 +33,6 @@ var NAVTREE =
       [ "Error During Piping", "md_docs_markdown_pages_piping.html#error_during_pipin", null ]
     ] ],
     [ "Premade Commands", "md_docs_markdown_pages_premade_commands.html", [
-      [ "How To Add Premade Commands", "md_docs_markdown_pages_premade_commands.html#how_to_add_premade_commands", null ],
       [ "System Commands", "md_docs_markdown_pages_premade_commands.html#system_commands", [
         [ "reboot Command", "md_docs_markdown_pages_premade_commands.html#reboot_command", null ],
         [ "neofetch Command", "md_docs_markdown_pages_premade_commands.html#neofetch_command", null ]
@@ -63,6 +62,7 @@ var NAVTREE =
         [ "not Command", "md_docs_markdown_pages_premade_commands.html#not_command", null ]
       ] ]
     ] ],
+    [ "Supported Platforms", "md_docs_markdown_pages_supported_platforms.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
