@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['select_0',['select',['../classcommand_response_arduino_serial.html#aa933890cea5d07d57c58b92a447bbf22',1,'commandResponseArduinoSerial::select()'],['../classcommand_response_arduino32_u4_serial.html#ad950f2c74e067f42b77f354c0957cab8',1,'commandResponseArduino32U4Serial::select()'],['../classcommand_response_wi_fi_client.html#a057a298580aefdd596d38cf946ee88ca',1,'commandResponseWiFiClient::select()']]]
+  ['peek_0',['peek',['../classcommand_response.html#a8a0b6b91e60952dfe99b475979e2e783',1,'commandResponse::peek()'],['../classcommander_pipe_channel.html#abcc2883b6cd2d8ec9b30f104e0c1fd3e',1,'commanderPipeChannel::peek()']]],
+  ['printhelp_1',['printHelp',['../class_commander.html#a57aea5c75438a6e0096f8014705a9d0e',1,'Commander']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version_0',['version',['../class_commander.html#a4bdd4b6d51596e160799551500e5d074',1,'Commander']]]
+  ['left_0',['left',['../struct_commander_1_1_a_p_i__t.html#a5336f0be7493690579380d4e82b55987',1,'Commander::API_t']]]
 ];

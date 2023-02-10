@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['flush_0',['flush',['../classcommand_response.html#abac036e563caabc242d9505993ee62d2',1,'commandResponse::flush()'],['../classcommand_response_arduino_serial.html#ac8eacc3fefecc8daf632f9d36887fb63',1,'commandResponseArduinoSerial::flush()'],['../classcommand_response_arduino32_u4_serial.html#adcc97cd249178d64da6f2e55d5066cb0',1,'commandResponseArduino32U4Serial::flush()'],['../classcommand_response_wi_fi_client.html#acadb6bdd18b5203fc4c412cfc2439c1f',1,'commandResponseWiFiClient::flush()']]]
+  ['enabledebug_0',['enableDebug',['../class_commander.html#ae6c6e8eb4bf5f761ed4a2e8da68e97f1',1,'Commander']]],
+  ['execute_1',['execute',['../class_commander.html#aafe1ff979eae34461aaee3aaf8ee474c',1,'Commander::execute(char *cmd)'],['../class_commander.html#af6609b049d9524db60aac35dbba58cec',1,'Commander::execute(const char *cmd)'],['../class_commander.html#a1986d962b3c1e8ea99b6cd088f101e76',1,'Commander::execute(char *cmd, Stream *resp)'],['../class_commander.html#a3cfb465abaf04d51bb6e9901e260987d',1,'Commander::execute(const char *cmd, Stream *resp)']]],
+  ['executecommand_2',['executeCommand',['../class_commander.html#a31be5be6e4b41cec2f2f836969fe7932',1,'Commander']]]
 ];

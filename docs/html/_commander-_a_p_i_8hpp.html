@@ -54,10 +54,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V2.0.2</span>
+   &#160;<span id="projectnumber">V2.1.0</span>
    </div>
    <div id="projectbrief">Simple Command Parser</div>
   </td>
@@ -133,8 +133,10 @@ $(document).ready(function(){initNavTree('_commander-_a_p_i_8hpp.html',''); init
 <code>#include &quot;<a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>&quot;</code><br />
 <code>#include &quot;Arduino.h&quot;</code><br />
+<code>#include &quot;Stream.h&quot;</code><br />
 <code>#include &lt;ESP8266WiFi.h&gt;</code><br />
 <code>#include &lt;WiFi.h&gt;</code><br />
+<code>#include &lt;avr/pgmspace.h&gt;</code><br />
 </div>
 <p><a href="_commander-_a_p_i_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -149,11 +151,14 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a9dda1700b3dad0727a9042fec8405d53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#a9dda1700b3dad0727a9042fec8405d53">COMMANDER_API_VERSION</a>&#160;&#160;&#160;(const char*)&quot;2.0.1&quot;</td></tr>
+<tr class="memitem:a9dda1700b3dad0727a9042fec8405d53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#a9dda1700b3dad0727a9042fec8405d53">COMMANDER_API_VERSION</a>&#160;&#160;&#160;(const char*)&quot;2.1.0&quot;</td></tr>
 <tr class="separator:a9dda1700b3dad0727a9042fec8405d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff2cdea04953244073599693c685043a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a>(name,  desc,  func)&#160;&#160;&#160;{ 0, NULL, NULL, (const char*)name, (const char*)desc, func }</td></tr>
-<tr class="memdesc:aff2cdea04953244073599693c685043a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Like STM32 Class Factory.  <a href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">More...</a><br /></td></tr>
+<tr class="memdesc:aff2cdea04953244073599693c685043a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino detection.  <a href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">More...</a><br /></td></tr>
 <tr class="separator:aff2cdea04953244073599693c685043a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41e042ac899c0299b632f7843841479"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#af41e042ac899c0299b632f7843841479">apiElement_P</a>(element,  name,  desc,  func_arg)&#160;&#160;&#160;{ element.name_P = F( name ); element.desc_P = F( desc ); element.func = func_arg; }</td></tr>
+<tr class="memdesc:af41e042ac899c0299b632f7843841479"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the API element creation for PROGMEM implementation.  <a href="_commander-_a_p_i_8hpp.html#af41e042ac899c0299b632f7843841479">More...</a><br /></td></tr>
+<tr class="separator:af41e042ac899c0299b632f7843841479"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d0f46f4a25c198925f895e3584000a3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#a9d0f46f4a25c198925f895e3584000a3">attachTree</a>(name)&#160;&#160;&#160;attachTreeFunction( name, sizeof( name ) / sizeof( name[ 0 ] ) )</td></tr>
 <tr class="memdesc:a9d0f46f4a25c198925f895e3584000a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the attachment of the API-tree.  <a href="_commander-_a_p_i_8hpp.html#a9d0f46f4a25c198925f895e3584000a3">More...</a><br /></td></tr>
 <tr class="separator:a9d0f46f4a25c198925f895e3584000a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,11 +196,56 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Like STM32 Class Factory. </p>
-<p >Arduino detection This macro simplifies the API element creation.</p>
-<p >With this macro you can fill the API tree structure faster than the traditional {}-way. </p>
+<p>Arduino detection. </p>
+<p >This macro simplifies the API element creation.</p>
+<p >With this macro you can fill the API tree structure easily. </p>
 
 <p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00070">70</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af41e042ac899c0299b632f7843841479" name="af41e042ac899c0299b632f7843841479"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af41e042ac899c0299b632f7843841479">&#9670;&#160;</a></span>apiElement_P</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define apiElement_P</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">element, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">desc, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">func_arg&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;{ element.name_P = F( name ); element.desc_P = F( desc ); element.func = func_arg; }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This macro simplifies the API element creation for PROGMEM implementation. </p>
+<p >With this macro you can fill the API tree structure easily. It is used for PROGMEM implementation. </p>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00078">78</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -218,7 +268,7 @@ Macros</h2></td></tr>
 <p>This macro simplifies the attachment of the API-tree. </p>
 <p >With this macro you can attach the API-tree to the class easier and faster than with attachTreeFunction. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00076">76</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00086">86</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -229,7 +279,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define COMMANDER_API_VERSION&#160;&#160;&#160;(const char*)&quot;2.0.1&quot;</td>
+          <td class="memname">#define COMMANDER_API_VERSION&#160;&#160;&#160;(const char*)&quot;2.1.0&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -240,11 +290,44 @@ Macros</h2></td></tr>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+
+<!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_commander-_a_p_i_8hpp.html">Commander-API.hpp</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="footer">
+      <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
+        <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/commander-api/">
+        <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Shellminator" href="https://github.com/dani007200964/Commander-API">
+        <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
+      <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+      <a href="http://www.doxygen.org/index.html">
+        <img class="footer" src="doxygen.svg" alt="doxygen"/>
+      </a> on Fri Feb 10 2023
+      <hr class="footer"/><address class="footer"><small>
+        <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
+          <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/commander-api/">
+          <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Shellminator" href="https://github.com/dani007200964/Commander-API">
+          <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
+        <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+        <a href="http://www.doxygen.org/index.html">
+          <img class="footer" src="doxygen.svg" alt="doxygen"/>
+        </a> on Fri Feb 10 2023
+      </small></address>
+    </li>
   </ul>
 </div>
 </body>

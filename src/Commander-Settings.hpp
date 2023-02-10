@@ -35,47 +35,44 @@ SOFTWARE.
 #ifndef COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
 #define COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
 
-#ifdef ARDUINO
-
-#ifndef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-#define COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-#endif
-
-#if defined(ARDUINO_AVR_LEONARDO)
-#define COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
-#endif
-
-#if defined(ARDUINO_AVR_MICRO)
-#define COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
-#endif
-
-#endif
-
 #ifdef ESP32
-#ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-#define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-#endif
+
+  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
+    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
+  #endif
+
+  #ifndef COMMANDER_ENABLE_PIPE_MODULE
+    #define COMMANDER_ENABLE_PIPE_MODULE
+  #endif
+
+  #ifndef COMMANDER_MAX_COMMAND_SIZE
+    #define COMMANDER_MAX_COMMAND_SIZE 50
+  #endif
+
 #endif
 
 #ifdef ESP8266
-#ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-#define COMMANDER_USE_WIFI_CLIENT_RESPONSE
+
+  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
+    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
+  #endif
+
+  #ifndef COMMANDER_ENABLE_PIPE_MODULE
+    #define COMMANDER_ENABLE_PIPE_MODULE
+  #endif
+
+  #ifndef COMMANDER_MAX_COMMAND_SIZE
+    #define COMMANDER_MAX_COMMAND_SIZE 50
+  #endif
+
 #endif
-#endif
+
+// Enable the Pipe module by default
+#define COMMANDER_ENABLE_PIPE_MODULE
 
 /// Maximum length of the terminal command.
 #ifndef COMMANDER_MAX_COMMAND_SIZE
-#define COMMANDER_MAX_COMMAND_SIZE 30
+  #define COMMANDER_MAX_COMMAND_SIZE 30
 #endif
-
-/// printf function buffer length
-///
-/// If you use printf function the maximumlength
-/// of the message( including the termination '\0' character )
-/// must be less or equal with COMMAND_PRINTF_BUFF_LEN.
-#ifndef COMMAND_PRINTF_BUFF_LEN
-#define COMMAND_PRINTF_BUFF_LEN 100
-#endif
-
 
 #endif /* COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_ */

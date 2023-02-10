@@ -35,7 +35,7 @@ SOFTWARE.
 #ifndef COMMANDER_API_SRC_COMMANDER_HPP_
 #define COMMANDER_API_SRC_COMMANDER_HPP_
 
-#define COMMANDER_API_VERSION (const char*)"2.0.1"
+#define COMMANDER_API_VERSION (const char*)"2.1.0"
 
 #include "stdint.h"
 #include "string.h"
@@ -43,15 +43,12 @@ SOFTWARE.
 #include "Commander-Settings.hpp"
 #include "Commander-IO.hpp"
 
-/// Like STM32 Class Factory
-#ifdef COMMANDER_USE_SERIAL_RESPONSE
-#include "Serial.hpp"
-#endif
-
 /// Arduino detection
 #ifdef ARDUINO
 #include "Arduino.h"
 #endif
+
+#include "Stream.h"
 
 #ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
 	#ifdef ESP8266
@@ -63,11 +60,24 @@ SOFTWARE.
 	#endif
 #endif
 
+#ifdef __AVR__
+#include <avr/pgmspace.h>
+#endif
+
 /// This macro simplifies the API element creation.
 ///
-/// With this macro you can fill the API tree structure
-/// faster than the traditional {}-way.
+/// With this macro you can fill the API tree structure easily.
 #define apiElement( name, desc, func ) { 0, NULL, NULL, (const char*)name, (const char*)desc, func }
+
+#ifdef __AVR__
+
+/// This macro simplifies the API element creation for PROGMEM implementation.
+///
+/// With this macro you can fill the API tree structure easily.
+/// It is used for PROGMEM implementation.
+#define apiElement_P( element, name, desc, func_arg ) { element.name_P = F( name ); element.desc_P = F( desc ); element.func = func_arg; }
+
+#endif
 
 /// This macro simplifies the attachment of the API-tree.
 ///
@@ -103,9 +113,23 @@ public:
 	  struct API_t *right;                              //  Right element on a binary tree branch
 	  const char *name;                                 //  Name of the command
 	  const char *desc;                                 //  Description of the command
-	  void(*func)( char*, commandResponse *response );  //  Function pointer to the command function
+
+	  void(*func)( char*, Stream *response );  					//  Function pointer to the command function
+
+		#ifdef __AVR__
+		__FlashStringHelper *name_P;											// Name of the command( stored in PROGMEM )
+		__FlashStringHelper *desc_P;											// Description of the command( stored in PROGMEM )
+		#endif
 
 	}API_t;
+
+	enum memoryType_t{
+		MEMORY_REGULAR,		///< Regular memory implementation
+		MEMORY_PROGMEM		///< Progmem memory implementation
+	};
+
+	/// Flag for memory type.
+	memoryType_t memoryType = MEMORY_REGULAR;
 
 	/// Attach API-tree to the object.
 	///
@@ -160,7 +184,6 @@ public:
 	/// be visible.
 	void execute( const char *cmd );
 
-	#ifdef COMMANDER_USE_SERIAL_RESPONSE
 	/// Execution function for Serial response.
 	///
 	/// This function tries to execute a command.
@@ -168,7 +191,7 @@ public:
 	/// the messages from the command handler
 	/// will be passed to the selected Serial
 	/// object.
-	void execute( char *cmd, Serial *resp );
+	void execute( char *cmd, Stream *resp );
 
 	/// Execution function for Serial response.
 	///
@@ -177,102 +200,24 @@ public:
 	/// the messages from the command handler
 	/// will be passed to the selected Serial
 	/// object.
-	void execute( const char *cmd, Serial *resp );
+	void execute( const char *cmd, Stream *resp );
 
 	/// Debug channel for Serial.
 	///
 	/// This function attaches a Serial channel
 	/// for debug messages. It also enables
 	/// the debug functionality.
-	void attachDebugChannel( Serial *resp );
-	#endif
-
-	#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-	/// Execution function for Arduino Serial response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the HardwareSerial response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-	void execute( char *cmd, HardwareSerial *resp );
-
-	/// Execution function for Arduino Serial response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the HardwareSerial response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-	void execute( const char *cmd, HardwareSerial *resp );
-
-	/// Debug channel for Arduino Serial.
-	///
-	/// This function attaches a HardwareSerial channel
-	/// for debug messages. It also enables
-	/// the debug functionality.
-	void attachDebugChannel( HardwareSerial *resp );
-	#endif
-
-	#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
-	/// Execution function for Arduino Serial response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the HardwareSerial response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-	void execute( char *cmd, Serial_ *resp );
-
-	/// Execution function for Arduino Serial response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the HardwareSerial response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-	void execute( const char *cmd, Serial_ *resp );
-
-	/// Debug channel for Arduino Serial.
-	///
-	/// This function attaches a HardwareSerial channel
-	/// for debug messages. It also enables
-	/// the debug functionality.
-	void attachDebugChannel( Serial_ *resp );
-	#endif
-
-	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-	/// Execution function for WiFi Client response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the WiFi Client response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-
-	void execute( char *cmd, WiFiClient *resp );
-	/// Execution function for WiFi Client response.
-	///
-	/// This function tries to execute a command.
-	/// It uses the WiFi Client response channel, so
-	/// the messages from the command handler
-	/// will be passed to the selected Serial
-	/// object.
-	void execute( const char *cmd, WiFiClient *resp );
-
-	/// Debug channel for WiFiClient.
-	///
-	/// This function attaches a WiFiClient channel
-	/// for debug messages. It also enables
-	/// the debug functionality.
-	void attachDebugChannel( WiFiClient *resp );
-	#endif
+	void attachDebugChannel( Stream *resp );
 
 	/// Enables debug messages.
 	void enableDebug();
 
 	/// Disables debug messages.
 	void disableDebug();
+
+	/// Prints out the help string to the specified Stream.
+	/// @param out The help information will be printed to this Stream.
+	void printHelp( Stream* out );
 
 private:
 
@@ -291,32 +236,63 @@ private:
 	/// content of the command.
 	char tempBuff[ COMMANDER_MAX_COMMAND_SIZE ];
 
+	#ifdef __AVR__
+
+	/// With the PROGMEM implementation we need to copy the
+	/// data from the PROGMEM area to a buffer for compersation.
+	char progmemBuffer[ COMMANDER_MAX_COMMAND_SIZE ];
+
+	/// Compare two API-tree element's name.
+	///
+	/// It compares two API-tree element's name like a regular strcmp.
+	/// It compares the names stored in the name_P
+	/// variable. This names are stored in PROGMEM space.
+	/// @param element1 Pointer to an API-tree element.
+	/// @param element2 Pointer to an API-tree element.
+	/// @returns Returns an int value indicating the [relationship](https://cplusplus.com/reference/cstring/strcmp/) between the strings.
+	int commander_strcmp_progmem( API_t* element1, API_t* element2 );
+
+	/// Compare an API-tree element's name with a regular string.
+	///
+	/// It compares an API-tree element's name with a regular string like a regular strcmp.
+	/// @param element1 Pointer to an API-tree element.
+	/// @param element2 Character array.
+	/// @returns Returns an int value indicating the [relationship](https://cplusplus.com/reference/cstring/strcmp/) between the strings.
+	int commander_strcmp_tree_ram_progmem( API_t* element1, char* element2 );
+
+	#endif
+
+	/// Compare two API-tree element's name.
+	///
+	/// It compares two API-tree element's name like a regular strcmp.
+	/// variable. This names are stored in PROGMEM space.
+	/// @param element1 Pointer to an API-tree element.
+	/// @param element2 Pointer to an API-tree element.
+	/// @returns Returns an int value indicating the [relationship](https://cplusplus.com/reference/cstring/strcmp/) between the strings.
+	int commander_strcmp_regular( API_t* element1, API_t* element2 );
+
+	/// Compare an API-tree element's name with a regular string.
+	///
+	/// It compares an API-tree element's name with a regular string like a regular strcmp.
+	/// @param element1 Pointer to an API-tree element.
+	/// @param element2 Character array.
+	/// @returns Returns an int value indicating the [relationship](https://cplusplus.com/reference/cstring/strcmp/) between the strings.
+	int commander_strcmp_tree_ram_regular( API_t* element1, char* element2 );
+
+	/// Function pointer to an internal strcmp like function.
+	/// It uses the regular version by default.
+	int( Commander::*commander_strcmp )( API_t* element1, API_t* element2 ) = &Commander::commander_strcmp_regular;
+
+	/// Function pointer to an internal strcmp like function.
+	/// It uses the regular version by default.
+	int( Commander::*commander_strcmp_tree_ram )( API_t* element1, char* element2 ) = &Commander::commander_strcmp_tree_ram_regular;
+
 	/// Default response handler class.
 	commandResponse defaultResponse;
 
-	#ifdef COMMANDER_USE_SERIAL_RESPONSE
-	/// Serial response handler class.
-	commandResponseSerial serialResponse;
-	#endif
-
-	#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-	/// Serial response handler class.
-	commandResponseArduinoSerial arduinoSerialResponse;
-	#endif
-
-	#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
-	/// Serial response handler class.
-	commandResponseArduino32U4Serial arduino32U4SerialResponse;
-	#endif
-
-	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-	/// WiFi Client response handler class.
-	commandResponseWiFiClient WiFiClientResponse;
-	#endif
-
 	/// Pointer to response class. By default it
 	/// points to the default response handler.
-	commandResponse *response = &defaultResponse;
+	Stream *response = &defaultResponse;
 
 	/// Flag to enable or disable debug messages.
 	bool debugEnabled = false;
@@ -324,24 +300,9 @@ private:
 	/// Default response handler for debug messages.
 	commandResponse defaultDebugResponse;
 
-	#ifdef COMMANDER_USE_SERIAL_RESPONSE
-	/// Serial response handler class.
-	commandResponseSerial serialDebugResponse;
-	#endif
-
-	#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-	/// Serial response handler class.
-	commandResponseArduinoSerial arduinoSerialDebugResponse;
-	#endif
-
-	#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-	/// WiFi Client response handler class.
-	commandResponseWiFiClient WiFiClientDebugResponse;
-	#endif
-
 	/// Pointer to response class. By default it
 	/// points to the default debug response handler.
-	commandResponse *dbgResponse = &defaultDebugResponse;
+	Stream *dbgResponse = &defaultDebugResponse;
 
 	/// Find an API element in the tree by alphabetical place.
 	uint16_t find_api_index_by_place( uint16_t place );
@@ -373,7 +334,34 @@ private:
 	/// alphabetical order. If the description
 	/// argument is set to true, it also prints
 	/// the description data for all commands.
+	/// todo Finish description.
 	void helpFunction( bool description = false );
+
+	/// Help function
+	///
+	/// It prints all the available commands in
+	/// alphabetical order. If the description
+	/// argument is set to true, it also prints
+	/// the description data for all commands.
+	/// todo Finish description.
+	void helpFunction( bool description, Stream* out, bool style = false );
+
+	/// Search for a character in a string.
+	/// @param str Pointer to a character array where the search will be.
+	/// @param c This character will be searched in the string.
+	/// @returns If the character found in the string, the poisition of the first occurance will be returned.
+	int32_t hasChar( char* str, char c );
+
+	#ifdef COMMANDER_ENABLE_PIPE_MODULE
+
+	/// Channel for the internal piping.
+	commanderPipeChannel pipeChannel;
+
+	/// If piping happenes the output of the first command will be copied to this buffer.
+	/// This way it can be passed to the second command and so on.
+	char pipeArgBuffer[ COMMANDER_MAX_COMMAND_SIZE ];
+
+	#endif
 
 };
 

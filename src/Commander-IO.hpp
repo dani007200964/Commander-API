@@ -40,9 +40,7 @@ SOFTWARE.
 
 #include "Commander-Settings.hpp"
 
-#ifdef COMMANDER_USE_SERIAL_RESPONSE
-#include "Serial.hpp"
-#endif
+#include "Stream.h"
 
 #ifdef ARDUINO
 #include "Arduino.h"
@@ -71,271 +69,72 @@ SOFTWARE.
 /// right function for that entity. The base class doesn't do
 /// much. To make it any use, we have to create a subclass
 /// for it like below.
-class commandResponse{
+class commandResponse : public Stream{
 
 public:
-	virtual int    available()                               	{ return 0;  }
-	virtual int    read()                                    	{ return -1; }
-	virtual int    peek()                                    	{ return 0;  }
-	virtual size_t readBytes( uint8_t *buff, uint32_t size ) 	{ return 0;  }
-	virtual void   flush()                                   	{ return;    }
-	virtual size_t write( uint8_t b )                        	{ return 0;  }
 
-	virtual size_t print( char c )                           	{ return 0;  }
-	virtual size_t print( char *str )                        	{ return 0;  }
-	virtual size_t print( const char *str )                  	{ return 0;  }
+	/// Available bytes in the channel.
+  ///
+  /// @returns The available bytes in the channel. Because it is the base class, it returns 0.
+  int    available()                               	{ return 0;  }
 
-	virtual size_t print( int8_t b )							{ return 0;  }
-	virtual size_t print( uint8_t b )							{ return 0;  }
-	virtual size_t print( int16_t b )							{ return 0;  }
-	virtual size_t print( uint16_t b )							{ return 0;  }
-	virtual size_t print( int32_t b )							{ return 0;  }
-	virtual size_t print( uint32_t b )							{ return 0;  }
-	virtual size_t print( float f )								{ return 0;  }
-	virtual size_t print( double f )							{ return 0;  }
+  /// Read one byte form the channel.
+  ///
+  /// @returns Read and return one byte form the channel. The byte will be removed from the channel. Because it is the base class, it returns -1.
+  int    read()                                    	{ return -1; }
 
-	virtual size_t println()                           			{ return 0;  }
-	virtual size_t println( char c )                           	{ return 0;  }
-	virtual size_t println( char *str )                        	{ return 0;  }
-	virtual size_t println( const char *str )                  	{ return 0;  }
+  /// Peek the firtst byte from the channel.
+  ///
+  /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel. Because it is the base class, it returns 0.
+  int    peek()                                    	{ return 0;  }
 
-	virtual size_t println( int8_t b )							{ return 0;  }
-	virtual size_t println( uint8_t b )							{ return 0;  }
-	virtual size_t println( int16_t b )							{ return 0;  }
-	virtual size_t println( uint16_t b )						{ return 0;  }
-	virtual size_t println( int32_t b )							{ return 0;  }
-	virtual size_t println( uint32_t b )						{ return 0;  }
-	virtual size_t println( float f )							{ return 0;  }
-	virtual size_t println( double f )							{ return 0;  }
+  /// Flush the channel.
+  void   flush()                                   	{ return;    }
 
-	virtual int    printf( const char *fmt, ... )            	{ return 0; }
+  /// Write one byte to the channel.
+  ///
+  /// @param b The value that has to be written to the channel.
+  /// @returns The number of bytes that has been sucessfully written to the channel. Because it is the base class, it returns 0.
+  size_t write( uint8_t b )                        	{ return 0;  }
 
 };
 
-#ifdef COMMANDER_USE_SERIAL_RESPONSE
-
-/// Serial response subclass.
-///
-/// This subclass is overrides the communication functions in
-/// the commandResponse class to make it work with a Serial
-/// like class in STM32 Class Factory.
-class commandResponseSerial : public commandResponse{
+class commanderPipeChannel : public Stream{
 
 public:
 
-	void select( Serial *serialPort_p );
+  /// Available bytes in the channel.
+  ///
+  /// @returns The available bytes in the channel.
+  int    available() override;
 
-	int    available() override;
+  /// Read one byte form the channel.
+  ///
+  /// @returns Read and return one byte form the channel. The byte will be removed from the channel.
 	int    read() override;
+
+  /// Peek the firtst byte from the channel.
+  ///
+  /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel.
 	int    peek() override;
-	size_t readBytes( uint8_t *buff, uint32_t size ) override;
+
+  /// Flush the channel.
 	void   flush() override;
+
+  /// Write one byte to the channel.
+  ///
+  /// @param b The value that has to be written to the channel.
+  /// @returns The number of bytes that has been sucessfully written to the channel. Because it is the base class, it returns 0.
 	size_t write( uint8_t b ) override;
 
-	size_t print( char c ) override;
-	size_t print( char *str ) override;
-	size_t print( const char *str ) override;
-
-	size_t print( int8_t b ) override;
-	size_t print( uint8_t b ) override;
-	size_t print( int16_t b ) override;
-	size_t print( uint16_t b ) override;
-	size_t print( int32_t b ) override;
-	size_t print( uint32_t b ) override;
-	size_t print( float f ) override;
-	size_t print( double f ) override;
-
-	size_t println() override;
-	size_t println( char c ) override;
-	size_t println( char *str ) override;
-	size_t println( const char *str ) override;
-
-	size_t println( int8_t b ) override;
-	size_t println( uint8_t b ) override;
-	size_t println( int16_t b ) override;
-	size_t println( uint16_t b ) override;
-	size_t println( int32_t b ) override;
-	size_t println( uint32_t b ) override;
-	size_t println( float f ) override;
-	size_t println( double f ) override;
-
-	int    printf( const char *fmt, ... ) override;
+	size_t write( const uint8_t *buffer, size_t size ) override;
 
 private:
-	Serial *serialPort = NULL;
+	uint8_t buffer[ COMMANDER_MAX_COMMAND_SIZE ];
+	uint32_t readPointer = 0;
+	uint32_t writePointer = 0;
 
 };
-
-#endif
-
-#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-
-/// Arduino Hardware serial response subclass.
-///
-/// This subclass is overrides the communication functions in
-/// the commandResponse class to make it work with a HardwareSerial
-/// like class in Arduino environment.
-class commandResponseArduinoSerial : public commandResponse{
-
-public:
-
-	void select( HardwareSerial *serialPort_p );
-
-	int    available() override;
-	int    read() override;
-	int    peek() override;
-	size_t readBytes( uint8_t *buff, uint32_t size ) override;
-	void   flush() override;
-	size_t write( uint8_t b ) override;
-	size_t print( char c ) override;
-	size_t print( char *str ) override;
-	size_t print( const char *str ) override;
-
-	size_t print( int8_t b ) override;
-	size_t print( uint8_t b ) override;
-	size_t print( int16_t b ) override;
-	size_t print( uint16_t b ) override;
-	size_t print( int32_t b ) override;
-	size_t print( uint32_t b ) override;
-	size_t print( float f ) override;
-	size_t print( double f ) override;
-
-	size_t println() override;
-	size_t println( char c ) override;
-	size_t println( char *str ) override;
-	size_t println( const char *str ) override;
-
-	size_t println( int8_t b ) override;
-	size_t println( uint8_t b ) override;
-	size_t println( int16_t b ) override;
-	size_t println( uint16_t b ) override;
-	size_t println( int32_t b ) override;
-	size_t println( uint32_t b ) override;
-	size_t println( float f ) override;
-	size_t println( double f ) override;
-
-	int    printf( const char *fmt, ... ) override;
-
-private:
-	HardwareSerial *serialPort = NULL;
-
-};
-
-#endif
-
-#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
-
-/// Arduino Serial_ response subclass.
-///
-/// This subclass is overrides the communication functions in
-/// the commandResponse class to make it work with a Serial_
-/// like class in Arduino environment. The Serial_ class usually
-/// used by Atmega-32U4 boards with hardware USB support.
-class commandResponseArduino32U4Serial : public commandResponse{
-
-public:
-
-	void select( Serial_ *serialPort_p );
-
-	int    available() override;
-	int    read() override;
-	int    peek() override;
-	size_t readBytes( uint8_t *buff, uint32_t size ) override;
-	void   flush() override;
-	size_t write( uint8_t b ) override;
-	size_t print( char c ) override;
-	size_t print( char *str ) override;
-	size_t print( const char *str ) override;
-
-	size_t print( int8_t b ) override;
-	size_t print( uint8_t b ) override;
-	size_t print( int16_t b ) override;
-	size_t print( uint16_t b ) override;
-	size_t print( int32_t b ) override;
-	size_t print( uint32_t b ) override;
-	size_t print( float f ) override;
-	size_t print( double f ) override;
-
-	size_t println() override;
-	size_t println( char c ) override;
-	size_t println( char *str ) override;
-	size_t println( const char *str ) override;
-
-	size_t println( int8_t b ) override;
-	size_t println( uint8_t b ) override;
-	size_t println( int16_t b ) override;
-	size_t println( uint16_t b ) override;
-	size_t println( int32_t b ) override;
-	size_t println( uint32_t b ) override;
-	size_t println( float f ) override;
-	size_t println( double f ) override;
-
-	int    printf( const char *fmt, ... ) override;
-
-private:
-	Serial_ *serialPort = NULL;
-
-};
-
-#endif
-
-#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-
-/// Arduino Hardware serial response subclass.
-///
-/// This subclass is overrides the communication functions in
-/// the commandResponse class to make it work with a HardwareSerial
-/// like class in Arduino environment.
-class commandResponseWiFiClient : public commandResponse{
-
-public:
-
-	void select( WiFiClient *client_p );
-
-	int    available() override;
-	int    read() override;
-	int    peek() override;
-	size_t readBytes( uint8_t *buff, uint32_t size ) override;
-	void   flush() override;
-	size_t write( uint8_t b ) override;
-	size_t print( char c ) override;
-	size_t print( char *str ) override;
-	size_t print( const char *str ) override;
-
-	size_t print( int8_t b ) override;
-	size_t print( uint8_t b ) override;
-	size_t print( int16_t b ) override;
-	size_t print( uint16_t b ) override;
-	size_t print( int32_t b ) override;
-	size_t print( uint32_t b ) override;
-	size_t print( float f ) override;
-	size_t print( double f ) override;
-
-	size_t println() override;
-	size_t println( char c ) override;
-	size_t println( char *str ) override;
-	size_t println( const char *str ) override;
-
-	size_t println( int8_t b ) override;
-	size_t println( uint8_t b ) override;
-	size_t println( int16_t b ) override;
-	size_t println( uint16_t b ) override;
-	size_t println( int32_t b ) override;
-	size_t println( uint32_t b ) override;
-	size_t println( float f ) override;
-	size_t println( double f ) override;
-
-	int    printf( const char *fmt, ... ) override;
-
-private:
-	WiFiClient *client = NULL;
-
-};
-
-#endif
-
-
-
 
 
 #endif /* COMMANDER_API_SRC_COMMANDER_IO_HPP_ */

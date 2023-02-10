@@ -54,10 +54,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V2.0.2</span>
+   &#160;<span id="projectnumber">V2.1.0</span>
    </div>
    <div id="projectbrief">Simple Command Parser</div>
   </td>
@@ -162,51 +162,86 @@ $(document).ready(function(){initNavTree('_commander-_settings_8hpp_source.html'
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#ifndef COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#define COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#ifdef ARDUINO</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#ifdef ESP32</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#ifndef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="_commander-_settings_8hpp.html#aa9d34529d805303277578666245c62d4">   41</a></span><span class="preprocessor">#define COMMANDER_USE_ARDUINO_SERIAL_RESPONSE</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="_commander-_settings_8hpp.html#a7392802e05ee3ce93237a2d2d619e787">   41</a></span><span class="preprocessor">    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">  #endif</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#if defined(ARDUINO_AVR_LEONARDO)</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="_commander-_settings_8hpp.html#afff0af0e0d507ddffba101e8e250d078">   45</a></span><span class="preprocessor">#define COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">  #ifndef COMMANDER_ENABLE_PIPE_MODULE</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">    #define COMMANDER_ENABLE_PIPE_MODULE</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">  #endif</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#if defined(ARDUINO_AVR_MICRO)</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#define COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">  #ifndef COMMANDER_MAX_COMMAND_SIZE</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">   49</a></span><span class="preprocessor">    #define COMMANDER_MAX_COMMAND_SIZE 50</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">  #endif</span></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#ifdef ESP32</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="_commander-_settings_8hpp.html#a7392802e05ee3ce93237a2d2d619e787">   56</a></span><span class="preprocessor">#define COMMANDER_USE_WIFI_CLIENT_RESPONSE</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#ifdef ESP8266</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">  #endif</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#ifdef ESP8266</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#define COMMANDER_USE_WIFI_CLIENT_RESPONSE</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#ifndef COMMANDER_MAX_COMMAND_SIZE</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">   68</a></span><span class="preprocessor">#define COMMANDER_MAX_COMMAND_SIZE 30</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#ifndef COMMAND_PRINTF_BUFF_LEN</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="_commander-_settings_8hpp.html#ae64629cab79366fca60d3c159d708bc8">   77</a></span><span class="preprocessor">#define COMMAND_PRINTF_BUFF_LEN 100</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#endif </span><span class="comment">/* COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">  #ifndef COMMANDER_ENABLE_PIPE_MODULE</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">    #define COMMANDER_ENABLE_PIPE_MODULE</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">  #endif</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">  #ifndef COMMANDER_MAX_COMMAND_SIZE</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">    #define COMMANDER_MAX_COMMAND_SIZE 50</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">  #endif</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">// Enable the Pipe module by default</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="_commander-_settings_8hpp.html#a70dd4d6223b7386a5299fd3913b59ede">   71</a></span><span class="preprocessor">#define COMMANDER_ENABLE_PIPE_MODULE</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#ifndef COMMANDER_MAX_COMMAND_SIZE</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">  #define COMMANDER_MAX_COMMAND_SIZE 30</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#endif </span><span class="comment">/* COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+
+<!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_commander-_settings_8hpp.html">Commander-Settings.hpp</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="footer">
+      <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
+        <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/commander-api/">
+        <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Shellminator" href="https://github.com/dani007200964/Commander-API">
+        <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
+      <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+      <a href="http://www.doxygen.org/index.html">
+        <img class="footer" src="doxygen.svg" alt="doxygen"/>
+      </a> on Fri Feb 10 2023
+      <hr class="footer"/><address class="footer"><small>
+        <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
+          <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/commander-api/">
+          <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Shellminator" href="https://github.com/dani007200964/Commander-API">
+          <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
+        <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+        <a href="http://www.doxygen.org/index.html">
+          <img class="footer" src="doxygen.svg" alt="doxygen"/>
+        </a> on Fri Feb 10 2023
+      </small></address>
+    </li>
   </ul>
 </div>
 </body>

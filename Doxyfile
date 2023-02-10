@@ -48,7 +48,7 @@ PROJECT_NAME           = Commander-API
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = V2.0.2
+PROJECT_NUMBER         = V2.1.0
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -61,7 +61,7 @@ PROJECT_BRIEF          = "Simple Command Parser"
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = docs/images/logo.PNG
+PROJECT_LOGO           = docs/images/logo.svg
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
@@ -505,7 +505,7 @@ EXTRACT_ALL            = YES
 # be included in the documentation.
 # The default value is: NO.
 
-EXTRACT_PRIVATE        = NO
+EXTRACT_PRIVATE        = YES
 
 # If the EXTRACT_PRIV_VIRTUAL tag is set to YES, documented private virtual
 # methods of a class will be included in the documentation.
@@ -1332,7 +1332,7 @@ HTML_HEADER            = docs/Style/doxygen-custom/header.html
 # that doxygen normally uses.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_FOOTER            =
+HTML_FOOTER            = docs/Style/doxygen-custom/footer.html
 
 # The HTML_STYLESHEET tag can be used to specify a user-defined cascading style
 # sheet that is used by each HTML page. It can be used to fine-tune the look of
@@ -1374,7 +1374,9 @@ HTML_EXTRA_STYLESHEET  = docs/Style/doxygen-awesome.css \
 HTML_EXTRA_FILES       = docs/Style/doxygen-custom/toggle-alternative-theme.js \
                          docs/Style/doxygen-awesome-darkmode-toggle.js \
                          docs/Style/doxygen-awesome-fragment-copy-button.js \
-                         docs/Style/doxygen-awesome-paragraph-link.js
+                         docs/Style/doxygen-awesome-paragraph-link.js \
+                         docs/images/arduino_logo.png \
+                         docs/images/platformio_logo.png
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme. Default setting AUTO_LIGHT
@@ -2375,7 +2377,8 @@ INCLUDE_FILE_PATTERNS  =
 PREDEFINED             = ARDUINO \
                          ESP32 \
                          ESP8266 \
-                         ARDUINO_AVR_LEONARDO
+                         ARDUINO_AVR_LEONARDO \
+                         __AVR__
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The

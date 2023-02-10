@@ -42,7 +42,19 @@ void Commander::attachTreeFunction( API_t *API_tree_p, uint32_t API_tree_size_p 
 	API_tree      = API_tree_p;
 	API_tree_size = API_tree_size_p;
 
-	dbgResponse -> printf( (const char*)"API tree attached with %d commands.\r\n", API_tree_size );
+	#if defined( ARDUINO ) && defined( __AVR__ )
+
+	dbgResponse -> print( F( "API tree attached with " ) );
+	dbgResponse -> print( API_tree_size );
+	dbgResponse -> println( F( " commands." ) );
+
+	#else
+
+	dbgResponse -> print( (const char*)"API tree attached with "  );
+	dbgResponse -> print( API_tree_size );
+	dbgResponse -> println( " commands." );
+
+	#endif
 
 }
 
@@ -55,15 +67,44 @@ void Commander::init(){
 	// Temporary variable, used to flip elements.
 	API_t temp;
 
-	dbgResponse -> printf( (const char*)"Commander init start\r\n" );
+	#ifdef __AVR__
+
+	if( API_tree[ 0 ].name == NULL ){
+
+		memoryType = MEMORY_PROGMEM;
+		commander_strcmp = &Commander::commander_strcmp_progmem;
+		commander_strcmp_tree_ram = &Commander::commander_strcmp_tree_ram_progmem;
+
+	}
+
+	#endif
+
+	#if defined( ARDUINO ) && defined( __AVR__ )
+
+	dbgResponse -> println( F( "Commander init start" ) );
+
+	#else
+
+	dbgResponse -> println( (const char*)"Commander init start" );
+
+	#endif
 
 	// Make the tree ordered by alphabet.
-	dbgResponse -> printf( (const char*)"\tCreating alphabetical order...      " );
+	#if defined( ARDUINO ) && defined( __AVR__ )
+
+	dbgResponse -> print( F( "\tCreating alphabetical order... " ) );
+
+	#else
+
+	dbgResponse -> print( (const char*)"\tCreating alphabetical order... " );
+
+	#endif
+
 	for( i = 0; i < API_tree_size; i++ ){
 
 		for( j = i + 1; j < API_tree_size; j++ ){
 
-			if( strcmp( API_tree[ i ].name, API_tree[ j ].name ) > 0 ){
+			if( ( this ->* commander_strcmp )( &API_tree[ i ], &API_tree[ j ] ) > 0 ){
 
 				temp = API_tree[ i ];
 				API_tree[ i ] = API_tree[ j ];
@@ -82,16 +123,43 @@ void Commander::init(){
 		API_tree[ i ].place = i;
 
 	}
-	dbgResponse -> printf( (const char*)"[ OK ]\r\n" );
+
+	#if defined( ARDUINO ) && defined( __AVR__ )
+
+	dbgResponse -> println( F( "[ OK ]" ) );
+
+	#else
+
+	dbgResponse -> println( (const char*)"[ OK ]" );
+
+	#endif
+
 
 	// Optimize the tree to make it balanced.
 	// It is necessary to speed up the command
 	// search phase.
-	dbgResponse -> printf( (const char*)"\tCreate balanced binary structure... " );
-	optimize_api_tree();
-	dbgResponse -> printf( (const char*)"[ OK ]\r\n" );
+	#if defined( ARDUINO ) && defined( __AVR__ )
 
-	dbgResponse -> printf( (const char*)"Commander init finished!\r\n" );
+	dbgResponse -> print( F( "\tCreate balanced binary structure... " ) );
+
+	#else
+
+	dbgResponse -> print( (const char*)"\tCreate balanced binary structure... " );
+
+	#endif
+	optimize_api_tree();
+
+	#if defined( ARDUINO ) && defined( __AVR__ )
+
+	dbgResponse -> println( F( "[ OK ]" ) );
+	dbgResponse -> println( F( "Commander init finished!" ) );
+
+	#else
+
+	dbgResponse -> println( (const char*)"[ OK ]" );
+	dbgResponse -> println( (const char*)"Commander init finished!" );
+
+	#endif
 
 }
 
@@ -168,14 +236,15 @@ void Commander::optimize_api_tree(){
 	for( i = 1; i < API_tree_size; i++ ){
 
 		prev = &API_tree[ 0 ];
-		comp_res = strcmp( prev -> name, API_tree[ i ].name );
+
+		comp_res = ( this ->* commander_strcmp )( prev, &API_tree[ i ] );
 
 		(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
 
 		while( next != NULL ){
 
 			prev = next;
-			comp_res = strcmp( prev -> name, API_tree[ i ].name );
+			comp_res = ( this ->* commander_strcmp )( prev, &API_tree[ i ] );
 			(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
 
 		}
@@ -228,12 +297,36 @@ void Commander::executeCommand( char *cmd ){
 	// Pointer to the selected command data.
 	API_t *commandData_ptr;
 
+	int32_t pipePos;
+
+	uint32_t i;
+
 	// Copy the command data to the internal buffer.
 	// It is necessary because we have to modify the content
 	// of it. If it is points to a const char array we will
 	// get a bus-fault error without a buffer.
 	strncpy( tempBuff, cmd, COMMANDER_MAX_COMMAND_SIZE );
 
+	pipePos = hasChar( tempBuff, '|' );
+
+	if( pipePos >= 0 ){
+
+		#ifdef COMMANDER_ENABLE_PIPE_MODULE
+		// Terminate where pip is found.
+		tempBuff[ pipePos ] = '\0';
+		#else
+
+			#ifdef __AVR__
+			response -> println( F( "Piping not available on this device!" ) );
+			#else
+			response -> println( (const char*)"Piping not available on this device!" );
+			#endif
+
+			return;
+
+		#endif
+
+	}
 
 	// tempBuff is the address of the first character of the incoming command.
 	// If we give arg variable the value stored in tempBuff means arg will point to
@@ -283,8 +376,29 @@ void Commander::executeCommand( char *cmd ){
 		// If show_description flag is set, than we have to print the description.
 		if( show_description ){
 
-			// Print the description text to the output channel.
-			response -> printf( "%s: %s\r\n", commandData_ptr -> name, commandData_ptr -> desc );
+			if( memoryType == MEMORY_REGULAR ){
+
+				// Print the description text to the output channel.
+				response -> print( commandData_ptr -> name );
+				response -> print( ':' );
+				response -> print( ' ' );
+				response -> println( commandData_ptr -> desc );
+
+			}
+
+			#ifdef __AVR__
+
+			else if( memoryType == MEMORY_PROGMEM ){
+
+				// Print the description text to the output channel.
+				response -> print( commandData_ptr -> name_P );
+				response -> print( ':' );
+				response -> print( ' ' );
+				response -> println( commandData_ptr -> desc_P );
+
+			}
+
+			#endif
 
 
 		}
@@ -292,8 +406,75 @@ void Commander::executeCommand( char *cmd ){
 		// If show_description flag is not set, than we have to execute the commands function.
 		else{
 
-			// Execute commands function.
+			#ifdef COMMANDER_ENABLE_PIPE_MODULE
+
+			if( pipeChannel.available() > 0 ){
+
+				// pipeChannel.readBytesUntil( '\0', pipeArgBuffer, COMMANDER_MAX_COMMAND_SIZE );
+
+				i = 0;
+
+				while( pipeChannel.available() ){
+
+					if( i < COMMANDER_MAX_COMMAND_SIZE ){
+
+						pipeArgBuffer[ i ] = pipeChannel.read();
+
+					}
+
+					else{
+
+						pipeChannel.read();
+
+					}
+
+					i++;
+
+				}
+
+				if( i < COMMANDER_MAX_COMMAND_SIZE ){
+
+					pipeArgBuffer[ i ] = '\0';
+
+				}
+
+				pipeArgBuffer[ COMMANDER_MAX_COMMAND_SIZE - 1 ] = '\0';
+
+				arg = pipeArgBuffer;
+
+			}
+
+			if( pipePos > 0 ){
+
+				// Execute commands function and redirect the output to pipe.
+				(commandData_ptr -> func)( arg, &pipeChannel );
+
+			}
+
+			else{
+
+				// Execute command function.
+				(commandData_ptr -> func)( arg, response );
+
+			}
+
+			if( pipePos > 0 ){
+
+				// To remowe whitespace from the new command begin.
+				while( tempBuff[ pipePos + 1 ] == ' ' ){
+					pipePos++;
+				}
+
+				executeCommand( &tempBuff[ pipePos + 1 ] );
+
+			}
+
+			#else
+
+			// Execute command function.
 			(commandData_ptr -> func)( arg, response );
+
+			#endif
 
 		}
 
@@ -322,7 +503,30 @@ void Commander::executeCommand( char *cmd ){
 
 		// If we went through the whole tree and we did not found the command in it,
 		// we have to notice the user abut the problem. Maybe a Type-O
-		response -> printf( (const char*)"Command \'%s\' not found!!!\r\n", tempBuff );
+		#if defined( ARDUINO ) && defined( __AVR__ )
+
+		response -> print( F( "Command \'" ) );
+		response -> print( tempBuff );
+		response -> println( F( "\' not found!" ) );
+
+		#else
+
+		response -> print( (const char*)"Command \'" );
+		response -> print( tempBuff );
+		response -> println( (const char*)"\' not found!" );
+
+		#endif
+
+		#ifdef COMMANDER_ENABLE_PIPE_MODULE
+
+		// Clear the pipe at error.
+		while( pipeChannel.available() ){
+
+			pipeChannel.read();
+
+		}
+		
+		#endif
 
 	}
 
@@ -348,173 +552,32 @@ void Commander::execute( const char *cmd ){
 
 }
 
-#ifdef COMMANDER_USE_SERIAL_RESPONSE
+void Commander::execute( char *cmd, Stream *resp ){
 
-void Commander::execute( char *cmd, Serial *resp ){
-
-	// Serial execute handler, so the Serial response will be chosen.
-	response = &serialResponse;
-
-	// Select the right Serial object in the response class.
-	serialResponse.select( resp );
+	response = resp;
 
 	// Execute the command.
 	executeCommand( cmd );
 
 }
 
-void Commander::execute( const char *cmd, Serial *resp ){
+void Commander::execute( const char *cmd, Stream *resp ){
 
-	// Serial execute handler, so the Serial response will be chosen.
-	response = &serialResponse;
-
-	// Select the right Serial object in the response class.
-	serialResponse.select( resp );
+	response = resp;
 
 	// Execute the command.
 	executeCommand( (char*)cmd );
 
 }
 
-void Commander::attachDebugChannel( Serial *resp ){
+void Commander::attachDebugChannel( Stream *resp ){
 
-	dbgResponse = &serialDebugResponse;
-
-	// Select the right Serial object in the response class.
-	serialDebugResponse.select( resp );
+	dbgResponse = resp;
 
 	// Enable debug messages.
 	debugEnabled = true;
 
 }
-
-#endif
-
-#ifdef COMMANDER_USE_ARDUINO_SERIAL_RESPONSE
-
-void Commander::execute( char *cmd, HardwareSerial *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &arduinoSerialResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduinoSerialResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( cmd );
-
-}
-
-void Commander::execute( const char *cmd, HardwareSerial *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &arduinoSerialResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduinoSerialResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( (char*)cmd );
-
-}
-
-void Commander::attachDebugChannel( HardwareSerial *resp ){
-
-	dbgResponse = &arduinoSerialDebugResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduinoSerialDebugResponse.select( resp );
-
-	// Enable debug messages.
-	debugEnabled = true;
-
-}
-
-#endif
-
-#ifdef COMMANDER_USE_ARDUINO_32U4_SERIAL_RESPONSE
-
-void Commander::execute( char *cmd, Serial_ *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &arduino32U4SerialResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduino32U4SerialResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( cmd );
-
-}
-
-void Commander::execute( const char *cmd, Serial_ *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &arduino32U4SerialResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduino32U4SerialResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( (char*)cmd );
-
-}
-
-void Commander::attachDebugChannel( Serial_ *resp ){
-
-	dbgResponse = &arduino32U4SerialResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	arduino32U4SerialResponse.select( resp );
-
-	// Enable debug messages.
-	debugEnabled = true;
-
-}
-
-#endif
-
-#ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-
-void Commander::execute( char *cmd, WiFiClient *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &WiFiClientResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	WiFiClientResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( cmd );
-
-}
-
-void Commander::execute( const char *cmd, WiFiClient *resp ){
-
-	// Arduino Serial execute handler, so the Arduino Serial response will be chosen.
-	response = &WiFiClientResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	WiFiClientResponse.select( resp );
-
-	// Execute the command.
-	executeCommand( (char*)cmd );
-
-}
-
-void Commander::attachDebugChannel( WiFiClient *resp ){
-
-	dbgResponse = &WiFiClientDebugResponse;
-
-	// Select the right HardwareSerial object in the response class.
-	WiFiClientDebugResponse.select( resp );
-
-	// Enable debug messages.
-	debugEnabled = true;
-
-}
-
-#endif
 
 void Commander::enableDebug(){
 
@@ -554,7 +617,7 @@ Commander::API_t* Commander::operator [] ( char* name ){
 
 	prev = &API_tree[ 0 ];
 
-	comp_res = strcmp( prev -> name, name );
+	comp_res = ( this ->* commander_strcmp_tree_ram )( prev, name );
 
 	(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
 
@@ -563,7 +626,7 @@ Commander::API_t* Commander::operator [] ( char* name ){
 	while( ( comp_res !=0 ) && ( next != NULL ) ){
 
 		prev = next;
-		comp_res = strcmp( prev -> name, name );
+		comp_res = ( this ->* commander_strcmp_tree_ram )( prev, name );
 		(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
 
 	}
@@ -589,26 +652,135 @@ Commander::API_t* Commander::operator [] ( const char* name ){
 
 void Commander::helpFunction( bool description ){
 
+	helpFunction( description, response );
+
+}
+
+void Commander::helpFunction( bool description, Stream* out, bool style ){
+
 	uint32_t i;
 	uint32_t j;
 
-	response -> printf( (const char*)"---- Available commands ----\r\n" );
+	if( style ){
+
+		#if defined( ARDUINO ) && defined( __AVR__ )
+
+		out -> println( F( "\033[1;31m----\033[1;32m Available commands \033[1;31m----\033[0;37m\r\n" ) );
+
+		#else
+
+		out -> println( (const char*)"\033[1;31m----\033[1;32m Available commands \033[1;31m----\033[0;37m\r\n" );
+
+		#endif
+
+	}
+
+	else{
+
+		#if defined( ARDUINO ) && defined( __AVR__ )
+
+		out -> println( F( "---- Available commands ----\r\n" ) );
+
+		#else
+
+		out -> println( (const char*)"---- Available commands ----\r\n" );
+
+		#endif
+
+	}
+
 	for( i = 0; i < API_tree_size; i++ ){
 
 		for( j = 0; j < API_tree_size; j++ ){
 
 			if( API_tree[ j ].place == i ){
 
+				// Check if the description is required to print.
 				if( description ){
 
-					response -> printf( (const char*)"%s:\r\n", API_tree[ j ].name );
-					response -> printf( (const char*)"\t%s\r\n\r\n", API_tree[ j ].desc );
+					// Check if style is enabled.
+					if( style ){
+
+						if( memoryType == MEMORY_REGULAR ){
+
+							out -> print( (const char*)"\033[1;32m" );
+							out -> print( API_tree[ j ].name );
+							out -> print( (const char*)"\033[0;37m" );
+							out -> print( ':' );
+							out -> print( ' ' );
+							out -> print( API_tree[ j ].desc );
+							out -> println();
+
+						}
+
+						#ifdef __AVR__
+
+						else if( memoryType == MEMORY_PROGMEM ){
+
+							out -> print( F( "\033[1;32m" ) );
+							out -> print( API_tree[ j ].name_P );
+							out -> print( F( "\033[0;37m" ) );
+							out -> print( ':' );
+							out -> print( ' ' );
+							out -> print( API_tree[ j ].desc_P );
+							out -> println();
+							out -> println();
+
+						}
+
+						#endif
+
+					}
+
+					else{
+
+						if( memoryType == MEMORY_REGULAR ){
+
+							out -> print( API_tree[ j ].name );
+							out -> println( ':' );
+							out -> print( '\t' );
+							out -> print( API_tree[ j ].desc );
+							out -> println();
+							out -> println();
+
+						}
+
+						#ifdef __AVR__
+
+						else if( memoryType == MEMORY_PROGMEM ){
+
+							out -> print( API_tree[ j ].name_P );
+							out -> println( ':' );
+							out -> print( '\t' );
+							out -> print( API_tree[ j ].desc_P );
+							out -> println();
+							out -> println();
+
+						}
+
+						#endif
+
+					}
 
 				}
 
 				else{
 
-					response -> printf( (const char*)"%s\r\n", API_tree[ j ].name );
+					if( memoryType == MEMORY_REGULAR ){
+
+						out -> println( API_tree[ j ].name );
+
+					}
+
+					#ifdef __AVR__
+
+					else if( memoryType == MEMORY_PROGMEM ){
+
+						out -> println( API_tree[ j ].name_P );
+
+					}
+
+					#endif
 
 				}
 
@@ -621,3 +793,58 @@ void Commander::helpFunction( bool description ){
 	}
 
 }
+
+int32_t Commander::hasChar( char* str, char c ){
+
+	int32_t cntr = 0;
+
+	while( str[ cntr ] ){
+
+		if( str[ cntr ] == c ){
+
+			return cntr;
+
+		}
+
+		cntr++;
+
+	}
+
+	return -1;
+
+}
+
+void Commander::printHelp( Stream* out ){
+
+	helpFunction( true, out, true );
+
+}
+
+int Commander::commander_strcmp_regular( API_t* element1, API_t* element2 ){
+
+	return strcmp( element1 -> name, element2 -> name );
+
+}
+
+int Commander::commander_strcmp_tree_ram_regular( API_t* element1, char* element2 ){
+
+	return strcmp( element1 -> name, element2 );
+
+}
+
+#ifdef __AVR__
+
+int Commander::commander_strcmp_progmem( API_t* element1, API_t* element2 ){
+
+	strncpy_P( progmemBuffer, (	PGM_P ) element1 -> name_P, COMMANDER_MAX_COMMAND_SIZE );
+	return strcmp_P( progmemBuffer, (	PGM_P )element2 -> name_P );
+
+}
+
+int Commander::commander_strcmp_tree_ram_progmem( API_t* element1, char* element2 ){
+
+	return strcmp_P( element2, (PGM_P)element1 -> name_P ) * -1;
+
+}
+
+#endif

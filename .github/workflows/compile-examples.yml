@@ -24,6 +24,7 @@ jobs:
 
           sketch-paths: |
             - examples/Commander_simple
+            - examples/Commander_simple_progmem
 
   compile-examples-for-esp32:
     runs-on: ubuntu-latest

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['operator_5b_5d_0',['operator[]',['../class_commander.html#a04896ef61a17ed24afd9079dadfc568a',1,'Commander::operator[](int i)'],['../class_commander.html#ac91ff98c9d23d274d09453a8196ac7cf',1,'Commander::operator[](char *name)'],['../class_commander.html#a1a7c939ef7432eaa31658463d48149de',1,'Commander::operator[](const char *name)']]]
+  ['haschar_0',['hasChar',['../class_commander.html#a79a36c570d33547d859fa0c9c6fc99d6',1,'Commander']]],
+  ['helpfunction_1',['helpFunction',['../class_commander.html#a578efc09c061fd0c784fabc2844d2c40',1,'Commander::helpFunction(bool description=false)'],['../class_commander.html#a9c8d932df75a2e74ef49ba7bc23a1956',1,'Commander::helpFunction(bool description, Stream *out, bool style=false)']]]
 ];
