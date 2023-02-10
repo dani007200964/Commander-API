@@ -421,6 +421,8 @@ void commander_wifiStat_func( char *args, Stream *response ){
 
   switch( WiFi.getMode() ){
 
+    #ifdef ESP32
+
     case WIFI_MODE_STA:
       response -> println( "Station" );
       break;
@@ -433,9 +435,29 @@ void commander_wifiStat_func( char *args, Stream *response ){
       response -> println( "Acces Point & Station" );
       break;
 
+    #endif
+
+    #ifdef ESP8266
+
+    case WIFI_STA:
+      response -> println( "Station" );
+      break;
+
+    case WIFI_AP:
+      response -> println( "Acces Point" );
+      break;
+
+    case WIFI_AP_STA:
+      response -> println( "Acces Point & Station" );
+      break;
+
+    #endif
+
     default:
       response -> println( "Unknown" );
       break;
+
+
 
   }
 
