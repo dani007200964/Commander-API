@@ -73,7 +73,7 @@ void commander_uptime_func( char *args, Stream *response ){
   minute = second / 60;
   second %= 60;
 
-  sprintf( buff, "%d days, %d:%d:%lu", day, hour, minute, second );
+  sprintf( buff, "%d days, %d:%02d:%02lu", day, hour, minute, second );
 
   response -> print( buff );
 
