@@ -55,7 +55,7 @@ void commander_micros_func( char *args, Stream *response ){
 
 void commander_uptime_func( char *args, Stream *response ){
 
-  char buff[ 20 ];
+  char buff[ 30 ];
 
   int day;
   int hour;
@@ -73,7 +73,7 @@ void commander_uptime_func( char *args, Stream *response ){
   minute = second / 60;
   second %= 60;
 
-  sprintf( buff, "%d days, %d:%02d:%02lu", day, hour, minute, second );
+  snprintf( buff, 30, "%d days, %d:%02d:%02lu", day, hour, minute, second );
 
   response -> print( buff );
 
