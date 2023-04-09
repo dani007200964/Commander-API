@@ -282,7 +282,7 @@ void Commander::recursive_optimizer( int32_t start_index, int32_t stop_index ){
 
 }
 
-void Commander::executeCommand( char *cmd ){
+void Commander::executeCommand( char *cmd, void* parent ){
 
 	// The beginning of the argument list will be stored in this pointer
 	char *arg;
@@ -447,14 +447,14 @@ void Commander::executeCommand( char *cmd ){
 			if( pipePos > 0 ){
 
 				// Execute commands function and redirect the output to pipe.
-				(commandData_ptr -> func)( arg, &pipeChannel );
+				(commandData_ptr -> func)( arg, &pipeChannel, parent );
 
 			}
 
 			else{
 
 				// Execute command function.
-				(commandData_ptr -> func)( arg, response );
+				(commandData_ptr -> func)( arg, response, parent );
 
 			}
 
@@ -567,6 +567,24 @@ void Commander::execute( const char *cmd, Stream *resp ){
 
 	// Execute the command.
 	executeCommand( (char*)cmd );
+
+}
+
+void Commander::execute( char *cmd, Stream *resp, void* parent ){
+
+	response = resp;
+
+	// Execute the command.
+	executeCommand( cmd, parent );
+
+}
+
+void Commander::execute( const char *cmd, Stream *resp, void* parent ){
+
+	response = resp;
+
+	// Execute the command.
+	executeCommand( (char*)cmd, parent );
 
 }
 
@@ -814,9 +832,9 @@ int32_t Commander::hasChar( char* str, char c ){
 
 }
 
-void Commander::printHelp( Stream* out ){
+void Commander::printHelp( Stream* out, bool style ){
 
-	helpFunction( true, out, true );
+	helpFunction( true, out, style );
 
 }
 

@@ -114,7 +114,7 @@ public:
 	  const char *name;                                 //  Name of the command
 	  const char *desc;                                 //  Description of the command
 
-	  void(*func)( char*, Stream *response );  					//  Function pointer to the command function
+	  void(*func)( char*, Stream *response, void* parent );  					//  Function pointer to the command function
 
 		#ifdef __AVR__
 		__FlashStringHelper *name_P;											// Name of the command( stored in PROGMEM )
@@ -184,25 +184,28 @@ public:
 	/// be visible.
 	void execute( const char *cmd );
 
-	/// Execution function for Serial response.
+	/// Execution function for Stream response.
 	///
 	/// This function tries to execute a command.
-	/// It uses the Serial response channel, so
+	/// It uses the Stream response channel, so
 	/// the messages from the command handler
-	/// will be passed to the selected Serial
+	/// will be passed to the selected Stream
 	/// object.
 	void execute( char *cmd, Stream *resp );
 
-	/// Execution function for Serial response.
+	/// Execution function for Stream response.
 	///
 	/// This function tries to execute a command.
-	/// It uses the Serial response channel, so
+	/// It uses the Stream response channel, so
 	/// the messages from the command handler
-	/// will be passed to the selected Serial
+	/// will be passed to the selected Stream
 	/// object.
 	void execute( const char *cmd, Stream *resp );
 
-	/// Debug channel for Serial.
+	void execute( char *cmd, Stream *resp, void* parent );
+	void execute( const char *cmd, Stream *resp, void* parent );
+
+	/// Debug channel for Stream.
 	///
 	/// This function attaches a Serial channel
 	/// for debug messages. It also enables
@@ -217,7 +220,7 @@ public:
 
 	/// Prints out the help string to the specified Stream.
 	/// @param out The help information will be printed to this Stream.
-	void printHelp( Stream* out );
+	void printHelp( Stream* out, bool style = false );
 
 private:
 
@@ -326,7 +329,7 @@ private:
 	/// This function executes a command. Before calling this
 	/// function, the response pointer and it's channel has to
 	/// be configured correctly.
-	void executeCommand( char *cmd );
+	void executeCommand( char *cmd, void* parent = NULL );
 
 	/// Help function
 	///
