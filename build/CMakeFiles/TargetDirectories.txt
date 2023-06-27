@@ -1,0 +1,4 @@
+C:/Users/dani0/Documents/Programok/Commander-API/build/CMakeFiles/Argumentbasic.dir
+C:/Users/dani0/Documents/Programok/Commander-API/build/CMakeFiles/Basic.dir
+C:/Users/dani0/Documents/Programok/Commander-API/build/CMakeFiles/edit_cache.dir
+C:/Users/dani0/Documents/Programok/Commander-API/build/CMakeFiles/rebuild_cache.dir

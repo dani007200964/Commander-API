@@ -67,6 +67,9 @@ void Commander::init(){
 	// Temporary variable, used to flip elements.
 	API_t temp;
 
+	commander_strcmp = &Commander::commander_strcmp_regular;
+	commander_strcmp_tree_ram = &Commander::commander_strcmp_tree_ram_regular;
+
 	#ifdef __AVR__
 
 	if( API_tree[ 0 ].name == NULL ){
@@ -92,14 +95,15 @@ void Commander::init(){
 	// Make the tree ordered by alphabet.
 	#if defined( ARDUINO ) && defined( __AVR__ )
 
-	dbgResponse -> print( F( "\tCreating alphabetical order... " ) );
+	dbgResponse -> print( F( "  Creating alphabetical order... " ) );
 
 	#else
 
-	dbgResponse -> print( (const char*)"\tCreating alphabetical order... " );
+	dbgResponse -> print( (const char*)"  Creating alphabetical order... " );
 
 	#endif
 
+	// Bubble sort. We need to sort the commands into an alphabetical order.
 	for( i = 0; i < API_tree_size; i++ ){
 
 		for( j = i + 1; j < API_tree_size; j++ ){
@@ -140,11 +144,11 @@ void Commander::init(){
 	// search phase.
 	#if defined( ARDUINO ) && defined( __AVR__ )
 
-	dbgResponse -> print( F( "\tCreate balanced binary structure... " ) );
+	dbgResponse -> print( F( "  Create balanced binary structure... " ) );
 
 	#else
 
-	dbgResponse -> print( (const char*)"\tCreate balanced binary structure... " );
+	dbgResponse -> print( (const char*)"  Create balanced binary structure... " );
 
 	#endif
 	optimize_api_tree();
@@ -163,10 +167,16 @@ void Commander::init(){
 
 }
 
-uint16_t Commander::find_api_index_by_place( uint16_t place ){
+int Commander::find_api_index_by_place( int place ){
 
 	// Generic counter variable
-	uint16_t i;
+	uint32_t i;
+
+	if( place < 0 ){
+
+		return 0;
+
+	}
 
 	// Go through all commands
 	for( i = 0; i < API_tree_size; i++ ){
@@ -221,7 +231,7 @@ void Commander::optimize_api_tree(){
 	API_t *prev;
 
 	// It will store string comparison result
-	int32_t comp_res;
+	int comp_res;
 
 	// recursive optimizer need to initialize elementCounter to 0
 	elementCounter = 0;
@@ -311,20 +321,8 @@ void Commander::executeCommand( char *cmd, void* parent ){
 
 	if( pipePos >= 0 ){
 
-		#ifdef COMMANDER_ENABLE_PIPE_MODULE
 		// Terminate where pip is found.
 		tempBuff[ pipePos ] = '\0';
-		#else
-
-			#ifdef __AVR__
-			response -> println( F( "Piping not available on this device!" ) );
-			#else
-			response -> println( (const char*)"Piping not available on this device!" );
-			#endif
-
-			return;
-
-		#endif
 
 	}
 
@@ -406,8 +404,6 @@ void Commander::executeCommand( char *cmd, void* parent ){
 		// If show_description flag is not set, than we have to execute the commands function.
 		else{
 
-			#ifdef COMMANDER_ENABLE_PIPE_MODULE
-
 			if( pipeChannel.available() > 0 ){
 
 				// pipeChannel.readBytesUntil( '\0', pipeArgBuffer, COMMANDER_MAX_COMMAND_SIZE );
@@ -460,7 +456,7 @@ void Commander::executeCommand( char *cmd, void* parent ){
 
 			if( pipePos > 0 ){
 
-				// To remowe whitespace from the new command begin.
+				// To remove whitespace from the new command begin.
 				while( tempBuff[ pipePos + 1 ] == ' ' ){
 					pipePos++;
 				}
@@ -468,13 +464,6 @@ void Commander::executeCommand( char *cmd, void* parent ){
 				executeCommand( &tempBuff[ pipePos + 1 ] );
 
 			}
-
-			#else
-
-			// Execute command function.
-			(commandData_ptr -> func)( arg, response );
-
-			#endif
 
 		}
 
@@ -487,13 +476,13 @@ void Commander::executeCommand( char *cmd, void* parent ){
 		// We have to check for single or described help function.
 		if( strcmp( arg, (const char*)"-d" ) == 0 ){
 
-			helpFunction( true );
+			printHelp( response, true, false );
 
 		}
 
 		else{
 
-			helpFunction();
+			printHelp( response, false, false );
 
 		}
 
@@ -631,12 +620,12 @@ Commander::API_t* Commander::operator [] ( char* name ){
 	API_t *prev;
 
 	// It will store string compersation result
-	int8_t comp_res;
+	int comp_res;
 
 	prev = &API_tree[ 0 ];
 
-	comp_res = ( this ->* commander_strcmp_tree_ram )( prev, name );
-
+	comp_res = ( (*this).*(commander_strcmp_tree_ram) )( prev, name );
+	
 	(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
 
 	// Go through the binary tree until you find a match, or until you find the
@@ -644,7 +633,7 @@ Commander::API_t* Commander::operator [] ( char* name ){
 	while( ( comp_res !=0 ) && ( next != NULL ) ){
 
 		prev = next;
-		comp_res = ( this ->* commander_strcmp_tree_ram )( prev, name );
+		comp_res = ( (*this).*(commander_strcmp_tree_ram) )( prev, name );
 		(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
 
 	}
@@ -668,16 +657,15 @@ Commander::API_t* Commander::operator [] ( const char* name ){
 
 }
 
-void Commander::helpFunction( bool description ){
+void Commander::printHelp( bool description ){
 
-	helpFunction( description, response );
+	printHelp( response, description );
 
 }
 
-void Commander::helpFunction( bool description, Stream* out, bool style ){
+void Commander::printHelp( Stream* out, bool description, bool style ){
 
 	uint32_t i;
-	uint32_t j;
 
 	if( style ){
 
@@ -709,102 +697,92 @@ void Commander::helpFunction( bool description, Stream* out, bool style ){
 
 	for( i = 0; i < API_tree_size; i++ ){
 
-		for( j = 0; j < API_tree_size; j++ ){
+		// Check if the description is required to print.
+		if( description ){
 
-			if( API_tree[ j ].place == i ){
+			// Check if style is enabled.
+			if( style ){
 
-				// Check if the description is required to print.
-				if( description ){
+				if( memoryType == MEMORY_REGULAR ){
 
-					// Check if style is enabled.
-					if( style ){
-
-						if( memoryType == MEMORY_REGULAR ){
-
-							out -> print( (const char*)"\033[1;32m" );
-							out -> print( API_tree[ j ].name );
-							out -> print( (const char*)"\033[0;37m" );
-							out -> print( ':' );
-							out -> print( ' ' );
-							out -> print( API_tree[ j ].desc );
-							out -> println();
-
-						}
-
-						#ifdef __AVR__
-
-						else if( memoryType == MEMORY_PROGMEM ){
-
-							out -> print( F( "\033[1;32m" ) );
-							out -> print( API_tree[ j ].name_P );
-							out -> print( F( "\033[0;37m" ) );
-							out -> print( ':' );
-							out -> print( ' ' );
-							out -> print( API_tree[ j ].desc_P );
-							out -> println();
-							out -> println();
-
-						}
-
-						#endif
-
-					}
-
-					else{
-
-						if( memoryType == MEMORY_REGULAR ){
-
-							out -> print( API_tree[ j ].name );
-							out -> println( ':' );
-							out -> print( '\t' );
-							out -> print( API_tree[ j ].desc );
-							out -> println();
-							out -> println();
-
-						}
-
-						#ifdef __AVR__
-
-						else if( memoryType == MEMORY_PROGMEM ){
-
-							out -> print( API_tree[ j ].name_P );
-							out -> println( ':' );
-							out -> print( '\t' );
-							out -> print( API_tree[ j ].desc_P );
-							out -> println();
-							out -> println();
-
-						}
-
-						#endif
-
-					}
+					out -> print( (const char*)"\033[1;32m" );
+					out -> print( API_tree[ find_api_index_by_place( i ) ].name );
+					out -> print( (const char*)"\033[0;37m" );
+					out -> print( ':' );
+					out -> print( ' ' );
+					out -> print( API_tree[ find_api_index_by_place( i ) ].desc );
+					out -> println();
 
 				}
 
-				else{
+				#ifdef __AVR__
 
-					if( memoryType == MEMORY_REGULAR ){
+				else if( memoryType == MEMORY_PROGMEM ){
 
-						out -> println( API_tree[ j ].name );
-
-					}
-
-					#ifdef __AVR__
-
-					else if( memoryType == MEMORY_PROGMEM ){
-
-						out -> println( API_tree[ j ].name_P );
-
-					}
-
-					#endif
+					out -> print( F( "\033[1;32m" ) );
+					out -> print( API_tree[ find_api_index_by_place( i ) ].name_P );
+					out -> print( F( "\033[0;37m" ) );
+					out -> print( ':' );
+					out -> print( ' ' );
+					out -> print( API_tree[ find_api_index_by_place( i ) ].desc_P );
+					out -> println();
+					out -> println();
 
 				}
 
-				continue;
+				#endif
 
 			}
+
+			else{
+
+				if( memoryType == MEMORY_REGULAR ){
+
+					out -> print( API_tree[ find_api_index_by_place( i ) ].name );
+					out -> println( ':' );
+					out -> print( '\t' );
+					out -> print( API_tree[ find_api_index_by_place( i ) ].desc );
+					out -> println();
+					out -> println();
+
+				}
+
+				#ifdef __AVR__
+
+				else if( memoryType == MEMORY_PROGMEM ){
+
+					out -> print( API_tree[ find_api_index_by_place( i ) ].name_P );
+					out -> println( ':' );
+					out -> print( '\t' );
+					out -> print( API_tree[ find_api_index_by_place( i ) ].desc_P );
+					out -> println();
+					out -> println();
+
+				}
+
+				#endif
+
+			}
+
+		}
+
+		else{
+
+			if( memoryType == MEMORY_REGULAR ){
+
+				out -> println( API_tree[ find_api_index_by_place( i ) ].name );
+
+			}
+
+			#ifdef __AVR__
+
+			else if( memoryType == MEMORY_PROGMEM ){
+
+				out -> println( API_tree[ find_api_index_by_place( i ) ].name_P );
+
+			}
+
+			#endif
 
 		}
 
@@ -832,12 +810,6 @@ int32_t Commander::hasChar( char* str, char c ){
 
 }
 
-void Commander::printHelp( Stream* out, bool style ){
-
-	helpFunction( true, out, style );
-
-}
-
 int Commander::commander_strcmp_regular( API_t* element1, API_t* element2 ){
 
 	return strcmp( element1 -> name, element2 -> name );
@@ -846,7 +818,7 @@ int Commander::commander_strcmp_regular( API_t* element1, API_t* element2 ){
 
 int Commander::commander_strcmp_tree_ram_regular( API_t* element1, char* element2 ){
 
-	return strcmp( element1 -> name, element2 );
+	return strcmp( element1 -> name, (const char*)element2 );
 
 }
 

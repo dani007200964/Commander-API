@@ -1,10 +1,10 @@
 /*
- * Created on June 18 2020
+ * Created on April 08 2023
  *
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
- * This file is part of the Commander-API project.
- * Modified 2022.02.06
+ * This file is part of the Shellminator project.
+ * Modified 2023.04.08
 */
 
 /*
@@ -31,48 +31,62 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "System.h"
 
-#ifndef COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
-#define COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
+unsigned long millis(){
 
-#ifdef ESP32
+    double value = std::clock() / (double)(CLOCKS_PER_SEC / 1000);
 
-  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-  #endif
+    return (unsigned long) value;
 
-  #ifndef COMMANDER_ENABLE_PIPE_MODULE
-    #define COMMANDER_ENABLE_PIPE_MODULE
-  #endif
+}
 
-  #ifndef COMMANDER_MAX_COMMAND_SIZE
-    #define COMMANDER_MAX_COMMAND_SIZE 50
-  #endif
+void delay( uint32_t x ){
 
-#endif
+    #ifdef _WIN32
+    Sleep( x );
+    #endif
 
-#ifdef ESP8266
+    #ifdef __EMSCRIPTEN__
+    emscripten_sleep( x );
+    #endif
+    
+}
 
-  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-  #endif
+void randomSeed( unsigned long seed ){
 
-  #ifndef COMMANDER_ENABLE_PIPE_MODULE
-    #define COMMANDER_ENABLE_PIPE_MODULE
-  #endif
+    if( seed != 0 ){
+        srand( seed );
+    }
 
-  #ifndef COMMANDER_MAX_COMMAND_SIZE
-    #define COMMANDER_MAX_COMMAND_SIZE 50
-  #endif
+}
 
-#endif
+long random( long howbig ){
 
-// Enable the Pipe module by default
-#define COMMANDER_ENABLE_PIPE_MODULE
+    if( howbig == 0 ){
+        return 0;
+    }
 
-/// Maximum length of the terminal command.
-#ifndef COMMANDER_MAX_COMMAND_SIZE
-  #define COMMANDER_MAX_COMMAND_SIZE 100
-#endif
+    return rand() % howbig;
 
-#endif /* COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_ */
+}
+
+long random(long howsmall, long howbig ){
+
+    if( howsmall >= howbig ){
+        return howsmall;
+    }
+
+    long diff = howbig - howsmall;
+
+    return random( diff ) + howsmall;
+
+}
+
+void systemInit(){
+
+    #ifdef __EMSCRIPTEN__
+
+    #endif
+
+}

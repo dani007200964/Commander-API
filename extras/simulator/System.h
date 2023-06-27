@@ -1,10 +1,10 @@
 /*
- * Created on June 18 2020
+ * Created on April 08 2023
  *
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
- * This file is part of the Commander-API project.
- * Modified 2022.02.06
+ * This file is part of the Shellminator project.
+ * Modified 2023.04.08
 */
 
 /*
@@ -31,48 +31,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#ifndef System_h
+#define System_h
 
-#ifndef COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
-#define COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
+#include <ctime>
+#include <stdio.h>
+#include <stdint.h>
+#include <cstdlib>
 
-#ifdef ESP32
-
-  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-  #endif
-
-  #ifndef COMMANDER_ENABLE_PIPE_MODULE
-    #define COMMANDER_ENABLE_PIPE_MODULE
-  #endif
-
-  #ifndef COMMANDER_MAX_COMMAND_SIZE
-    #define COMMANDER_MAX_COMMAND_SIZE 50
-  #endif
-
+#ifdef _WIN32
+#include <Windows.h>
 #endif
 
-#ifdef ESP8266
-
-  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-  #endif
-
-  #ifndef COMMANDER_ENABLE_PIPE_MODULE
-    #define COMMANDER_ENABLE_PIPE_MODULE
-  #endif
-
-  #ifndef COMMANDER_MAX_COMMAND_SIZE
-    #define COMMANDER_MAX_COMMAND_SIZE 50
-  #endif
-
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
 #endif
 
-// Enable the Pipe module by default
-#define COMMANDER_ENABLE_PIPE_MODULE
+unsigned long millis();
+void delay( uint32_t x );
 
-/// Maximum length of the terminal command.
-#ifndef COMMANDER_MAX_COMMAND_SIZE
-  #define COMMANDER_MAX_COMMAND_SIZE 100
+void randomSeed( unsigned long seed );
+long random( long howbig );
+long random( long howsmall, long howbig );
+
+void systemInit();
+
 #endif
-
-#endif /* COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_ */

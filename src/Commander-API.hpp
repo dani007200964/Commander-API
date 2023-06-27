@@ -108,13 +108,13 @@ public:
 	/// in a balanced binary tree.
 	typedef struct API_t{
 
-	  uint16_t place;                                   //  This will store the alphabetical place of the command in the tree
-	  struct API_t *left;                               //  Left element on a binary tree branch
-	  struct API_t *right;                              //  Right element on a binary tree branch
-	  const char *name;                                 //  Name of the command
-	  const char *desc;                                 //  Description of the command
+	  	uint16_t place;                                   //  This will store the alphabetical place of the command in the tree
+	  	struct API_t *left;                               //  Left element on a binary tree branch
+	  	struct API_t *right;                              //  Right element on a binary tree branch
+	  	const char *name;                                 //  Name of the command
+	  	const char *desc;                                 //  Description of the command
 
-	  void(*func)( char*, Stream *response, void* parent );  					//  Function pointer to the command function
+	  	void(*func)( char*, Stream *response, void* parent );  					//  Function pointer to the command function
 
 		#ifdef __AVR__
 		__FlashStringHelper *name_P;											// Name of the command( stored in PROGMEM )
@@ -218,9 +218,26 @@ public:
 	/// Disables debug messages.
 	void disableDebug();
 
-	/// Prints out the help string to the specified Stream.
-	/// @param out The help information will be printed to this Stream.
-	void printHelp( Stream* out, bool style = false );
+	/// Find an API element in the tree by alphabetical place.
+	int find_api_index_by_place( int place );
+
+	/// Help function
+	///
+	/// It prints all the available commands in
+	/// alphabetical order. If the description
+	/// argument is set to true, it also prints
+	/// the description data for all commands.
+	/// todo Finish description.
+	void printHelp( bool description = false );
+
+	/// Help function
+	///
+	/// It prints all the available commands in
+	/// alphabetical order. If the description
+	/// argument is set to true, it also prints
+	/// the description data for all commands.
+	/// todo Finish description.
+	void printHelp( Stream* out, bool description, bool style = false );
 
 private:
 
@@ -284,11 +301,11 @@ private:
 
 	/// Function pointer to an internal strcmp like function.
 	/// It uses the regular version by default.
-	int( Commander::*commander_strcmp )( API_t* element1, API_t* element2 ) = &Commander::commander_strcmp_regular;
+	int( Commander::*commander_strcmp )( API_t* element1, API_t* element2 );
 
 	/// Function pointer to an internal strcmp like function.
 	/// It uses the regular version by default.
-	int( Commander::*commander_strcmp_tree_ram )( API_t* element1, char* element2 ) = &Commander::commander_strcmp_tree_ram_regular;
+	int( Commander::*commander_strcmp_tree_ram )( API_t* element1, char* element2 );
 
 	/// Default response handler class.
 	commandResponse defaultResponse;
@@ -306,9 +323,6 @@ private:
 	/// Pointer to response class. By default it
 	/// points to the default debug response handler.
 	Stream *dbgResponse = &defaultDebugResponse;
-
-	/// Find an API element in the tree by alphabetical place.
-	uint16_t find_api_index_by_place( uint16_t place );
 
 	/// Swap two API elements in the tree.
 	void swap_api_elements( uint16_t index, uint16_t place );
@@ -330,24 +344,6 @@ private:
 	/// function, the response pointer and it's channel has to
 	/// be configured correctly.
 	void executeCommand( char *cmd, void* parent = NULL );
-
-	/// Help function
-	///
-	/// It prints all the available commands in
-	/// alphabetical order. If the description
-	/// argument is set to true, it also prints
-	/// the description data for all commands.
-	/// todo Finish description.
-	void helpFunction( bool description = false );
-
-	/// Help function
-	///
-	/// It prints all the available commands in
-	/// alphabetical order. If the description
-	/// argument is set to true, it also prints
-	/// the description data for all commands.
-	/// todo Finish description.
-	void helpFunction( bool description, Stream* out, bool style = false );
 
 	/// Search for a character in a string.
 	/// @param str Pointer to a character array where the search will be.

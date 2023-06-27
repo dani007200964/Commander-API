@@ -1,10 +1,10 @@
 /*
- * Created on June 18 2020
+ * Created on June 25 2022
  *
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2022.02.06
+ * Modified 2022.06.25
 */
 
 /*
@@ -32,47 +32,18 @@ SOFTWARE.
 */
 
 
-#ifndef COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
-#define COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
+#ifndef COMMANDER_UTILS_HPP_
+#define COMMANDER_UTILS_HPP_
 
-#ifdef ESP32
+#include "Commander-API.hpp"
 
-  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-  #endif
+/// This macro simplifies the attachment of the API-tree.
+///
+/// With this macro you can attach the API-tree to the
+/// class easier and faster than with attachTreeFunction.
+#define apiTreeDump( tree, out ) apiTreeDumpFunction( tree, sizeof( tree ) / sizeof( tree[ 0 ] ), out )
 
-  #ifndef COMMANDER_ENABLE_PIPE_MODULE
-    #define COMMANDER_ENABLE_PIPE_MODULE
-  #endif
 
-  #ifndef COMMANDER_MAX_COMMAND_SIZE
-    #define COMMANDER_MAX_COMMAND_SIZE 50
-  #endif
+void apiTreeDumpFunction( Commander::API_t* tree, int treeSize, Stream* out  );
 
 #endif
-
-#ifdef ESP8266
-
-  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-  #endif
-
-  #ifndef COMMANDER_ENABLE_PIPE_MODULE
-    #define COMMANDER_ENABLE_PIPE_MODULE
-  #endif
-
-  #ifndef COMMANDER_MAX_COMMAND_SIZE
-    #define COMMANDER_MAX_COMMAND_SIZE 50
-  #endif
-
-#endif
-
-// Enable the Pipe module by default
-#define COMMANDER_ENABLE_PIPE_MODULE
-
-/// Maximum length of the terminal command.
-#ifndef COMMANDER_MAX_COMMAND_SIZE
-  #define COMMANDER_MAX_COMMAND_SIZE 100
-#endif
-
-#endif /* COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_ */

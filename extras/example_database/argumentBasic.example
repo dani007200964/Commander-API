@@ -1,0 +1,95 @@
+EXCLUDE=NONE
+
+++--HEADER--++
+
+/*
+ * Created on June 25 2023
+ *
+ * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+ *
+ * This is a simple example, that demonstrates how
+ * to use the base functionality of th Commander-API.
+*/
+
+++--INCLUDES--++
+
+// Necessary includes.
+#include "Commander-API.hpp"
+#include "Commander-IO.hpp"
+
+// Argument parser module.
+#include "Commander-Arguments.hpp"
+
+++--GLOBAL_VARIABLES--++
+
+++--FUNCTION_PROTOTYPES--++
+
+++--SETUP--++
+
+const char* argsToParseSimple = "Jack -h 174 -w 71";
+
+Argument name( argsToParseSimple, 0 );
+Argument height( argsToParseSimple, 'h', "height" );
+Argument weight( argsToParseSimple, 'w', "weight" );
+
+height.parseInt();
+weight.parseInt();
+
+{{ channel }}.print( "Parsing this arguments: " );
+{{ channel }}.println( argsToParseSimple );
+
+{{ channel }}.print( "\theight: " );
+
+// Check if the height argument is parsed correctly.
+if( height ){
+    {{ channel }}.println( (int)height );
+}
+else{
+    {{ channel }}.println( "Error!" );
+}
+
+{{ channel }}.print( "\tweight: " );
+
+// Check if the weight argument is parsed correctly.
+if( weight ){
+    {{ channel }}.println( (int)weight );
+}
+else{
+    {{ channel }}.println( "Error!" );
+}
+
+const char* argsToParseDetailed = "Jack --height 174 --weight 71";
+
+name = Argument( argsToParseDetailed, 0 );
+height = Argument( argsToParseDetailed, 'h', "height" );
+weight = Argument( argsToParseDetailed, 'w', "weight" );
+
+{{ channel }}.print( "Parsing this arguments: " );
+{{ channel }}.println( argsToParseDetailed );
+
+{{ channel }}.print( "\theight: " );
+
+// Check if the height argument is parsed correctly.
+if( height ){
+    {{ channel }}.println( (int)height );
+}
+else{
+    {{ channel }}.println( "Error!" );
+}
+
+{{ channel }}.print( "\tweight: " );
+
+// Check if the weight argument is parsed correctly.
+if( weight ){
+    {{ channel }}.println( (int)weight );
+}
+else{
+    {{ channel }}.println( "Error!" );
+}
+
+++--LOOP--++
+
+++--FUNCTION_IMPLEMENTATIONS--++

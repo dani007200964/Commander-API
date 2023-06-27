@@ -1,10 +1,10 @@
 /*
- * Created on June 18 2020
+ * Created on June 25 2022
  *
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2022.02.06
+ * Modified 2022.06.25
 */
 
 /*
@@ -31,48 +31,90 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Commander-Utils.hpp"
 
-#ifndef COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
-#define COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
+void apiTreeDumpFunction( Commander::API_t* tree, int treeSize, Stream* out ){
 
-#ifdef ESP32
+	int i;
+	int j;
 
-  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-  #endif
+	if( out == NULL ){
 
-  #ifndef COMMANDER_ENABLE_PIPE_MODULE
-    #define COMMANDER_ENABLE_PIPE_MODULE
-  #endif
+		return;
 
-  #ifndef COMMANDER_MAX_COMMAND_SIZE
-    #define COMMANDER_MAX_COMMAND_SIZE 50
-  #endif
+	}
 
-#endif
+    if( treeSize < 0 ){
 
-#ifdef ESP8266
+		out -> println( "Invalid API-tree size!" );
+		return;
 
-  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-  #endif
+    }
 
-  #ifndef COMMANDER_ENABLE_PIPE_MODULE
-    #define COMMANDER_ENABLE_PIPE_MODULE
-  #endif
+	if( tree == NULL ){
 
-  #ifndef COMMANDER_MAX_COMMAND_SIZE
-    #define COMMANDER_MAX_COMMAND_SIZE 50
-  #endif
+		out -> println( "Invalid API-tree address!" );
+		return;
 
-#endif
+	}
 
-// Enable the Pipe module by default
-#define COMMANDER_ENABLE_PIPE_MODULE
+	for( i = 0; i < treeSize; i++ ){
 
-/// Maximum length of the terminal command.
-#ifndef COMMANDER_MAX_COMMAND_SIZE
-  #define COMMANDER_MAX_COMMAND_SIZE 100
-#endif
+		out -> print( i );
+		out->println( " -> element:" );
+		out->print( "\tname: " );
+		out->println( tree[ i ].name );
+		out->print( "\tdesc: " );
+		out->println( tree[ i ].desc );
+		out->print( "\tplace: " );
+		out->println( tree[ i ].place );
+		out->print( "\tleft: " );
 
-#endif /* COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_ */
+		if( tree[ i ].left == NULL ){
+			
+			out->println( "NULL" );
+
+		}
+
+		else{
+
+			for( j = 0; j < treeSize; j++ ){
+
+				if( &tree[ j ] == tree[ i ].left ){
+
+					out->println( tree[ j ].name );
+					break;
+
+				}
+
+			}
+
+		}
+
+		out->print( "\tright: " );
+
+		if( tree[ i ].right == NULL ){
+			
+			out -> println( "NULL" );
+
+		}
+
+		else{
+
+			for( j = 0; j < treeSize; j++ ){
+
+				if( &tree[ j ] == tree[ i ].right ){
+
+					out -> println( tree[ j ].name );
+					break;
+
+				}
+
+			}
+
+		}
+		out -> println();
+
+	}
+
+}

@@ -1,10 +1,10 @@
 /*
- * Created on June 18 2020
+ * Created on June 25 2022
  *
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2022.02.06
+ * Modified 2022.06.25
 */
 
 /*
@@ -32,47 +32,47 @@ SOFTWARE.
 */
 
 
-#ifndef COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
-#define COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_
+#ifndef COMMANDER_ARGUMENTS_HPP_
+#define COMMANDER_ARGUMENTS_HPP_
 
-#ifdef ESP32
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-  #endif
+class Argument{
 
-  #ifndef COMMANDER_ENABLE_PIPE_MODULE
-    #define COMMANDER_ENABLE_PIPE_MODULE
-  #endif
+public:    
 
-  #ifndef COMMANDER_MAX_COMMAND_SIZE
-    #define COMMANDER_MAX_COMMAND_SIZE 50
-  #endif
+    Argument( const char* source_p, int place_p );
+    Argument( const char* source_p, char shortName_p );
+    Argument( const char* source_p, char shortName_p, const char* longName_p );
+
+    operator int();
+    operator bool();
+
+    bool parseInt();
+    bool parseFloat();
+    bool parseString();
+
+private:
+
+    const char* source = NULL;
+    int sourceSize = -1;
+
+    int place = -1;
+    char shortName = '\0';
+    const char* longName = NULL;
+
+    bool parsed = false;
+    int intResult;
+    int floatResult;
+
+    int findShortName();
+    int findLongName();
+    int findPlace();
+
+    int substring( char* str1, char* str2 );
+
+};
 
 #endif
-
-#ifdef ESP8266
-
-  #ifndef COMMANDER_USE_WIFI_CLIENT_RESPONSE
-    #define COMMANDER_USE_WIFI_CLIENT_RESPONSE
-  #endif
-
-  #ifndef COMMANDER_ENABLE_PIPE_MODULE
-    #define COMMANDER_ENABLE_PIPE_MODULE
-  #endif
-
-  #ifndef COMMANDER_MAX_COMMAND_SIZE
-    #define COMMANDER_MAX_COMMAND_SIZE 50
-  #endif
-
-#endif
-
-// Enable the Pipe module by default
-#define COMMANDER_ENABLE_PIPE_MODULE
-
-/// Maximum length of the terminal command.
-#ifndef COMMANDER_MAX_COMMAND_SIZE
-  #define COMMANDER_MAX_COMMAND_SIZE 100
-#endif
-
-#endif /* COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_ */

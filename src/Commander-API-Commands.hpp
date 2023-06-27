@@ -35,6 +35,8 @@ SOFTWARE.
 #ifdef ARDUINO
 #include "Arduino.h"
 #include "Wire.h"
+#else
+#include "System.h"
 #endif
 
 #include <math.h>
