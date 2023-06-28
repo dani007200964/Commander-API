@@ -239,6 +239,8 @@ public:
 	/// todo Finish description.
 	void printHelp( Stream* out, bool description, bool style = false );
 
+	bool enablePipeModule();
+
 private:
 
 	/// Starting address of the API-tree.
