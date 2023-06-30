@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['commander_2dapi_20library_0',['Commander-API library',['../index.html',1,'']]]
+  ['aguments_20_2d_20basic_0',['Aguments - Basic',['../md_docs_markdown_pages_examples_example_argumentbasic.html',1,'']]],
+  ['api_1',['API',['../md_docs_markdown_pages_api.html',1,'']]]
 ];

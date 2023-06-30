@@ -1,11 +1,11 @@
 
 /*
- * Created on June 25 2023
+ * Created on 2023.Jun.25
  *
  * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
- * This file is part of the Shellminator project.
- * Modified 2023.05.13
+ * This file is part of the Commander-API project.
+ * Modified 2023.Jun.30
  *
  * This is a simple example, that demonstrates how
  * to use the base functionality of th Commander-API.

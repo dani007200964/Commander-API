@@ -35,6 +35,10 @@ SOFTWARE.
 import os
 import shutil
 from jinja2 import Template
+import datetime
+
+# Get the current time
+currentTime = datetime.datetime.now()
 
 # Convert a string list to a single string.
 def listToString( lst ):
@@ -182,9 +186,9 @@ for template in templateFiles:
         # Parameter fields.
         fields = {
             'channel': channelInfo,
-            'YEAR': '2023',
-            'MONTH': '05',
-            'DAY': '13',
+            'YEAR': currentTime.strftime( "%Y" ),
+            'MONTH': currentTime.strftime( "%b" ),
+            'DAY': currentTime.strftime( "%d" ),
             'HEADER': headerData,
             'INCLUDES': includesData,
             'GLOBAL_VARIABLES': globalVariablesData,

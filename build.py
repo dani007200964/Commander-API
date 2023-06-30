@@ -39,9 +39,13 @@ import sys
 import getopt
 import json
 from jinja2 import Template
+import datetime
 
 # Badge generator
 import anybadge
+
+# Get the current time
+currentTime = datetime.datetime.now()
 
 # Collect input arguments
 argv = sys.argv[ 1: ]
@@ -280,7 +284,10 @@ if ( 'web' in target ) or ( 'all' in target ):
             # Parameter fields.
             fields = {
                 'EXAMPLE_NAME': fileName,
-                'EXAMPLE_PATH': "./" + fileName + ".js"
+                'EXAMPLE_PATH': "./" + fileName + ".js",
+                'YEAR': currentTime.strftime( "%Y" ),
+                'MONTH': currentTime.strftime( "%b" ),
+                'DAY': currentTime.strftime( "%d" )
             }
 
             # Create a template object from the template file.

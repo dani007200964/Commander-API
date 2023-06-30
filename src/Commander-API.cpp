@@ -476,13 +476,13 @@ void Commander::executeCommand( char *cmd, void* parent ){
 		// We have to check for single or described help function.
 		if( strcmp( arg, (const char*)"-d" ) == 0 ){
 
-			printHelp( response, true, false );
+			printHelp( response, true, formatting );
 
 		}
 
 		else{
 
-			printHelp( response, false, false );
+			printHelp( response, false, formatting );
 
 		}
 
@@ -739,8 +739,8 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 				if( memoryType == MEMORY_REGULAR ){
 
 					out -> print( API_tree[ find_api_index_by_place( i ) ].name );
-					out -> println( ':' );
-					out -> print( '\t' );
+					out -> print( ':' );
+					out -> print( ' ' );
 					out -> print( API_tree[ find_api_index_by_place( i ) ].desc );
 					out -> println();
 					out -> println();
@@ -752,8 +752,8 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 				else if( memoryType == MEMORY_PROGMEM ){
 
 					out -> print( API_tree[ find_api_index_by_place( i ) ].name_P );
-					out -> println( ':' );
-					out -> print( '\t' );
+					out -> print( ':' );
+					out -> print( ' ' );
 					out -> print( API_tree[ find_api_index_by_place( i ) ].desc_P );
 					out -> println();
 					out -> println();
@@ -838,3 +838,10 @@ int Commander::commander_strcmp_tree_ram_progmem( API_t* element1, char* element
 }
 
 #endif
+
+void Commander::enableFormatting(){
+	formatting = true;
+}
+void Commander::disableFormatting(){
+	formatting = false;
+}

@@ -23,14 +23,23 @@
  @licend  The above is the entire license notice for the JavaScript code in this file
 */
 var menudata={children:[
-{text:"Main Page",url:"index.html"},
-{text:"Related Pages",url:"pages.html"},
-{text:"Classes",url:"annotated.html",children:[
+{text:"Home",url:"index.html"},
+{text:"💻 Supported Platforms",url:"md_docs_markdown_pages_supported_platforms.html#supported_platforms"},
+{text:"📖 Examples",url:"md_docs_markdown_pages_example_codes.html#example_codes",children:[
+{text:"Basic",url:"md_docs_markdown_pages_examples_example_basic.html#example_basic"},
+{text:"Help",url:"md_docs_markdown_pages_examples_example_help.html#example_help"},
+{text:"Description",url:"md_docs_markdown_pages_examples_example_description.html#example_description"},
+{text:"Interactive",url:"md_docs_markdown_pages_examples_example_interactive.html#example_interactive"},
+{text:"💲 Arguments",url:"md_docs_markdown_pages_example_codes.html#example_codes",children:[
+{text:"Basic",url:"md_docs_markdown_pages_examples_example_argumentbasic.html#example_argumentbasic"}]}]},
+{text:"🚀 API",url:"md_docs_markdown_pages_api.html#api",children:[
+{text:"Class List",url:"annotated.html",children:[
 {text:"Class List",url:"annotated.html"},
 {text:"Class Index",url:"classes.html"},
 {text:"Class Hierarchy",url:"inherits.html"},
 {text:"Class Members",url:"functions.html",children:[
 {text:"All",url:"functions.html",children:[
+{text:"_",url:"functions.html#index__5F"},
 {text:"a",url:"functions.html#index_a"},
 {text:"b",url:"functions.html#index_b"},
 {text:"c",url:"functions.html#index_c"},
@@ -50,6 +59,7 @@ var menudata={children:[
 {text:"v",url:"functions.html#index_v"},
 {text:"w",url:"functions.html#index_w"}]},
 {text:"Functions",url:"functions_func.html",children:[
+{text:"_",url:"functions_func.html#index__5F"},
 {text:"a",url:"functions_func.html#index_a"},
 {text:"c",url:"functions_func.html#index_c"},
 {text:"d",url:"functions_func.html#index_d"},
@@ -62,20 +72,25 @@ var menudata={children:[
 {text:"r",url:"functions_func.html#index_r"},
 {text:"s",url:"functions_func.html#index_s"},
 {text:"w",url:"functions_func.html#index_w"}]},
-{text:"Variables",url:"functions_vars.html"},
+{text:"Variables",url:"functions_vars.html",children:[
+{text:"a",url:"functions_vars.html#index_a"},
+{text:"b",url:"functions_vars.html#index_b"},
+{text:"c",url:"functions_vars.html#index_c"},
+{text:"d",url:"functions_vars.html#index_d"},
+{text:"e",url:"functions_vars.html#index_e"},
+{text:"f",url:"functions_vars.html#index_f"},
+{text:"i",url:"functions_vars.html#index_i"},
+{text:"l",url:"functions_vars.html#index_l"},
+{text:"m",url:"functions_vars.html#index_m"},
+{text:"n",url:"functions_vars.html#index_n"},
+{text:"p",url:"functions_vars.html#index_p"},
+{text:"r",url:"functions_vars.html#index_r"},
+{text:"s",url:"functions_vars.html#index_s"},
+{text:"t",url:"functions_vars.html#index_t"},
+{text:"v",url:"functions_vars.html#index_v"},
+{text:"w",url:"functions_vars.html#index_w"}]},
 {text:"Typedefs",url:"functions_type.html"},
 {text:"Enumerations",url:"functions_enum.html"},
-{text:"Enumerator",url:"functions_eval.html"}]}]},
-{text:"Files",url:"files.html",children:[
-{text:"File List",url:"files.html"},
-{text:"File Members",url:"globals.html",children:[
-{text:"All",url:"globals.html",children:[
-{text:"a",url:"globals.html#index_a"},
-{text:"c",url:"globals.html#index_c"},
-{text:"n",url:"globals.html#index_n"}]},
-{text:"Functions",url:"globals_func.html",children:[
-{text:"c",url:"globals_func.html#index_c"}]},
-{text:"Macros",url:"globals_defs.html",children:[
-{text:"a",url:"globals_defs.html#index_a"},
-{text:"c",url:"globals_defs.html#index_c"},
-{text:"n",url:"globals_defs.html#index_n"}]}]}]}]}
+{text:"Enumerator",url:"functions_eval.html"}]}]}]},
+{text:"📈 Coverage",url:"md_docs_markdown_pages_coverage.html#coverage"},
+{text:"🚧 Developer Zone",url:"md_docs_markdown_pages_developer_zone.html#developer_zone"}]}

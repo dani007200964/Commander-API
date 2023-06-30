@@ -1,11 +1,11 @@
 
 /*
- * Created on June 25 2023
+ * Created on 2023.Jun.25
  *
  * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
- * This file is part of the Shellminator project.
- * Modified 2023.05.13
+ * This file is part of the Commander-API project.
+ * Modified 2023.Jun.30
  *
  * This is a simple example, that demonstrates how
  * to use the base functionality of th Commander-API.
@@ -66,17 +66,34 @@ void setup(){
 
     // Init code.
 
+    // Simple argument name example
     const char* argsToParseSimple = "Jack -h 174 -w 71";
 
+    // String arguments require a buffer to store the data.
+    char nameBuffer[ 30 ];
+
+    // Create an Argument object for each argument
     Argument name( argsToParseSimple, 0 );
     Argument height( argsToParseSimple, 'h', "height" );
     Argument weight( argsToParseSimple, 'w', "weight" );
 
+    // Try to parse each argument.
+    name.parseString( nameBuffer );
     height.parseInt();
     weight.parseInt();
 
-    stdioChannel.print( "Parsing this arguments: " );
+    stdioChannel.print( "Parsing these arguments: " );
     stdioChannel.println( argsToParseSimple );
+
+    stdioChannel.print( "\tname: " );
+
+    // Check if the name argument is parsed correctly.
+    if( name ){
+        stdioChannel.println( (char*)name );
+    }
+    else{
+        stdioChannel.println( "Error!" );
+    }
 
     stdioChannel.print( "\theight: " );
 
@@ -98,14 +115,31 @@ void setup(){
         stdioChannel.println( "Error!" );
     }
 
-    const char* argsToParseDetailed = "Jack --height 174 --weight 71";
+    // Detailed argument name example
+    const char* argsToParseDetailed = "\"Jack Black\" --height 174 --weight 71";
 
+    // Create an Argument object for each argument
     name = Argument( argsToParseDetailed, 0 );
     height = Argument( argsToParseDetailed, 'h', "height" );
     weight = Argument( argsToParseDetailed, 'w', "weight" );
 
-    stdioChannel.print( "Parsing this arguments: " );
+    // Try to parse each argument.
+    name.parseString( nameBuffer );
+    height.parseInt();
+    weight.parseInt();
+
+    stdioChannel.print( "Parsing these arguments: " );
     stdioChannel.println( argsToParseDetailed );
+
+    stdioChannel.print( "\tname: " );
+
+    // Check if the name argument is parsed correctly.
+    if( name ){
+        stdioChannel.println( (char*)name );
+    }
+    else{
+        stdioChannel.println( "Error!" );
+    }
 
     stdioChannel.print( "\theight: " );
 

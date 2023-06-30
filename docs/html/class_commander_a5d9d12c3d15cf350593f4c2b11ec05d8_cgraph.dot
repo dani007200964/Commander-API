@@ -1,0 +1,27 @@
+digraph "Commander::init"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="Commander::init",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Initializer."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="Commander::commander\l_strcmp_progmem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_commander.html#a427d055d672b7bbfc7f70005d48c372f",tooltip="Compare two API-tree element's name."];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="Commander::commander\l_strcmp_regular",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_commander.html#ac1f57477577657c1df6fc30efaa05c7e",tooltip="Compare two API-tree element's name."];
+  Node1 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="Commander::commander\l_strcmp_tree_ram_progmem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_commander.html#a2762a5be3813cd54c9091487829bdf8b",tooltip="Compare an API-tree element's name with a regular string."];
+  Node1 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="Commander::commander\l_strcmp_tree_ram_regular",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_commander.html#a962d4b484b29957648c55a271463473a",tooltip="Compare an API-tree element's name with a regular string."];
+  Node1 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="Commander::optimize\l_api_tree",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_commander.html#ad435a3490d9ae4b4dda2c88e2fbf0421",tooltip="Optimizes the tree to make it balanced."];
+  Node6 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="Commander::recursive\l_optimizer",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_commander.html#a8415264e9cdf820c7ad1872cc36811bd",tooltip="Recursive function optimize a section in the tree."];
+  Node7 -> Node7 [color="steelblue1",style="solid"];
+  Node7 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="Commander::swap_api\l_elements",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_commander.html#a05f64743655f673fb18871e71ae75c9c",tooltip="Swap two API elements in the tree."];
+  Node8 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="Commander::find_api\l_index_by_place",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_commander.html#a8634a1c3c680d0a598fa8b6b5445ca39",tooltip="Find an API element in the tree by alphabetical place."];
+}

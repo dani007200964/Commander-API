@@ -35,5 +35,6 @@ var searchData=
   ['api_5felement_5fwifistat_32',['API_ELEMENT_WIFISTAT',['../_commander-_a_p_i-_commands_8hpp.html#ab6f962b1bfd332c107b84e4b17fbc3ab',1,'Commander-API-Commands.hpp']]],
   ['apielement_33',['apiElement',['../_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a',1,'Commander-API.hpp']]],
   ['apielement_5fp_34',['apiElement_P',['../_commander-_a_p_i_8hpp.html#af41e042ac899c0299b632f7843841479',1,'Commander-API.hpp']]],
-  ['attachtree_35',['attachTree',['../_commander-_a_p_i_8hpp.html#a9d0f46f4a25c198925f895e3584000a3',1,'Commander-API.hpp']]]
+  ['apitreedump_35',['apiTreeDump',['../_commander-_utils_8hpp.html#a98f545e0c150e8d17eae0c606167449f',1,'Commander-Utils.hpp']]],
+  ['attachtree_36',['attachTree',['../_commander-_a_p_i_8hpp.html#a9d0f46f4a25c198925f895e3584000a3',1,'Commander-API.hpp']]]
 ];

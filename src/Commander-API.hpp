@@ -241,6 +241,9 @@ public:
 
 	bool enablePipeModule();
 
+	void enableFormatting();
+	void disableFormatting();
+
 private:
 
 	/// Starting address of the API-tree.
@@ -257,6 +260,8 @@ private:
 	/// because the execute function has to modify the
 	/// content of the command.
 	char tempBuff[ COMMANDER_MAX_COMMAND_SIZE ];
+
+	bool formatting = false;
 
 	#ifdef __AVR__
 

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['init_0',['init',['../class_commander.html#a5d9d12c3d15cf350593f4c2b11ec05d8',1,'Commander']]]
+  ['haschar_0',['hasChar',['../class_commander.html#a79a36c570d33547d859fa0c9c6fc99d6',1,'Commander']]],
+  ['help_1',['Help',['../md_docs_markdown_pages_examples_example_help.html',1,'']]]
 ];

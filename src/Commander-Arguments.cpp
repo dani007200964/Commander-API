@@ -8,7 +8,10 @@ Argument::Argument( const char* source_p, int place_p ){
     place = place_p;
     shortName = '\0';
     longName = NULL;
-    parsed = false;
+    //parsed = false;
+    //found = false;
+    bFields.parsed = false;
+    bFields.found = false;
 
     if( source ){
         sourceSize = strlen( source );
@@ -24,7 +27,10 @@ Argument::Argument( const char* source_p, char shortName_p ){
     place = -1;
     shortName = shortName_p;
     longName = NULL;
-    parsed = false;
+    //parsed = false;
+    //found = false;
+    bFields.parsed = false;
+    bFields.found = false;
 
     if( source ){
         sourceSize = strlen( source );
@@ -40,7 +46,10 @@ Argument::Argument( const char* source_p, char shortName_p, const char* longName
     place = -1;
     shortName = shortName_p;
     longName = longName_p;
-    parsed = false;
+    //parsed = false;
+    //found = false;
+    bFields.parsed = false;
+    bFields.found = false;
 
     if( source ){
         sourceSize = strlen( source );
@@ -51,7 +60,9 @@ Argument::Argument( const char* source_p, char shortName_p, const char* longName
 int Argument::findShortName(){
 
     // Tracks the current index of the investigated character.
-    int index;
+    int index = 0;
+    int searchIndex = 0;
+    int offset = 0;
 
     // Array, that contains the searched argument name.
     char expected[ 3 ] = { '-', '\0', '\0' };
@@ -69,22 +80,50 @@ int Argument::findShortName(){
     // The alphabetical identifier is added to the expected string.
     expected[ 1 ] = shortName;
 
-    // Try to find the argument name in the source array.
-    index = substring( expected, (char*)source );
+    while( true ){
 
-    // Check if we found the short name in the source.
-    // If not, return with invalid address.
-    if( index < 0 ){
+        // Try to find the argument name in the source array.
+        index = substring( expected, (char*)&source[ searchIndex ] );
 
-        return -1;
+        // Check if we found the short name in the source.
+        // If not, return with invalid address.
+        if( index < 0 ){
+
+            return -1;
+
+        }
+
+        if( !inString( index + searchIndex ) ){
+            searchIndex += 2;
+            // Check and handle buffer overflow.
+            if( ( index + searchIndex ) > sourceSize ){
+                return -1;
+            }
+
+            if( ( source[ index + searchIndex ] == ' ' ) || ( source[ index + searchIndex ] == '\t' ) || ( source[ index + searchIndex ] == '\0' ) ){
+                break;            
+            }
+        }
+
+        searchIndex += 2;
+        // Check and handle buffer overflow.
+        if( ( index + searchIndex ) > sourceSize ){
+            return -1;
+        }
 
     }
 
+    index = index + searchIndex;
+
+    // Set the found flag
+    // found = true;
+    bFields.found = true;
+
     // Jump after the short name. It is 2 characters long.
-    index += 2;
+    //index += 2;
 
     // Check and handle buffer overflow.
-    if( index >= sourceSize ){
+    if( index > sourceSize ){
 
         return -1;
 
@@ -96,7 +135,7 @@ int Argument::findShortName(){
         index++;
 
         // Check and handle buffer overflow.
-        if( index >= sourceSize ){
+        if( index > sourceSize ){
 
             return -1;
 
@@ -139,7 +178,7 @@ int Argument::findLongName(){
 
     // Try to find a valid combination for the first and second part.
     // The exit event is when we run out of the bounds of the source array.
-    while( index < sourceSize ){
+    while( index <= sourceSize ){
 
         // This is tricky. We have to offset the return value of substring wiht the index;
         // Also, in every iteration we have to offset the start address of the sorce array with index.
@@ -147,9 +186,17 @@ int Argument::findLongName(){
         indexSecond = index + substring( (char*)longName, (char*)&source[ index ] );
 
         // If the '--' string can not be found in the rest of the source array, we have to quit.
-        if( indexFirst < 0 ){
+        if( ( indexFirst - index ) < 0 ){
 
             return -1;
+
+        }
+
+        // We have to check if we are in a string.
+        if( inString( indexFirst ) ){
+            //If it is the case we have to search further.
+            index++;
+            continue;
 
         }
 
@@ -158,8 +205,8 @@ int Argument::findLongName(){
         if( ( indexSecond - indexFirst ) != 2 ){
 
             // If it is not the case, we have to search further.
-            // We increment the index, and start a next iteration from here.
-            index = indexFirst + 1;
+            // We increment the index, and start a next iteration.
+            index++;
             continue;
 
         }
@@ -175,10 +222,17 @@ int Argument::findLongName(){
         index = indexSecond + strlen( longName );
 
         // Check and handle buffer overflow.
-        if( index >= sourceSize ){
+        if( index > sourceSize ){
 
             return -1;
 
+        }
+
+        if( source[ index ] == '\0' ){
+            // Set the found flag
+            // found = true;
+            bFields.found = true;
+            return index;
         }
 
         // We need at least one white space character after the name.
@@ -190,13 +244,17 @@ int Argument::findLongName(){
 
         }
 
+        // Set the found flag
+        // found = true;
+        bFields.found = true;
+
         // Remove white space characters.
         while( ( source[ index ] == ' ' ) || ( source[ index ] == '\t' ) ){
 
             index++;
 
             // Check and handle buffer overflow.
-            if( index >= sourceSize ){
+            if( index > sourceSize ){
 
                 return -1;
 
@@ -275,13 +333,10 @@ int Argument::findPlace(){
 
 }
 
-bool Argument::parseInt(){
+int Argument::findStart(){
 
-    // It will store the start address of the data for the current argument.
+    // This will hold the return value.
     int startIndex;
-
-    // It will store the status of the string to integer conversation.
-    int status;
 
     // Try to find the long name.
     startIndex = findLongName();
@@ -301,7 +356,7 @@ bool Argument::parseInt(){
             // If it fails we can't do anything.
             if( startIndex < 0 ){
 
-                return false;
+                return -1;
 
             }
 
@@ -309,30 +364,246 @@ bool Argument::parseInt(){
     
     }
 
+    return startIndex;
+
+}
+
+bool Argument::parseInt(){
+
+    // It will store the start address of the data for the current argument.
+    int startIndex;
+
+    // It will store the status of the string to integer conversation.
+    int status;
+
+    // Clear the parsed flag.
+    // parsed = false;
+    bFields.parsed = false;
+
+    // Try to find the argument.
+    startIndex = findStart();
+
+    // Handle if it is not found.
+    if( startIndex < 0 ){
+        return false;
+    }
+
     // Try to convert string to integer number.
-    status = sscanf( &source[ startIndex ], "%d", &intResult );
+    status = sscanf( &source[ startIndex ], "%d", &ret.i );
 
     // Check if the conversation was succesful.
     // Store the result to the parsed variable.
-    parsed = status == 1;
+    // parsed = status == 1;
+    bFields.parsed = status == 1;;
 
     // Return with the result.
-    return parsed;
+    return bFields.parsed;
+
+}
+
+bool Argument::parseFloat(){
+
+    // It will store the start address of the data for the current argument.
+    int startIndex;
+
+    // Clear the parsed flag.
+    // parsed = false;
+    bFields.parsed = false;
+
+    // Try to find the argument.
+    startIndex = findStart();
+
+    // Handle if it is not found.
+    if( startIndex < 0 ){
+        return false;
+    }
+
+    // The first character must be a number, or + or - character
+    if( ( ( source[ startIndex ] >= '0' ) && ( source[ startIndex ] <= '0' ) ) || ( source[ startIndex ] == '+' ) || ( source[ startIndex ] == '-' ) ){
+        // Try to convert string to integer number.
+        ret.f = (float)atof( &source[ startIndex ] );
+
+        // Check if the conversation was succesful.
+        // Store the result to the parsed variable.
+
+        bFields.parsed = true;
+    }
+
+    // Return with the result.
+    return bFields.parsed;
+
+}
+
+bool Argument::parseStringFunction( char* buffer, int bufferSize ){
+    
+    // It will store the start address of the data for the current argument.
+    int startIndex;
+
+    // It will store the status of the string to integer conversation.
+    int status;
+
+    // Points to the next free element in the buffer.
+    int bufferIndex;
+
+    // It indicates quotation mark bounded string.
+    bool quotation = false;
+
+    // Next character that is rad from the source buffer.
+    char c;
+
+    // Clear the parsed flag.
+    // parsed = false;
+    bFields.parsed = false;
+
+    // Set an invalid addres to the outStringBuffer by default.
+    // outStringBuffer = NULL;
+    ret.c = NULL;
+
+    // Check for invalid buffer size.
+    if( bufferSize < 1 ){
+
+        return false;
+
+    }
+
+    // Try to find the argument.
+    startIndex = findStart();
+
+    // Handle if it is not found.
+    if( startIndex < 0 ){
+        return false;
+    }
+
+    // The first character of the string should not be a '-'
+    // Character.
+    if( source[ startIndex ] == '-' ){
+        return false;
+    }
+
+    if( source[ startIndex ] == '\"' ){
+        quotation = true;
+        startIndex++;
+
+        // Check and handle buffer overflow.
+        if( startIndex >= sourceSize ){
+            return false;
+        }
+
+    }
+
+
+    for( bufferIndex = 0; bufferIndex < bufferSize; bufferIndex++ ){
+        
+        // Check and handle buffer overflow.
+        if( ( startIndex + bufferIndex ) > sourceSize ){
+            return false;
+        }
+
+        // Read the next character from the source buffer.
+        c = source[ startIndex + bufferIndex ];
+
+        // First case is when the input string is bounded with " characters.
+        if( quotation ){
+
+            if( c != '\"' ){
+                buffer[ bufferIndex ] = c;
+            }
+
+            else{
+                buffer[ bufferIndex ] = '\0';
+                //outStringBuffer = buffer;
+                //parsed = true;
+                bFields.parsed = true;
+                ret.c = buffer;
+                return true;
+            }
+
+        }
+
+        // Second case is when the input string is ended with a white space character or string terminator.
+        else{
+
+            if( ( c == ' ' ) || ( c == '\t' ) || ( c == '\0' ) ){
+                buffer[ bufferIndex ] = '\0';
+                // outStringBuffer = buffer;
+                ret.c = buffer;
+                //parsed = true;
+                bFields.parsed = true;
+                return true;
+            }
+
+            else{
+                buffer[ bufferIndex ] = c;
+            }
+
+        }
+
+    }
+
+    // If we are here, that means we did not found the end of the string.
+    // It probably means, that the buffer is too short, or the " bounded
+    // string is not terminated.
+    return false;
+
+}
+
+bool Argument::find(){
+
+    // Reset the found flag.
+    // found = false;
+    bFields.found = false;
+
+    findLongName();
+    findShortName();
+
+    return bFields.found;
 
 }
 
 Argument::operator int(){
 
-    return intResult;
+    //if( parsed ){
+    if( bFields.parsed ){
+        return ret.i;
+    }
+    return 0;
+
+}
+
+Argument::operator float(){
+
+    //if( parsed ){
+    if( bFields.parsed ){
+        return ret.f;
+    }
+    return 0.0;
 
 }
 
 Argument::operator bool(){
 
-    return parsed;
+    //return parsed;
+    return bFields.parsed;
 
 }
 
+Argument::operator char*(){
+
+    //if( ( !parsed ) || ( ret.c == NULL ) ){
+    if( ( !bFields.parsed ) || ( ret.c == NULL ) ){
+
+        return (char*)&failedString;
+
+    }
+
+    return ret.c;
+
+}
+
+bool Argument::isFound(){
+    //return found;
+    return bFields.found;
+}
 
 int Argument::substring( char* str1, char* str2 ){
 
@@ -366,3 +637,30 @@ int Argument::substring( char* str1, char* str2 ){
 
 }
 
+bool Argument::inString( int index ){
+
+    int i;
+    bool ret = false;
+
+    // Check if the source is not set correclty.
+    if( source == NULL ){
+        return false;
+    }
+
+    if( index < 0 ){
+        return false;
+    }
+
+    for( i = 0; i < index; i++ ){
+
+        if( source[ i ] == '\"' ){
+            ret = !ret;
+        }
+
+    }
+
+    return ret;
+    
+}
+
+const char Argument::failedString = '\0';

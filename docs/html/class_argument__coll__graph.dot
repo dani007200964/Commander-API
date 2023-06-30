@@ -1,0 +1,13 @@
+digraph "Argument"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="Argument",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Argument class."];
+  Node2 -> Node1 [dir="back",color="darkorchid3",style="dashed",label=" bFields" ];
+  Node2 [label="Argument::boolFields",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$struct_argument_1_1bool_fields.html",tooltip=" "];
+  Node3 -> Node1 [dir="back",color="darkorchid3",style="dashed",label=" ret" ];
+  Node3 [label="Argument::returnData",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$union_argument_1_1return_data.html",tooltip=" "];
+}

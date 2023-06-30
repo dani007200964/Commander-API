@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['pipeargbuffer_0',['pipeArgBuffer',['../class_commander.html#a967e10c0ce3ae364dce67e350cc7e624',1,'Commander']]],
-  ['pipechannel_1',['pipeChannel',['../class_commander.html#aecabc5266b3f6fb0bad78885aae37420',1,'Commander']]],
-  ['place_2',['place',['../struct_commander_1_1_a_p_i__t.html#ad0a6ed028e8330c69cc7055e6c819889',1,'Commander::API_t']]],
-  ['progmembuffer_3',['progmemBuffer',['../class_commander.html#a4bbd717794c34db58ee1740be06a861a',1,'Commander']]]
+  ['name_0',['name',['../struct_commander_1_1_a_p_i__t.html#a7b91a8bdba77b1a0e3e2ac7d91a39587',1,'Commander::API_t']]],
+  ['name_5fp_1',['name_P',['../struct_commander_1_1_a_p_i__t.html#a9ed94edd0385fde9d7f1a54a3d036c2f',1,'Commander::API_t']]]
 ];

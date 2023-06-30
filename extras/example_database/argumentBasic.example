@@ -3,11 +3,11 @@ EXCLUDE=NONE
 ++--HEADER--++
 
 /*
- * Created on June 25 2023
+ * Created on 2023.Jun.25
  *
- * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
- * This file is part of the Shellminator project.
+ * This file is part of the Commander-API project.
  * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
  *
  * This is a simple example, that demonstrates how
@@ -29,17 +29,34 @@ EXCLUDE=NONE
 
 ++--SETUP--++
 
+// Simple argument name example
 const char* argsToParseSimple = "Jack -h 174 -w 71";
 
+// String arguments require a buffer to store the data.
+char nameBuffer[ 30 ];
+
+// Create an Argument object for each argument
 Argument name( argsToParseSimple, 0 );
 Argument height( argsToParseSimple, 'h', "height" );
 Argument weight( argsToParseSimple, 'w', "weight" );
 
+// Try to parse each argument.
+name.parseString( nameBuffer );
 height.parseInt();
 weight.parseInt();
 
-{{ channel }}.print( "Parsing this arguments: " );
+{{ channel }}.print( "Parsing these arguments: " );
 {{ channel }}.println( argsToParseSimple );
+
+{{ channel }}.print( "\tname: " );
+
+// Check if the name argument is parsed correctly.
+if( name ){
+    {{ channel }}.println( (char*)name );
+}
+else{
+    {{ channel }}.println( "Error!" );
+}
 
 {{ channel }}.print( "\theight: " );
 
@@ -61,14 +78,31 @@ else{
     {{ channel }}.println( "Error!" );
 }
 
-const char* argsToParseDetailed = "Jack --height 174 --weight 71";
+// Detailed argument name example
+const char* argsToParseDetailed = "\"Jack Black\" --height 174 --weight 71";
 
+// Create an Argument object for each argument
 name = Argument( argsToParseDetailed, 0 );
 height = Argument( argsToParseDetailed, 'h', "height" );
 weight = Argument( argsToParseDetailed, 'w', "weight" );
 
-{{ channel }}.print( "Parsing this arguments: " );
+// Try to parse each argument.
+name.parseString( nameBuffer );
+height.parseInt();
+weight.parseInt();
+
+{{ channel }}.print( "Parsing these arguments: " );
 {{ channel }}.println( argsToParseDetailed );
+
+{{ channel }}.print( "\tname: " );
+
+// Check if the name argument is parsed correctly.
+if( name ){
+    {{ channel }}.println( (char*)name );
+}
+else{
+    {{ channel }}.println( "Error!" );
+}
 
 {{ channel }}.print( "\theight: " );
 

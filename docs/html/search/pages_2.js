@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['supported_20platforms_0',['Supported Platforms',['../md_docs_markdown_pages_supported_platforms.html',1,'']]]
+  ['commander_2dapi_20library_0',['Commander-API library',['../index.html',1,'']]],
+  ['coverage_1',['Coverage',['../md_docs_markdown_pages_coverage.html',1,'']]]
 ];

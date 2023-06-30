@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['write_0',['write',['../classcommand_response.html#a0a628f6f844835ec79582b754a58b768',1,'commandResponse::write()'],['../classcommander_pipe_channel.html#ab2488dc27cdc84e3a7510a89050e8415',1,'commanderPipeChannel::write(uint8_t b) override'],['../classcommander_pipe_channel.html#ae96d52bd4efdbb4f3db50aafaf09bcb8',1,'commanderPipeChannel::write(const uint8_t *buffer, size_t size) override']]]
+  ['substring_0',['substring',['../class_argument.html#a8f98fbce9e55886c0b3a84c6f92572e5',1,'Argument']]],
+  ['swap_5fapi_5felements_1',['swap_api_elements',['../class_commander.html#a05f64743655f673fb18871e71ae75c9c',1,'Commander']]]
 ];
