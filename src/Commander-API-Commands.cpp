@@ -189,7 +189,7 @@ void commander_digitalRead_func( char *args, Stream *response ){
 
 }
 
-#ifdef ARDUINO_AVR_UNO
+#if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_LEONARDO) || defined( ESP32 ) || ( ESP8266 )
 
 void commander_analogRead_func( char *args, Stream *response ){
 
@@ -201,10 +201,21 @@ void commander_analogRead_func( char *args, Stream *response ){
 
   if( argResult != 1 ){
 
-    response -> print( F( "Argument error!" ) );
+    response -> print( FF( "Argument error!" ) );
     return;
 
   }
+
+  #if defined( ESP32 ) || ( ESP8266 )
+
+  if( pin < 0 ){
+
+    response -> print( FF( "Argument error!" ) );
+    return;
+
+  }
+
+  #else
 
   switch( pin ){
 
@@ -232,61 +243,7 @@ void commander_analogRead_func( char *args, Stream *response ){
       pin = A5;
       break;
 
-    default:
-      response -> print( F( "Argument error!" ) );
-      return;
-
-  }
-
-  response -> print( analogRead( pin ) );
-
-}
-
-#endif
-
-#ifdef ARDUINO_AVR_LEONARDO
-
-void commander_analogRead_func( char *args, Stream *response ){
-
-  int pin;
-
-  int argResult;
-
-  argResult = sscanf( args, "%d", &pin );
-
-  if( argResult != 1 ){
-
-    response -> print( F( "Argument error!" ) );
-    return;
-
-  }
-
-  switch( pin ){
-
-    case 0:
-      pin = A0;
-      break;
-
-    case 1:
-      pin = A1;
-      break;
-
-    case 2:
-      pin = A2;
-      break;
-
-    case 3:
-      pin = A3;
-      break;
-
-    case 4:
-      pin = A5;
-      break;
-
-    case 5:
-      pin = A5;
-      break;
-
+    #ifdef ARDUINO_AVR_LEONARDO
     case 6:
       pin = A6;
       break;
@@ -310,42 +267,14 @@ void commander_analogRead_func( char *args, Stream *response ){
     case 11:
       pin = A11;
       break;
+    #endif  // ARDUINO_AVR_LEONARDO
 
     default:
-      response -> print( F( "Argument error!" ) );
+      response -> print( FF( "Argument error!" ) );
       return;
 
   }
-
-  response -> print( analogRead( pin ) );
-
-}
-
-#endif
-
-#if defined( ESP32 ) || ( ESP8266 )
-
-void commander_analogRead_func( char *args, Stream *response ){
-
-  int pin;
-
-  int argResult;
-
-  argResult = sscanf( args, "%d", &pin );
-
-  if( argResult != 1 ){
-
-    response -> print( "Argument error!" );
-    return;
-
-  }
-
-  if( pin < 0 ){
-
-    response -> print( "Argument error!" );
-    return;
-
-  }
+  #endif
 
   response -> print( analogRead( pin ) );
 
