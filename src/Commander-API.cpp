@@ -34,6 +34,12 @@ SOFTWARE.
 
 #include "Commander-API.hpp"
 
+#if defined(ARDUINO) && defined(__AVR__)
+#define FF(s) F(s)
+#else
+#define FF(s) (s)
+#endif
+
 const char *Commander::version = COMMANDER_API_VERSION;
 
 void Commander::attachTreeFunction( API_t *API_tree_p, uint32_t API_tree_size_p ){
@@ -42,27 +48,16 @@ void Commander::attachTreeFunction( API_t *API_tree_p, uint32_t API_tree_size_p 
 	API_tree      = API_tree_p;
 	API_tree_size = API_tree_size_p;
 
-	#if defined( ARDUINO ) && defined( __AVR__ )
-
-	dbgResponse -> print( F( "API tree attached with " ) );
+	dbgResponse -> print( FF( "API tree attached with " ) );
 	dbgResponse -> print( API_tree_size );
-	dbgResponse -> println( F( " commands." ) );
-
-	#else
-
-	dbgResponse -> print( (const char*)"API tree attached with "  );
-	dbgResponse -> print( API_tree_size );
-	dbgResponse -> println( " commands." );
-
-	#endif
-
+	dbgResponse -> println( FF( " commands." ) );
 }
 
 void Commander::init(){
 
 	// Generic conter variables.
 	uint32_t i;
-	uint32_t  j;
+	uint32_t j;
 
 	// Temporary variable, used to flip elements.
 	API_t temp;
@@ -82,26 +77,10 @@ void Commander::init(){
 
 	#endif
 
-	#if defined( ARDUINO ) && defined( __AVR__ )
-
-	dbgResponse -> println( F( "Commander init start" ) );
-
-	#else
-
-	dbgResponse -> println( (const char*)"Commander init start" );
-
-	#endif
+	dbgResponse -> println( FF( "Commander init start" ) );
 
 	// Make the tree ordered by alphabet.
-	#if defined( ARDUINO ) && defined( __AVR__ )
-
-	dbgResponse -> print( F( "  Creating alphabetical order... " ) );
-
-	#else
-
-	dbgResponse -> print( (const char*)"  Creating alphabetical order... " );
-
-	#endif
+	dbgResponse -> print( FF( "  Creating alphabetical order... " ) );
 
 	// Bubble sort. We need to sort the commands into an alphabetical order.
 	for( i = 0; i < API_tree_size; i++ ){
@@ -128,42 +107,16 @@ void Commander::init(){
 
 	}
 
-	#if defined( ARDUINO ) && defined( __AVR__ )
-
-	dbgResponse -> println( F( "[ OK ]" ) );
-
-	#else
-
-	dbgResponse -> println( (const char*)"[ OK ]" );
-
-	#endif
-
+	dbgResponse -> println( FF( "[ OK ]" ) );
 
 	// Optimize the tree to make it balanced.
 	// It is necessary to speed up the command
 	// search phase.
-	#if defined( ARDUINO ) && defined( __AVR__ )
-
-	dbgResponse -> print( F( "  Create balanced binary structure... " ) );
-
-	#else
-
-	dbgResponse -> print( (const char*)"  Create balanced binary structure... " );
-
-	#endif
+	dbgResponse -> print( FF( "  Create balanced binary structure... " ) );
 	optimize_api_tree();
 
-	#if defined( ARDUINO ) && defined( __AVR__ )
-
-	dbgResponse -> println( F( "[ OK ]" ) );
-	dbgResponse -> println( F( "Commander init finished!" ) );
-
-	#else
-
-	dbgResponse -> println( (const char*)"[ OK ]" );
-	dbgResponse -> println( (const char*)"Commander init finished!" );
-
-	#endif
+	dbgResponse -> println( FF( "[ OK ]" ) );
+	dbgResponse -> println( FF( "Commander init finished!" ) );
 
 }
 
@@ -492,19 +445,9 @@ void Commander::executeCommand( char *cmd, void* parent ){
 
 		// If we went through the whole tree and we did not found the command in it,
 		// we have to notice the user abut the problem. Maybe a Type-O
-		#if defined( ARDUINO ) && defined( __AVR__ )
-
-		response -> print( F( "Command \'" ) );
+		response -> print( FF( "Command \'" ) );
 		response -> print( tempBuff );
-		response -> println( F( "\' not found!" ) );
-
-		#else
-
-		response -> print( (const char*)"Command \'" );
-		response -> print( tempBuff );
-		response -> println( (const char*)"\' not found!" );
-
-		#endif
+		response -> println( FF( "\' not found!" ) );
 
 		#ifdef COMMANDER_ENABLE_PIPE_MODULE
 
@@ -668,31 +611,10 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 	uint32_t i;
 
 	if( style ){
-
-		#if defined( ARDUINO ) && defined( __AVR__ )
-
-		out -> println( F( "\033[1;31m----\033[1;32m Available commands \033[1;31m----\033[0;37m\r\n" ) );
-
-		#else
-
-		out -> println( (const char*)"\033[1;31m----\033[1;32m Available commands \033[1;31m----\033[0;37m\r\n" );
-
-		#endif
-
+		out -> println( FF( "\033[1;31m----\033[1;32m Available commands \033[1;31m----\033[0;37m\r\n" ) );
 	}
-
 	else{
-
-		#if defined( ARDUINO ) && defined( __AVR__ )
-
-		out -> println( F( "---- Available commands ----\r\n" ) );
-
-		#else
-
-		out -> println( (const char*)"---- Available commands ----\r\n" );
-
-		#endif
-
+		out -> println( FF( "---- Available commands ----\r\n" ) );
 	}
 
 	for( i = 0; i < API_tree_size; i++ ){
@@ -719,9 +641,9 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 
 				else if( memoryType == MEMORY_PROGMEM ){
 
-					out -> print( F( "\033[1;32m" ) );
+					out -> print( FF( "\033[1;32m" ) );
 					out -> print( API_tree[ find_api_index_by_place( i ) ].name_P );
-					out -> print( F( "\033[0;37m" ) );
+					out -> print( FF( "\033[0;37m" ) );
 					out -> print( ':' );
 					out -> print( ' ' );
 					out -> print( API_tree[ find_api_index_by_place( i ) ].desc_P );
