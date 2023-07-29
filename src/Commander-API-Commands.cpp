@@ -33,6 +33,13 @@ SOFTWARE.
 
 #include "Commander-API-Commands.hpp"
 
+#if defined(ARDUINO) && defined(__AVR__)
+#define FF(s) F(s)
+#else
+#define FF(s) (s)
+#endif
+
+
 void commander_millis_func( char *args, Stream *response ){
 
   char buff[ 20 ];
@@ -92,27 +99,13 @@ void commander_pinMode_func( char *args, Stream *response ){
   argResult = sscanf( args, "%d %d", &pin, &direction );
 
   if( argResult != 2 ){
-
-    #ifdef __AVR__
-    response -> print( F( "Argument error!" ) );
-    #else
-    response -> print( (const char*)"Argument error!" );
-    #endif
-
+    response -> print( FF( "Argument error!" ) );
     return;
-
   }
 
   if( pin < 0 || direction < 0 ){
-
-    #ifdef __AVR__
-    response -> print( F( "Argument error!" ) );
-    #else
-    response -> print( (const char*)"Argument error!" );
-    #endif
-
+    response -> print( FF( "Argument error!" ) );
     return;
-
   }
 
   if( direction == 0 ){
@@ -128,13 +121,7 @@ void commander_pinMode_func( char *args, Stream *response ){
   }
 
   else{
-
-    #ifdef __AVR__
-    response -> print( F( "Argument error! Second argument has to be 1 or 0!" ) );
-    #else
-    response -> print( (const char*)"Argument error! Second argument has to be 1 or 0!" );
-    #endif
-
+    response -> print( FF( "Argument error! Second argument has to be 1 or 0!" ) );
   }
 
 }
@@ -150,24 +137,14 @@ void commander_digitalWrite_func( char *args, Stream *response ){
 
   if( argResult != 2 ){
 
-    #ifdef __AVR__
-    response -> print( F( "Argument error!" ) );
-    #else
-    response -> print( (const char*)"Argument error!" );
-    #endif
-
+    response -> print( FF( "Argument error!" ) );
     return;
 
   }
 
   if( pin < 0 || state < 0 ){
 
-    #ifdef __AVR__
-    response -> print( F( "Argument error!" ) );
-    #else
-    response -> print( (const char*)"Argument error!" );
-    #endif
-
+    response -> print( FF( "Argument error!" ) );
     return;
 
   }
@@ -185,13 +162,7 @@ void commander_digitalWrite_func( char *args, Stream *response ){
   }
 
   else{
-
-    #ifdef __AVR__
-    response -> print( F( "Argument error! Second argument has to be 1 or 0!" ) );
-    #else
-    response -> print( (const char*)"Argument error! Second argument has to be 1 or 0!" );
-    #endif
-
+    response -> print( FF( "Argument error! Second argument has to be 1 or 0!" ) );
   }
 
 }
@@ -205,27 +176,13 @@ void commander_digitalRead_func( char *args, Stream *response ){
   argResult = sscanf( args, "%d", &pin );
 
   if( argResult != 1 ){
-
-    #ifdef __AVR__
-    response -> print( F( "Argument error!" ) );
-    #else
-    response -> print( (const char*)"Argument error!" );
-    #endif
-
+    response -> print( FF( "Argument error!" ) );
     return;
-
   }
 
   if( pin < 0 ){
-
-    #ifdef __AVR__
-    response -> print( F( "Argument error!" ) );
-    #else
-    response -> print( (const char*)"Argument error!" );
-    #endif
-
+    response -> print( FF( "Argument error!" ) );
     return;
-
   }
 
   response -> print( digitalRead( pin ) );
@@ -378,14 +335,14 @@ void commander_analogRead_func( char *args, Stream *response ){
 
   if( argResult != 1 ){
 
-    response -> print( (const char*)"Argument error!" );
+    response -> print( "Argument error!" );
     return;
 
   }
 
   if( pin < 0 ){
 
-    response -> print( (const char*)"Argument error!" );
+    response -> print( "Argument error!" );
     return;
 
   }
@@ -400,24 +357,24 @@ void commander_analogRead_func( char *args, Stream *response ){
 
 void commander_ipconfig_func( char *args, Stream *response ){
 
-  response -> println( (const char*)"Wi-Fi:\r\n" );
+  response -> println( "Wi-Fi:\r\n" );
 
-  response -> print( (const char*)"\tIP Address  . . : " );
+  response -> print( "\tIP Address  . . : " );
   response -> println( WiFi.localIP() );
 
-  response -> print( (const char*)"\tSubnet Mask . . : " );
+  response -> print( "\tSubnet Mask . . : " );
   response -> println( WiFi.subnetMask() );
 
-  response -> print( (const char*)"\tDefault Gateway : " );
+  response -> print( "\tDefault Gateway : " );
   response -> println( WiFi.gatewayIP() );
 
 }
 
 void commander_wifiStat_func( char *args, Stream *response ){
 
-  response -> println( (const char*)"Wi-Fi:\r\n" );
+  response -> println( "Wi-Fi:\r\n" );
 
-  response -> print( (const char*)"\tMode: " );
+  response -> print( "\tMode: " );
 
   switch( WiFi.getMode() ){
 
@@ -428,11 +385,11 @@ void commander_wifiStat_func( char *args, Stream *response ){
       break;
 
     case WIFI_MODE_AP:
-      response -> println( "Acces Point" );
+      response -> println( "Access Point" );
       break;
 
     case WIFI_MODE_APSTA:
-      response -> println( "Acces Point & Station" );
+      response -> println( "Access Point & Station" );
       break;
 
     #endif
@@ -444,11 +401,11 @@ void commander_wifiStat_func( char *args, Stream *response ){
       break;
 
     case WIFI_AP:
-      response -> println( "Acces Point" );
+      response -> println( "Access Point" );
       break;
 
     case WIFI_AP_STA:
-      response -> println( "Acces Point & Station" );
+      response -> println( "Access Point & Station" );
       break;
 
     #endif
@@ -461,11 +418,11 @@ void commander_wifiStat_func( char *args, Stream *response ){
 
   }
 
-  response -> print( (const char*)"\tRSSI: " );
+  response -> print( "\tRSSI: " );
   response -> print( WiFi.RSSI() );
   response -> println( "dBm" );
 
-  response -> print( (const char*)"\tMAC : " );
+  response -> print( "\tMAC : " );
   response -> println( WiFi.macAddress() );
 
 }
@@ -476,11 +433,11 @@ void commander_wifiScan_func( char *args, Stream *response ){
   int i;
   bool hasLocked = false;
 
-  response -> print( (const char*)"Scanning for available networks... " );
+  response -> print( "Scanning for available networks... " );
 
   num = WiFi.scanNetworks();
 
-  response -> println( (const char*)"[ OK ]:" );
+  response -> println( "[ OK ]:" );
 
   for( i = 0; i < num; i++ ){
 
@@ -519,7 +476,7 @@ void commander_wifiScan_func( char *args, Stream *response ){
   }
 
   if( hasLocked ){
-    response -> print( (const char*)"\r\n * means closed network." );
+    response -> print( "\r\n * means closed network." );
   }
 
 }
@@ -540,7 +497,7 @@ void commander_configTime_func( char *args, Stream *response ){
   if( argResult == 3 ){
 
     configTime( gmtOffset_sec, daylightOffset_sec, ntpServer );
-    response -> print( (const char*)"Time configured." );
+    response -> print( "Time configured." );
     return;
 
   }
@@ -549,15 +506,15 @@ void commander_configTime_func( char *args, Stream *response ){
 
   if( argResult == 2 ){
 
-    configTime( gmtOffset_sec, daylightOffset_sec, (const char*)"pool.ntp.org" );
-    response -> print( (const char*)"Time configured with default NTP server: pool.ntp.org" );
+    configTime( gmtOffset_sec, daylightOffset_sec, "pool.ntp.org" );
+    response -> print( "Time configured with default NTP server: pool.ntp.org" );
     return;
 
   }
 
   else{
 
-    response -> print( (const char*)"Argument error!" );
+    response -> print( "Argument error!" );
     return;
 
   }
@@ -794,11 +751,7 @@ void commander_neofetch_func( char *args, Stream *response ){
 
 void commander_reboot_func( char *args, Stream *response ){
 
-  #ifdef __AVR__
-  response -> println( F( "Rebooting..." ) );
-  #else
-  response -> println( (const char*)"Rebooting..." );
-  #endif
+  response -> println( FF( "Rebooting..." ) );
 
   #if defined( ESP32 ) || ( ESP8266 )
 
@@ -812,12 +765,6 @@ void commander_reboot_func( char *args, Stream *response ){
   #endif
 
 }
-
-#ifdef ARDUINO
-
-
-
-#endif
 
 
 void commander_sin_func( char *args, Stream *response ){
@@ -845,12 +792,7 @@ void commander_not_func( char *args, Stream *response ){
 
   if( argResult != 1 ){
 
-    #ifdef __AVR__
-    response -> print( F( "Argument error!" ) );
-    #else
-    response -> print( (const char*)"Argument error!" );
-    #endif
-
+    response -> print( FF( "Argument error!" ) );
     return;
 
   }
@@ -869,11 +811,7 @@ void commander_random_func( char *args, Stream *response ){
 
   if( argResult != 2 ){
 
-    #ifdef __AVR__
-    response -> print( F( "Argument error!" ) );
-    #else
-    response -> print( (const char*)"Argument error!" );
-    #endif
+    response -> print( FF( "Argument error!" ) );
 
     return;
 
@@ -881,11 +819,7 @@ void commander_random_func( char *args, Stream *response ){
 
   if( min >= max ){
 
-    #ifdef __AVR__
-    response -> print( F( "Argument erro! First argument is min, second is max!" ) );
-    #else
-    response -> print( (const char*)"Argument erro! First argument is min, second is max!" );
-    #endif
+    response -> print( FF( "Argument error! First argument is min, second is max!" ) );
 
     return;
 
