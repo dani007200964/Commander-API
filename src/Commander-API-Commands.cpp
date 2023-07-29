@@ -385,11 +385,11 @@ void commander_wifiStat_func( char *args, Stream *response ){
       break;
 
     case WIFI_MODE_AP:
-      response -> println( "Acces Point" );
+      response -> println( "Access Point" );
       break;
 
     case WIFI_MODE_APSTA:
-      response -> println( "Acces Point & Station" );
+      response -> println( "Access Point & Station" );
       break;
 
     #endif
@@ -401,11 +401,11 @@ void commander_wifiStat_func( char *args, Stream *response ){
       break;
 
     case WIFI_AP:
-      response -> println( "Acces Point" );
+      response -> println( "Access Point" );
       break;
 
     case WIFI_AP_STA:
-      response -> println( "Acces Point & Station" );
+      response -> println( "Access Point & Station" );
       break;
 
     #endif
@@ -819,7 +819,7 @@ void commander_random_func( char *args, Stream *response ){
 
   if( min >= max ){
 
-    response -> print( FF( "Argument erro! First argument is min, second is max!" ) );
+    response -> print( FF( "Argument error! First argument is min, second is max!" ) );
 
     return;
 
