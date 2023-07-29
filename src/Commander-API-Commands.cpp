@@ -538,13 +538,11 @@ void commander_dateTime_func( char *args, Stream *response ){
 
 #endif
 
-#ifdef __AVR__
-
 void commander_neofetch_func( char *args, Stream *response ){
 
   uint32_t rowCounter = 0;
 
-  response -> print( F(
+  response -> print( FF(
       "\r\n\033[1;36m"
       "      :=*%@@@@%#+-             :=*%@@@@%#+-       \r\n"
       "    +%@@@@@@@@@@@@@#-       :*@@@@@@@@@@@@@@*:    \r\n"
@@ -560,194 +558,91 @@ void commander_neofetch_func( char *args, Stream *response ){
       "      -+#@@@@@@%*=:            -+#@@@@@@%*=.      \r\n"
       "\033[0;37m" ) );
 
-  response -> print( F( "\033[" ) );
+  response -> print( FF( "\033[" ) );
   response -> print( NEOFETCH_LOGO_HEIGHT );
-  response -> print( F( "A\033[51C" ) );
+  response -> print( FF( "A\033[51C" ) );
 
   #ifdef NEOFETCH_FW_NAME
-  response -> print( F( "\033[1;31mFW\033[0;37m: " ) );
-  response -> print( F( NEOFETCH_FW_NAME ) );
-  response -> print( F( "\r\n\033[51C" ) );
+  response -> print( FF( "\033[1;31mFW\033[0;37m: " ) );
+  response -> print( FF( NEOFETCH_FW_NAME ) );
+  response -> print( FF( "\r\n\033[51C" ) );
   rowCounter++;
   #endif
 
   #ifdef NEOFETCH_CPU_TYPE
-  response -> print( F( "\033[1;31mCPU\033[0;37m: " ) );
-  response -> print( F( NEOFETCH_CPU_TYPE ) );
-  response -> print( F( "\r\n\033[51C" ) );
+  response -> print( FF( "\033[1;31mCPU\033[0;37m: " ) );
+  response -> print( FF( NEOFETCH_CPU_TYPE ) );
+  response -> print( FF( "\r\n\033[51C" ) );
   rowCounter++;
   #endif
 
   #ifdef NEOFETCH_CPU_TYPE_AUTO
-  response -> print( F( "\033[1;31mCPU\033[0;37m: " ) );
+  response -> print( FF( "\033[1;31mCPU\033[0;37m: " ) );
 
   #ifdef ARDUINO_AVR_UNO
-  response -> print( F( "AVR - Arduino UNO" ) );
+  response -> print( FF( "AVR - Arduino UNO" ) );
   #elif ARDUINO_AVR_LEONARDO
-  response -> print( F( "AVR - Arduino Leonardo" ) );
+  response -> print( FF( "AVR - Arduino Leonardo" ) );
+  #elif ESP32
+  response -> print( FF( "ESP32" ) );
+  #elif ESP8266
+  response -> print( FF( "ESP8266" ) );
   #else
-  response -> print( F( "Unknown" ) );
+  response -> print( FF( "Unknown" ) );
   #endif
 
-  response -> print( F( "\r\n\033[51C" ) );
+  response -> print( FF( "\r\n\033[51C" ) );
   rowCounter++;
   #endif
 
   #ifdef NEOFETCH_COMPILER
-  response -> print( F( "\033[1;31mCompiler\033[0;37m: GCC " ) );
-  response -> print( F( NEOFETCH_COMPILER ) );
-  response -> print( F( "\r\n\033[51C" ) );
+  response -> print( FF( "\033[1;31mCompiler\033[0;37m: GCC " ) );
+  response -> print( FF( NEOFETCH_COMPILER ) );
+  response -> print( FF( "\r\n\033[51C" ) );
   rowCounter++;
   #endif
 
   #ifdef NEOFETCH_COMPILE_DATE
-  response -> print( F( "\033[1;31mCompile Date\033[0;37m: " ) );
-  response -> print( F( NEOFETCH_COMPILE_DATE ) );
-  response -> print( F( "\r\n\033[51C" ) );
+  response -> print( FF( "\033[1;31mCompile Date\033[0;37m: " ) );
+  response -> print( FF( NEOFETCH_COMPILE_DATE ) );
+  response -> print( FF( "\r\n\033[51C" ) );
   rowCounter++;
   #endif
 
   #ifdef NEOFETCH_TERMINAL
-  response -> print( F( "\033[1;31mTerminal\033[0;37m: " ) );
-  response -> print( F( NEOFETCH_TERMINAL ) );
-  response -> print( F( "\r\n\033[51C" ) );
+  response -> print( FF( "\033[1;31mTerminal\033[0;37m: " ) );
+  response -> print( FF( NEOFETCH_TERMINAL ) );
+  response -> print( FF( "\r\n\033[51C" ) );
   rowCounter++;
   #endif
 
   #ifdef NEOFETCH_COMMAND_PARSER
-  response -> print( F( "\033[1;31mCMD Parser\033[0;37m: " ) );
-  response -> print( F( NEOFETCH_COMMAND_PARSER ) );
-  response -> print( F( "\r\n\033[51C" ) );
+  response -> print( FF( "\033[1;31mCMD Parser\033[0;37m: " ) );
+  response -> print( FF( NEOFETCH_COMMAND_PARSER ) );
+  response -> print( FF( "\r\n\033[51C" ) );
   rowCounter++;
   #endif
 
   #ifdef NEOFETCH_AUTHOR
-  response -> print( F( "\033[1;31mAuthor\033[0;37m: " ) );
-  response -> print( F( NEOFETCH_AUTHOR ) );
-  response -> print( F( "\r\n\033[51C" ) );
+  response -> print( FF( "\033[1;31mAuthor\033[0;37m: " ) );
+  response -> print( FF( NEOFETCH_AUTHOR ) );
+  response -> print( FF( "\r\n\033[51C" ) );
   rowCounter++;
   #endif
 
   #ifdef NEOFETCH_LICENSE
-  response -> print( F( "\033[1;31mLicense\033[0;37m: " ) );
-  response -> print( F( NEOFETCH_LICENSE ) );
-  response -> print( F( "\r\n\033[51C" ) );
+  response -> print( FF( "\033[1;31mLicense\033[0;37m: " ) );
+  response -> print( FF( NEOFETCH_LICENSE ) );
+  response -> print( FF( "\r\n\033[51C" ) );
   rowCounter++;
   #endif
 
-  response -> print( F( "\033[" ) );
+  response -> print( FF( "\033[" ) );
   response -> print( NEOFETCH_LOGO_HEIGHT - rowCounter );
   response -> print( 'B' );
 
 }
 
-#else
-
-const char* neofetchLogo = {
-  "\r\n\033[1;36m"
-  "      :=*%@@@@%#+-             :=*%@@@@%#+-       \r\n"
-  "    +%@@@@@@@@@@@@@#-       :*@@@@@@@@@@@@@@*:    \r\n"
-  "  =@@@@@*=-:::-+#@@@@@=   :#@@@@%*=::::-+%@@@@#.  \r\n"
-  " *@@@@-          .=@@@@%:*@@@@*:          .#@@@@. \r\n"
-  "+@@@%               +@@@@@@@%:     .##      +@@@% \r\n"
-  "@@@@-   .+++++++     -@@@@@*     -+*@@++-    @@@@:\r\n"
-  "@@@@-   .+++++++     .%@@@@+     =+*@@*+-    %@@@:\r\n"
-  "*@@@#               =@@@@@@@#.     .##      -@@@@ \r\n"
-  " #@@@%:           -%@@@@=#@@@@+.           +@@@@: \r\n"
-  "  *@@@@%=:.   :-*@@@@@*   -%@@@@#=:.  .:-*@@@@%:  \r\n"
-  "   :*@@@@@@@@@@@@@@@+.      -#@@@@@@@@@@@@@@%=    \r\n"
-  "      -+#@@@@@@%*=:            -+#@@@@@@%*=.      \r\n"
-  "\033[0;37m"
-};
-
-void commander_neofetch_func( char *args, Stream *response ){
-
-  uint32_t rowCounter = 0;
-
-  response -> print( neofetchLogo );
-
-  response -> print( "\033[" );
-  response -> print( NEOFETCH_LOGO_HEIGHT );
-  response -> print( "A\033[51C" );
-
-  #ifdef NEOFETCH_FW_NAME
-  response -> print( "\033[1;31mFW\033[0;37m: " );
-  response -> print( NEOFETCH_FW_NAME );
-  response -> print( "\r\n\033[51C" );
-  rowCounter++;
-  #endif
-
-  #ifdef NEOFETCH_CPU_TYPE
-  response -> print( "\033[1;31mCPU\033[0;37m: " );
-  response -> print( NEOFETCH_CPU_TYPE );
-  response -> print( "\r\n\033[51C" );
-  rowCounter++;
-  #endif
-
-  #ifdef NEOFETCH_CPU_TYPE_AUTO
-  response -> print( "\033[1;31mCPU\033[0;37m: " );
-
-  #ifdef ESP32
-  response -> print( "ESP32" );
-  #elif ESP8266
-  response -> print( "ESP8266" );
-  #else
-  response -> print( "Unknown" );
-  #endif
-
-  response -> print( "\r\n\033[51C" );
-  rowCounter++;
-  #endif
-
-  #ifdef NEOFETCH_COMPILER
-  response -> print( "\033[1;31mCompiler\033[0;37m: GCC " );
-  response -> print( NEOFETCH_COMPILER );
-  response -> print( "\r\n\033[51C" );
-  rowCounter++;
-  #endif
-
-  #ifdef NEOFETCH_COMPILE_DATE
-  response -> print( "\033[1;31mCompile Date\033[0;37m: " );
-  response -> print( NEOFETCH_COMPILE_DATE );
-  response -> print( "\r\n\033[51C" );
-  rowCounter++;
-  #endif
-
-  #ifdef NEOFETCH_TERMINAL
-  response -> print( "\033[1;31mTerminal\033[0;37m: " );
-  response -> print( NEOFETCH_TERMINAL );
-  response -> print( "\r\n\033[51C" );
-  rowCounter++;
-  #endif
-
-  #ifdef NEOFETCH_COMMAND_PARSER
-  response -> print( "\033[1;31mCMD Parser\033[0;37m: " );
-  response -> print( NEOFETCH_COMMAND_PARSER );
-  response -> print( "\r\n\033[51C" );
-  rowCounter++;
-  #endif
-
-  #ifdef NEOFETCH_AUTHOR
-  response -> print( "\033[1;31mAuthor\033[0;37m: " );
-  response -> print( NEOFETCH_AUTHOR );
-  response -> print( "\r\n\033[51C" );
-  rowCounter++;
-  #endif
-
-  #ifdef NEOFETCH_LICENSE
-  response -> print( "\033[1;31mLicense\033[0;37m: " );
-  response -> print( NEOFETCH_LICENSE );
-  response -> print( "\r\n\033[51C" );
-  rowCounter++;
-  #endif
-
-  response -> print( "\033[" );
-  response -> print( NEOFETCH_LOGO_HEIGHT - rowCounter );
-  response -> print( "B" );
-
-}
-
-#endif
 
 void commander_reboot_func( char *args, Stream *response ){
 
