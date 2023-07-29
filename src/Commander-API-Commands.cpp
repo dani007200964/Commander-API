@@ -586,6 +586,10 @@ void commander_reboot_func( char *args, Stream *response ){
   wdt_enable( WDTO_15MS );
   while( 1 );
 
+  #else
+
+  response -> println( FF( "Cannot reboot on this platform!" ) );
+
   #endif
 
 }
