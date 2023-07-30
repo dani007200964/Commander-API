@@ -156,14 +156,28 @@ for template in templateFiles:
         if example.endswith( '.example' ) == False:
             continue
 
-        print( "\tGenerating example: {:s}".format( example ) )
+        print( "\tGenerating example: {:s}".format( example ), end = " " )
 
         # Read the next example file line-by-line.
         exampleFile = open( rootDirectory + "/extras/example_database/" + example )
         exampleData = exampleFile.readlines()
 
-        # Store additional example parameters.
-        excludeData = exampleData[ 0 ]
+        # Get the list of the excluded boars.
+        excludeData = exampleData[ 0 ].split( '=' )[ 1 ]
+        excludeData = excludeData.replace( '\n', '' ).split(',')
+
+        # If this flag is true, this example will be ignored for this round.
+        skipThisExample = False
+
+        # Check if this panel is excluded.
+        for exclude in excludeData:
+            if exclude == boardInfo:
+                skipThisExample = True
+
+        # Check if skip is needed.
+        if skipThisExample:
+            print( "--EXCLUDED-- " )
+            continue
 
         # Find the index of every section.
         headerStartIndex                  = findLine( exampleData, "++--HEADER--++\n" )
@@ -240,7 +254,7 @@ for template in templateFiles:
 
             CMakeContent.append( "\tadd_executable( " + exampleFolderName + " ${SOURCES} " + emscriptenExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
             CMakeContent.append( "\ttarget_link_options( " + exampleFolderName + " PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )\n\n" )
-        #print( secondRunData )
+        print( "", end="\n" )
 
     # We have to close an if statement at the end.
     if environmentInfo == 'Desktop':

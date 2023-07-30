@@ -52,8 +52,12 @@ SOFTWARE.
 #endif
 
 #include "Commander-API.hpp"
+#include "Commander-Arguments.hpp"
+
+void printCommandNotImplemented( Stream* channel_p );
 
 //-------- System functions --------//
+
 
 #define API_ELEMENT_REBOOT apiElement( "reboot", "Reboots the device.", commander_reboot_func )
 #ifdef __AVR__
@@ -62,7 +66,7 @@ SOFTWARE.
 /// Premade function for reboot command. It reboots the core.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_reboot_func( char *args, Stream *response );
+void commander_reboot_func( char *args, Stream *response, void* parent );
 
 //-------- Timing functions --------//
 
@@ -73,7 +77,7 @@ void commander_reboot_func( char *args, Stream *response );
 /// Premade function for micros command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_micros_func( char *args, Stream *response );
+void commander_micros_func( char *args, Stream *response, void* parent );
 
 #define API_ELEMENT_MILLIS apiElement( "millis", "Returns the number of milliseconds passed since the program started.", commander_millis_func )
 #ifdef __AVR__
@@ -82,7 +86,7 @@ void commander_micros_func( char *args, Stream *response );
 /// Premade function for millis command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_millis_func( char *args, Stream *response );
+void commander_millis_func( char *args, Stream *response, void* parent );
 
 #define API_ELEMENT_UPTIME apiElement( "uptime", "Returns the time passed since the program started.", commander_uptime_func )
 #ifdef __AVR__
@@ -91,7 +95,7 @@ void commander_millis_func( char *args, Stream *response );
 /// Premade function for uptime command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_uptime_func( char *args, Stream *response );
+void commander_uptime_func( char *args, Stream *response, void* parent );
 
 //-------- Pure awesomeness --------//
 
@@ -102,38 +106,63 @@ void commander_uptime_func( char *args, Stream *response );
 /// Premade function for neofetch command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_neofetch_func( char *args, Stream *response );
+void commander_neofetch_func( char *args, Stream *response, void* parent );
 
 
 
 //-------- Digital I-O functions --------//
+#define API_ELEMENT_PINMODE_NAME		"pinMode"
 
-#define API_ELEMENT_PINMODE apiElement( "pinMode", "Set the direction of a pin.\r\n\tExample: pinMode [ Pin Number ] [ Direction ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Direction ] - 0 means input, 1 means output.", commander_pinMode_func )
+#define API_ELEMENT_PINMODE_DESCRIPTION	"Set the direction of a pin.\r\n\r\n"		\
+                                        "usage: pinMode [options]\r\n"				\
+                                        "Options:\r\n"								\
+                                        "  -p, --pin\t[int] Pin identifier.\r\n"	\
+                                        "  -o, --output\tSet mode to output.\r\n"	\
+                                        "  -i, --input\tSet mode to input.\r\n"
+
+#define API_ELEMENT_PINMODE apiElement( API_ELEMENT_PINMODE_NAME, API_ELEMENT_PINMODE_DESCRIPTION, commander_pinMode_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_PINMODE( element ) apiElement_P( element, "pinMode", "Set the direction of a pin.\r\n\tExample: pinMode [ Pin Number ] [ Direction ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Direction ] - 0 means input, 1 means output.", commander_pinMode_func )
+  #define API_ELEMENT_P_PINMODE( element ) apiElement_P( element, API_ELEMENT_PINMODE_NAME, API_ELEMENT_PINMODE_DESCRIPTION, commander_pinMode_func )
 #endif
 /// Premade function for pinMode command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_pinMode_func( char *args, Stream *response );
+void commander_pinMode_func( char *args, Stream *response, void* parent );
 
-#define API_ELEMENT_DIGITALWRITE apiElement( "digitalWrite", "Set the state of an output pin.\r\n\tExample: digitalWrite [ Pin Number ] [ State ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ State ] - 0 means low, 1 means high.", commander_digitalWrite_func )
+#define API_ELEMENT_DIGITALWRITE_NAME			"digitalWrite"
+
+#define API_ELEMENT_DIGITALWRITE_DESCRIPTION	"Set the state of an output pin.\r\n\r\n"			\
+                                        		"usage: digitalWrite [options]\r\n"					\
+                                        		"Options:\r\n"										\
+                                        		"  -p, --pin\t[int] Pin identifier.\r\n"			\
+                                        		"  -h, --high\tSet output mode to logic high.\r\n"	\
+                                        		"  -l, --low\tSet output mode to logic high.\r\n"
+
+#define API_ELEMENT_DIGITALWRITE apiElement( API_ELEMENT_DIGITALWRITE_NAME, API_ELEMENT_DIGITALWRITE_DESCRIPTION, commander_digitalWrite_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_DIGITALWRITE( element ) apiElement_P( element, "digitalWrite", "Set the state of an output pin.\r\n\tExample: digitalWrite [ Pin Number ] [ State ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ State ] - 0 means low, 1 means high.", commander_digitalWrite_func )
+  #define API_ELEMENT_P_DIGITALWRITE( element ) apiElement_P( element, API_ELEMENT_DIGITALWRITE_NAME, API_ELEMENT_DIGITALWRITE_DESCRIPTION, commander_digitalWrite_func )
 #endif
 /// Premade function for digitalWrite command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_digitalWrite_func( char *args, Stream *response );
+void commander_digitalWrite_func( char *args, Stream *response, void* parent );
 
-#define API_ELEMENT_DIGITALREAD apiElement( "digitalRead", "Read the state of a pin.\r\n\tExample: digitalRead [ Pin Number ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Returns ] - 0 means low, 1 means high.", commander_digitalRead_func )
+#define API_ELEMENT_DIGITALREAD_NAME			"digitalRead"
+
+#define API_ELEMENT_DIGITALREAD_DESCRIPTION	"Read the state of a pin.\r\n\r\n"							\
+                                        		"usage: digitalRead [options]\r\n"							\
+                                        		"Options:\r\n"												\
+                                        		"  -p, --pin\t[int] Pin identifier.\r\n"					\
+                                        		"  -t, --text\tSet return format to text[ LOW, HIGH ].\r\n"
+
+#define API_ELEMENT_DIGITALREAD apiElement( API_ELEMENT_DIGITALREAD_NAME, API_ELEMENT_DIGITALREAD_DESCRIPTION, commander_digitalRead_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_DIGITALREAD( element ) apiElement_P( element, "digitalRead", "Read the state of a pin.\r\n\tExample: digitalRead [ Pin Number ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Returns ] - 0 means low, 1 means high.", commander_digitalRead_func )
+  #define API_ELEMENT_P_DIGITALREAD( element ) apiElement_P( element, API_ELEMENT_DIGITALREAD_NAME, API_ELEMENT_DIGITALREAD_DESCRIPTION, commander_digitalRead_func )
 #endif
 /// Premade function for digitalRead command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_digitalRead_func( char *args, Stream *response );
+void commander_digitalRead_func( char *args, Stream *response, void* parent );
 
 //-------- Analog I-O functions --------//
 
@@ -144,7 +173,7 @@ void commander_digitalRead_func( char *args, Stream *response );
 /// Premade function for analogRead command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_analogRead_func( char *args, Stream *response );
+void commander_analogRead_func( char *args, Stream *response, void* parent );
 
 //-------- WiFi functions --------//
 
@@ -154,19 +183,19 @@ void commander_analogRead_func( char *args, Stream *response );
 /// Premade function for ipconfig command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_ipconfig_func( char *args, Stream *response );
+void commander_ipconfig_func( char *args, Stream *response, void* parent );
 
 #define API_ELEMENT_WIFISTAT apiElement( "wifiStat", "Print WiFi information.", commander_wifiStat_func )
 /// Premade function for wifiStat command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_wifiStat_func( char *args, Stream *response );
+void commander_wifiStat_func( char *args, Stream *response, void* parent );
 
 #define API_ELEMENT_WIFISCAN apiElement( "wifiScan", "Search for available networks around.", commander_wifiScan_func )
 /// Premade function for wifiScan command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_wifiScan_func( char *args, Stream *response );
+void commander_wifiScan_func( char *args, Stream *response, void* parent );
 
 #endif
 
@@ -176,13 +205,13 @@ void commander_wifiScan_func( char *args, Stream *response );
 /// Premade function for wifiScan command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_configTime_func( char *args, Stream *response );
+void commander_configTime_func( char *args, Stream *response, void* parent );
 
 #define API_ELEMENT_DATETIME apiElement( "dateTime", "Returns the NTP synchronised date and time.", commander_dateTime_func )
 /// Premade function for wifiScan command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_dateTime_func( char *args, Stream *response );
+void commander_dateTime_func( char *args, Stream *response, void* parent );
 
 #endif
 
@@ -195,7 +224,7 @@ void commander_dateTime_func( char *args, Stream *response );
 /// Premade function for sin command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_sin_func( char *args, Stream *response );
+void commander_sin_func( char *args, Stream *response, void* parent );
 
 #define API_ELEMENT_COS apiElement( "cos", "Cosine function. The input is in radians.", commander_cos_func )
 #ifdef __AVR__
@@ -204,7 +233,7 @@ void commander_sin_func( char *args, Stream *response );
 /// Premade function for cos command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_cos_func( char *args, Stream *response );
+void commander_cos_func( char *args, Stream *response, void* parent );
 
 #define API_ELEMENT_ABS apiElement( "abs", "Calculates the absolute value of a number.", commander_abs_func )
 #ifdef __AVR__
@@ -213,7 +242,7 @@ void commander_cos_func( char *args, Stream *response );
 /// Premade function for abs command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_abs_func( char *args, Stream *response );
+void commander_abs_func( char *args, Stream *response, void* parent );
 
 #define API_ELEMENT_RANDOM apiElement( "random", "Generates a random number between the parameters.\r\n\tExample: random [ min ] [ max ]\r\n\t[ min ] - Lower integer bound\r\n\t[ max ] - Upper integer bound", commander_random_func )
 #ifdef __AVR__
@@ -222,7 +251,7 @@ void commander_abs_func( char *args, Stream *response );
 /// Premade function for random command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_random_func( char *args, Stream *response );
+void commander_random_func( char *args, Stream *response, void* parent );
 
 #define API_ELEMENT_NOT apiElement( "not", "Logical not. If the input is 0 returns 1. Any other cases it returns 0.", commander_not_func )
 #ifdef __AVR__
@@ -231,7 +260,7 @@ void commander_random_func( char *args, Stream *response );
 /// Premade function for not command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-void commander_not_func( char *args, Stream *response );
+void commander_not_func( char *args, Stream *response, void* parent );
 
 /// The neofetch logo have this many lines.
 #define NEOFETCH_LOGO_HEIGHT 12

@@ -48,6 +48,16 @@ SOFTWARE.
 #include "Arduino.h"
 #endif
 
+#ifndef __weak
+	#define __weak __attribute__((weak))
+#endif
+
+#if defined(ARDUINO) && defined(__AVR__)
+#define __CONST_TXT__(s) F(s)
+#else
+#define __CONST_TXT__(s) (const char*)(s)
+#endif
+
 #include "Stream.h"
 
 #ifdef COMMANDER_USE_WIFI_CLIENT_RESPONSE
@@ -243,6 +253,14 @@ public:
 
 	void enableFormatting();
 	void disableFormatting();
+
+	/// Print 'Argument error!' to a specified Serial channel.
+	///
+	/// This is a relatively common message, when arguments are used in a command.
+	/// To avoid duplication and save som precious memory, this function is dedicated
+	/// to print this message.
+	/// @param channel_p Pointer to the Stream object where the message will be printed.
+	static void printArgumentError( Stream* channel_p );
 
 private:
 

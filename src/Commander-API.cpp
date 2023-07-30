@@ -34,12 +34,6 @@ SOFTWARE.
 
 #include "Commander-API.hpp"
 
-#if defined(ARDUINO) && defined(__AVR__)
-#define FF(s) F(s)
-#else
-#define FF(s) (s)
-#endif
-
 const char *Commander::version = COMMANDER_API_VERSION;
 
 void Commander::attachTreeFunction( API_t *API_tree_p, uint32_t API_tree_size_p ){
@@ -48,9 +42,9 @@ void Commander::attachTreeFunction( API_t *API_tree_p, uint32_t API_tree_size_p 
 	API_tree      = API_tree_p;
 	API_tree_size = API_tree_size_p;
 
-	dbgResponse -> print( FF( "API tree attached with " ) );
+	dbgResponse -> print( __CONST_TXT__( "API tree attached with " ) );
 	dbgResponse -> print( API_tree_size );
-	dbgResponse -> println( FF( " commands." ) );
+	dbgResponse -> println( __CONST_TXT__( " commands." ) );
 }
 
 void Commander::init(){
@@ -77,10 +71,10 @@ void Commander::init(){
 
 	#endif
 
-	dbgResponse -> println( FF( "Commander init start" ) );
+	dbgResponse -> println( __CONST_TXT__( "Commander init start" ) );
 
 	// Make the tree ordered by alphabet.
-	dbgResponse -> print( FF( "  Creating alphabetical order... " ) );
+	dbgResponse -> print( __CONST_TXT__( "  Creating alphabetical order... " ) );
 
 	// Bubble sort. We need to sort the commands into an alphabetical order.
 	for( i = 0; i < API_tree_size; i++ ){
@@ -107,16 +101,16 @@ void Commander::init(){
 
 	}
 
-	dbgResponse -> println( FF( "[ OK ]" ) );
+	dbgResponse -> println( __CONST_TXT__( "[ OK ]" ) );
 
 	// Optimize the tree to make it balanced.
 	// It is necessary to speed up the command
 	// search phase.
-	dbgResponse -> print( FF( "  Create balanced binary structure... " ) );
+	dbgResponse -> print( __CONST_TXT__( "  Create balanced binary structure... " ) );
 	optimize_api_tree();
 
-	dbgResponse -> println( FF( "[ OK ]" ) );
-	dbgResponse -> println( FF( "Commander init finished!" ) );
+	dbgResponse -> println( __CONST_TXT__( "[ OK ]" ) );
+	dbgResponse -> println( __CONST_TXT__( "Commander init finished!" ) );
 
 }
 
@@ -445,9 +439,9 @@ void Commander::executeCommand( char *cmd, void* parent ){
 
 		// If we went through the whole tree and we did not found the command in it,
 		// we have to notice the user abut the problem. Maybe a Type-O
-		response -> print( FF( "Command \'" ) );
+		response -> print( __CONST_TXT__( "Command \'" ) );
 		response -> print( tempBuff );
-		response -> println( FF( "\' not found!" ) );
+		response -> println( __CONST_TXT__( "\' not found!" ) );
 
 		#ifdef COMMANDER_ENABLE_PIPE_MODULE
 
@@ -611,10 +605,10 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 	uint32_t i;
 
 	if( style ){
-		out -> println( FF( "\033[1;31m----\033[1;32m Available commands \033[1;31m----\033[0;37m\r\n" ) );
+		out -> println( __CONST_TXT__( "\033[1;31m----\033[1;32m Available commands \033[1;31m----\033[0;37m\r\n" ) );
 	}
 	else{
-		out -> println( FF( "---- Available commands ----\r\n" ) );
+		out -> println( __CONST_TXT__( "---- Available commands ----\r\n" ) );
 	}
 
 	for( i = 0; i < API_tree_size; i++ ){
@@ -641,9 +635,9 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 
 				else if( memoryType == MEMORY_PROGMEM ){
 
-					out -> print( FF( "\033[1;32m" ) );
+					out -> print( __CONST_TXT__( "\033[1;32m" ) );
 					out -> print( API_tree[ find_api_index_by_place( i ) ].name_P );
-					out -> print( FF( "\033[0;37m" ) );
+					out -> print( __CONST_TXT__( "\033[0;37m" ) );
 					out -> print( ':' );
 					out -> print( ' ' );
 					out -> print( API_tree[ find_api_index_by_place( i ) ].desc_P );
@@ -766,4 +760,15 @@ void Commander::enableFormatting(){
 }
 void Commander::disableFormatting(){
 	formatting = false;
+}
+
+void Commander::printArgumentError( Stream* channel_p ){
+
+	// Check and handle invalid channel pointer.
+	if( channel_p == NULL ){
+		return;
+	}
+
+	channel_p -> print( __CONST_TXT__( "Argument error!" ) );
+
 }

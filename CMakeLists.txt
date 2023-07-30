@@ -32,8 +32,9 @@ include_directories(
 )
 
 set( SOURCES
-    #src/Commander-API-Commands.cpp
-    #src/Commander-API-Commands.hpp
+    src/Commander-API-Commands.cpp
+    src/Commander-API-Digital-IO-Commands.cpp
+    src/Commander-API-Commands.hpp
     src/Commander-API.cpp
     src/Commander-API.hpp
     src/Commander-IO.cpp
@@ -102,6 +103,7 @@ if( BUILD_EXAMPLES )
 	add_executable( Argumentadvanced ${SOURCES} extras/examples_desktop/Desktop/Argumentadvanced/Argumentadvanced.cpp )
 	add_executable( Argumentbasic ${SOURCES} extras/examples_desktop/Desktop/Argumentbasic/Argumentbasic.cpp )
 	add_executable( Basic ${SOURCES} extras/examples_desktop/Desktop/Basic/Basic.cpp )
+	add_executable( Blink ${SOURCES} extras/examples_desktop/Desktop/Blink/Blink.cpp )
 	add_executable( Description ${SOURCES} extras/examples_desktop/Desktop/Description/Description.cpp )
 	add_executable( Help ${SOURCES} extras/examples_desktop/Desktop/Help/Help.cpp )
 	add_executable( Interactive ${SOURCES} extras/examples_desktop/Desktop/Interactive/Interactive.cpp )
@@ -115,6 +117,9 @@ if( BUILD_WEBASSEMBLY )
 
 	add_executable( Basic ${SOURCES} extras/examples_emscripten/Emscripten/Basic/Basic.cpp )
 	target_link_options( Basic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Blink ${SOURCES} extras/examples_emscripten/Emscripten/Blink/Blink.cpp )
+	target_link_options( Blink PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( Description ${SOURCES} extras/examples_emscripten/Emscripten/Description/Description.cpp )
 	target_link_options( Description PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

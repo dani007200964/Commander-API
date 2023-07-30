@@ -5,7 +5,7 @@
  * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2023.Jun.30
+ * Modified 2023.Jul.30
  *
  * This is a simple example, that demonstrates how
  * to use the base functionality of th Commander-API.
@@ -53,7 +53,7 @@ int main(){
 
 
     // Simple argument name example
-    const char* argsToParseSimple = "Jack -h 174 -w a1asd";
+    const char* argsToParseSimple = "Jack -h 174 -w 71";
 
     // String arguments require a buffer to store the data.
     char nameBuffer[ 30 ];
@@ -66,7 +66,7 @@ int main(){
     // Try to parse each argument.
     name.parseString( nameBuffer );
     height.parseInt();
-    weight.parseFloat();
+    weight.parseInt();
 
     stdioChannel.print( "Parsing these arguments: " );
     stdioChannel.println( argsToParseSimple );
@@ -95,7 +95,7 @@ int main(){
 
     // Check if the weight argument is parsed correctly.
     if( weight ){
-        stdioChannel.println( (float)weight );
+        stdioChannel.println( (int)weight );
     }
     else{
         stdioChannel.println( "Error!" );

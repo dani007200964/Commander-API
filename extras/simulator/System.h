@@ -48,6 +48,7 @@ SOFTWARE.
 #endif
 
 unsigned long millis();
+unsigned long micros();
 void delay( uint32_t x );
 
 void randomSeed( unsigned long seed );

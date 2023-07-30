@@ -33,14 +33,18 @@ SOFTWARE.
 
 #include "Commander-API-Commands.hpp"
 
-#if defined(ARDUINO) && defined(__AVR__)
-#define FF(s) F(s)
-#else
-#define FF(s) (s)
-#endif
+void printCommandNotImplemented( Stream* channel_p ){
 
+	// Check and handle invalid channel pointer.
+	if( channel_p == NULL ){
+		return;
+	}
 
-void commander_millis_func( char *args, Stream *response ){
+  channel_p -> print( __CONST_TXT__( "Command not implemented!" ) );
+
+}
+
+void commander_millis_func( char *args, Stream *response, void* parent ){
 
   char buff[ 20 ];
 
@@ -50,7 +54,7 @@ void commander_millis_func( char *args, Stream *response ){
 
 }
 
-void commander_micros_func( char *args, Stream *response ){
+void commander_micros_func( char *args, Stream *response, void* parent ){
 
   char buff[ 20 ];
 
@@ -60,7 +64,7 @@ void commander_micros_func( char *args, Stream *response ){
 
 }
 
-void commander_uptime_func( char *args, Stream *response ){
+void commander_uptime_func( char *args, Stream *response, void* parent ){
 
   char buff[ 20 ];
 
@@ -89,109 +93,9 @@ void commander_uptime_func( char *args, Stream *response ){
 
 
 
-void commander_pinMode_func( char *args, Stream *response ){
-
-  int pin;
-  int direction;
-
-  int argResult;
-
-  argResult = sscanf( args, "%d %d", &pin, &direction );
-
-  if( argResult != 2 ){
-    response -> print( FF( "Argument error!" ) );
-    return;
-  }
-
-  if( pin < 0 || direction < 0 ){
-    response -> print( FF( "Argument error!" ) );
-    return;
-  }
-
-  if( direction == 0 ){
-
-    pinMode( pin, INPUT );
-
-  }
-
-  else if( direction == 1 ){
-
-    pinMode( pin, OUTPUT );
-
-  }
-
-  else{
-    response -> print( FF( "Argument error! Second argument has to be 1 or 0!" ) );
-  }
-
-}
-
-void commander_digitalWrite_func( char *args, Stream *response ){
-
-  int pin;
-  int state;
-
-  int argResult;
-
-  argResult = sscanf( args, "%d %d", &pin, &state );
-
-  if( argResult != 2 ){
-
-    response -> print( FF( "Argument error!" ) );
-    return;
-
-  }
-
-  if( pin < 0 || state < 0 ){
-
-    response -> print( FF( "Argument error!" ) );
-    return;
-
-  }
-
-  if( state == 0 ){
-
-    digitalWrite( pin, LOW );
-
-  }
-
-  else if( state == 1 ){
-
-    digitalWrite( pin, HIGH );
-
-  }
-
-  else{
-    response -> print( FF( "Argument error! Second argument has to be 1 or 0!" ) );
-  }
-
-}
-
-void commander_digitalRead_func( char *args, Stream *response ){
-
-  int pin;
-
-  int argResult;
-
-  argResult = sscanf( args, "%d", &pin );
-
-  if( argResult != 1 ){
-    response -> print( FF( "Argument error!" ) );
-    return;
-  }
-
-  if( pin < 0 ){
-    response -> print( FF( "Argument error!" ) );
-    return;
-  }
-
-  response -> print( digitalRead( pin ) );
-
-}
-
 #ifdef ARDUINO_AVR_UNO
 
-void commander_analogRead_func( char *args, Stream *response ){
+void commander_analogRead_func( char *args, Stream *response, void* parent ){
 
   int pin;
 
@@ -201,7 +105,7 @@ void commander_analogRead_func( char *args, Stream *response ){
 
   if( argResult != 1 ){
 
-    response -> print( F( "Argument error!" ) );
+    Commander::printArgumentError( response );
     return;
 
   }
@@ -233,7 +137,7 @@ void commander_analogRead_func( char *args, Stream *response ){
       break;
 
     default:
-      response -> print( F( "Argument error!" ) );
+      Commander::printArgumentError( response );
       return;
 
   }
@@ -246,7 +150,7 @@ void commander_analogRead_func( char *args, Stream *response ){
 
 #ifdef ARDUINO_AVR_LEONARDO
 
-void commander_analogRead_func( char *args, Stream *response ){
+void commander_analogRead_func( char *args, Stream *response, void* parent ){
 
   int pin;
 
@@ -256,7 +160,7 @@ void commander_analogRead_func( char *args, Stream *response ){
 
   if( argResult != 1 ){
 
-    response -> print( F( "Argument error!" ) );
+    Commander::printArgumentError( response );
     return;
 
   }
@@ -312,7 +216,7 @@ void commander_analogRead_func( char *args, Stream *response ){
       break;
 
     default:
-      response -> print( F( "Argument error!" ) );
+      Commander::printArgumentError( response );
       return;
 
   }
@@ -325,7 +229,7 @@ void commander_analogRead_func( char *args, Stream *response ){
 
 #if defined( ESP32 ) || ( ESP8266 )
 
-void commander_analogRead_func( char *args, Stream *response ){
+void commander_analogRead_func( char *args, Stream *response, void* parent ){
 
   int pin;
 
@@ -335,14 +239,14 @@ void commander_analogRead_func( char *args, Stream *response ){
 
   if( argResult != 1 ){
 
-    response -> print( "Argument error!" );
+    Commander::printArgumentError( response );
     return;
 
   }
 
   if( pin < 0 ){
 
-    response -> print( "Argument error!" );
+    Commander::printArgumentError( response );
     return;
 
   }
@@ -355,7 +259,7 @@ void commander_analogRead_func( char *args, Stream *response ){
 
 #if defined( ESP32 ) || ( ESP8266 )
 
-void commander_ipconfig_func( char *args, Stream *response ){
+void commander_ipconfig_func( char *args, Stream *response, void* parent ){
 
   response -> println( "Wi-Fi:\r\n" );
 
@@ -370,7 +274,7 @@ void commander_ipconfig_func( char *args, Stream *response ){
 
 }
 
-void commander_wifiStat_func( char *args, Stream *response ){
+void commander_wifiStat_func( char *args, Stream *response, void* parent ){
 
   response -> println( "Wi-Fi:\r\n" );
 
@@ -427,7 +331,7 @@ void commander_wifiStat_func( char *args, Stream *response ){
 
 }
 
-void commander_wifiScan_func( char *args, Stream *response ){
+void commander_wifiScan_func( char *args, Stream *response, void* parent ){
 
   int num;
   int i;
@@ -485,7 +389,7 @@ void commander_wifiScan_func( char *args, Stream *response ){
 
 #ifdef ESP32
 
-void commander_configTime_func( char *args, Stream *response ){
+void commander_configTime_func( char *args, Stream *response, void* parent ){
 
   int gmtOffset_sec;
   int daylightOffset_sec;
@@ -514,14 +418,14 @@ void commander_configTime_func( char *args, Stream *response ){
 
   else{
 
-    response -> print( "Argument error!" );
+    Commander::printArgumentError( response );
     return;
 
   }
 
 }
 
-void commander_dateTime_func( char *args, Stream *response ){
+void commander_dateTime_func( char *args, Stream *response, void* parent ){
 
   struct tm timeInfo;
 
@@ -540,7 +444,7 @@ void commander_dateTime_func( char *args, Stream *response ){
 
 #ifdef __AVR__
 
-void commander_neofetch_func( char *args, Stream *response ){
+void commander_neofetch_func( char *args, Stream *response, void* parent ){
 
   uint32_t rowCounter = 0;
 
@@ -660,7 +564,7 @@ const char* neofetchLogo = {
   "\033[0;37m"
 };
 
-void commander_neofetch_func( char *args, Stream *response ){
+void commander_neofetch_func( char *args, Stream *response, void* parent ){
 
   uint32_t rowCounter = 0;
 
@@ -749,9 +653,9 @@ void commander_neofetch_func( char *args, Stream *response ){
 
 #endif
 
-void commander_reboot_func( char *args, Stream *response ){
+void commander_reboot_func( char *args, Stream *response, void* parent ){
 
-  response -> println( FF( "Rebooting..." ) );
+  response -> println( __CONST_TXT__( "Rebooting..." ) );
 
   #if defined( ESP32 ) || ( ESP8266 )
 
@@ -767,7 +671,7 @@ void commander_reboot_func( char *args, Stream *response ){
 }
 
 
-void commander_sin_func( char *args, Stream *response ){
+void commander_sin_func( char *args, Stream *response, void* parent ){
 
   float f = atof( args );
 
@@ -775,7 +679,7 @@ void commander_sin_func( char *args, Stream *response ){
 
 }
 
-void commander_cos_func( char *args, Stream *response ){
+void commander_cos_func( char *args, Stream *response, void* parent ){
 
   float f = atof( args );
 
@@ -783,7 +687,7 @@ void commander_cos_func( char *args, Stream *response ){
 
 }
 
-void commander_not_func( char *args, Stream *response ){
+void commander_not_func( char *args, Stream *response, void* parent ){
 
   int num;
   int argResult;
@@ -792,7 +696,7 @@ void commander_not_func( char *args, Stream *response ){
 
   if( argResult != 1 ){
 
-    response -> print( FF( "Argument error!" ) );
+    Commander::printArgumentError( response );
     return;
 
   }
@@ -801,7 +705,7 @@ void commander_not_func( char *args, Stream *response ){
 
 }
 
-void commander_random_func( char *args, Stream *response ){
+void commander_random_func( char *args, Stream *response, void* parent ){
 
   int min;
   int max;
@@ -811,7 +715,7 @@ void commander_random_func( char *args, Stream *response ){
 
   if( argResult != 2 ){
 
-    response -> print( FF( "Argument error!" ) );
+    Commander::printArgumentError( response );
 
     return;
 
@@ -819,7 +723,8 @@ void commander_random_func( char *args, Stream *response ){
 
   if( min >= max ){
 
-    response -> print( FF( "Argument error! First argument is min, second is max!" ) );
+    Commander::printArgumentError( response );
+    response -> print( " First argument is min, second is max!" );
 
     return;
 
@@ -829,7 +734,7 @@ void commander_random_func( char *args, Stream *response ){
 
 }
 
-void commander_abs_func( char *args, Stream *response ){
+void commander_abs_func( char *args, Stream *response, void* parent ){
 
   float f = atof( args );
 

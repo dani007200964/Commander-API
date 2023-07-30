@@ -41,6 +41,14 @@ unsigned long millis(){
 
 }
 
+unsigned long micros(){
+
+    double value = std::clock() / (double)(CLOCKS_PER_SEC / ( 1000 * 1000 ));
+
+    return (unsigned long) value;
+
+}
+
 void delay( uint32_t x ){
 
     #ifdef _WIN32
