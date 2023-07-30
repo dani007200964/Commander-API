@@ -31,6 +31,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#ifndef COMMANDER_API_COMMANDS_HPP__
+#define COMMANDER_API_COMMANDS_HPP__
+
 /// Arduino detection
 #ifdef ARDUINO
 #include "Arduino.h"
@@ -276,3 +279,5 @@ void commander_not_func( char *args, Stream *response, void* parent );
 #define NEOFETCH_COMMAND_PARSER "Commander"
 #define NEOFETCH_AUTHOR "Daniel Hajnal"
 #define NEOFETCH_LICENSE "MIT"
+
+#endif

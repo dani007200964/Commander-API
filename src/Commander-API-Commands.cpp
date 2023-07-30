@@ -90,64 +90,6 @@ void commander_uptime_func( char *args, Stream *response, void* parent ){
 
 }
 
-
-
-
-#ifdef ARDUINO_AVR_UNO
-
-void commander_analogRead_func( char *args, Stream *response, void* parent ){
-
-  int pin;
-
-  int argResult;
-
-  argResult = sscanf( args, "%d", &pin );
-
-  if( argResult != 1 ){
-
-    Commander::printArgumentError( response );
-    return;
-
-  }
-
-  switch( pin ){
-
-    case 0:
-      pin = A0;
-      break;
-
-    case 1:
-      pin = A1;
-      break;
-
-    case 2:
-      pin = A2;
-      break;
-
-    case 3:
-      pin = A3;
-      break;
-
-    case 4:
-      pin = A5;
-      break;
-
-    case 5:
-      pin = A5;
-      break;
-
-    default:
-      Commander::printArgumentError( response );
-      return;
-
-  }
-
-  response -> print( analogRead( pin ) );
-
-}
-
-#endif
-
 #ifdef ARDUINO_AVR_LEONARDO
 
 void commander_analogRead_func( char *args, Stream *response, void* parent ){

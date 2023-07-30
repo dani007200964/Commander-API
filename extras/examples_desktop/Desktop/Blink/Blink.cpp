@@ -76,19 +76,19 @@ int main(){
     // Commander at the beginning of your code to prevent stack-overflow.
     commander.init();
 
-    Serial.println();
-    Serial.println( __CONST_TXT__( "---- Init Finished ----" ) );
-    Serial.println();
+    stdioChannel.println();
+    stdioChannel.println( __CONST_TXT__( "---- Init Finished ----" ) );
+    stdioChannel.println();
 
     // List all the available commands.
-    Serial.println( __CONST_TXT__( "Executing 'help -d' command:" ) );
-    commander.execute( "help -d", &Serial );
-    Serial.println();
+    stdioChannel.println( __CONST_TXT__( "Executing 'help -d' command:" ) );
+    commander.execute( "help -d", &stdioChannel );
+    stdioChannel.println();
 
     // Set pin 13 to output. Usually the LED is on this pin.
-    Serial.println( __CONST_TXT__( "Executing 'pinMode -p 13 -o' command:" ) );
-    commander.execute( "pinMode -p 13 -o", &Serial );
-    Serial.println();
+    stdioChannel.println( __CONST_TXT__( "Executing 'pinMode -p 13 -o' command:" ) );
+    commander.execute( "pinMode -p 13 -o", &stdioChannel );
+    stdioChannel.println();
 
 
 
@@ -97,23 +97,27 @@ int main(){
 
 
         // Set pin 13 to logic high. It will turn on the built in LED on most boards.
-        Serial.println( __CONST_TXT__( "Executing 'digitalWrite -p 13 -h' command:" ) );
-        commander.execute( "digitalWrite -p 13 -h", &Serial );
+        stdioChannel.println( __CONST_TXT__( "Executing 'digitalWrite -p 13 -h' command:" ) );
+        commander.execute( "digitalWrite -p 13 -h", &stdioChannel );
+        stdioChannel.println();
 
         // Read the state of pin 13.
-        Serial.println( __CONST_TXT__( "Executing 'digitalRead -p 13' command:" ) );
-        commander.execute( "digitalRead -p 13", &Serial );
+        stdioChannel.println( __CONST_TXT__( "Executing 'digitalRead -p 13' command:" ) );
+        commander.execute( "digitalRead -p 13", &stdioChannel );
+        stdioChannel.println();
 
         // Delay one seconds.
         delay( 1000 );
 
         // Set pin 13 to logic low. It will turn off the built in LED on most boards.
-        Serial.println( __CONST_TXT__( "Executing 'digitalWrite -p 13 -l' command:" ) );
-        commander.execute( "digitalWrite -p 13 -h", &Serial );
+        stdioChannel.println( __CONST_TXT__( "Executing 'digitalWrite -p 13 -l' command:" ) );
+        commander.execute( "digitalWrite -p 13 -h", &stdioChannel );
+        stdioChannel.println();
 
         // Read the state of pin 13.
-        Serial.println( __CONST_TXT__( "Executing 'digitalRead -p 13' command:" ) );
-        commander.execute( "digitalRead -p 13", &Serial );
+        stdioChannel.println( __CONST_TXT__( "Executing 'digitalRead -p 13' command:" ) );
+        commander.execute( "digitalRead -p 13", &stdioChannel );
+        stdioChannel.println();
 
         // Delay one seconds.
         delay( 1000 );

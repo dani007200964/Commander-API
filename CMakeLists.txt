@@ -70,6 +70,15 @@ if (RUN_TESTS)
 
 endif()
 
+if( BUILD_EXAMPLES )
+
+    set( CUSTOM_COMMANDS
+        extras/simulator/CustomCommands.cpp
+        extras/simulator/CustomCommands.hpp
+    )
+
+endif()
+
 # Commander settings
 add_compile_definitions(
     # SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
@@ -100,34 +109,34 @@ endif()
 #---- Examples Section ----#
 
 if( BUILD_EXAMPLES )
-	add_executable( Argumentadvanced ${SOURCES} extras/examples_desktop/Desktop/Argumentadvanced/Argumentadvanced.cpp )
-	add_executable( Argumentbasic ${SOURCES} extras/examples_desktop/Desktop/Argumentbasic/Argumentbasic.cpp )
-	add_executable( Basic ${SOURCES} extras/examples_desktop/Desktop/Basic/Basic.cpp )
-	add_executable( Blink ${SOURCES} extras/examples_desktop/Desktop/Blink/Blink.cpp )
-	add_executable( Description ${SOURCES} extras/examples_desktop/Desktop/Description/Description.cpp )
-	add_executable( Help ${SOURCES} extras/examples_desktop/Desktop/Help/Help.cpp )
-	add_executable( Interactive ${SOURCES} extras/examples_desktop/Desktop/Interactive/Interactive.cpp )
+	add_executable( Argumentadvanced ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Argumentadvanced/Argumentadvanced.cpp )
+	add_executable( Argumentbasic ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Argumentbasic/Argumentbasic.cpp )
+	add_executable( Basic ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Basic/Basic.cpp )
+	add_executable( Blink ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Blink/Blink.cpp )
+	add_executable( Description ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Description/Description.cpp )
+	add_executable( Help ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Help/Help.cpp )
+	add_executable( Interactive ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Interactive/Interactive.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
-	add_executable( Argumentadvanced ${SOURCES} extras/examples_emscripten/Emscripten/Argumentadvanced/Argumentadvanced.cpp )
+	add_executable( Argumentadvanced ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Argumentadvanced/Argumentadvanced.cpp )
 	target_link_options( Argumentadvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Argumentbasic ${SOURCES} extras/examples_emscripten/Emscripten/Argumentbasic/Argumentbasic.cpp )
+	add_executable( Argumentbasic ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Argumentbasic/Argumentbasic.cpp )
 	target_link_options( Argumentbasic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Basic ${SOURCES} extras/examples_emscripten/Emscripten/Basic/Basic.cpp )
+	add_executable( Basic ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Basic/Basic.cpp )
 	target_link_options( Basic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Blink ${SOURCES} extras/examples_emscripten/Emscripten/Blink/Blink.cpp )
+	add_executable( Blink ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Blink/Blink.cpp )
 	target_link_options( Blink PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Description ${SOURCES} extras/examples_emscripten/Emscripten/Description/Description.cpp )
+	add_executable( Description ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Description/Description.cpp )
 	target_link_options( Description PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Help ${SOURCES} extras/examples_emscripten/Emscripten/Help/Help.cpp )
+	add_executable( Help ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Help/Help.cpp )
 	target_link_options( Help PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Interactive ${SOURCES} extras/examples_emscripten/Emscripten/Interactive/Interactive.cpp )
+	add_executable( Interactive ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Interactive/Interactive.cpp )
 	target_link_options( Interactive PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 endif()

@@ -1,10 +1,10 @@
 /*
- * Created on July. 30 2023
+ * Created on Oct. 01 2022
  *
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2023.07.30
+ * Modified 2022.10.04
 */
 
 /*
@@ -31,26 +31,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "CustomCommands.hpp"
 #include "Commander-API-Commands.hpp"
-
-// These commands only work inside the Arduino environment by default.
-#ifdef ARDUINO
-#include "Arduino.h"
 
 void commander_pinMode_func( char *args, Stream *response, void* parent ){
 
-    // AVR microcontrollers has small amount of dynamic memory.
-    // For this reason the built in commands do not support long
-    // argument names on AVR platforms.
-    #ifdef __AVR__
-        Argument pin( args, 'p' );
-        Argument outputFlag( args, 'o' );
-        Argument inputFlag( args, 'i' );
-    #else
-        Argument pin( args, 'p', "pin" );
-        Argument outputFlag( args, 'o', "output" );
-        Argument inputFlag( args, 'i', "input" );
-    #endif
+    Argument pin( args, 'p', "pin" );
+    Argument outputFlag( args, 'o', "output" );
+    Argument inputFlag( args, 'i', "input" );
 
     pin.parseInt();
     outputFlag.find();
@@ -72,30 +60,13 @@ void commander_pinMode_func( char *args, Stream *response, void* parent ){
         return;
     }
 
-    if( inputFlag.isFound() ){
-        pinMode( (int)pin, INPUT );
-    }
-
-    else{
-        pinMode( (int)pin, OUTPUT );
-    }
-
 }
 
 void commander_digitalWrite_func( char *args, Stream *response, void* parent ){
 
-    // AVR microcontrollers has small amount of dynamic memory.
-    // For this reason the built in commands do not support long
-    // argument names on AVR platforms.
-    #ifdef __AVR__
-        Argument pin( args, 'p' );
-        Argument highFlag( args, 'h' );
-        Argument lowFlag( args, 'l' );
-    #else
-        Argument pin( args, 'p', "pin" );
-        Argument highFlag( args, 'h', "high" );
-        Argument lowFlag( args, 'l', "low" );
-    #endif
+    Argument pin( args, 'p', "pin" );
+    Argument highFlag( args, 'h', "high" );
+    Argument lowFlag( args, 'l', "low" );
 
     pin.parseInt();
     highFlag.find();
@@ -117,32 +88,16 @@ void commander_digitalWrite_func( char *args, Stream *response, void* parent ){
         return;
     }
 
-    if( lowFlag.isFound() ){
-        digitalWrite( (int)pin, LOW );
-    }
-
-    else{
-        digitalWrite( (int)pin, HIGH );
-    }
-
 }
 
 void commander_digitalRead_func( char *args, Stream *response, void* parent ){
 
-    // AVR microcontrollers has small amount of dynamic memory.
-    // For this reason the built in commands do not support long
-    // argument names on AVR platforms.
-    #ifdef __AVR__
-        Argument pin( args, 'p' );
-        Argument txtFlag( args, 't' );
-    #else
-        Argument pin( args, 'p', "pin" );
-        Argument txtFlag( args, 't', "text" );
-    #endif
+    Argument pin( args, 'p', "pin" );
+    Argument txtFlag( args, 't', "text" );
 
     pin.parseInt();
     txtFlag.find();
-    int state;
+    int state = 0;
 
     if( !pin ){
         Commander::printArgumentError( response );
@@ -151,8 +106,6 @@ void commander_digitalRead_func( char *args, Stream *response, void* parent ){
         }
         return;
     }
-
-    state = digitalRead( (int)pin );
 
     if( txtFlag.isFound() ){
 
@@ -167,7 +120,3 @@ void commander_digitalRead_func( char *args, Stream *response, void* parent ){
     }
 
 }
-
-#else
-
-#endif

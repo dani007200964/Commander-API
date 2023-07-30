@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "*.example": "cpp"
+        "*.example": "cpp",
+        "type_traits": "cpp",
+        "xtr1common": "cpp"
     }
 }
