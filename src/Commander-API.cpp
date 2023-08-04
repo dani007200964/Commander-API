@@ -435,6 +435,14 @@ void Commander::executeCommand( char *cmd, void* parent ){
 
 	}
 
+	/*
+	// 'echo' is an internal function that prints what it gets, or an internal variable.
+	else if( strcmp( tempBuff, (const char*)"echo" ) == 0 ){
+
+		response -> print( arg );
+
+	}*/
+
 	else{
 
 		// If we went through the whole tree and we did not found the command in it,
@@ -770,5 +778,68 @@ void Commander::printArgumentError( Stream* channel_p ){
 	}
 
 	channel_p -> print( __CONST_TXT__( "Argument error!" ) );
+
+}
+
+Commander::SystemVariable_t* Commander::variables = NULL;
+uint32_t Commander::variables_size = 0;
+
+void Commander::attachVariablesFunction( Commander::SystemVariable_t* variables_p, uint32_t variables_size_p ){
+	variables = variables_p;
+	variables_size = variables_size_p;
+}
+
+Commander::SystemVariable_t* Commander::getSystemVariable( const char* name ){
+
+	int i;
+
+	for( i = 0; i < variables_size; i++ ){
+
+		if( strcmp( name, variables[ i ].name ) == 0 ){
+			return &variables[ i ];
+		}
+
+	}
+
+	return NULL;
+
+}
+
+void Commander::printSystemVariable( Stream* channel_p, const char* name ){
+
+	SystemVariable_t* var;
+
+	if( channel_p == NULL ){
+		return;
+	}
+
+	var= getSystemVariable( name );
+
+	if( var == NULL ){
+
+		return;
+
+	}
+	/*
+	channel_p -> println( var -> name );
+	return;
+	*/
+
+	if( ( var -> floatData ) != NULL ){
+		channel_p -> print( (int)*var -> floatData );
+		channel_p -> print( '.' );
+		channel_p -> print( ( (int)( *(var -> floatData) * 100.0 ) ) % 100 );
+		return;
+	}
+
+	if( ( var -> intData ) != NULL ){
+		channel_p -> print( *var -> intData );
+		return;
+	}
+
+	if( ( var -> strData ) != NULL ){
+		channel_p -> print( var -> strData );
+		return;
+	}
 
 }

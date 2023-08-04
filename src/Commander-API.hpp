@@ -95,6 +95,13 @@ SOFTWARE.
 /// class easier and faster than with attachTreeFunction.
 #define attachTree( name ) attachTreeFunction( name, sizeof( name ) / sizeof( name[ 0 ] ) )
 
+
+
+#define systemVariableFloat( name, data ) { name, data, NULL, NULL }
+#define systemVariableInt( name, data ) { name, NULL, data, NULL }
+#define systemVariableString( name, data ) { name, NULL, NULL, (char*)data }
+#define attachVariables( name ) attachVariablesFunction( name, sizeof( name ) / sizeof( name[ 0 ] ) )
+
 /// Commander class.
 ///
 /// This class can be used to create a command parser.
@@ -133,6 +140,28 @@ public:
 
 	}API_t;
 
+	enum variableType_t{
+		VARIABLE_FLOAT,
+		VARIABLE_INT,
+		VARIABLES_STRING
+	};
+
+	typedef struct{
+
+	  	const char *name;                                 //  Name of the command
+
+		float* floatData;
+		int* intData;
+		char* strData;
+
+		#ifdef __AVR__
+		__FlashStringHelper *name_P;											// Name of the command( stored in PROGMEM )
+		__FlashStringHelper *desc_P;											// Description of the command( stored in PROGMEM )
+		#endif
+
+
+	}SystemVariable_t;
+
 	enum memoryType_t{
 		MEMORY_REGULAR,		///< Regular memory implementation
 		MEMORY_PROGMEM		///< Progmem memory implementation
@@ -147,7 +176,11 @@ public:
 	/// structure array to the object. This array contains
 	/// the data for each command.
 	/// @note There is a macro( attachTree ) to simplify this process.
-	void attachTreeFunction(  API_t *API_tree_p, uint32_t API_tree_size_p );
+	void attachTreeFunction( API_t *API_tree_p, uint32_t API_tree_size_p );
+
+	static void attachVariablesFunction( SystemVariable_t* variables_p, uint32_t variables_size_p );
+	static SystemVariable_t* getSystemVariable( const char* name );
+	static void printSystemVariable( Stream* channel_p, const char* name );
 
 	/// Initializer.
 	///
@@ -269,6 +302,9 @@ private:
 
 	/// Number of elements in the API-tree.
 	uint32_t API_tree_size = 0;
+
+	static SystemVariable_t *variables;
+	static uint32_t variables_size;
 
 	/// Internal variable for counting purpose.
 	uint32_t elementCounter;

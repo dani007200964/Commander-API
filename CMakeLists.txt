@@ -116,6 +116,7 @@ if( BUILD_EXAMPLES )
 	add_executable( Description ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Description/Description.cpp )
 	add_executable( Help ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Help/Help.cpp )
 	add_executable( Interactive ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Interactive/Interactive.cpp )
+	add_executable( Systemvariables ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Systemvariables/Systemvariables.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
 	add_executable( Argumentadvanced ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Argumentadvanced/Argumentadvanced.cpp )
@@ -138,5 +139,8 @@ if( BUILD_WEBASSEMBLY )
 
 	add_executable( Interactive ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Interactive/Interactive.cpp )
 	target_link_options( Interactive PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Systemvariables ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Systemvariables/Systemvariables.cpp )
+	target_link_options( Systemvariables PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 endif()

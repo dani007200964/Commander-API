@@ -61,7 +61,6 @@ void printCommandNotImplemented( Stream* channel_p );
 
 //-------- System functions --------//
 
-
 #define API_ELEMENT_REBOOT apiElement( "reboot", "Reboots the device.", commander_reboot_func )
 #ifdef __AVR__
   #define API_ELEMENT_P_REBOOT( element ) apiElement_P( element, "reboot", "Reboots the device.", commander_reboot_func )
@@ -110,6 +109,22 @@ void commander_uptime_func( char *args, Stream *response, void* parent );
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
 void commander_neofetch_func( char *args, Stream *response, void* parent );
+
+
+//---- echo function ----//
+#define API_ELEMENT_ECHO_NAME		"echo"
+
+#define API_ELEMENT_ECHO_DESCRIPTION	"echoes back the input data. The input data can be a system variable.\r\n\r\n"		\
+                                        "usage: echo [input data or system variable]\r\n"				                          \
+
+#define API_ELEMENT_ECHO apiElement( API_ELEMENT_ECHO_NAME, API_ELEMENT_ECHO_DESCRIPTION, commander_echo_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_ECHO( element ) apiElement_P( element, API_ELEMENT_ECHO_NAME, API_ELEMENT_ECHO_DESCRIPTION, commander_echo_func )
+#endif
+/// Premade function for echo command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+void commander_echo_func( char *args, Stream *response, void* parent );
 
 
 
