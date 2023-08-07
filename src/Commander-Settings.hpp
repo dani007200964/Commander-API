@@ -75,4 +75,71 @@ SOFTWARE.
   #define COMMANDER_MAX_COMMAND_SIZE 100
 #endif
 
+
+///**** neofetch settings****///
+
+/// The neofetch logo have this many lines.
+#ifndef NEOFETCH_LOGO_HEIGHT
+	#define NEOFETCH_LOGO_HEIGHT 12
+#endif
+
+#ifndef NEOFETCH_FW_NAME
+	#define NEOFETCH_FW_NAME "Firmware-name"
+#endif
+
+#ifndef NEOFETCH_CPU_TYPE
+	#if defined( ARDUINO_AVR_UNO )
+		#define NEOFETCH_CPU_TYPE "ATMEG328"
+	#elif defined( ARDUINO_AVR_LEONARDO )
+		#define NEOFETCH_CPU_TYPE "ATMEGA32U4"
+	#elif defined( ESP32 )
+		#define NEOFETCH_CPU_TYPE "ESP32"
+	#elif defined( ESP8266 )
+		#define NEOFETCH_CPU_TYPE "ESP8266"
+	#else
+		#define NEOFETCH_CPU_TYPE "CPU"
+	#endif
+#endif
+
+#ifndef NEOFETCH_TEXT
+	#define NEOFETCH_TEXT	"\r\n\033[1;36m"											\
+      						"      :=*%@@@@%#+-             :=*%@@@@%#+-       \r\n"	\
+      						"    +%@@@@@@@@@@@@@#-       :*@@@@@@@@@@@@@@*:    \r\n"	\
+      						"  =@@@@@*=-:::-+#@@@@@=   :#@@@@%*=::::-+%@@@@#.  \r\n"	\
+      						" *@@@@-          .=@@@@%:*@@@@*:          .#@@@@. \r\n"	\
+      						"+@@@%               +@@@@@@@%:     .##      +@@@% \r\n"	\
+      						"@@@@-   .+++++++     -@@@@@*     -+*@@++-    @@@@:\r\n"	\
+      						"@@@@-   .+++++++     .%@@@@+     =+*@@*+-    %@@@:\r\n"	\
+      						"*@@@#               =@@@@@@@#.     .##      -@@@@ \r\n"	\
+      						" #@@@%:           -%@@@@=#@@@@+.           +@@@@: \r\n"	\
+      						"  *@@@@%=:.   :-*@@@@@*   -%@@@@#=:.  .:-*@@@@%:  \r\n"	\
+      						"   :*@@@@@@@@@@@@@@@+.      -#@@@@@@@@@@@@@@%=    \r\n"	\
+      						"      -+#@@@@@@%*=:            -+#@@@@@@%*=.      \r\n"	\
+      						"\033[0;37m"
+#endif
+
+#ifndef NEOFETCH_COMPILER
+	#define NEOFETCH_COMPILER __VERSION__
+#endif
+
+#ifndef NEOFETCH_COMPILE_DATE
+	#define NEOFETCH_COMPILE_DATE __DATE__
+#endif
+
+#ifndef NEOFETCH_TERMINAL
+	#define NEOFETCH_TERMINAL ""
+#endif
+
+#ifndef NEOFETCH_COMMAND_PARSER
+	#define NEOFETCH_COMMAND_PARSER "Commander"
+#endif
+
+#ifndef NEOFETCH_AUTHOR
+	#define NEOFETCH_AUTHOR "Daniel Hajnal"
+#endif
+
+#ifndef NEOFETCH_LICENSE
+	#define NEOFETCH_LICENSE "MIT"
+#endif
+
 #endif /* COMMANDER_API_SRC_COMMANDER_SETTINGS_HPP_ */

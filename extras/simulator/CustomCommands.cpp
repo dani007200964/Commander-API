@@ -31,8 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "CustomCommands.hpp"
 #include "Commander-API-Commands.hpp"
+#include "System.h"
 
 void commander_pinMode_func( char *args, Stream *response, void* parent ){
 
@@ -117,6 +117,127 @@ void commander_digitalRead_func( char *args, Stream *response, void* parent ){
 
         response -> print( state );
 
+    }
+
+}
+
+void commander_reboot_func( char *args, Stream *response, void* parent ){
+
+    response -> println( __CONST_TXT__( "Rebooting..." ) );
+
+}
+
+void commander_millis_func( char *args, Stream *response, void* parent ){
+
+    char buff[ 20 ];
+
+    sprintf( buff, "%lu", millis() );
+
+    response -> print( buff );
+
+}
+
+void commander_micros_func( char *args, Stream *response, void* parent ){
+
+    char buff[ 20 ];
+
+    sprintf( buff, "%lu", micros() );
+
+    response -> print( buff );
+
+}
+
+void commander_uptime_func( char *args, Stream *response, void* parent ){
+
+    char buff[ 20 ];
+
+    int day;
+    int hour;
+    int minute;
+    unsigned long second;
+
+    second = millis() / 1000;
+
+    day = ( second / 24 ) / 3600;
+    second %= (unsigned long)24 * 3600;
+
+    hour = second / 3600;
+    second %= 3600;
+
+    minute = second / 60;
+    second %= 60;
+
+    snprintf( buff, sizeof( buff ), "%d days, %d:%02d:%02lu", day, hour, minute, second );
+
+    response -> print( buff );
+
+}
+
+void commander_analogRead_func( char *args, Stream *response, void* parent ){
+
+    Argument pin( args, 'p', "pin" );
+
+    pin.parseInt();
+
+    if( !pin ){
+        Commander::printArgumentError( response );
+        if( response != NULL ){
+            response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
+        }
+        return;
+    }
+
+    if( (int)pin < 0 ){
+        Commander::printArgumentError( response );
+        if( response != NULL ){
+            response -> print( __CONST_TXT__( " Incorrect pin identifier!" ) );
+        }
+        return;
+    }
+
+    response -> print( 100 );
+
+}
+
+void commander_analogWrite_func( char *args, Stream *response, void* parent ){
+
+    Argument pin( args, 'p', "pin" );
+    Argument duty( args, 'd', "duty" );
+    Argument value( args, 'v', "value" );
+
+    pin.parseInt();
+    duty.parseInt();
+    value.parseInt();
+
+    int arduinoPin;
+
+    if( !pin ){
+        Commander::printArgumentError( response );
+        if( response != NULL ){
+            response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
+        }
+        return;
+    }
+
+    if( duty && !value ){
+    }
+
+    else if( !duty && value ){
+    }
+    else{
+        Commander::printArgumentError( response );
+        if( response != NULL ){
+            response -> print( __CONST_TXT__( " Duty or value has to be defined, but not both!" ) );
+        }
+        return;
+    }
+
+    if( (int)pin < 0 ){
+        Commander::printArgumentError( response );
+        if( response != NULL ){
+            response -> print( __CONST_TXT__( " Incorrect pin identifier!" ) );
+        }
+        return;
     }
 
 }

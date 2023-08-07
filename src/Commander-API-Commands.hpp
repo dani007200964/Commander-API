@@ -59,63 +59,28 @@ SOFTWARE.
 
 void printCommandNotImplemented( Stream* channel_p );
 
-//-------- System functions --------//
+//**** System functions ****//
 
-#define API_ELEMENT_REBOOT apiElement( "reboot", "Reboots the device.", commander_reboot_func )
+//-------- reboot function --------//
+#define API_ELEMENT_REBOOT_NAME		"reboot"
+
+#define API_ELEMENT_REBOOT_DESCRIPTION	"Reboots the device.\r\n\r\n"	\
+                                      	"usage: reboot\r\n"				\
+
+#define API_ELEMENT_REBOOT apiElement( API_ELEMENT_REBOOT_NAME, API_ELEMENT_REBOOT_DESCRIPTION, commander_reboot_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_REBOOT( element ) apiElement_P( element, "reboot", "Reboots the device.", commander_reboot_func )
+  #define API_ELEMENT_P_REBOOT( element ) apiElement_P( element, API_ELEMENT_REBOOT_NAME, API_ELEMENT_REBOOT_DESCRIPTION, commander_reboot_func )
 #endif
 /// Premade function for reboot command. It reboots the core.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
 void commander_reboot_func( char *args, Stream *response, void* parent );
 
-//-------- Timing functions --------//
-
-#define API_ELEMENT_MICROS apiElement( "micros", "Returns the number of microseconds passed since the program started.", commander_micros_func )
-#ifdef __AVR__
-  #define API_ELEMENT_P_MICROS( element ) apiElement_P( element, "micros", "Returns the number of microseconds passed since the program started.", commander_micros_func )
-#endif
-/// Premade function for micros command.
-/// @param args Pointer to the argument string.
-/// @param response Response channel for messages.
-void commander_micros_func( char *args, Stream *response, void* parent );
-
-#define API_ELEMENT_MILLIS apiElement( "millis", "Returns the number of milliseconds passed since the program started.", commander_millis_func )
-#ifdef __AVR__
-  #define API_ELEMENT_P_MILLIS( element ) apiElement_P( element, "millis", "Returns the number of milliseconds passed since the program started.", commander_millis_func )
-#endif
-/// Premade function for millis command.
-/// @param args Pointer to the argument string.
-/// @param response Response channel for messages.
-void commander_millis_func( char *args, Stream *response, void* parent );
-
-#define API_ELEMENT_UPTIME apiElement( "uptime", "Returns the time passed since the program started.", commander_uptime_func )
-#ifdef __AVR__
-  #define API_ELEMENT_P_UPTIME( element ) apiElement_P( element, "uptime", "Returns the time passed since the program started.", commander_uptime_func )
-#endif
-/// Premade function for uptime command.
-/// @param args Pointer to the argument string.
-/// @param response Response channel for messages.
-void commander_uptime_func( char *args, Stream *response, void* parent );
-
-//-------- Pure awesomeness --------//
-
-#define API_ELEMENT_NEOFETCH apiElement( "neofetch", "Nice looking system information.", commander_neofetch_func )
-#ifdef __AVR__
-  #define API_ELEMENT_P_NEOFETCH( element ) apiElement_P( element, "neofetch", "Nice looking system information.", commander_neofetch_func )
-#endif
-/// Premade function for neofetch command.
-/// @param args Pointer to the argument string.
-/// @param response Response channel for messages.
-void commander_neofetch_func( char *args, Stream *response, void* parent );
-
-
 //---- echo function ----//
-#define API_ELEMENT_ECHO_NAME		"echo"
+#define API_ELEMENT_ECHO_NAME			"echo"
 
-#define API_ELEMENT_ECHO_DESCRIPTION	"echoes back the input data. The input data can be a system variable.\r\n\r\n"		\
-                                        "usage: echo [input data or system variable]\r\n"				                          \
+#define API_ELEMENT_ECHO_DESCRIPTION	"Echoes back the input data. The input data can be a system variable.\r\n\r\n"	\
+                                    	"usage: echo [input data or system variable]\r\n"								\
 
 #define API_ELEMENT_ECHO apiElement( API_ELEMENT_ECHO_NAME, API_ELEMENT_ECHO_DESCRIPTION, commander_echo_func )
 #ifdef __AVR__
@@ -126,7 +91,81 @@ void commander_neofetch_func( char *args, Stream *response, void* parent );
 /// @param response Response channel for messages.
 void commander_echo_func( char *args, Stream *response, void* parent );
 
+//---- env function ----//
+#define API_ELEMENT_ENV_NAME			"env"
 
+#define API_ELEMENT_ENV_DESCRIPTION		"Lists all hte system variables.\r\n\r\n"   \
+                                    	"usage: env\r\n"							\
+
+#define API_ELEMENT_ENV apiElement( API_ELEMENT_ENV_NAME, API_ELEMENT_ENV_DESCRIPTION, commander_env_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_ENV( element ) apiElement_P( element, API_ELEMENT_ENV_NAME, API_ELEMENT_ENV_DESCRIPTION, commander_env_func )
+#endif
+/// Premade function for echo command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+void commander_env_func( char *args, Stream *response, void* parent );
+
+//-------- micros functions --------//
+#define API_ELEMENT_MICROS_NAME			"micros"
+
+#define API_ELEMENT_MICROS_DESCRIPTION	"Returns the number of microseconds passed since the program started.\r\n\r\n"	\
+                                    	"usage: micros\r\n"																\
+
+#define API_ELEMENT_MICROS apiElement( API_ELEMENT_MICROS_NAME, API_ELEMENT_MICROS_DESCRIPTION, commander_micros_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_MICROS( element ) apiElement_P( element, API_ELEMENT_MICROS_NAME, API_ELEMENT_MICROS_DESCRIPTION, commander_micros_func )
+#endif
+/// Premade function for micros command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+void commander_micros_func( char *args, Stream *response, void* parent );
+
+//-------- millis functions --------//
+#define API_ELEMENT_MILLIS_NAME			"millis"
+
+#define API_ELEMENT_MILLIS_DESCRIPTION	"Returns the number of milliseconds passed since the program started.\r\n\r\n"	\
+                                    	"usage: millis\r\n"																\
+
+#define API_ELEMENT_MILLIS apiElement( API_ELEMENT_MILLIS_NAME, API_ELEMENT_MILLIS_DESCRIPTION, commander_millis_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_MILLIS( element ) apiElement_P( element, API_ELEMENT_MILLIS_NAME, API_ELEMENT_MILLIS_DESCRIPTION, commander_millis_func )
+#endif
+/// Premade function for millis command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+void commander_millis_func( char *args, Stream *response, void* parent );
+
+//-------- uptime functions --------//
+#define API_ELEMENT_UPTIME_NAME			"uptime"
+
+#define API_ELEMENT_UPTIME_DESCRIPTION	"Returns the time passed since the program started.\r\n\r\n"	\
+                                    	"usage: uptime\r\n"																\
+
+#define API_ELEMENT_UPTIME apiElement( API_ELEMENT_UPTIME_NAME, API_ELEMENT_UPTIME_DESCRIPTION, commander_uptime_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_UPTIME( element ) apiElement_P( element, API_ELEMENT_UPTIME_NAME, API_ELEMENT_UPTIME_DESCRIPTION, commander_uptime_func )
+#endif
+/// Premade function for uptime command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+void commander_uptime_func( char *args, Stream *response, void* parent );
+
+//-------- neofetch function --------//
+#define API_ELEMENT_NEOFETCH_NAME			"neofetch"
+
+#define API_ELEMENT_NEOFETCH_DESCRIPTION	"Nice looking system information.\r\n\r\n"	\
+                                    		"usage: neofetch\r\n"																\
+
+
+#define API_ELEMENT_NEOFETCH apiElement( API_ELEMENT_NEOFETCH_NAME, API_ELEMENT_NEOFETCH_DESCRIPTION, commander_neofetch_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_NEOFETCH( element ) apiElement_P( element, API_ELEMENT_NEOFETCH_NAME, API_ELEMENT_NEOFETCH_DESCRIPTION, commander_neofetch_func )
+#endif
+/// Premade function for neofetch command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+void commander_neofetch_func( char *args, Stream *response, void* parent );
 
 //-------- Digital I-O functions --------//
 #define API_ELEMENT_PINMODE_NAME		"pinMode"
@@ -167,7 +206,7 @@ void commander_digitalWrite_func( char *args, Stream *response, void* parent );
 
 #define API_ELEMENT_DIGITALREAD_NAME			"digitalRead"
 
-#define API_ELEMENT_DIGITALREAD_DESCRIPTION	"Read the state of a pin.\r\n\r\n"							\
+#define API_ELEMENT_DIGITALREAD_DESCRIPTION		"Read the state of a pin.\r\n\r\n"							\
                                         		"usage: digitalRead [options]\r\n"							\
                                         		"Options:\r\n"												\
                                         		"  -p, --pin\t[int] Pin identifier.\r\n"					\
@@ -182,16 +221,41 @@ void commander_digitalWrite_func( char *args, Stream *response, void* parent );
 /// @param response Response channel for messages.
 void commander_digitalRead_func( char *args, Stream *response, void* parent );
 
-//-------- Analog I-O functions --------//
+//-------- analogRead functions --------//
+#define API_ELEMENT_ANALOGREAD_NAME				"analogRead"
 
-#define API_ELEMENT_ANALOGREAD apiElement( "analogRead", "Generate an ADC measurement on a pin.\r\n\tExample: analogRead [ Pin Number ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Returns ] - The raw ADC sample.", commander_analogRead_func )
+#define API_ELEMENT_ANALOGREAD_DESCRIPTION		"Reads the value from the specified analog pin.\r\n\r\n"			\
+                                        		"usage: analogRead [options]\r\n"									\
+                                        		"Options:\r\n"														\
+                                        		"  -p, --pin\t[int] Pin identifier( A0 -> 0, A5 -> 5... )."
+
+#define API_ELEMENT_ANALOGREAD apiElement( API_ELEMENT_ANALOGREAD_NAME, API_ELEMENT_ANALOGREAD_DESCRIPTION, commander_analogRead_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_ANALOGREAD( element ) apiElement_P( element, "analogRead", "Generate an ADC measurement on a pin.\r\n\tExample: analogRead [ Pin Number ]\r\n\t[ Pin Number ] - The number ofthe pin. Typically printed on the board.\r\n\t[ Returns ] - The raw ADC sample.", commander_analogRead_func )
+  #define API_ELEMENT_P_ANALOGREAD( element ) apiElement_P( element, API_ELEMENT_ANALOGREAD_NAME, API_ELEMENT_ANALOGREAD_DESCRIPTION, commander_analogRead_func )
 #endif
 /// Premade function for analogRead command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
 void commander_analogRead_func( char *args, Stream *response, void* parent );
+
+//-------- analogWrite functions --------//
+#define API_ELEMENT_ANALOGWRITE_NAME			"analogWrite"
+
+#define API_ELEMENT_ANALOGWRITE_DESCRIPTION		"Writes an analog value (PWM wave) to a pin.\r\n\r\n"	\
+                                        		"usage: analogWrite [options]\r\n"						\
+                                        		"Options:\r\n"											\
+                                        		"  -p, --pin\t[int] Pin identifier."					\
+                                        		"  -d, --duty\t[int] Duty cycle[ 0 - 255 ]."			\
+												"  -v, --value\t[int] Value in percentage[ 0 - 100 ]."
+
+#define API_ELEMENT_ANALOGWRITE apiElement( API_ELEMENT_ANALOGWRITE_NAME, API_ELEMENT_ANALOGWRITE_DESCRIPTION, commander_analogWrite_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_ANALOGWRITE( element ) apiElement_P( element, API_ELEMENT_ANALOGWRITE_NAME, API_ELEMENT_ANALOGWRITE_DESCRIPTION, commander_analogWrite_func )
+#endif
+/// Premade function for analogRead command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+void commander_analogWrite_func( char *args, Stream *response, void* parent );
 
 //-------- WiFi functions --------//
 
@@ -279,20 +343,5 @@ void commander_random_func( char *args, Stream *response, void* parent );
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
 void commander_not_func( char *args, Stream *response, void* parent );
-
-/// The neofetch logo have this many lines.
-#define NEOFETCH_LOGO_HEIGHT 12
-
-// Uncomment the unnecessary fields.
-// Modify the required ones to your application.
-#define NEOFETCH_FW_NAME "Firmware-name"
-//#define NEOFETCH_CPU_TYPE "CPU-Type"
-#define NEOFETCH_CPU_TYPE_AUTO
-#define NEOFETCH_COMPILER __VERSION__
-#define NEOFETCH_COMPILE_DATE __DATE__
-#define NEOFETCH_TERMINAL "Shellminator"
-#define NEOFETCH_COMMAND_PARSER "Commander"
-#define NEOFETCH_AUTHOR "Daniel Hajnal"
-#define NEOFETCH_LICENSE "MIT"
 
 #endif

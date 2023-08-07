@@ -5,7 +5,7 @@
  * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2023.Aug.04
+ * Modified 2023.Aug.07
  *
  * This is a simple example, that demonstrates how
  * to use the base functionality of th Commander-API.

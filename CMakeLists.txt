@@ -32,8 +32,11 @@ include_directories(
 )
 
 set( SOURCES
-    src/Commander-API-Commands.cpp
-    src/Commander-API-Digital-IO-Commands.cpp
+    src/Commands/Commander-API-Commands.cpp
+    src/Commands/Commander-API-Digital-IO-Commands.cpp
+    src/Commands/Commander-API-Analog-IO-Commands.cpp
+    src/Commands/Commander-API-System-Commands.cpp
+    src/Commands/Commander-API-Neofetch-Command.cpp
     src/Commander-API-Commands.hpp
     src/Commander-API.cpp
     src/Commander-API.hpp
@@ -74,7 +77,6 @@ if( BUILD_EXAMPLES )
 
     set( CUSTOM_COMMANDS
         extras/simulator/CustomCommands.cpp
-        extras/simulator/CustomCommands.hpp
     )
 
 endif()
@@ -114,8 +116,11 @@ if( BUILD_EXAMPLES )
 	add_executable( Basic ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Basic/Basic.cpp )
 	add_executable( Blink ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Blink/Blink.cpp )
 	add_executable( Description ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Description/Description.cpp )
+	add_executable( Echo ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Echo/Echo.cpp )
+	add_executable( Fullsystem ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Fullsystem/Fullsystem.cpp )
 	add_executable( Help ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Help/Help.cpp )
 	add_executable( Interactive ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Interactive/Interactive.cpp )
+	add_executable( Neofetch ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Neofetch/Neofetch.cpp )
 	add_executable( Systemvariables ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Systemvariables/Systemvariables.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
@@ -134,11 +139,20 @@ if( BUILD_WEBASSEMBLY )
 	add_executable( Description ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Description/Description.cpp )
 	target_link_options( Description PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
+	add_executable( Echo ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Echo/Echo.cpp )
+	target_link_options( Echo PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Fullsystem ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Fullsystem/Fullsystem.cpp )
+	target_link_options( Fullsystem PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
 	add_executable( Help ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Help/Help.cpp )
 	target_link_options( Help PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( Interactive ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Interactive/Interactive.cpp )
 	target_link_options( Interactive PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Neofetch ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Neofetch/Neofetch.cpp )
+	target_link_options( Neofetch PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( Systemvariables ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Systemvariables/Systemvariables.cpp )
 	target_link_options( Systemvariables PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

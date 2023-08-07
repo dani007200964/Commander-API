@@ -39,6 +39,7 @@ SOFTWARE.
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include "Commander-API.hpp"
 
 /// Try to parse the defined string argument.
 ///
@@ -199,6 +200,8 @@ private:
 
     // If long named argument is used, this will store pointer to its long name.
     const char* longName = NULL;
+
+    Commander::SystemVariable_t* systemVariable = NULL;
 
 
     //bool parsed = false;

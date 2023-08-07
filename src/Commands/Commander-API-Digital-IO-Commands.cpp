@@ -31,11 +31,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Commander-API-Commands.hpp"
+#include "../Commander-API-Commands.hpp"
 
 // These commands only work inside the Arduino environment by default.
 #ifdef ARDUINO
-#include "Arduino.h"
 
 void commander_pinMode_func( char *args, Stream *response, void* parent ){
 

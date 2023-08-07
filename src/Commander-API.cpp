@@ -820,10 +820,6 @@ void Commander::printSystemVariable( Stream* channel_p, const char* name ){
 		return;
 
 	}
-	/*
-	channel_p -> println( var -> name );
-	return;
-	*/
 
 	if( ( var -> floatData ) != NULL ){
 		channel_p -> print( (int)*var -> floatData );
@@ -840,6 +836,44 @@ void Commander::printSystemVariable( Stream* channel_p, const char* name ){
 	if( ( var -> strData ) != NULL ){
 		channel_p -> print( var -> strData );
 		return;
+	}
+
+}
+
+void Commander::printSystemVariables( Stream* channel_p ){
+
+	uint32_t i;
+
+	if( channel_p == NULL ){
+		return;
+	}
+
+	if( ( variables_size == 0 ) || ( variables == NULL ) ){
+
+		channel_p -> print( __CONST_TXT__( "No system variables found!" ) );
+		return;
+
+	}
+
+	for( i = 0; i < variables_size; i++ ){
+
+		channel_p -> print( variables[ i ].name );
+
+		if( variables[ i ].floatData != NULL ){
+			channel_p -> print( __CONST_TXT__( ": float = " ) );
+			channel_p -> println( *variables[ i ].floatData );
+		}
+
+		else if( variables[ i ].intData != NULL ){
+			channel_p -> print( __CONST_TXT__( ": int = " ) );
+			channel_p -> println( *variables[ i ].intData );
+		}
+
+		else if( variables[ i ].strData != NULL ){
+			channel_p -> print( __CONST_TXT__( ": str = " ) );
+			channel_p -> println( variables[ i ].strData );
+		}
+
 	}
 
 }

@@ -97,9 +97,9 @@ SOFTWARE.
 
 
 
-#define systemVariableFloat( name, data ) { name, data, NULL, NULL }
-#define systemVariableInt( name, data ) { name, NULL, data, NULL }
-#define systemVariableString( name, data ) { name, NULL, NULL, (char*)data }
+#define systemVariableFloat( name ) { #name, &name, NULL, NULL }
+#define systemVariableInt( name ) { #name, NULL, &name, NULL }
+#define systemVariableString( name ) { #name, NULL, NULL, (char*)name }
 #define attachVariables( name ) attachVariablesFunction( name, sizeof( name ) / sizeof( name[ 0 ] ) )
 
 /// Commander class.
@@ -181,6 +181,7 @@ public:
 	static void attachVariablesFunction( SystemVariable_t* variables_p, uint32_t variables_size_p );
 	static SystemVariable_t* getSystemVariable( const char* name );
 	static void printSystemVariable( Stream* channel_p, const char* name );
+	static void printSystemVariables( Stream* channel_p );
 
 	/// Initializer.
 	///

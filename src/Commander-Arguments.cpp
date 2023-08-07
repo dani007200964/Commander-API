@@ -338,6 +338,10 @@ int Argument::findStart(){
     // This will hold the return value.
     int startIndex;
 
+    // By default set it to NULL. It will be changed to a valid address if
+    // the argument is a system variable.
+    systemVariable = NULL;
+
     // Try to find the long name.
     startIndex = findLongName();
 
@@ -364,6 +368,13 @@ int Argument::findStart(){
     
     }
 
+    // Check if it is a system variable.
+    if( source[ startIndex ] == '$' ){
+
+        systemVariable = Commander::getSystemVariable( &source[ startIndex + 1 ] );
+
+    }
+
     return startIndex;
 
 }
@@ -374,7 +385,7 @@ bool Argument::parseInt(){
     int startIndex;
 
     // It will store the status of the string to integer conversation.
-    int status;
+    int status = 0;
 
     // Clear the parsed flag.
     // parsed = false;
@@ -388,13 +399,26 @@ bool Argument::parseInt(){
         return false;
     }
 
-    // Try to convert string to integer number.
-    status = sscanf( &source[ startIndex ], "%d", &ret.i );
+    if( systemVariable != NULL ){
+
+        if( ( systemVariable -> intData ) != NULL ){
+            ret.i = *systemVariable -> intData;
+            status = 1;
+        }
+
+    }
+
+    else{
+
+        // Try to convert string to integer number.
+        status = sscanf( &source[ startIndex ], "%d", &ret.i );
+
+    }
 
     // Check if the conversation was succesful.
     // Store the result to the parsed variable.
     // parsed = status == 1;
-    bFields.parsed = status == 1;;
+    bFields.parsed = status == 1;
 
     // Return with the result.
     return bFields.parsed;
@@ -418,15 +442,28 @@ bool Argument::parseFloat(){
         return false;
     }
 
-    // The first character must be a number, or + or - character
-    if( ( ( source[ startIndex ] >= '0' ) && ( source[ startIndex ] <= '0' ) ) || ( source[ startIndex ] == '+' ) || ( source[ startIndex ] == '-' ) ){
-        // Try to convert string to integer number.
-        ret.f = (float)atof( &source[ startIndex ] );
+    if( systemVariable != NULL ){
 
-        // Check if the conversation was succesful.
-        // Store the result to the parsed variable.
+        if( ( systemVariable -> floatData ) != NULL ){
+            ret.f = *systemVariable -> floatData;
+            bFields.parsed = true;
+        }
 
-        bFields.parsed = true;
+    }
+
+    else{
+
+        // The first character must be a number, or + or - character
+        if( ( ( source[ startIndex ] >= '0' ) && ( source[ startIndex ] <= '0' ) ) || ( source[ startIndex ] == '+' ) || ( source[ startIndex ] == '-' ) ){
+            // Try to convert string to integer number.
+            ret.f = (float)atof( &source[ startIndex ] );
+
+            // Check if the conversation was succesful.
+            // Store the result to the parsed variable.
+
+            bFields.parsed = true;
+        }
+
     }
 
     // Return with the result.
@@ -478,6 +515,18 @@ bool Argument::parseStringFunction( char* buffer, int bufferSize ){
     // Character.
     if( source[ startIndex ] == '-' ){
         return false;
+    }
+
+    if( systemVariable != NULL ){
+
+        if( ( systemVariable -> strData ) != NULL ){
+            ret.c = systemVariable -> strData;
+            strncpy( buffer, systemVariable -> strData, bufferSize );
+            systemVariable -> strData[ bufferSize - 1 ] = '\0';
+            bFields.parsed = true;
+            return true;
+        }
+
     }
 
     if( source[ startIndex ] == '\"' ){
