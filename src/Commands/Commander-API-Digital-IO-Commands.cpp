@@ -36,7 +36,7 @@ SOFTWARE.
 // These commands only work inside the Arduino environment by default.
 #ifdef ARDUINO
 
-void commander_pinMode_func( char *args, Stream *response, void* parent ){
+bool commander_pinMode_func( char *args, Stream *response, void* parent ){
 
     // AVR microcontrollers has small amount of dynamic memory.
     // For this reason the built in commands do not support long
@@ -60,28 +60,28 @@ void commander_pinMode_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
         }
-        return;
+        return false;
     }
 
-    if( outputFlag.isFound() && inputFlag.isFound() ){
-        Commander::printArgumentError( response );
-        if( response != NULL ){
-            response -> print( __CONST_TXT__( " Mode can not be input and output at the same time!" ) );
-        }
-        return;
-    }
-
-    if( inputFlag.isFound() ){
+    if( inputFlag.isFound() && !outputFlag.isFound() ){
         pinMode( (int)pin, INPUT );
     }
 
-    else{
+    else if( !inputFlag.isFound() && outputFlag.isFound() ){
         pinMode( (int)pin, OUTPUT );
     }
 
+    else{
+        Commander::printArgumentError( response );
+        if( response != NULL ){
+            response -> print( __CONST_TXT__( " Pin mode has to be defined and can not be input and output at the same time!" ) );
+        }
+    }
+
+    return true;
 }
 
-void commander_digitalWrite_func( char *args, Stream *response, void* parent ){
+bool commander_digitalWrite_func( char *args, Stream *response, void* parent ){
 
     // AVR microcontrollers has small amount of dynamic memory.
     // For this reason the built in commands do not support long
@@ -105,28 +105,28 @@ void commander_digitalWrite_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
         }
-        return;
+        return false;
     }
 
-    if( highFlag.isFound() && lowFlag.isFound() ){
-        Commander::printArgumentError( response );
-        if( response != NULL ){
-            response -> print( __CONST_TXT__( " State can not be high and low at the same time!" ) );
-        }
-        return;
-    }
-
-    if( lowFlag.isFound() ){
+    if( lowFlag.isFound() && !highFlag.isFound() ){
         digitalWrite( (int)pin, LOW );
     }
 
-    else{
+    else if( !lowFlag.isFound() && highFlag.isFound() ){
         digitalWrite( (int)pin, HIGH );
     }
 
+    else{
+        Commander::printArgumentError( response );
+        if( response != NULL ){
+            response -> print( __CONST_TXT__( " Pin state has to be defined and can not be high and low at the same time!" ) );
+        }
+    }
+
+    return true;
 }
 
-void commander_digitalRead_func( char *args, Stream *response, void* parent ){
+bool commander_digitalRead_func( char *args, Stream *response, void* parent ){
 
     // AVR microcontrollers has small amount of dynamic memory.
     // For this reason the built in commands do not support long
@@ -148,7 +148,7 @@ void commander_digitalRead_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
         }
-        return;
+        return false;
     }
 
     state = digitalRead( (int)pin );
@@ -165,6 +165,7 @@ void commander_digitalRead_func( char *args, Stream *response, void* parent ){
 
     }
 
+    return true;
 }
 
 #else

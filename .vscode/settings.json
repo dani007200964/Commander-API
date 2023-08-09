@@ -5,6 +5,8 @@
         "xtr1common": "cpp",
         "compare": "cpp",
         "utility": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "cmath": "cpp",
+        "initializer_list": "cpp"
     }
 }

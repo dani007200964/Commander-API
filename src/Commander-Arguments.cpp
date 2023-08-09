@@ -406,6 +406,11 @@ bool Argument::parseInt(){
             status = 1;
         }
 
+        else if( ( systemVariable -> floatData ) != NULL ){
+            ret.f = (int)*systemVariable -> floatData;
+            bFields.parsed = true;
+        }
+
     }
 
     else{
@@ -449,12 +454,17 @@ bool Argument::parseFloat(){
             bFields.parsed = true;
         }
 
+        else if( ( systemVariable -> intData ) != NULL ){
+            ret.f = (float)*systemVariable -> intData;
+            bFields.parsed = true;
+        }
+
     }
 
     else{
 
         // The first character must be a number, or + or - character
-        if( ( ( source[ startIndex ] >= '0' ) && ( source[ startIndex ] <= '0' ) ) || ( source[ startIndex ] == '+' ) || ( source[ startIndex ] == '-' ) ){
+        if( ( ( source[ startIndex ] >= '0' ) && ( source[ startIndex ] <= '9' ) ) || ( source[ startIndex ] == '+' ) || ( source[ startIndex ] == '-' ) ){
             // Try to convert string to integer number.
             ret.f = (float)atof( &source[ startIndex ] );
 
@@ -710,6 +720,10 @@ bool Argument::inString( int index ){
 
     return ret;
     
+}
+
+Commander::SystemVariable_t* Argument::getSystemVariable(){
+    return systemVariable;
 }
 
 const char Argument::failedString = '\0';

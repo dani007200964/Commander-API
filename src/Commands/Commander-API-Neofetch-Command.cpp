@@ -33,7 +33,7 @@ SOFTWARE.
 
 #include "../Commander-API-Commands.hpp"
 
-void commander_neofetch_func( char *args, Stream *response, void* parent ){
+bool commander_neofetch_func( char *args, Stream *response, void* parent ){
 
   uint32_t rowCounter = 0;
 
@@ -86,5 +86,7 @@ void commander_neofetch_func( char *args, Stream *response, void* parent ){
   response -> print( __CONST_TXT__( "\033[" ) );
   response -> print( NEOFETCH_LOGO_HEIGHT - rowCounter );
   response -> print( 'B' );
+
+  return true;
 
 }

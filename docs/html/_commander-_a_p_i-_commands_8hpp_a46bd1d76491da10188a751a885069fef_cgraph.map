@@ -1,0 +1,5 @@
+<map id="commander_echo_func" name="commander_echo_func">
+<area shape="rect" id="node1" title="Premade function for echo command." alt="" coords="5,5,161,31"/>
+<area shape="rect" id="node2" href="$class_commander.html#aed49189003860bfa85ab3bf8d320c5f6" title="Get the instance if a system variable by its name." alt="" coords="475,5,685,31"/>
+<area shape="rect" id="node3" href="$class_commander.html#af9ef97a7482a31282c53fd98062a940c" title="Print the value of a system variable." alt="" coords="209,31,427,56"/>
+</map>

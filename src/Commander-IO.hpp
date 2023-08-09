@@ -131,7 +131,7 @@ public:
 	size_t write( const uint8_t *buffer, size_t size ) override;
 
 private:
-	uint8_t buffer[ COMMANDER_MAX_COMMAND_SIZE ];
+	uint8_t buffer[ COMMANDER_MAX_COMMAND_SIZE + 1 ];
 	uint32_t readPointer = 0;
 	uint32_t writePointer = 0;
 

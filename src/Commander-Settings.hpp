@@ -75,6 +75,9 @@ SOFTWARE.
   #define COMMANDER_MAX_COMMAND_SIZE 100
 #endif
 
+/// This macro can be used create a buffer for piping.
+/// @note The pipe buffer has to be a char type and the size of the buffer has to be as big as this define.
+#define COMMANDER_PIPE_BUFFER_SIZE ( COMMANDER_MAX_COMMAND_SIZE + 1 )
 
 ///**** neofetch settings****///
 

@@ -37,6 +37,7 @@ set( SOURCES
     src/Commands/Commander-API-Analog-IO-Commands.cpp
     src/Commands/Commander-API-System-Commands.cpp
     src/Commands/Commander-API-Neofetch-Command.cpp
+    src/Commands/Commander-API-Math-Commands.cpp
     src/Commander-API-Commands.hpp
     src/Commander-API.cpp
     src/Commander-API.hpp
@@ -121,6 +122,7 @@ if( BUILD_EXAMPLES )
 	add_executable( Help ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Help/Help.cpp )
 	add_executable( Interactive ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Interactive/Interactive.cpp )
 	add_executable( Neofetch ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Neofetch/Neofetch.cpp )
+	add_executable( Piping ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Piping/Piping.cpp )
 	add_executable( Systemvariables ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Systemvariables/Systemvariables.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
@@ -153,6 +155,9 @@ if( BUILD_WEBASSEMBLY )
 
 	add_executable( Neofetch ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Neofetch/Neofetch.cpp )
 	target_link_options( Neofetch PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Piping ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Piping/Piping.cpp )
+	target_link_options( Piping PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( Systemvariables ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Systemvariables/Systemvariables.cpp )
 	target_link_options( Systemvariables PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

@@ -33,12 +33,12 @@ SOFTWARE.
 
 #include "../Commander-API-Commands.hpp"
 
-void commander_echo_func( char *args, Stream *response, void* parent ){
+bool commander_echo_func( char *args, Stream *response, void* parent ){
 
     Commander::SystemVariable_t* systemVariable;
 
     if( response == NULL ){
-        return;
+        return false;
     }
 
     // Check for system variable request. System variables
@@ -49,7 +49,7 @@ void commander_echo_func( char *args, Stream *response, void* parent ){
 
         if( systemVariable != NULL ){
 
-            Commander::printSystemVariable( response, (const char*)&args[ 1 ] );
+            Commander::printSystemVariable( response, (const char*)&args[ 1 ], 5 );
 
         }
 
@@ -58,6 +58,7 @@ void commander_echo_func( char *args, Stream *response, void* parent ){
             response -> print( __CONST_TXT__( "System variable '" ) );
             response -> print( &args[ 1 ] );
             response -> print( __CONST_TXT__( "' NOT found!" ) );
+            return false;
 
         }
 
@@ -69,28 +70,117 @@ void commander_echo_func( char *args, Stream *response, void* parent ){
 
     }
 
-    response -> println();
+    return true;
 
 }
 
-void commander_env_func( char *args, Stream *response, void* parent ){
+bool commander_env_func( char *args, Stream *response, void* parent ){
 
     if( response == NULL ){
-        return;
+        return false;
     }
 
     Commander::printSystemVariables( response );
+    return true;
 
-    response -> println();
+}
 
+Commander::SystemVariable_t* exportTarget = NULL;
+
+bool commander_exportTarget_func( char *args, Stream *response, void* parent ){
+
+    Argument intNumber( args, 0 );
+    Argument floatNumber( args, 0 );
+
+    if( response == NULL ){
+        return false;
+    }
+
+    intNumber.parseInt();
+    floatNumber.parseFloat();
+
+    if( strncmp( (const char*)args, "", 2 ) == 0 ){
+
+        if( exportTarget == NULL ){
+            response -> print( __CONST_TXT__( " Target for export is not set!" ) );
+        }
+
+        else{
+            response -> print( __CONST_TXT__( "Export target is: " ) );
+            response -> print( exportTarget -> name );
+        }
+
+        return true;
+
+    }
+
+    if( intNumber ){
+        exportTarget = intNumber.getSystemVariable();
+    }
+
+    else if( floatNumber ){
+        exportTarget = floatNumber.getSystemVariable();
+    }
+
+    else{
+        Commander::printArgumentError( response );
+        response -> print( __CONST_TXT__( " Variable '" ) );
+        response -> print( args );
+        response -> print( __CONST_TXT__( "' is not found in the system variables!" ) );
+        return false;        
+    }
+
+    return true;
+
+}
+
+bool commander_export_func( char *args, Stream *response, void* parent ){
+
+    Argument number( args, 0 );
+
+    if( response == NULL ){
+        return false;
+    }
+
+    if( exportTarget == NULL ){
+        response -> print( __CONST_TXT__( " Target for export is not set!" ) );
+        return false;
+    }
+
+    number.parseFloat();
+
+    if( number ){
+
+        if( ( exportTarget -> floatData ) != NULL ){
+            *exportTarget -> floatData = (float)number;
+        }
+
+        else if( ( exportTarget -> intData ) != NULL ){
+            *exportTarget -> intData = (int)( (float)number );
+        }
+
+        else{
+            Commander::printArgumentError( response );
+            response -> print( __CONST_TXT__( " Only integer or float targets are supported!" ) );
+            return false;
+        }
+    }
+
+    else{
+        Commander::printArgumentError( response );
+        response -> print( __CONST_TXT__( " Input has to be an integer or a float!" ) );
+        return false;
+    }
+    
+    return true;
 }
 
 // These commands only work inside the Arduino environment by default.
 #ifdef ARDUINO
 
-void commander_reboot_func( char *args, Stream *response, void* parent ){
+bool commander_reboot_func( char *args, Stream *response, void* parent ){
 
-    response -> println( __CONST_TXT__( "Rebooting..." ) );
+    response -> print( __CONST_TXT__( "Rebooting..." ) );
 
     #if defined( ESP32 ) || ( ESP8266 )
 
@@ -107,9 +197,10 @@ void commander_reboot_func( char *args, Stream *response, void* parent ){
 
     #endif
 
+    return true;
 }
 
-void commander_millis_func( char *args, Stream *response, void* parent ){
+bool commander_millis_func( char *args, Stream *response, void* parent ){
 
     char buff[ 20 ];
 
@@ -117,9 +208,10 @@ void commander_millis_func( char *args, Stream *response, void* parent ){
 
     response -> print( buff );
 
+    return true;
 }
 
-void commander_micros_func( char *args, Stream *response, void* parent ){
+bool commander_micros_func( char *args, Stream *response, void* parent ){
 
     char buff[ 20 ];
 
@@ -127,9 +219,10 @@ void commander_micros_func( char *args, Stream *response, void* parent ){
 
     response -> print( buff );
 
+    return true;
 }
 
-void commander_uptime_func( char *args, Stream *response, void* parent ){
+bool commander_uptime_func( char *args, Stream *response, void* parent ){
 
     char buff[ 20 ];
 
@@ -152,6 +245,8 @@ void commander_uptime_func( char *args, Stream *response, void* parent ){
     snprintf( buff, sizeof( buff ), "%d days, %d:%02d:%02lu", day, hour, minute, second );
 
     response -> print( buff );
+
+    return true;
 
 }
 

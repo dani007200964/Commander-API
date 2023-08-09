@@ -1,5 +1,12 @@
 var searchData=
 [
-  ['read_0',['read',['../classcommand_response.html#aa732f3238a494ba696dc2e0bf381275c',1,'commandResponse::read()'],['../classcommander_pipe_channel.html#ac94b25ee07795603b3197f4c289efe92',1,'commanderPipeChannel::read()']]],
-  ['recursive_5foptimizer_1',['recursive_optimizer',['../class_commander.html#a8415264e9cdf820c7ad1872cc36811bd',1,'Commander']]]
+  ['parsefloat_0',['parseFloat',['../class_argument.html#a2258f3363dbb1d462286a41d4ab3b8ad',1,'Argument']]],
+  ['parseint_1',['parseInt',['../class_argument.html#aeabd957dda6add595aa860761ea337f1',1,'Argument']]],
+  ['parsestringfunction_2',['parseStringFunction',['../class_argument.html#a91aa4b22990c4532a437afb1ed58acf4',1,'Argument']]],
+  ['peek_3',['peek',['../classcommand_response.html#a8a0b6b91e60952dfe99b475979e2e783',1,'commandResponse::peek()'],['../classcommander_pipe_channel.html#abcc2883b6cd2d8ec9b30f104e0c1fd3e',1,'commanderPipeChannel::peek()']]],
+  ['printargumenterror_4',['printArgumentError',['../class_commander.html#a11b7236808d55ed1c497e719117cdf3d',1,'Commander']]],
+  ['printcommandnotimplemented_5',['printCommandNotImplemented',['../_commander-_a_p_i-_commands_8hpp.html#a7d60dbb7040580e64c652ca9ab8e3114',1,'printCommandNotImplemented(Stream *channel_p):&#160;Commander-API-Commands.cpp'],['../_commander-_a_p_i-_commands_8cpp.html#a7d60dbb7040580e64c652ca9ab8e3114',1,'printCommandNotImplemented(Stream *channel_p):&#160;Commander-API-Commands.cpp']]],
+  ['printhelp_6',['printHelp',['../class_commander.html#a0fab647689fcd4557145386ff585aec1',1,'Commander']]],
+  ['printsystemvariable_7',['printSystemVariable',['../class_commander.html#af9ef97a7482a31282c53fd98062a940c',1,'Commander']]],
+  ['printsystemvariables_8',['printSystemVariables',['../class_commander.html#afff92132175174aafb0dd4490acf865b',1,'Commander']]]
 ];

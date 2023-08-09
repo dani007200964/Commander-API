@@ -1,0 +1,4 @@
+<map id="commander_env_func" name="commander_env_func">
+<area shape="rect" id="node1" title="Premade function for echo command." alt="" coords="5,5,152,31"/>
+<area shape="rect" id="node2" href="$class_commander.html#afff92132175174aafb0dd4490acf865b" title="Print all the available system variables." alt="" coords="200,5,424,31"/>
+</map>

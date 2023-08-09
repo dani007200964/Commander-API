@@ -5,7 +5,7 @@
  * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2023.Aug.07
+ * Modified 2023.Aug.09
  *
  * This is a simple example, that demonstrates how
  * to use the base functionality of th Commander-API.
@@ -24,7 +24,7 @@ Commander commander;
 
 // We have to create the prototypes functions for our commands.
 // The arguments have to be the same for all command functions.
-void dog_func( char *args, Stream *response, void* parrent );
+bool dog_func( char *args, Stream *response, void* parrent );
 
 
 const char* dogGraphicsLine0 = {
@@ -156,7 +156,7 @@ void loop(){
 }
 
 /// This is an example function for the cat command
-void dog_func(char *args, Stream *response, void* parrent ){
+bool dog_func(char *args, Stream *response, void* parrent ){
 
     // Generic counter
     int i;
@@ -278,5 +278,5 @@ void dog_func(char *args, Stream *response, void* parrent ){
 
     response -> println();
 
-
+    return true;
 }

@@ -12,6 +12,7 @@ var class_argument =
     [ "findPlace", "class_argument.html#a267c2e9b46491f60b264c39e08ad5686", null ],
     [ "findShortName", "class_argument.html#a3ec1ea9ca2d489a987e0fa335daaf061", null ],
     [ "findStart", "class_argument.html#a7fab3d983e4a63b93e6f50df82ed6f84", null ],
+    [ "getSystemVariable", "class_argument.html#a578656131acb2afb90691ed5d949daa5", null ],
     [ "inString", "class_argument.html#af21c1965c64a5f3984cbf42bcf1eec5f", null ],
     [ "isFound", "class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728", null ],
     [ "operator bool", "class_argument.html#a2aceecdbf62755b8cfd7d1aa45298fad", null ],
@@ -28,5 +29,6 @@ var class_argument =
     [ "ret", "class_argument.html#aa14a50e55622b38c695bca1f31c4fe1e", null ],
     [ "shortName", "class_argument.html#a8585973a6fb4c23c446b4e83edd7e27a", null ],
     [ "source", "class_argument.html#a548e24f45dcf5160f664f358c6eb455c", null ],
-    [ "sourceSize", "class_argument.html#acf1ddfdbc705a7d5cda2f2da84683a1f", null ]
+    [ "sourceSize", "class_argument.html#acf1ddfdbc705a7d5cda2f2da84683a1f", null ],
+    [ "systemVariable", "class_argument.html#af0505e5adf9b8f4241686fa8dcb5a4e8", null ]
 ];

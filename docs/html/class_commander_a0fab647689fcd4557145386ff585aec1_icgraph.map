@@ -1,0 +1,5 @@
+<map id="Commander::printHelp" name="Commander::printHelp">
+<area shape="rect" id="node1" title="Print the help text to a specified Stream." alt="" coords="453,29,604,55"/>
+<area shape="rect" id="node2" href="$class_commander.html#add4dd1e824524f3682d1862d26cfa6a6" title="Command execution." alt="" coords="200,29,405,55"/>
+<area shape="rect" id="node3" href="$class_commander.html#af6609b049d9524db60aac35dbba58cec" title="Default execution function." alt="" coords="5,29,152,55"/>
+</map>

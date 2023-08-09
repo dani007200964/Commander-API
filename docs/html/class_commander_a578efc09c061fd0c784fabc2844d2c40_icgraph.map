@@ -1,6 +1,0 @@
-<map id="Commander::helpFunction" name="Commander::helpFunction">
-<area shape="rect" id="node1" title="Help function." alt="" coords="453,55,628,80"/>
-<area shape="rect" id="node2" href="$class_commander.html#a31be5be6e4b41cec2f2f836969fe7932" title="Command execution." alt="" coords="200,29,405,55"/>
-<area shape="rect" id="node4" href="$class_commander.html#a57aea5c75438a6e0096f8014705a9d0e" title="Prints out the help string to the specified Stream." alt="" coords="227,79,378,104"/>
-<area shape="rect" id="node3" href="$class_commander.html#aafe1ff979eae34461aaee3aaf8ee474c" title="Default execution function." alt="" coords="5,29,152,55"/>
-</map>

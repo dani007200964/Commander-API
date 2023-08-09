@@ -43,7 +43,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="class_commander.html#aec3ddca4426c77b7ac39c0eaea641f68" target="_top" xlink:title="Find an API element in the tree by alphabetical place.">
+<g id="a_node3"><a xlink:href="class_commander.html#a8634a1c3c680d0a598fa8b6b5445ca39" target="_top" xlink:title="Find an API element in the tree by alphabetical place.">
 <polygon fill="white" stroke="#666666" points="409,-30 301,-30 301,0 409,0 409,-30"/>
 <text text-anchor="start" x="309" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Commander::find_api</text>
 <text text-anchor="middle" x="355" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_index_by_place</text>

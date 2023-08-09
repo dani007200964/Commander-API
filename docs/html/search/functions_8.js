@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['operator_20bool_0',['operator bool',['../class_argument.html#a2aceecdbf62755b8cfd7d1aa45298fad',1,'Argument']]],
-  ['operator_20char_20_2a_1',['operator char *',['../class_argument.html#a5b8b0bb77ba6c58ef96511b6b5bae9a6',1,'Argument']]],
-  ['operator_20float_2',['operator float',['../class_argument.html#ab3007f56f8fa4706306a704d9e8a269a',1,'Argument']]],
-  ['operator_20int_3',['operator int',['../class_argument.html#a118bf68ff1438236e2dbb344c7476156',1,'Argument']]],
-  ['operator_5b_5d_4',['operator[]',['../class_commander.html#a04896ef61a17ed24afd9079dadfc568a',1,'Commander::operator[](int i)'],['../class_commander.html#ac91ff98c9d23d274d09453a8196ac7cf',1,'Commander::operator[](char *name)'],['../class_commander.html#a1a7c939ef7432eaa31658463d48149de',1,'Commander::operator[](const char *name)']]],
-  ['optimize_5fapi_5ftree_5',['optimize_api_tree',['../class_commander.html#ad435a3490d9ae4b4dda2c88e2fbf0421',1,'Commander']]]
+  ['init_0',['init',['../class_commander.html#a5d9d12c3d15cf350593f4c2b11ec05d8',1,'Commander']]],
+  ['instring_1',['inString',['../class_commander.html#a80f04d459243886a6d92bce2a15eea5e',1,'Commander::inString()'],['../class_argument.html#af21c1965c64a5f3984cbf42bcf1eec5f',1,'Argument::inString(int index)']]],
+  ['isfound_2',['isFound',['../class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728',1,'Argument']]]
 ];

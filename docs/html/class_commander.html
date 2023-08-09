@@ -57,7 +57,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V2.1.0</span>
+   &#160;<span id="projectnumber">V3.0.0</span>
    </div>
    <div id="projectbrief">Simple Command Parser</div>
   </td>
@@ -126,10 +126,12 @@ $(document).ready(function(){initNavTree('class_commander.html',''); initResizab
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="class_commander-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Commander Class Reference</div></div>
 </div><!--header-->
@@ -142,17 +144,26 @@ $(document).ready(function(){initNavTree('class_commander.html',''); initResizab
 <div class="dynheader">
 Collaboration diagram for Commander:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander__coll__graph.svg" width="542" height="218"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_commander__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for command data.  <a href="struct_commander_1_1_a_p_i__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_commander_1_1_system_variable__t.html">SystemVariable_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for system variable data.  <a href="struct_commander_1_1_system_variable__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr class="memitem:ab44b48720fd76aa5ab311641a82eb381"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#ab44b48720fd76aa5ab311641a82eb381">variableType_t</a> { <a class="el" href="class_commander.html#ab44b48720fd76aa5ab311641a82eb381aece6413d41cad7c85ebf841c529b1b80">VARIABLE_FLOAT</a>
+, <a class="el" href="class_commander.html#ab44b48720fd76aa5ab311641a82eb381a33d6c6680b6c8cddc25b49066e3bba40">VARIABLE_INT</a>
+, <a class="el" href="class_commander.html#ab44b48720fd76aa5ab311641a82eb381a664afda22e8d0bfbb6b37b9e7b4f9c93">VARIABLES_STRING</a>
+ }</td></tr>
+<tr class="memdesc:ab44b48720fd76aa5ab311641a82eb381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum for system variable type.  <a href="class_commander.html#ab44b48720fd76aa5ab311641a82eb381">More...</a><br /></td></tr>
+<tr class="separator:ab44b48720fd76aa5ab311641a82eb381"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af50ed041c506d476bbbd0c193dbc8a6c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#af50ed041c506d476bbbd0c193dbc8a6c">memoryType_t</a> { <a class="el" href="class_commander.html#af50ed041c506d476bbbd0c193dbc8a6caf20bbdb630a3e2b26beebf4343a5a5f0">MEMORY_REGULAR</a>
 , <a class="el" href="class_commander.html#af50ed041c506d476bbbd0c193dbc8a6caee4b2cfe1c907ae663ebe66557144c6a">MEMORY_PROGMEM</a>
  }</td></tr>
@@ -172,30 +183,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a04896ef61a17ed24afd9079dadfc568a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a04896ef61a17ed24afd9079dadfc568a">operator[]</a> (int i)</td></tr>
 <tr class="memdesc:a04896ef61a17ed24afd9079dadfc568a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array index operator overload for int type.  <a href="class_commander.html#a04896ef61a17ed24afd9079dadfc568a">More...</a><br /></td></tr>
 <tr class="separator:a04896ef61a17ed24afd9079dadfc568a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac91ff98c9d23d274d09453a8196ac7cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#ac91ff98c9d23d274d09453a8196ac7cf">operator[]</a> (char *name)</td></tr>
-<tr class="memdesc:ac91ff98c9d23d274d09453a8196ac7cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array index operator overload for char array( string ).  <a href="class_commander.html#ac91ff98c9d23d274d09453a8196ac7cf">More...</a><br /></td></tr>
-<tr class="separator:ac91ff98c9d23d274d09453a8196ac7cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a7c939ef7432eaa31658463d48149de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a1a7c939ef7432eaa31658463d48149de">operator[]</a> (const char *name)</td></tr>
 <tr class="memdesc:a1a7c939ef7432eaa31658463d48149de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array index operator overload for const char array( string ).  <a href="class_commander.html#a1a7c939ef7432eaa31658463d48149de">More...</a><br /></td></tr>
 <tr class="separator:a1a7c939ef7432eaa31658463d48149de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafe1ff979eae34461aaee3aaf8ee474c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#aafe1ff979eae34461aaee3aaf8ee474c">execute</a> (char *cmd)</td></tr>
-<tr class="memdesc:aafe1ff979eae34461aaee3aaf8ee474c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default execution function.  <a href="class_commander.html#aafe1ff979eae34461aaee3aaf8ee474c">More...</a><br /></td></tr>
-<tr class="separator:aafe1ff979eae34461aaee3aaf8ee474c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6609b049d9524db60aac35dbba58cec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#af6609b049d9524db60aac35dbba58cec">execute</a> (const char *cmd)</td></tr>
 <tr class="memdesc:af6609b049d9524db60aac35dbba58cec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default execution function.  <a href="class_commander.html#af6609b049d9524db60aac35dbba58cec">More...</a><br /></td></tr>
 <tr class="separator:af6609b049d9524db60aac35dbba58cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1986d962b3c1e8ea99b6cd088f101e76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a1986d962b3c1e8ea99b6cd088f101e76">execute</a> (char *cmd, Stream *resp)</td></tr>
-<tr class="memdesc:a1986d962b3c1e8ea99b6cd088f101e76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execution function for Stream response.  <a href="class_commander.html#a1986d962b3c1e8ea99b6cd088f101e76">More...</a><br /></td></tr>
-<tr class="separator:a1986d962b3c1e8ea99b6cd088f101e76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cfb465abaf04d51bb6e9901e260987d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a3cfb465abaf04d51bb6e9901e260987d">execute</a> (const char *cmd, Stream *resp)</td></tr>
-<tr class="memdesc:a3cfb465abaf04d51bb6e9901e260987d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execution function for Stream response.  <a href="class_commander.html#a3cfb465abaf04d51bb6e9901e260987d">More...</a><br /></td></tr>
-<tr class="separator:a3cfb465abaf04d51bb6e9901e260987d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f4697e3fb6ca8e6e35a55c6c26e2373"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a1f4697e3fb6ca8e6e35a55c6c26e2373">execute</a> (char *cmd, Stream *resp, void *parent)</td></tr>
-<tr class="separator:a1f4697e3fb6ca8e6e35a55c6c26e2373"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4c0189a502725a0ea0a711a4bde8551"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#af4c0189a502725a0ea0a711a4bde8551">execute</a> (const char *cmd, Stream *resp, void *parent)</td></tr>
-<tr class="separator:af4c0189a502725a0ea0a711a4bde8551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2a0464386da436113f18e3a5d87a85c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#ab2a0464386da436113f18e3a5d87a85c">execute</a> (const char *cmd, Stream *resp, void *parent=NULL)</td></tr>
+<tr class="memdesc:ab2a0464386da436113f18e3a5d87a85c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execution function for Stream response.  <a href="class_commander.html#ab2a0464386da436113f18e3a5d87a85c">More...</a><br /></td></tr>
+<tr class="separator:ab2a0464386da436113f18e3a5d87a85c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac06e93506b035ac7b99aa4253c1ed17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#aac06e93506b035ac7b99aa4253c1ed17">attachDebugChannel</a> (Stream *resp)</td></tr>
-<tr class="memdesc:aac06e93506b035ac7b99aa4253c1ed17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug channel for Stream.  <a href="class_commander.html#aac06e93506b035ac7b99aa4253c1ed17">More...</a><br /></td></tr>
+<tr class="memdesc:aac06e93506b035ac7b99aa4253c1ed17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach a debug channel to the object.  <a href="class_commander.html#aac06e93506b035ac7b99aa4253c1ed17">More...</a><br /></td></tr>
 <tr class="separator:aac06e93506b035ac7b99aa4253c1ed17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6c6e8eb4bf5f761ed4a2e8da68e97f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#ae6c6e8eb4bf5f761ed4a2e8da68e97f1">enableDebug</a> ()</td></tr>
 <tr class="memdesc:ae6c6e8eb4bf5f761ed4a2e8da68e97f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables debug messages.  <a href="class_commander.html#ae6c6e8eb4bf5f761ed4a2e8da68e97f1">More...</a><br /></td></tr>
@@ -206,11 +204,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8634a1c3c680d0a598fa8b6b5445ca39"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a8634a1c3c680d0a598fa8b6b5445ca39">find_api_index_by_place</a> (int place)</td></tr>
 <tr class="memdesc:a8634a1c3c680d0a598fa8b6b5445ca39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find an API element in the tree by alphabetical place.  <a href="class_commander.html#a8634a1c3c680d0a598fa8b6b5445ca39">More...</a><br /></td></tr>
 <tr class="separator:a8634a1c3c680d0a598fa8b6b5445ca39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f6622de74b711f79846470263ae0cdf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a4f6622de74b711f79846470263ae0cdf">printHelp</a> (bool description=false)</td></tr>
-<tr class="memdesc:a4f6622de74b711f79846470263ae0cdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Help function.  <a href="class_commander.html#a4f6622de74b711f79846470263ae0cdf">More...</a><br /></td></tr>
-<tr class="separator:a4f6622de74b711f79846470263ae0cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fab647689fcd4557145386ff585aec1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a0fab647689fcd4557145386ff585aec1">printHelp</a> (Stream *out, bool description, bool style=false)</td></tr>
-<tr class="memdesc:a0fab647689fcd4557145386ff585aec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Help function.  <a href="class_commander.html#a0fab647689fcd4557145386ff585aec1">More...</a><br /></td></tr>
+<tr class="memdesc:a0fab647689fcd4557145386ff585aec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the help text to a specified Stream.  <a href="class_commander.html#a0fab647689fcd4557145386ff585aec1">More...</a><br /></td></tr>
 <tr class="separator:a0fab647689fcd4557145386ff585aec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a610d4824de72fb824641198f1911d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a6a610d4824de72fb824641198f1911d2">enablePipeModule</a> ()</td></tr>
 <tr class="separator:a6a610d4824de72fb824641198f1911d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -218,6 +213,26 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a753446df57af5a0521632bda253d668c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a565c8117c80ec402a0d5788c37486a48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a565c8117c80ec402a0d5788c37486a48">disableFormatting</a> ()</td></tr>
 <tr class="separator:a565c8117c80ec402a0d5788c37486a48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a9fd84cb8edec49c3ae1bae5b88ff0e10"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a9fd84cb8edec49c3ae1bae5b88ff0e10">attachVariablesFunction</a> (<a class="el" href="struct_commander_1_1_system_variable__t.html">SystemVariable_t</a> *variables_p, uint32_t variables_size_p)</td></tr>
+<tr class="memdesc:a9fd84cb8edec49c3ae1bae5b88ff0e10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach system variables list to the object.  <a href="class_commander.html#a9fd84cb8edec49c3ae1bae5b88ff0e10">More...</a><br /></td></tr>
+<tr class="separator:a9fd84cb8edec49c3ae1bae5b88ff0e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed49189003860bfa85ab3bf8d320c5f6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_commander_1_1_system_variable__t.html">SystemVariable_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#aed49189003860bfa85ab3bf8d320c5f6">getSystemVariable</a> (const char *name)</td></tr>
+<tr class="memdesc:aed49189003860bfa85ab3bf8d320c5f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the instance if a system variable by its name.  <a href="class_commander.html#aed49189003860bfa85ab3bf8d320c5f6">More...</a><br /></td></tr>
+<tr class="separator:aed49189003860bfa85ab3bf8d320c5f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9ef97a7482a31282c53fd98062a940c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#af9ef97a7482a31282c53fd98062a940c">printSystemVariable</a> (Stream *channel_p, const char *name, int decimalPlaces=2)</td></tr>
+<tr class="memdesc:af9ef97a7482a31282c53fd98062a940c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the value of a system variable.  <a href="class_commander.html#af9ef97a7482a31282c53fd98062a940c">More...</a><br /></td></tr>
+<tr class="separator:af9ef97a7482a31282c53fd98062a940c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afff92132175174aafb0dd4490acf865b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#afff92132175174aafb0dd4490acf865b">printSystemVariables</a> (Stream *channel_p)</td></tr>
+<tr class="memdesc:afff92132175174aafb0dd4490acf865b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print all the available system variables.  <a href="class_commander.html#afff92132175174aafb0dd4490acf865b">More...</a><br /></td></tr>
+<tr class="separator:afff92132175174aafb0dd4490acf865b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11b7236808d55ed1c497e719117cdf3d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a11b7236808d55ed1c497e719117cdf3d">printArgumentError</a> (Stream *channel_p)</td></tr>
+<tr class="memdesc:a11b7236808d55ed1c497e719117cdf3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print '<a class="el" href="class_argument.html" title="Argument class.">Argument</a> error!' to a specified Serial channel.  <a href="class_commander.html#a11b7236808d55ed1c497e719117cdf3d">More...</a><br /></td></tr>
+<tr class="separator:a11b7236808d55ed1c497e719117cdf3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80f04d459243886a6d92bce2a15eea5e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a80f04d459243886a6d92bce2a15eea5e">inString</a> (const char *source, int index)</td></tr>
+<tr class="separator:a80f04d459243886a6d92bce2a15eea5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -242,9 +257,9 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:ac1f57477577657c1df6fc30efaa05c7e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#ac1f57477577657c1df6fc30efaa05c7e">commander_strcmp_regular</a> (<a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *element1, <a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *element2)</td></tr>
 <tr class="memdesc:ac1f57477577657c1df6fc30efaa05c7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two API-tree element's name.  <a href="class_commander.html#ac1f57477577657c1df6fc30efaa05c7e">More...</a><br /></td></tr>
 <tr class="separator:ac1f57477577657c1df6fc30efaa05c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a962d4b484b29957648c55a271463473a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a962d4b484b29957648c55a271463473a">commander_strcmp_tree_ram_regular</a> (<a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *element1, char *element2)</td></tr>
-<tr class="memdesc:a962d4b484b29957648c55a271463473a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare an API-tree element's name with a regular string.  <a href="class_commander.html#a962d4b484b29957648c55a271463473a">More...</a><br /></td></tr>
-<tr class="separator:a962d4b484b29957648c55a271463473a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad445a486713469de3b397c6fe305c480"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#ad445a486713469de3b397c6fe305c480">commander_strcmp_tree_ram_regular</a> (<a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *element1, const char *element2)</td></tr>
+<tr class="memdesc:ad445a486713469de3b397c6fe305c480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare an API-tree element's name with a regular string.  <a href="class_commander.html#ad445a486713469de3b397c6fe305c480">More...</a><br /></td></tr>
+<tr class="separator:ad445a486713469de3b397c6fe305c480"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05f64743655f673fb18871e71ae75c9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a05f64743655f673fb18871e71ae75c9c">swap_api_elements</a> (uint16_t index, uint16_t place)</td></tr>
 <tr class="memdesc:a05f64743655f673fb18871e71ae75c9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap two API elements in the tree.  <a href="class_commander.html#a05f64743655f673fb18871e71ae75c9c">More...</a><br /></td></tr>
 <tr class="separator:a05f64743655f673fb18871e71ae75c9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -254,12 +269,12 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a8415264e9cdf820c7ad1872cc36811bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a8415264e9cdf820c7ad1872cc36811bd">recursive_optimizer</a> (int32_t start_index, int32_t stop_index)</td></tr>
 <tr class="memdesc:a8415264e9cdf820c7ad1872cc36811bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursive function optimize a section in the tree.  <a href="class_commander.html#a8415264e9cdf820c7ad1872cc36811bd">More...</a><br /></td></tr>
 <tr class="separator:a8415264e9cdf820c7ad1872cc36811bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfb4a457de8907f222da537466adb84d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#adfb4a457de8907f222da537466adb84d">executeCommand</a> (char *cmd, void *parent=NULL)</td></tr>
-<tr class="memdesc:adfb4a457de8907f222da537466adb84d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command execution.  <a href="class_commander.html#adfb4a457de8907f222da537466adb84d">More...</a><br /></td></tr>
-<tr class="separator:adfb4a457de8907f222da537466adb84d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79a36c570d33547d859fa0c9c6fc99d6"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a79a36c570d33547d859fa0c9c6fc99d6">hasChar</a> (char *str, char c)</td></tr>
-<tr class="memdesc:a79a36c570d33547d859fa0c9c6fc99d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for a character in a string.  <a href="class_commander.html#a79a36c570d33547d859fa0c9c6fc99d6">More...</a><br /></td></tr>
-<tr class="separator:a79a36c570d33547d859fa0c9c6fc99d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add4dd1e824524f3682d1862d26cfa6a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#add4dd1e824524f3682d1862d26cfa6a6">executeCommand</a> (const char *cmd, void *parent=NULL)</td></tr>
+<tr class="memdesc:add4dd1e824524f3682d1862d26cfa6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command execution.  <a href="class_commander.html#add4dd1e824524f3682d1862d26cfa6a6">More...</a><br /></td></tr>
+<tr class="separator:add4dd1e824524f3682d1862d26cfa6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1598c9d4039c1d0e8ec57f0f44ef98b"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#aa1598c9d4039c1d0e8ec57f0f44ef98b">hasChar</a> (const char *str, char c, bool ignoreString=true)</td></tr>
+<tr class="memdesc:aa1598c9d4039c1d0e8ec57f0f44ef98b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for a character in a string.  <a href="class_commander.html#aa1598c9d4039c1d0e8ec57f0f44ef98b">More...</a><br /></td></tr>
+<tr class="separator:aa1598c9d4039c1d0e8ec57f0f44ef98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -272,20 +287,20 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a3d9a0f96fb205cdb5665d7ab4ae67a00"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a3d9a0f96fb205cdb5665d7ab4ae67a00">elementCounter</a></td></tr>
 <tr class="memdesc:a3d9a0f96fb205cdb5665d7ab4ae67a00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal variable for counting purpose.  <a href="class_commander.html#a3d9a0f96fb205cdb5665d7ab4ae67a00">More...</a><br /></td></tr>
 <tr class="separator:a3d9a0f96fb205cdb5665d7ab4ae67a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a316a4c235d0474e9be0465f722f46015"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a316a4c235d0474e9be0465f722f46015">tempBuff</a> [<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>]</td></tr>
-<tr class="memdesc:a316a4c235d0474e9be0465f722f46015"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal command buffer.  <a href="class_commander.html#a316a4c235d0474e9be0465f722f46015">More...</a><br /></td></tr>
-<tr class="separator:a316a4c235d0474e9be0465f722f46015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a865e15db1316388328f77c269f435968"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a865e15db1316388328f77c269f435968">tempBuff</a> [<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>+1]</td></tr>
+<tr class="memdesc:a865e15db1316388328f77c269f435968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal command buffer.  <a href="class_commander.html#a865e15db1316388328f77c269f435968">More...</a><br /></td></tr>
+<tr class="separator:a865e15db1316388328f77c269f435968"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ce030ae25b4c68d60f673595e2481bb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a7ce030ae25b4c68d60f673595e2481bb">formatting</a> = false</td></tr>
 <tr class="separator:a7ce030ae25b4c68d60f673595e2481bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bbd717794c34db58ee1740be06a861a"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a4bbd717794c34db58ee1740be06a861a">progmemBuffer</a> [<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>]</td></tr>
-<tr class="memdesc:a4bbd717794c34db58ee1740be06a861a"><td class="mdescLeft">&#160;</td><td class="mdescRight">With the PROGMEM implementation we need to copy the data from the PROGMEM area to a buffer for compersation.  <a href="class_commander.html#a4bbd717794c34db58ee1740be06a861a">More...</a><br /></td></tr>
-<tr class="separator:a4bbd717794c34db58ee1740be06a861a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7adef0598be64efe2aabb5f4f7dc6a6f"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a7adef0598be64efe2aabb5f4f7dc6a6f">progmemBuffer</a> [<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>+1]</td></tr>
+<tr class="memdesc:a7adef0598be64efe2aabb5f4f7dc6a6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">With the PROGMEM implementation we need to copy the data from the PROGMEM area to a buffer for compersation.  <a href="class_commander.html#a7adef0598be64efe2aabb5f4f7dc6a6f">More...</a><br /></td></tr>
+<tr class="separator:a7adef0598be64efe2aabb5f4f7dc6a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ae218566be0e1de395bfec46a03ba79"><td class="memItemLeft" align="right" valign="top">int(Commander::*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a2ae218566be0e1de395bfec46a03ba79">commander_strcmp</a> )(<a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *element1, <a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *element2)</td></tr>
 <tr class="memdesc:a2ae218566be0e1de395bfec46a03ba79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to an internal strcmp like function.  <a href="class_commander.html#a2ae218566be0e1de395bfec46a03ba79">More...</a><br /></td></tr>
 <tr class="separator:a2ae218566be0e1de395bfec46a03ba79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e21c86ee2dc3ea6ce7a8792bd2a0d20"><td class="memItemLeft" align="right" valign="top">int(Commander::*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a3e21c86ee2dc3ea6ce7a8792bd2a0d20">commander_strcmp_tree_ram</a> )(<a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *element1, char *element2)</td></tr>
-<tr class="memdesc:a3e21c86ee2dc3ea6ce7a8792bd2a0d20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to an internal strcmp like function.  <a href="class_commander.html#a3e21c86ee2dc3ea6ce7a8792bd2a0d20">More...</a><br /></td></tr>
-<tr class="separator:a3e21c86ee2dc3ea6ce7a8792bd2a0d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc616dba92464902cf376d4a1709807a"><td class="memItemLeft" align="right" valign="top">int(Commander::*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#abc616dba92464902cf376d4a1709807a">commander_strcmp_tree_ram</a> )(<a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *element1, const char *element2)</td></tr>
+<tr class="memdesc:abc616dba92464902cf376d4a1709807a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to an internal strcmp like function.  <a href="class_commander.html#abc616dba92464902cf376d4a1709807a">More...</a><br /></td></tr>
+<tr class="separator:abc616dba92464902cf376d4a1709807a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37d16f549c5329c4a42999ee2704f49d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcommand_response.html">commandResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a37d16f549c5329c4a42999ee2704f49d">defaultResponse</a></td></tr>
 <tr class="memdesc:a37d16f549c5329c4a42999ee2704f49d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default response handler class.  <a href="class_commander.html#a37d16f549c5329c4a42999ee2704f49d">More...</a><br /></td></tr>
 <tr class="separator:a37d16f549c5329c4a42999ee2704f49d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -304,15 +319,22 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:aecabc5266b3f6fb0bad78885aae37420"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcommander_pipe_channel.html">commanderPipeChannel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#aecabc5266b3f6fb0bad78885aae37420">pipeChannel</a></td></tr>
 <tr class="memdesc:aecabc5266b3f6fb0bad78885aae37420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Channel for the internal piping.  <a href="class_commander.html#aecabc5266b3f6fb0bad78885aae37420">More...</a><br /></td></tr>
 <tr class="separator:aecabc5266b3f6fb0bad78885aae37420"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a967e10c0ce3ae364dce67e350cc7e624"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a967e10c0ce3ae364dce67e350cc7e624">pipeArgBuffer</a> [<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>]</td></tr>
-<tr class="memdesc:a967e10c0ce3ae364dce67e350cc7e624"><td class="mdescLeft">&#160;</td><td class="mdescRight">If piping happenes the output of the first command will be copied to this buffer.  <a href="class_commander.html#a967e10c0ce3ae364dce67e350cc7e624">More...</a><br /></td></tr>
-<tr class="separator:a967e10c0ce3ae364dce67e350cc7e624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab77c685c8d89fe8a257dca3f6da85163"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#ab77c685c8d89fe8a257dca3f6da85163">pipeArgBuffer</a> [<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>+1]</td></tr>
+<tr class="memdesc:ab77c685c8d89fe8a257dca3f6da85163"><td class="mdescLeft">&#160;</td><td class="mdescRight">If piping happens the output of the first command will be copied to this buffer.  <a href="class_commander.html#ab77c685c8d89fe8a257dca3f6da85163">More...</a><br /></td></tr>
+<tr class="separator:ab77c685c8d89fe8a257dca3f6da85163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a49c91bd906a14d79197add2de215e8d3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_commander_1_1_system_variable__t.html">SystemVariable_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#a49c91bd906a14d79197add2de215e8d3">variables</a> = NULL</td></tr>
+<tr class="separator:a49c91bd906a14d79197add2de215e8d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad546d1e7250ea4ccba3a705d95426793"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_commander.html#ad546d1e7250ea4ccba3a705d95426793">variables_size</a> = 0</td></tr>
+<tr class="separator:ad546d1e7250ea4ccba3a705d95426793"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p ><a class="el" href="class_commander.html" title="Commander class.">Commander</a> class. </p>
 <p >This class can be used to create a command parser. Its job is to parse a command from a character array( string ) and find the matching function for that command from a database. This database consists an array of API_t-type elements, and these elements are store the relevant information for that specific command. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00097">97</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00168">168</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ad08915a4416f0f5f79706b3017d323ff" name="ad08915a4416f0f5f79706b3017d323ff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad08915a4416f0f5f79706b3017d323ff">&#9670;&#160;</a></span>API_t</h2>
@@ -350,7 +372,33 @@ Private Attributes</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00126">126</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00224">224</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab44b48720fd76aa5ab311641a82eb381" name="ab44b48720fd76aa5ab311641a82eb381"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab44b48720fd76aa5ab311641a82eb381">&#9670;&#160;</a></span>variableType_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_commander.html#ab44b48720fd76aa5ab311641a82eb381">Commander::variableType_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enum for system variable type. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab44b48720fd76aa5ab311641a82eb381aece6413d41cad7c85ebf841c529b1b80" name="ab44b48720fd76aa5ab311641a82eb381aece6413d41cad7c85ebf841c529b1b80"></a>VARIABLE_FLOAT&#160;</td><td class="fielddoc"><p >Used for float data. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab44b48720fd76aa5ab311641a82eb381a33d6c6680b6c8cddc25b49066e3bba40" name="ab44b48720fd76aa5ab311641a82eb381a33d6c6680b6c8cddc25b49066e3bba40"></a>VARIABLE_INT&#160;</td><td class="fielddoc"><p >Used for int data. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab44b48720fd76aa5ab311641a82eb381a664afda22e8d0bfbb6b37b9e7b4f9c93" name="ab44b48720fd76aa5ab311641a82eb381a664afda22e8d0bfbb6b37b9e7b4f9c93"></a>VARIABLES_STRING&#160;</td><td class="fielddoc"><p >Used for string data. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00198">198</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -371,10 +419,16 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Debug channel for Stream. </p>
-<p >This function attaches a Serial channel for debug messages. It also enables the debug functionality. </p>
+<p>Attach a debug channel to the object. </p>
+<p >This function attaches a Serial channel for debug messages. It also enables the debug functionality. It can be useful during the init phase. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resp</td><td>Pointer to a Stream object. The output data will be printed to this Stream. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>If you call this function the debug messages will be enabled automatically. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00580">580</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00493">493</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 
 </div>
 </div>
@@ -405,9 +459,50 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Attach API-tree to the object. </p>
-<p >With this function you can attach the API-tree structure array to the object. This array contains the data for each command. </p><dl class="section note"><dt>Note</dt><dd>There is a macro( attachTree ) to simplify this process. </dd></dl>
+<p >With this function you can attach the API-tree structure array to the object. This array contains the data for each command. </p><dl class="section note"><dt>Note</dt><dd>There is a macro to simplify this process. Please use the attachTree macro because it is safer! </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00039">39</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9fd84cb8edec49c3ae1bae5b88ff0e10" name="a9fd84cb8edec49c3ae1bae5b88ff0e10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fd84cb8edec49c3ae1bae5b88ff0e10">&#9670;&#160;</a></span>attachVariablesFunction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Commander::attachVariablesFunction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_commander_1_1_system_variable__t.html">Commander::SystemVariable_t</a> *&#160;</td>
+          <td class="paramname"><em>variables_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>variables_size_p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attach system variables list to the object. </p>
+<p >With this function you can attach the system variables list to the object. This array contains the data for each variable. </p><dl class="section note"><dt>Note</dt><dd>There is a macro to simplify this process. Please use the attachVariables macro because it is safer! </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00755">755</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 
 </div>
 </div>
@@ -455,7 +550,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns an int value indicating the <a href="https://cplusplus.com/reference/cstring/strcmp/">relationship</a> between the strings. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00827">827</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00719">719</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -508,12 +603,11 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns an int value indicating the <a href="https://cplusplus.com/reference/cstring/strcmp/">relationship</a> between the strings. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00813">813</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00705">705</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 0 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_ac1f57477577657c1df6fc30efaa05c7e_icgraph.svg" width="344" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -562,7 +656,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns an int value indicating the <a href="https://cplusplus.com/reference/cstring/strcmp/">relationship</a> between the strings. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00834">834</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00726">726</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -571,8 +665,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a962d4b484b29957648c55a271463473a" name="a962d4b484b29957648c55a271463473a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a962d4b484b29957648c55a271463473a">&#9670;&#160;</a></span>commander_strcmp_tree_ram_regular()</h2>
+<a id="ad445a486713469de3b397c6fe305c480" name="ad445a486713469de3b397c6fe305c480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad445a486713469de3b397c6fe305c480">&#9670;&#160;</a></span>commander_strcmp_tree_ram_regular()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -589,7 +683,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>element2</em>&#160;</td>
         </tr>
         <tr>
@@ -615,12 +709,11 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns an int value indicating the <a href="https://cplusplus.com/reference/cstring/strcmp/">relationship</a> between the strings. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00819">819</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00711">711</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 1 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_ad445a486713469de3b397c6fe305c480_icgraph.svg" width="350" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -642,7 +735,7 @@ Here is the caller graph for this function:</div>
 
 <p>Disables debug messages. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00595">595</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00508">508</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 
 </div>
 </div>
@@ -661,7 +754,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00845">845</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00737">737</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 
 </div>
 </div>
@@ -682,7 +775,7 @@ Here is the caller graph for this function:</div>
 
 <p>Enables debug messages. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00589">589</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00502">502</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 
 </div>
 </div>
@@ -701,7 +794,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00842">842</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00734">734</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 
 </div>
 </div>
@@ -722,118 +815,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="aafe1ff979eae34461aaee3aaf8ee474c" name="aafe1ff979eae34461aaee3aaf8ee474c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafe1ff979eae34461aaee3aaf8ee474c">&#9670;&#160;</a></span>execute() <span class="overload">[1/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Commander::execute </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>cmd</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Default execution function. </p>
-<p >This function tries to execute a command. It uses the default response channel, so the messages from the command handler wont be visible. </p>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00524">524</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><!-- SVG 2 -->
-</div>
-</div>
-
-</div>
-</div>
-<a id="a1986d962b3c1e8ea99b6cd088f101e76" name="a1986d962b3c1e8ea99b6cd088f101e76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1986d962b3c1e8ea99b6cd088f101e76">&#9670;&#160;</a></span>execute() <span class="overload">[2/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Commander::execute </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>cmd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>resp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Execution function for Stream response. </p>
-<p >This function tries to execute a command. It uses the Stream response channel, so the messages from the command handler will be passed to the selected Stream object. </p>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00544">544</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><!-- SVG 3 -->
-</div>
-</div>
-
-</div>
-</div>
-<a id="a1f4697e3fb6ca8e6e35a55c6c26e2373" name="a1f4697e3fb6ca8e6e35a55c6c26e2373"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f4697e3fb6ca8e6e35a55c6c26e2373">&#9670;&#160;</a></span>execute() <span class="overload">[3/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Commander::execute </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>cmd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>resp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>parent</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00562">562</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><!-- SVG 4 -->
-</div>
-</div>
-
-</div>
-</div>
 <a id="af6609b049d9524db60aac35dbba58cec" name="af6609b049d9524db60aac35dbba58cec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6609b049d9524db60aac35dbba58cec">&#9670;&#160;</a></span>execute() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af6609b049d9524db60aac35dbba58cec">&#9670;&#160;</a></span>execute() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -849,59 +832,24 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Default execution function. </p>
-<p >This function tries to execute a command. It uses the default response channel, so the messages from the command handler wont be visible. </p>
+<p >This function tries to execute a command. It uses the default response channel, so the messages from the command handler won't be visible. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cmd</td><td>This is a command string and it will be executed. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00534">534</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00473">473</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 5 -->
-</div>
-</div>
-
-</div>
-</div>
-<a id="a3cfb465abaf04d51bb6e9901e260987d" name="a3cfb465abaf04d51bb6e9901e260987d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cfb465abaf04d51bb6e9901e260987d">&#9670;&#160;</a></span>execute() <span class="overload">[5/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Commander::execute </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>cmd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>resp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Execution function for Stream response. </p>
-<p >This function tries to execute a command. It uses the Stream response channel, so the messages from the command handler will be passed to the selected Stream object. </p>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00553">553</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><!-- SVG 6 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_commander_af6609b049d9524db60aac35dbba58cec_cgraph.svg" width="100%" height="461"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="af4c0189a502725a0ea0a711a4bde8551" name="af4c0189a502725a0ea0a711a4bde8551"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4c0189a502725a0ea0a711a4bde8551">&#9670;&#160;</a></span>execute() <span class="overload">[6/6]</span></h2>
+<a id="ab2a0464386da436113f18e3a5d87a85c" name="ab2a0464386da436113f18e3a5d87a85c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2a0464386da436113f18e3a5d87a85c">&#9670;&#160;</a></span>execute() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -922,7 +870,7 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>parent</em>&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>NULL</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -932,18 +880,27 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00571">571</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p>Execution function for Stream response. </p>
+<p >This function tries to execute a command. It uses the Stream response channel, so the messages from the command handler will be passed to the selected Stream object. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cmd</td><td>This is a command string and it will be executed. </td></tr>
+    <tr><td class="paramname">resp</td><td>Pointer to a Stream object. The output data will be printed to this Stream. This pointer will be accessible from the function that is assigned to the command. </td></tr>
+    <tr><td class="paramname">parent</td><td>This can be a pointer to anything. The reason why it is implemented, is because the Shellminator project needed a simple way to communicate with the caller terminal from the called command function. It is optional, the default value for it is NULL. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00483">483</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 7 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_commander_ab2a0464386da436113f18e3a5d87a85c_cgraph.svg" width="100%" height="461"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="adfb4a457de8907f222da537466adb84d" name="adfb4a457de8907f222da537466adb84d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfb4a457de8907f222da537466adb84d">&#9670;&#160;</a></span>executeCommand()</h2>
+<a id="add4dd1e824524f3682d1862d26cfa6a6" name="add4dd1e824524f3682d1862d26cfa6a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add4dd1e824524f3682d1862d26cfa6a6">&#9670;&#160;</a></span>executeCommand()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -954,7 +911,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">void Commander::executeCommand </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>cmd</em>, </td>
         </tr>
         <tr>
@@ -979,18 +936,16 @@ Here is the call graph for this function:</div>
 <p>Command execution. </p>
 <p >This function executes a command. Before calling this function, the response pointer and it's channel has to be configured correctly. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00295">295</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00242">242</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 8 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_add4dd1e824524f3682d1862d26cfa6a6_cgraph.svg" width="619" height="215"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 9 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_add4dd1e824524f3682d1862d26cfa6a6_icgraph.svg" width="411" height="60"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1012,19 +967,68 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Find an API element in the tree by alphabetical place. </p>
+<p >With this function you can find an element in the API-tree by its alphabetical place in the tree. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">place</td><td>The place of the searched element. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>It will return the index of the element if it is found. If the element is not found it will return 0. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>It can be only used after the init function finished its job! </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00170">170</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00117">117</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 10 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_commander_a8634a1c3c680d0a598fa8b6b5445ca39_icgraph.svg" width="100%" height="412"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="a79a36c570d33547d859fa0c9c6fc99d6" name="a79a36c570d33547d859fa0c9c6fc99d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79a36c570d33547d859fa0c9c6fc99d6">&#9670;&#160;</a></span>hasChar()</h2>
+<a id="aed49189003860bfa85ab3bf8d320c5f6" name="aed49189003860bfa85ab3bf8d320c5f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed49189003860bfa85ab3bf8d320c5f6">&#9670;&#160;</a></span>getSystemVariable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_commander_1_1_system_variable__t.html">Commander::SystemVariable_t</a> * Commander::getSystemVariable </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the instance if a system variable by its name. </p>
+<p >With this function you can get the address of a system variable structure element by the name if the system variable. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the system variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>If the variable is found, it will return the address of the control structure. Otherwise it will return NULL. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00760">760</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_commander_aed49189003860bfa85ab3bf8d320c5f6_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="aa1598c9d4039c1d0e8ec57f0f44ef98b" name="aa1598c9d4039c1d0e8ec57f0f44ef98b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1598c9d4039c1d0e8ec57f0f44ef98b">&#9670;&#160;</a></span>hasChar()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1035,14 +1039,20 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">int32_t Commander::hasChar </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>str</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>c</em>&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>ignoreString</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1062,17 +1072,22 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">str</td><td>Pointer to a character array where the search will be. </td></tr>
     <tr><td class="paramname">c</td><td>This character will be searched in the string. </td></tr>
+    <tr><td class="paramname">ignoreString</td><td>If this flag is set to true, the searched character within a string will be ignored. For example if the searched character is 'A' and the input str is 'dog "Apple" Arduino' 12 will be returned, which is the start of the Arduino word. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>If the character found in the string, the poisition of the first occurance will be returned. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>If the character found in the string, the position of the first occurrence will be returned. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00793">793</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00673">673</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_aa1598c9d4039c1d0e8ec57f0f44ef98b_cgraph.svg" width="351" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 11 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_aa1598c9d4039c1d0e8ec57f0f44ef98b_icgraph.svg" width="607" height="60"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1095,41 +1110,60 @@ Here is the caller graph for this function:</div>
 <p>Initializer. </p>
 <p >This function initializes the object and its internal parts. Firstly it makes the API-tree alphabetically ordered, then creates a balanced binary tree from it. It is necessary to speed up the search process. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00061">61</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00050">50</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 12 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_commander_a5d9d12c3d15cf350593f4c2b11ec05d8_cgraph.svg" width="100%" height="530"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="ac91ff98c9d23d274d09453a8196ac7cf" name="ac91ff98c9d23d274d09453a8196ac7cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac91ff98c9d23d274d09453a8196ac7cf">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/3]</span></h2>
+<a id="a80f04d459243886a6d92bce2a15eea5e" name="a80f04d459243886a6d92bce2a15eea5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80f04d459243886a6d92bce2a15eea5e">&#9670;&#160;</a></span>inString()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_commander_1_1_a_p_i__t.html">Commander::API_t</a> * Commander::operator[] </td>
+          <td class="memname">bool Commander::inString </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Array index operator overload for char array( string ). </p>
-<p >With this function you can get a pointer to an element from the API-tree by it's name. If the name is not found the return value will be NULL. </p>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00614">614</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00847">847</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_commander_a80f04d459243886a6d92bce2a15eea5e_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>
 <a id="a1a7c939ef7432eaa31658463d48149de" name="a1a7c939ef7432eaa31658463d48149de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a7c939ef7432eaa31658463d48149de">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7c939ef7432eaa31658463d48149de">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1145,14 +1179,20 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Array index operator overload for const char array( string ). </p>
-<p >With this function you can get a pointer to an element from the API-tree by it's name. If the name is not found the return value will be NULL. </p>
+<p >With this function you can get a pointer to an element from the API-tree by it's name. If the name is not found the return value will be NULL. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of an element in the API-tree. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>In case of valid name, it will return the address of the element. Otherwise NULL is returned. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00654">654</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00527">527</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a04896ef61a17ed24afd9079dadfc568a" name="a04896ef61a17ed24afd9079dadfc568a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04896ef61a17ed24afd9079dadfc568a">&#9670;&#160;</a></span>operator[]() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a04896ef61a17ed24afd9079dadfc568a">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1168,9 +1208,15 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Array index operator overload for int type. </p>
-<p >With this function you can get a pointer to an element from the API-tree by it's index. If the index is invalid, the return value will be NULL. </p>
+<p >With this function you can get a pointer to an element from the API-tree by it's index. If the index is invalid, the return value will be NULL. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Index of an element in the API-tree. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>In case of valid index, it will return the address of the element. Otherwise NULL is returned. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00601">601</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00514">514</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 
 </div>
 </div>
@@ -1199,12 +1245,11 @@ Here is the call graph for this function:</div>
 
 <p>Optimizes the tree to make it balanced. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00221">221</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00168">168</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 13 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_commander_ad435a3490d9ae4b4dda2c88e2fbf0421_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -1214,43 +1259,49 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a4f6622de74b711f79846470263ae0cdf" name="a4f6622de74b711f79846470263ae0cdf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f6622de74b711f79846470263ae0cdf">&#9670;&#160;</a></span>printHelp() <span class="overload">[1/2]</span></h2>
+<a id="a11b7236808d55ed1c497e719117cdf3d" name="a11b7236808d55ed1c497e719117cdf3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11b7236808d55ed1c497e719117cdf3d">&#9670;&#160;</a></span>printArgumentError()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Commander::printHelp </td>
+          <td class="memname">void Commander::printArgumentError </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>description</em> = <code>false</code></td><td>)</td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>channel_p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Help function. </p>
-<p >It prints all the available commands in alphabetical order. If the description argument is set to true, it also prints the description data for all commands. todo Finish description. </p>
+<p>Print '<a class="el" href="class_argument.html" title="Argument class.">Argument</a> error!' to a specified Serial channel. </p>
+<p >This is a relatively common message, when arguments are used in a command. To avoid duplication and save som precious memory, this function is dedicated to print this message. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">channel_p</td><td>Pointer to the Stream object where the message will be printed. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00660">660</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><!-- SVG 14 -->
-</div>
-</div>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00741">741</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 15 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_a11b7236808d55ed1c497e719117cdf3d_icgraph.svg" width="440" height="579"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <a id="a0fab647689fcd4557145386ff585aec1" name="a0fab647689fcd4557145386ff585aec1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fab647689fcd4557145386ff585aec1">&#9670;&#160;</a></span>printHelp() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fab647689fcd4557145386ff585aec1">&#9670;&#160;</a></span>printHelp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1281,15 +1332,131 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Help function. </p>
-<p >It prints all the available commands in alphabetical order. If the description argument is set to true, it also prints the description data for all commands. todo Finish description. </p>
+<p>Print the help text to a specified Stream. </p>
+<p >It prints all the available commands in alphabetical order. If the description argument is set to true, it also prints the description data for all commands. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Pointer to a Stream object. The output data will be printed to this Stream. </td></tr>
+    <tr><td class="paramname">description</td><td>If this flag is set to true, the description data will be printed as well. </td></tr>
+    <tr><td class="paramname">style</td><td>If this flag is set to true, the output text will be colorized. It will use VT100 escape sequences, and because of it, the output data only will be pretty on VT100 compatible frontends. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00666">666</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00567">567</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 16 -->
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_a0fab647689fcd4557145386ff585aec1_cgraph.svg" width="354" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_a0fab647689fcd4557145386ff585aec1_icgraph.svg" width="610" height="60"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="af9ef97a7482a31282c53fd98062a940c" name="af9ef97a7482a31282c53fd98062a940c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9ef97a7482a31282c53fd98062a940c">&#9670;&#160;</a></span>printSystemVariable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Commander::printSystemVariable </td>
+          <td>(</td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>channel_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>decimalPlaces</em> = <code>2</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print the value of a system variable. </p>
+<p >This function will print the value of a system variable to a specified Stream. The variable is accessed by its name. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">channel_p</td><td>Pointer to a Stream object. The data will be printed to this Stream. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the system variable. </td></tr>
+    <tr><td class="paramname">decimalPlaces</td><td>Optionally, you can specify how many how many decimal places will be needed in case of float data. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00776">776</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_af9ef97a7482a31282c53fd98062a940c_cgraph.svg" width="487" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_af9ef97a7482a31282c53fd98062a940c_icgraph.svg" width="432" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="afff92132175174aafb0dd4490acf865b" name="afff92132175174aafb0dd4490acf865b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afff92132175174aafb0dd4490acf865b">&#9670;&#160;</a></span>printSystemVariables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Commander::printSystemVariables </td>
+          <td>(</td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>channel_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print all the available system variables. </p>
+<p >This function will print all the available system variables to a specified Stream. The variable name and its value will be printed. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">channel_p</td><td>Pointer to a Stream object. The data will be printed to this Stream. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00809">809</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_afff92132175174aafb0dd4490acf865b_icgraph.svg" width="430" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1331,12 +1498,11 @@ Here is the call graph for this function:</div>
 <p>Recursive function optimize a section in the tree. </p>
 <p >It is used by optimize_api_tree function. The elementCounter has to be 0 before using this function. This function just creates an order for the balanced tree, but does not create the links between the elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00268">268</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00215">215</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 17 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_a8415264e9cdf820c7ad1872cc36811bd_cgraph.svg" width="556" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -1382,12 +1548,11 @@ Here is the caller graph for this function:</div>
 
 <p>Swap two API elements in the tree. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00198">198</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8cpp_source.html#l00145">145</a> of file <a class="el" href="_commander-_a_p_i_8cpp_source.html">Commander-API.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 18 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_commander_a05f64743655f673fb18871e71ae75c9c_cgraph.svg" width="358" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -1420,7 +1585,7 @@ Here is the caller graph for this function:</div>
 
 <p>Starting address of the API-tree. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00250">250</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00378">378</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1446,7 +1611,7 @@ Here is the caller graph for this function:</div>
 
 <p>Number of elements in the API-tree. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00253">253</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00381">381</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1473,12 +1638,12 @@ Here is the caller graph for this function:</div>
 <p>Function pointer to an internal strcmp like function. </p>
 <p >It uses the regular version by default. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00311">311</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00442">442</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a3e21c86ee2dc3ea6ce7a8792bd2a0d20" name="a3e21c86ee2dc3ea6ce7a8792bd2a0d20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e21c86ee2dc3ea6ce7a8792bd2a0d20">&#9670;&#160;</a></span>commander_strcmp_tree_ram</h2>
+<a id="abc616dba92464902cf376d4a1709807a" name="abc616dba92464902cf376d4a1709807a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc616dba92464902cf376d4a1709807a">&#9670;&#160;</a></span>commander_strcmp_tree_ram</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1487,7 +1652,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int(Commander::* Commander::commander_strcmp_tree_ram) (<a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *element1, char *element2)</td>
+          <td class="memname">int(Commander::* Commander::commander_strcmp_tree_ram) (<a class="el" href="struct_commander_1_1_a_p_i__t.html">API_t</a> *element1, const char *element2)</td>
         </tr>
       </table>
   </td>
@@ -1500,7 +1665,7 @@ Here is the caller graph for this function:</div>
 <p>Function pointer to an internal strcmp like function. </p>
 <p >It uses the regular version by default. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00315">315</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00446">446</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1527,7 +1692,7 @@ Here is the caller graph for this function:</div>
 <p>Pointer to response class. </p>
 <p >By default it points to the default debug response handler. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00332">332</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00463">463</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1553,7 +1718,7 @@ Here is the caller graph for this function:</div>
 
 <p>Flag to enable or disable debug messages. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00325">325</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00456">456</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1579,7 +1744,7 @@ Here is the caller graph for this function:</div>
 
 <p>Default response handler for debug messages. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00328">328</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00459">459</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1605,7 +1770,7 @@ Here is the caller graph for this function:</div>
 
 <p>Default response handler class. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00318">318</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00449">449</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1631,7 +1796,7 @@ Here is the caller graph for this function:</div>
 
 <p>Internal variable for counting purpose. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00256">256</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00387">387</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1655,7 +1820,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00264">264</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00395">395</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1673,12 +1838,12 @@ Here is the caller graph for this function:</div>
 
 <p>Flag for memory type. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00132">132</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00230">230</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a967e10c0ce3ae364dce67e350cc7e624" name="a967e10c0ce3ae364dce67e350cc7e624"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a967e10c0ce3ae364dce67e350cc7e624">&#9670;&#160;</a></span>pipeArgBuffer</h2>
+<a id="ab77c685c8d89fe8a257dca3f6da85163" name="ab77c685c8d89fe8a257dca3f6da85163"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab77c685c8d89fe8a257dca3f6da85163">&#9670;&#160;</a></span>pipeArgBuffer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1687,7 +1852,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">char Commander::pipeArgBuffer[<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>]</td>
+          <td class="memname">char Commander::pipeArgBuffer[<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>+1]</td>
         </tr>
       </table>
   </td>
@@ -1697,10 +1862,10 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>If piping happenes the output of the first command will be copied to this buffer. </p>
+<p>If piping happens the output of the first command will be copied to this buffer. </p>
 <p >This way it can be passed to the second command and so on. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00368">368</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00502">502</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1726,12 +1891,12 @@ Here is the caller graph for this function:</div>
 
 <p>Channel for the internal piping. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00364">364</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00498">498</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a4bbd717794c34db58ee1740be06a861a" name="a4bbd717794c34db58ee1740be06a861a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4bbd717794c34db58ee1740be06a861a">&#9670;&#160;</a></span>progmemBuffer</h2>
+<a id="a7adef0598be64efe2aabb5f4f7dc6a6f" name="a7adef0598be64efe2aabb5f4f7dc6a6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7adef0598be64efe2aabb5f4f7dc6a6f">&#9670;&#160;</a></span>progmemBuffer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1740,7 +1905,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">char Commander::progmemBuffer[<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>]</td>
+          <td class="memname">char Commander::progmemBuffer[<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>+1]</td>
         </tr>
       </table>
   </td>
@@ -1752,7 +1917,7 @@ Here is the caller graph for this function:</div>
 
 <p>With the PROGMEM implementation we need to copy the data from the PROGMEM area to a buffer for compersation. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00270">270</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00401">401</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1779,12 +1944,12 @@ Here is the caller graph for this function:</div>
 <p>Pointer to response class. </p>
 <p >By default it points to the default response handler. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00322">322</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00453">453</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a316a4c235d0474e9be0465f722f46015" name="a316a4c235d0474e9be0465f722f46015"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a316a4c235d0474e9be0465f722f46015">&#9670;&#160;</a></span>tempBuff</h2>
+<a id="a865e15db1316388328f77c269f435968" name="a865e15db1316388328f77c269f435968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a865e15db1316388328f77c269f435968">&#9670;&#160;</a></span>tempBuff</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1793,7 +1958,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">char Commander::tempBuff[<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>]</td>
+          <td class="memname">char Commander::tempBuff[<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>+1]</td>
         </tr>
       </table>
   </td>
@@ -1806,7 +1971,55 @@ Here is the caller graph for this function:</div>
 <p>Internal command buffer. </p>
 <p >The command data has to be copied to this buffer. It is necessary because the execute function has to modify the content of the command. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00262">262</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00393">393</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a49c91bd906a14d79197add2de215e8d3" name="a49c91bd906a14d79197add2de215e8d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49c91bd906a14d79197add2de215e8d3">&#9670;&#160;</a></span>variables</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_commander_1_1_system_variable__t.html">Commander::SystemVariable_t</a> * Commander::variables = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00383">383</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad546d1e7250ea4ccba3a705d95426793" name="ad546d1e7250ea4ccba3a705d95426793"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad546d1e7250ea4ccba3a705d95426793">&#9670;&#160;</a></span>variables_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Commander::variables_size = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00384">384</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1832,7 +2045,7 @@ Here is the caller graph for this function:</div>
 
 <p>Library version string. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00102">102</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00173">173</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -1855,10 +2068,10 @@ Here is the caller graph for this function:</div>
         <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
       </a> &nbsp;|&nbsp;
       <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
-      <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+      <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Fri Jun 30 2023
+      </a> on Wed Aug 9 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -1870,10 +2083,10 @@ Here is the caller graph for this function:</div>
           <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
         </a> &nbsp;|&nbsp;
         <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
-        <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+        <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Fri Jun 30 2023
+        </a> on Wed Aug 9 2023
       </small></address>
     </li>
   </ul>

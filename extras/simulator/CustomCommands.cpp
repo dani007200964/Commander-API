@@ -34,7 +34,7 @@ SOFTWARE.
 #include "Commander-API-Commands.hpp"
 #include "System.h"
 
-void commander_pinMode_func( char *args, Stream *response, void* parent ){
+bool commander_pinMode_func( char *args, Stream *response, void* parent ){
 
     Argument pin( args, 'p', "pin" );
     Argument outputFlag( args, 'o', "output" );
@@ -44,25 +44,23 @@ void commander_pinMode_func( char *args, Stream *response, void* parent ){
     outputFlag.find();
     inputFlag.find();
 
-    if( !pin ){
-        Commander::printArgumentError( response );
-        if( response != NULL ){
-            response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
-        }
-        return;
+    if( inputFlag.isFound() && !outputFlag.isFound() ){
     }
 
-    if( outputFlag.isFound() && inputFlag.isFound() ){
-        Commander::printArgumentError( response );
-        if( response != NULL ){
-            response -> print( __CONST_TXT__( " Mode can not be input and output at the same time!" ) );
-        }
-        return;
+    else if( !inputFlag.isFound() && outputFlag.isFound() ){
     }
 
+    else{
+        Commander::printArgumentError( response );
+        if( response != NULL ){
+            response -> print( __CONST_TXT__( " Pin mode has to be defined and can not be input and output at the same time!" ) );
+        }
+        return false;
+    }
+    return true;
 }
 
-void commander_digitalWrite_func( char *args, Stream *response, void* parent ){
+bool commander_digitalWrite_func( char *args, Stream *response, void* parent ){
 
     Argument pin( args, 'p', "pin" );
     Argument highFlag( args, 'h', "high" );
@@ -72,25 +70,24 @@ void commander_digitalWrite_func( char *args, Stream *response, void* parent ){
     highFlag.find();
     lowFlag.find();
 
-    if( !pin ){
-        Commander::printArgumentError( response );
-        if( response != NULL ){
-            response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
-        }
-        return;
+    if( lowFlag.isFound() && !highFlag.isFound() ){
     }
 
-    if( highFlag.isFound() && lowFlag.isFound() ){
-        Commander::printArgumentError( response );
-        if( response != NULL ){
-            response -> print( __CONST_TXT__( " State can not be high and low at the same time!" ) );
-        }
-        return;
+    else if( !lowFlag.isFound() && highFlag.isFound() ){
     }
 
+    else{
+        Commander::printArgumentError( response );
+        if( response != NULL ){
+            response -> print( __CONST_TXT__( " Pin state has to be defined and can not be high and low at the same time!" ) );
+        }
+        return false;
+    }
+
+    return true;
 }
 
-void commander_digitalRead_func( char *args, Stream *response, void* parent ){
+bool commander_digitalRead_func( char *args, Stream *response, void* parent ){
 
     Argument pin( args, 'p', "pin" );
     Argument txtFlag( args, 't', "text" );
@@ -104,7 +101,7 @@ void commander_digitalRead_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
         }
-        return;
+        return false;
     }
 
     if( txtFlag.isFound() ){
@@ -119,35 +116,36 @@ void commander_digitalRead_func( char *args, Stream *response, void* parent ){
 
     }
 
+    return true;
 }
 
-void commander_reboot_func( char *args, Stream *response, void* parent ){
+bool commander_reboot_func( char *args, Stream *response, void* parent ){
 
     response -> println( __CONST_TXT__( "Rebooting..." ) );
-
+    return true;
 }
 
-void commander_millis_func( char *args, Stream *response, void* parent ){
+bool commander_millis_func( char *args, Stream *response, void* parent ){
 
     char buff[ 20 ];
 
     sprintf( buff, "%lu", millis() );
-
     response -> print( buff );
 
+    return true;
 }
 
-void commander_micros_func( char *args, Stream *response, void* parent ){
+bool commander_micros_func( char *args, Stream *response, void* parent ){
 
     char buff[ 20 ];
 
     sprintf( buff, "%lu", micros() );
-
     response -> print( buff );
 
+    return true;
 }
 
-void commander_uptime_func( char *args, Stream *response, void* parent ){
+bool commander_uptime_func( char *args, Stream *response, void* parent ){
 
     char buff[ 20 ];
 
@@ -171,9 +169,10 @@ void commander_uptime_func( char *args, Stream *response, void* parent ){
 
     response -> print( buff );
 
+    return true;
 }
 
-void commander_analogRead_func( char *args, Stream *response, void* parent ){
+bool commander_analogRead_func( char *args, Stream *response, void* parent ){
 
     Argument pin( args, 'p', "pin" );
 
@@ -184,7 +183,7 @@ void commander_analogRead_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
         }
-        return;
+        return false;
     }
 
     if( (int)pin < 0 ){
@@ -192,14 +191,15 @@ void commander_analogRead_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Incorrect pin identifier!" ) );
         }
-        return;
+        return false;
     }
 
     response -> print( 100 );
 
+    return true;
 }
 
-void commander_analogWrite_func( char *args, Stream *response, void* parent ){
+bool commander_analogWrite_func( char *args, Stream *response, void* parent ){
 
     Argument pin( args, 'p', "pin" );
     Argument duty( args, 'd', "duty" );
@@ -216,7 +216,7 @@ void commander_analogWrite_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
         }
-        return;
+        return false;
     }
 
     if( duty && !value ){
@@ -229,7 +229,7 @@ void commander_analogWrite_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Duty or value has to be defined, but not both!" ) );
         }
-        return;
+        return false;
     }
 
     if( (int)pin < 0 ){
@@ -237,7 +237,8 @@ void commander_analogWrite_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Incorrect pin identifier!" ) );
         }
-        return;
+        return false;
     }
 
+    return true;
 }

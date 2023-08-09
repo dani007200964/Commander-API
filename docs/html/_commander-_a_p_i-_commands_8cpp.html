@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="Doxygen Awesome" />
 <meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
 <!-- END twitter metadata -->
-<title>Commander-API: src/Commander-API-Commands.cpp File Reference</title>
+<title>Commander-API: src/Commands/Commander-API-Commands.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -57,7 +57,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V2.1.0</span>
+   &#160;<span id="projectnumber">V3.0.0</span>
    </div>
    <div id="projectbrief">Simple Command Parser</div>
   </td>
@@ -127,151 +127,34 @@ $(document).ready(function(){initNavTree('_commander-_a_p_i-_commands_8cpp.html'
   <div class="headertitle"><div class="title">Commander-API-Commands.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">Commander-API-Commands.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_commander-_a_p_i-_commands_8hpp_source.html">../Commander-API-Commands.hpp</a>&quot;</code><br />
 </div>
 <p><a href="_commander-_a_p_i-_commands_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a359b49c07f4f7b0dccfd81c6bef5b873"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a359b49c07f4f7b0dccfd81c6bef5b873">commander_millis_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:a359b49c07f4f7b0dccfd81c6bef5b873"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for millis command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a359b49c07f4f7b0dccfd81c6bef5b873">More...</a><br /></td></tr>
-<tr class="separator:a359b49c07f4f7b0dccfd81c6bef5b873"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae01890e7123d2a162738d85ff24f418d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#ae01890e7123d2a162738d85ff24f418d">commander_micros_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:ae01890e7123d2a162738d85ff24f418d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for micros command.  <a href="_commander-_a_p_i-_commands_8cpp.html#ae01890e7123d2a162738d85ff24f418d">More...</a><br /></td></tr>
-<tr class="separator:ae01890e7123d2a162738d85ff24f418d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a210dee7595476d13d6204cce62f2cbbc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a210dee7595476d13d6204cce62f2cbbc">commander_uptime_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:a210dee7595476d13d6204cce62f2cbbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for uptime command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a210dee7595476d13d6204cce62f2cbbc">More...</a><br /></td></tr>
-<tr class="separator:a210dee7595476d13d6204cce62f2cbbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7c0b48d88813fbb4c4c56a5819204eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#ac7c0b48d88813fbb4c4c56a5819204eb">commander_pinMode_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:ac7c0b48d88813fbb4c4c56a5819204eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for pinMode command.  <a href="_commander-_a_p_i-_commands_8cpp.html#ac7c0b48d88813fbb4c4c56a5819204eb">More...</a><br /></td></tr>
-<tr class="separator:ac7c0b48d88813fbb4c4c56a5819204eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25104d380b58889aabc445a89372e298"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a25104d380b58889aabc445a89372e298">commander_digitalWrite_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:a25104d380b58889aabc445a89372e298"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for digitalWrite command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a25104d380b58889aabc445a89372e298">More...</a><br /></td></tr>
-<tr class="separator:a25104d380b58889aabc445a89372e298"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ddb2545106085b4c45b9d7d6e0271c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a2ddb2545106085b4c45b9d7d6e0271c2">commander_digitalRead_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:a2ddb2545106085b4c45b9d7d6e0271c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for digitalRead command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a2ddb2545106085b4c45b9d7d6e0271c2">More...</a><br /></td></tr>
-<tr class="separator:a2ddb2545106085b4c45b9d7d6e0271c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad50e2da8c65464fded53e4f101c12df4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#ad50e2da8c65464fded53e4f101c12df4">commander_analogRead_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:ad50e2da8c65464fded53e4f101c12df4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for analogRead command.  <a href="_commander-_a_p_i-_commands_8cpp.html#ad50e2da8c65464fded53e4f101c12df4">More...</a><br /></td></tr>
-<tr class="separator:ad50e2da8c65464fded53e4f101c12df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2d007a0ffedbcbb4e50e5e455f2b580"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#af2d007a0ffedbcbb4e50e5e455f2b580">commander_ipconfig_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:af2d007a0ffedbcbb4e50e5e455f2b580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for ipconfig command.  <a href="_commander-_a_p_i-_commands_8cpp.html#af2d007a0ffedbcbb4e50e5e455f2b580">More...</a><br /></td></tr>
-<tr class="separator:af2d007a0ffedbcbb4e50e5e455f2b580"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a066128d063cd819e9bafb1fe3dfb3a27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a066128d063cd819e9bafb1fe3dfb3a27">commander_wifiStat_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:a066128d063cd819e9bafb1fe3dfb3a27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiStat command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a066128d063cd819e9bafb1fe3dfb3a27">More...</a><br /></td></tr>
-<tr class="separator:a066128d063cd819e9bafb1fe3dfb3a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ce486c9f6cc8f9d32719dde240cc9dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a9ce486c9f6cc8f9d32719dde240cc9dd">commander_wifiScan_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:a9ce486c9f6cc8f9d32719dde240cc9dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiScan command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a9ce486c9f6cc8f9d32719dde240cc9dd">More...</a><br /></td></tr>
-<tr class="separator:a9ce486c9f6cc8f9d32719dde240cc9dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89464d6a1bd02945dc651ed287eb0a9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a89464d6a1bd02945dc651ed287eb0a9a">commander_configTime_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:a89464d6a1bd02945dc651ed287eb0a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiScan command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a89464d6a1bd02945dc651ed287eb0a9a">More...</a><br /></td></tr>
-<tr class="separator:a89464d6a1bd02945dc651ed287eb0a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a841d50286418ffc91a2820f93a757ae7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a841d50286418ffc91a2820f93a757ae7">commander_dateTime_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:a841d50286418ffc91a2820f93a757ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiScan command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a841d50286418ffc91a2820f93a757ae7">More...</a><br /></td></tr>
-<tr class="separator:a841d50286418ffc91a2820f93a757ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa105b8da0d1654685a5ab1eee8254dc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#aa105b8da0d1654685a5ab1eee8254dc7">commander_neofetch_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:aa105b8da0d1654685a5ab1eee8254dc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for neofetch command.  <a href="_commander-_a_p_i-_commands_8cpp.html#aa105b8da0d1654685a5ab1eee8254dc7">More...</a><br /></td></tr>
-<tr class="separator:aa105b8da0d1654685a5ab1eee8254dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa254cffc6e91bf6c2c779802373859d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#aa254cffc6e91bf6c2c779802373859d9">commander_reboot_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:aa254cffc6e91bf6c2c779802373859d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for reboot command.  <a href="_commander-_a_p_i-_commands_8cpp.html#aa254cffc6e91bf6c2c779802373859d9">More...</a><br /></td></tr>
-<tr class="separator:aa254cffc6e91bf6c2c779802373859d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a754007529f61db96b2ac3bd76d0d45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a1a754007529f61db96b2ac3bd76d0d45">commander_sin_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:a1a754007529f61db96b2ac3bd76d0d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for sin command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a1a754007529f61db96b2ac3bd76d0d45">More...</a><br /></td></tr>
-<tr class="separator:a1a754007529f61db96b2ac3bd76d0d45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6780710f945ac78f9b54630663f4e75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#ab6780710f945ac78f9b54630663f4e75">commander_cos_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:ab6780710f945ac78f9b54630663f4e75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for cos command.  <a href="_commander-_a_p_i-_commands_8cpp.html#ab6780710f945ac78f9b54630663f4e75">More...</a><br /></td></tr>
-<tr class="separator:ab6780710f945ac78f9b54630663f4e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a768c422672b927ef72696dd68d9c41cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a768c422672b927ef72696dd68d9c41cc">commander_not_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:a768c422672b927ef72696dd68d9c41cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for not command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a768c422672b927ef72696dd68d9c41cc">More...</a><br /></td></tr>
-<tr class="separator:a768c422672b927ef72696dd68d9c41cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec5a719106b789f1658080397335322e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#aec5a719106b789f1658080397335322e">commander_random_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:aec5a719106b789f1658080397335322e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for random command.  <a href="_commander-_a_p_i-_commands_8cpp.html#aec5a719106b789f1658080397335322e">More...</a><br /></td></tr>
-<tr class="separator:aec5a719106b789f1658080397335322e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac12b28f732724d7b0149e99927664af0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#ac12b28f732724d7b0149e99927664af0">commander_abs_func</a> (char *args, Stream *response)</td></tr>
-<tr class="memdesc:ac12b28f732724d7b0149e99927664af0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for abs command.  <a href="_commander-_a_p_i-_commands_8cpp.html#ac12b28f732724d7b0149e99927664af0">More...</a><br /></td></tr>
-<tr class="separator:ac12b28f732724d7b0149e99927664af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d60dbb7040580e64c652ca9ab8e3114"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a7d60dbb7040580e64c652ca9ab8e3114">printCommandNotImplemented</a> (Stream *channel_p)</td></tr>
+<tr class="memdesc:a7d60dbb7040580e64c652ca9ab8e3114"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino detection.  <a href="_commander-_a_p_i-_commands_8cpp.html#a7d60dbb7040580e64c652ca9ab8e3114">More...</a><br /></td></tr>
+<tr class="separator:a7d60dbb7040580e64c652ca9ab8e3114"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe82ff8034aefa9595cacd850ae10a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#aafe82ff8034aefa9595cacd850ae10a2">commander_ipconfig_func</a> (char *args, Stream *response, void *parent)</td></tr>
+<tr class="memdesc:aafe82ff8034aefa9595cacd850ae10a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for ipconfig command.  <a href="_commander-_a_p_i-_commands_8cpp.html#aafe82ff8034aefa9595cacd850ae10a2">More...</a><br /></td></tr>
+<tr class="separator:aafe82ff8034aefa9595cacd850ae10a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac788d3699820560c239edd4ca697b0d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#ac788d3699820560c239edd4ca697b0d2">commander_wifiStat_func</a> (char *args, Stream *response, void *parent)</td></tr>
+<tr class="memdesc:ac788d3699820560c239edd4ca697b0d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiStat command.  <a href="_commander-_a_p_i-_commands_8cpp.html#ac788d3699820560c239edd4ca697b0d2">More...</a><br /></td></tr>
+<tr class="separator:ac788d3699820560c239edd4ca697b0d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad27af2c0a0966abc9e71d699ab948119"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#ad27af2c0a0966abc9e71d699ab948119">commander_wifiScan_func</a> (char *args, Stream *response, void *parent)</td></tr>
+<tr class="memdesc:ad27af2c0a0966abc9e71d699ab948119"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiScan command.  <a href="_commander-_a_p_i-_commands_8cpp.html#ad27af2c0a0966abc9e71d699ab948119">More...</a><br /></td></tr>
+<tr class="separator:ad27af2c0a0966abc9e71d699ab948119"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6df16c4b3429cad40911ef08ed94f45f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#a6df16c4b3429cad40911ef08ed94f45f">commander_configTime_func</a> (char *args, Stream *response, void *parent)</td></tr>
+<tr class="memdesc:a6df16c4b3429cad40911ef08ed94f45f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiScan command.  <a href="_commander-_a_p_i-_commands_8cpp.html#a6df16c4b3429cad40911ef08ed94f45f">More...</a><br /></td></tr>
+<tr class="separator:a6df16c4b3429cad40911ef08ed94f45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf9686d929cb65dcd4b033b537b30e30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html#aaf9686d929cb65dcd4b033b537b30e30">commander_dateTime_func</a> (char *args, Stream *response, void *parent)</td></tr>
+<tr class="memdesc:aaf9686d929cb65dcd4b033b537b30e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Premade function for wifiScan command.  <a href="_commander-_a_p_i-_commands_8cpp.html#aaf9686d929cb65dcd4b033b537b30e30">More...</a><br /></td></tr>
+<tr class="separator:aaf9686d929cb65dcd4b033b537b30e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ac12b28f732724d7b0149e99927664af0" name="ac12b28f732724d7b0149e99927664af0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac12b28f732724d7b0149e99927664af0">&#9670;&#160;</a></span>commander_abs_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_abs_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for abs command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00898">898</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ad50e2da8c65464fded53e4f101c12df4" name="ad50e2da8c65464fded53e4f101c12df4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad50e2da8c65464fded53e4f101c12df4">&#9670;&#160;</a></span>commander_analogRead_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_analogRead_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for analogRead command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00292">292</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a89464d6a1bd02945dc651ed287eb0a9a" name="a89464d6a1bd02945dc651ed287eb0a9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89464d6a1bd02945dc651ed287eb0a9a">&#9670;&#160;</a></span>commander_configTime_func()</h2>
+<a id="a6df16c4b3429cad40911ef08ed94f45f" name="a6df16c4b3429cad40911ef08ed94f45f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6df16c4b3429cad40911ef08ed94f45f">&#9670;&#160;</a></span>commander_configTime_func()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -286,7 +169,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
+          <td class="paramname"><em>response</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>parent</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -305,51 +194,17 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00531">531</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00179">179</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="_commander-_a_p_i-_commands_8cpp_a6df16c4b3429cad40911ef08ed94f45f_cgraph.svg" width="431" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
-<a id="ab6780710f945ac78f9b54630663f4e75" name="ab6780710f945ac78f9b54630663f4e75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6780710f945ac78f9b54630663f4e75">&#9670;&#160;</a></span>commander_cos_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_cos_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for cos command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00831">831</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a841d50286418ffc91a2820f93a757ae7" name="a841d50286418ffc91a2820f93a757ae7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a841d50286418ffc91a2820f93a757ae7">&#9670;&#160;</a></span>commander_dateTime_func()</h2>
+<a id="aaf9686d929cb65dcd4b033b537b30e30" name="aaf9686d929cb65dcd4b033b537b30e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf9686d929cb65dcd4b033b537b30e30">&#9670;&#160;</a></span>commander_dateTime_func()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -364,7 +219,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
+          <td class="paramname"><em>response</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>parent</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -383,90 +244,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00567">567</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00215">215</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a2ddb2545106085b4c45b9d7d6e0271c2" name="a2ddb2545106085b4c45b9d7d6e0271c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ddb2545106085b4c45b9d7d6e0271c2">&#9670;&#160;</a></span>commander_digitalRead_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_digitalRead_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for digitalRead command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00199">199</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a25104d380b58889aabc445a89372e298" name="a25104d380b58889aabc445a89372e298"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25104d380b58889aabc445a89372e298">&#9670;&#160;</a></span>commander_digitalWrite_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_digitalWrite_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for digitalWrite command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00142">142</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="af2d007a0ffedbcbb4e50e5e455f2b580" name="af2d007a0ffedbcbb4e50e5e455f2b580"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2d007a0ffedbcbb4e50e5e455f2b580">&#9670;&#160;</a></span>commander_ipconfig_func()</h2>
+<a id="aafe82ff8034aefa9595cacd850ae10a2" name="aafe82ff8034aefa9595cacd850ae10a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafe82ff8034aefa9595cacd850ae10a2">&#9670;&#160;</a></span>commander_ipconfig_func()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -481,7 +264,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
+          <td class="paramname"><em>response</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>parent</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -500,363 +289,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00401">401</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00049">49</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ae01890e7123d2a162738d85ff24f418d" name="ae01890e7123d2a162738d85ff24f418d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae01890e7123d2a162738d85ff24f418d">&#9670;&#160;</a></span>commander_micros_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_micros_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for micros command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00046">46</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a359b49c07f4f7b0dccfd81c6bef5b873" name="a359b49c07f4f7b0dccfd81c6bef5b873"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a359b49c07f4f7b0dccfd81c6bef5b873">&#9670;&#160;</a></span>commander_millis_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_millis_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for millis command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00036">36</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aa105b8da0d1654685a5ab1eee8254dc7" name="aa105b8da0d1654685a5ab1eee8254dc7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa105b8da0d1654685a5ab1eee8254dc7">&#9670;&#160;</a></span>commander_neofetch_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_neofetch_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for neofetch command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00586">586</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a768c422672b927ef72696dd68d9c41cc" name="a768c422672b927ef72696dd68d9c41cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a768c422672b927ef72696dd68d9c41cc">&#9670;&#160;</a></span>commander_not_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_not_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for not command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00839">839</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ac7c0b48d88813fbb4c4c56a5819204eb" name="ac7c0b48d88813fbb4c4c56a5819204eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7c0b48d88813fbb4c4c56a5819204eb">&#9670;&#160;</a></span>commander_pinMode_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_pinMode_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for pinMode command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00085">85</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aec5a719106b789f1658080397335322e" name="aec5a719106b789f1658080397335322e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec5a719106b789f1658080397335322e">&#9670;&#160;</a></span>commander_random_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_random_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for random command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00862">862</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aa254cffc6e91bf6c2c779802373859d9" name="aa254cffc6e91bf6c2c779802373859d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa254cffc6e91bf6c2c779802373859d9">&#9670;&#160;</a></span>commander_reboot_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_reboot_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for reboot command. </p>
-<p >It reboots the core. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00795">795</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a1a754007529f61db96b2ac3bd76d0d45" name="a1a754007529f61db96b2ac3bd76d0d45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a754007529f61db96b2ac3bd76d0d45">&#9670;&#160;</a></span>commander_sin_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_sin_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for sin command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00823">823</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a210dee7595476d13d6204cce62f2cbbc" name="a210dee7595476d13d6204cce62f2cbbc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a210dee7595476d13d6204cce62f2cbbc">&#9670;&#160;</a></span>commander_uptime_func()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commander_uptime_func </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Premade function for uptime command. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>Pointer to the argument string. </td></tr>
-    <tr><td class="paramname">response</td><td>Response channel for messages. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00056">56</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a9ce486c9f6cc8f9d32719dde240cc9dd" name="a9ce486c9f6cc8f9d32719dde240cc9dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ce486c9f6cc8f9d32719dde240cc9dd">&#9670;&#160;</a></span>commander_wifiScan_func()</h2>
+<a id="ad27af2c0a0966abc9e71d699ab948119" name="ad27af2c0a0966abc9e71d699ab948119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad27af2c0a0966abc9e71d699ab948119">&#9670;&#160;</a></span>commander_wifiScan_func()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -871,7 +309,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
+          <td class="paramname"><em>response</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>parent</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -890,12 +334,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00473">473</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00121">121</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a066128d063cd819e9bafb1fe3dfb3a27" name="a066128d063cd819e9bafb1fe3dfb3a27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a066128d063cd819e9bafb1fe3dfb3a27">&#9670;&#160;</a></span>commander_wifiStat_func()</h2>
+<a id="ac788d3699820560c239edd4ca697b0d2" name="ac788d3699820560c239edd4ca697b0d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac788d3699820560c239edd4ca697b0d2">&#9670;&#160;</a></span>commander_wifiStat_func()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -910,7 +354,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>response</em>&#160;</td>
+          <td class="paramname"><em>response</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>parent</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -929,7 +379,29 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00416">416</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00064">64</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7d60dbb7040580e64c652ca9ab8e3114" name="a7d60dbb7040580e64c652ca9ab8e3114"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d60dbb7040580e64c652ca9ab8e3114">&#9670;&#160;</a></span>printCommandNotImplemented()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printCommandNotImplemented </td>
+          <td>(</td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>channel_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Arduino detection. </p>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html#l00036">36</a> of file <a class="el" href="_commander-_a_p_i-_commands_8cpp_source.html">Commander-API-Commands.cpp</a>.</p>
 
 </div>
 </div>
@@ -940,7 +412,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html">Commander-API-Commands.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f515e70efe8118fc7dfd8779442b95b7.html">Commands</a></li><li class="navelem"><a class="el" href="_commander-_a_p_i-_commands_8cpp.html">Commander-API-Commands.cpp</a></li>
     <li class="footer">
       <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
         <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -952,10 +424,10 @@ Functions</h2></td></tr>
         <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
       </a> &nbsp;|&nbsp;
       <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
-      <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+      <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Fri Jun 30 2023
+      </a> on Wed Aug 9 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -967,10 +439,10 @@ Functions</h2></td></tr>
           <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
         </a> &nbsp;|&nbsp;
         <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
-        <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+        <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Fri Jun 30 2023
+        </a> on Wed Aug 9 2023
       </small></address>
     </li>
   </ul>

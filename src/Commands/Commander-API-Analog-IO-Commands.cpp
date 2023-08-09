@@ -77,7 +77,7 @@ int adcLookUpSize = 0;
 
 #endif
 
-void commander_analogRead_func( char *args, Stream *response, void* parent ){
+bool commander_analogRead_func( char *args, Stream *response, void* parent ){
 
     // AVR microcontrollers has small amount of dynamic memory.
     // For this reason the built in commands do not support long
@@ -155,7 +155,7 @@ int pwmLookUpSize = 0;
 
 #endif
 
-void commander_analogWrite_func( char *args, Stream *response, void* parent ){
+bool commander_analogWrite_func( char *args, Stream *response, void* parent ){
 
     // AVR microcontrollers has small amount of dynamic memory.
     // For this reason the built in commands do not support long
@@ -191,7 +191,7 @@ void commander_analogWrite_func( char *args, Stream *response, void* parent ){
     }
 
     else if( !duty && value ){
-        pwm = (int)( (float)( value / 100.0 ) * 255.0 );
+        pwm = (int)( (float)( (int)value / 100.0 ) * 255.0 );
         if( pwm > 255 ){
             pwm = 255;
         }

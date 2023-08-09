@@ -57,7 +57,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V2.1.0</span>
+   &#160;<span id="projectnumber">V3.0.0</span>
    </div>
    <div id="projectbrief">Simple Command Parser</div>
   </td>
@@ -141,9 +141,8 @@ $(document).ready(function(){initNavTree('class_argument.html',''); initResizabl
 <div class="dynheader">
 Collaboration diagram for Argument:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 0 -->
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_argument__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -185,6 +184,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a11a9933e5a65f1cbf0525cd9bd2a29ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d0ae00347ef7108f6cab6c270ac5728"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a> ()</td></tr>
 <tr class="separator:a5d0ae00347ef7108f6cab6c270ac5728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a578656131acb2afb90691ed5d949daa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_commander_1_1_system_variable__t.html">Commander::SystemVariable_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_argument.html#a578656131acb2afb90691ed5d949daa5">getSystemVariable</a> ()</td></tr>
+<tr class="separator:a578656131acb2afb90691ed5d949daa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
 Private Types</h2></td></tr>
@@ -220,6 +221,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a8585973a6fb4c23c446b4e83edd7e27a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36906a02c1cacf113146fb01108f27a9"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_argument.html#a36906a02c1cacf113146fb01108f27a9">longName</a> = NULL</td></tr>
 <tr class="separator:a36906a02c1cacf113146fb01108f27a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0505e5adf9b8f4241686fa8dcb5a4e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_commander_1_1_system_variable__t.html">Commander::SystemVariable_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_argument.html#af0505e5adf9b8f4241686fa8dcb5a4e8">systemVariable</a> = NULL</td></tr>
+<tr class="separator:af0505e5adf9b8f4241686fa8dcb5a4e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5caaffe3eeaea6ac18d7fb0aba1487c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_argument_1_1bool_fields.html">boolFields</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_argument.html#a5caaffe3eeaea6ac18d7fb0aba1487c4">bFields</a></td></tr>
 <tr class="separator:a5caaffe3eeaea6ac18d7fb0aba1487c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa14a50e55622b38c695bca1f31c4fe1e"><td class="memItemLeft" align="right" valign="top">union <a class="el" href="union_argument_1_1return_data.html">returnData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_argument.html#aa14a50e55622b38c695bca1f31c4fe1e">ret</a></td></tr>
@@ -245,7 +248,7 @@ Static Private Attributes</h2></td></tr>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00089">89</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00090">90</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a08a33287ac78deb84a404eae4d6bf3ff" name="a08a33287ac78deb84a404eae4d6bf3ff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a08a33287ac78deb84a404eae4d6bf3ff">&#9670;&#160;</a></span>boolField</h2>
@@ -267,7 +270,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00178">178</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00180">180</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
 
 </div>
 </div>
@@ -442,12 +445,16 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00550">550</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00609">609</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 1 -->
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_argument_a11a9933e5a65f1cbf0525cd9bd2a29ca_cgraph.svg" width="523" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_argument_a11a9933e5a65f1cbf0525cd9bd2a29ca_icgraph.svg" width="359" height="135"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -479,14 +486,12 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 2 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_argument_a19696736b23d7f4f4c6e4125e67f59a8_cgraph.svg" width="366" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 3 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_argument_a19696736b23d7f4f4c6e4125e67f59a8_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -518,8 +523,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 4 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_argument_a267c2e9b46491f60b264c39e08ad5686_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -551,14 +555,12 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 5 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_argument_a3ec1ea9ca2d489a987e0fa335daaf061_cgraph.svg" width="368" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 6 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_argument_a3ec1ea9ca2d489a987e0fa335daaf061_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -590,14 +592,36 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 7 -->
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_argument_a7fab3d983e4a63b93e6f50df82ed6f84_cgraph.svg" width="591" height="184"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 8 -->
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_argument_a7fab3d983e4a63b93e6f50df82ed6f84_icgraph.svg" width="644" height="579"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+
+</div>
+</div>
+<a id="a578656131acb2afb90691ed5d949daa5" name="a578656131acb2afb90691ed5d949daa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a578656131acb2afb90691ed5d949daa5">&#9670;&#160;</a></span>getSystemVariable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_commander_1_1_system_variable__t.html">Commander::SystemVariable_t</a> * Argument::getSystemVariable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00725">725</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_argument_a578656131acb2afb90691ed5d949daa5_icgraph.svg" width="455" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -626,12 +650,11 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00640">640</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00699">699</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 9 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_argument_af21c1965c64a5f3984cbf42bcf1eec5f_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -651,7 +674,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00603">603</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00662">662</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_argument_a5d0ae00347ef7108f6cab6c270ac5728_icgraph.svg" width="384" height="135"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -673,7 +701,7 @@ Here is the caller graph for this function:</div>
 <p>Override return behaviour for boolean. </p>
 <p >The return behaviour is overriden in such a way, that it will return <b>true</b> value if the parsing process for the specified type was successful. Otherwise it will return false. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00583">583</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00642">642</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
 
 </div>
 </div>
@@ -695,7 +723,7 @@ Here is the caller graph for this function:</div>
 <p>Override return behaviour for char array. </p>
 <p >The return behaviour is overriden in such a way, that it will return a pointer to the parsed string if the <b>parseString</b> function was successfully parsed the input argument string. Otherwise it will return a pointer to an empty string( "" ). </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00590">590</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00649">649</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
 
 </div>
 </div>
@@ -717,7 +745,7 @@ Here is the caller graph for this function:</div>
 <p>Override return behaviour for float. </p>
 <p >The return behaviour is overriden in such a way, that it will return the parsed float number if the <b>parseFloat</b> function was successfully parsed the input argument string. Otherwise it will return <b>0.0</b>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00573">573</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00632">632</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
 
 </div>
 </div>
@@ -739,7 +767,7 @@ Here is the caller graph for this function:</div>
 <p>Override return behaviour for int. </p>
 <p >The return behaviour is overriden in such a way, that it will return the parsed integer number if the <b>parseInt</b> function was successfully parsed the input argument string. Otherwise it will return <b>0</b>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00563">563</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00622">622</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
 
 </div>
 </div>
@@ -758,12 +786,16 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00404">404</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00433">433</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 10 -->
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_argument_a2258f3363dbb1d462286a41d4ab3b8ad_cgraph.svg" width="100%" height="438"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_argument_a2258f3363dbb1d462286a41d4ab3b8ad_icgraph.svg" width="406" height="234"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -783,12 +815,16 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00371">371</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00382">382</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 11 -->
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_argument_aeabd957dda6add595aa860761ea337f1_cgraph.svg" width="100%" height="438"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_argument_aeabd957dda6add595aa860761ea337f1_icgraph.svg" width="391" height="530"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -819,12 +855,11 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00437">437</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00484">484</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 12 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_argument_a91aa4b22990c4532a437afb1ed58acf4_cgraph.svg" width="100%" height="438"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -863,12 +898,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00608">608</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8cpp_source.html#l00667">667</a> of file <a class="el" href="_commander-_arguments_8cpp_source.html">Commander-Arguments.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 13 -->
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_argument_a8f98fbce9e55886c0b3a84c6f92572e5_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -894,7 +928,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00207">207</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00211">211</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
 
 </div>
 </div>
@@ -918,7 +952,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00213">213</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00217">217</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
 
 </div>
 </div>
@@ -942,7 +976,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00201">201</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00203">203</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
 
 </div>
 </div>
@@ -966,7 +1000,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00195">195</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00197">197</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
 
 </div>
 </div>
@@ -990,7 +1024,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00209">209</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00213">213</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
 
 </div>
 </div>
@@ -1014,7 +1048,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00198">198</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00200">200</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
 
 </div>
 </div>
@@ -1038,7 +1072,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00188">188</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00190">190</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
 
 </div>
 </div>
@@ -1062,7 +1096,31 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00192">192</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00194">194</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af0505e5adf9b8f4241686fa8dcb5a4e8" name="af0505e5adf9b8f4241686fa8dcb5a4e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0505e5adf9b8f4241686fa8dcb5a4e8">&#9670;&#160;</a></span>systemVariable</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_commander_1_1_system_variable__t.html">Commander::SystemVariable_t</a>* Argument::systemVariable = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_arguments_8hpp_source.html#l00205">205</a> of file <a class="el" href="_commander-_arguments_8hpp_source.html">Commander-Arguments.hpp</a>.</p>
 
 </div>
 </div>
@@ -1085,10 +1143,10 @@ Here is the caller graph for this function:</div>
         <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
       </a> &nbsp;|&nbsp;
       <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
-      <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+      <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Fri Jun 30 2023
+      </a> on Wed Aug 9 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -1100,10 +1158,10 @@ Here is the caller graph for this function:</div>
           <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
         </a> &nbsp;|&nbsp;
         <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
-        <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+        <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Fri Jun 30 2023
+        </a> on Wed Aug 9 2023
       </small></address>
     </li>
   </ul>

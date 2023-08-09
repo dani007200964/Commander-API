@@ -165,6 +165,7 @@ public:
     bool parseStringFunction( char* buffer, int bufferSize );
     bool find();
     bool isFound();
+    Commander::SystemVariable_t* getSystemVariable();
 
 private:
 

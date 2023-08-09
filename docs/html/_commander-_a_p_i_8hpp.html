@@ -57,7 +57,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V2.1.0</span>
+   &#160;<span id="projectnumber">V3.0.0</span>
    </div>
    <div id="projectbrief">Simple Command Parser</div>
   </td>
@@ -132,8 +132,8 @@ $(document).ready(function(){initNavTree('_commander-_a_p_i_8hpp.html',''); init
 <code>#include &quot;string.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>&quot;</code><br />
-<code>#include &quot;Arduino.h&quot;</code><br />
 <code>#include &quot;Stream.h&quot;</code><br />
+<code>#include &quot;Arduino.h&quot;</code><br />
 <code>#include &lt;ESP8266WiFi.h&gt;</code><br />
 <code>#include &lt;WiFi.h&gt;</code><br />
 <code>#include &lt;avr/pgmspace.h&gt;</code><br />
@@ -148,22 +148,72 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_commander_1_1_a_p_i__t.html">Commander::API_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for command data.  <a href="struct_commander_1_1_a_p_i__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_commander_1_1_system_variable__t.html">Commander::SystemVariable_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for system variable data.  <a href="struct_commander_1_1_system_variable__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a9dda1700b3dad0727a9042fec8405d53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#a9dda1700b3dad0727a9042fec8405d53">COMMANDER_API_VERSION</a>&#160;&#160;&#160;(const char*)&quot;2.1.0&quot;</td></tr>
+<tr class="memitem:a9dda1700b3dad0727a9042fec8405d53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#a9dda1700b3dad0727a9042fec8405d53">COMMANDER_API_VERSION</a>&#160;&#160;&#160;(const char*)&quot;3.0.0&quot;</td></tr>
+<tr class="memdesc:a9dda1700b3dad0727a9042fec8405d53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version string.  <a href="_commander-_a_p_i_8hpp.html#a9dda1700b3dad0727a9042fec8405d53">More...</a><br /></td></tr>
 <tr class="separator:a9dda1700b3dad0727a9042fec8405d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b53171feb22439a742d2b02da99e9f4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>(s)&#160;&#160;&#160;F(s)</td></tr>
+<tr class="memdesc:a1b53171feb22439a742d2b02da99e9f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino detection.  <a href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">More...</a><br /></td></tr>
+<tr class="separator:a1b53171feb22439a742d2b02da99e9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff2cdea04953244073599693c685043a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a>(name,  desc,  func)&#160;&#160;&#160;{ 0, NULL, NULL, (const char*)name, (const char*)desc, func }</td></tr>
-<tr class="memdesc:aff2cdea04953244073599693c685043a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino detection.  <a href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">More...</a><br /></td></tr>
+<tr class="memdesc:aff2cdea04953244073599693c685043a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the API element creation.  <a href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">More...</a><br /></td></tr>
 <tr class="separator:aff2cdea04953244073599693c685043a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af41e042ac899c0299b632f7843841479"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#af41e042ac899c0299b632f7843841479">apiElement_P</a>(element,  name,  desc,  func_arg)&#160;&#160;&#160;{ element.name_P = F( name ); element.desc_P = F( desc ); element.func = func_arg; }</td></tr>
+<tr class="memitem:af41e042ac899c0299b632f7843841479"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#af41e042ac899c0299b632f7843841479">apiElement_P</a>(element,  name,  desc,  func_arg)&#160;&#160;&#160;{ element.name_P = <a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( name ); element.desc_P = <a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( desc ); element.func = func_arg; }</td></tr>
 <tr class="memdesc:af41e042ac899c0299b632f7843841479"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the API element creation for PROGMEM implementation.  <a href="_commander-_a_p_i_8hpp.html#af41e042ac899c0299b632f7843841479">More...</a><br /></td></tr>
 <tr class="separator:af41e042ac899c0299b632f7843841479"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d0f46f4a25c198925f895e3584000a3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#a9d0f46f4a25c198925f895e3584000a3">attachTree</a>(name)&#160;&#160;&#160;attachTreeFunction( name, sizeof( name ) / sizeof( name[ 0 ] ) )</td></tr>
 <tr class="memdesc:a9d0f46f4a25c198925f895e3584000a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the attachment of the API-tree.  <a href="_commander-_a_p_i_8hpp.html#a9d0f46f4a25c198925f895e3584000a3">More...</a><br /></td></tr>
 <tr class="separator:a9d0f46f4a25c198925f895e3584000a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5ea851c207b99f1f705bc8416a81171"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#ad5ea851c207b99f1f705bc8416a81171">systemVariableFloat</a>(name)&#160;&#160;&#160;{ #name, &amp;name, NULL, NULL }</td></tr>
+<tr class="memdesc:ad5ea851c207b99f1f705bc8416a81171"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the float type system variable creation.  <a href="_commander-_a_p_i_8hpp.html#ad5ea851c207b99f1f705bc8416a81171">More...</a><br /></td></tr>
+<tr class="separator:ad5ea851c207b99f1f705bc8416a81171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8357c1311d08f0b9c4955ab43b0f6ba6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#a8357c1311d08f0b9c4955ab43b0f6ba6">systemVariableInt</a>(name)&#160;&#160;&#160;{ #name, NULL, &amp;name, NULL }</td></tr>
+<tr class="memdesc:a8357c1311d08f0b9c4955ab43b0f6ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the int type system variable creation.  <a href="_commander-_a_p_i_8hpp.html#a8357c1311d08f0b9c4955ab43b0f6ba6">More...</a><br /></td></tr>
+<tr class="separator:a8357c1311d08f0b9c4955ab43b0f6ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ff459ab1c5008c92fe86c3b9d2f8d5c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#a3ff459ab1c5008c92fe86c3b9d2f8d5c">systemVariableString</a>(name)&#160;&#160;&#160;{ #name, NULL, NULL, (char*)name }</td></tr>
+<tr class="memdesc:a3ff459ab1c5008c92fe86c3b9d2f8d5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the char* or const char* type system variable creation.  <a href="_commander-_a_p_i_8hpp.html#a3ff459ab1c5008c92fe86c3b9d2f8d5c">More...</a><br /></td></tr>
+<tr class="separator:a3ff459ab1c5008c92fe86c3b9d2f8d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af742c4274ed250beab4db093c9565467"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#af742c4274ed250beab4db093c9565467">systemVariableFloat_P</a>(element,  name)&#160;&#160;&#160;{ element.name_P = <a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( name ); element.floatData = &amp;name; element.intData = NULL; element.strData = NULL; element.name = NULL; }</td></tr>
+<tr class="memdesc:af742c4274ed250beab4db093c9565467"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the float type system variable creation for PROGMEM implementation.  <a href="_commander-_a_p_i_8hpp.html#af742c4274ed250beab4db093c9565467">More...</a><br /></td></tr>
+<tr class="separator:af742c4274ed250beab4db093c9565467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd41171f5bdd6f3ccff80969d62640e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#acd41171f5bdd6f3ccff80969d62640e1">systemVariableInt_P</a>(element,  name)&#160;&#160;&#160;{ element.name_P = <a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( name ); element.floatData = NULL; element.intData = &amp;name; element.strData = NULL; element.name = NULL; }</td></tr>
+<tr class="memdesc:acd41171f5bdd6f3ccff80969d62640e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the int type system variable creation for PROGMEM implementation.  <a href="_commander-_a_p_i_8hpp.html#acd41171f5bdd6f3ccff80969d62640e1">More...</a><br /></td></tr>
+<tr class="separator:acd41171f5bdd6f3ccff80969d62640e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd41171f5bdd6f3ccff80969d62640e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#acd41171f5bdd6f3ccff80969d62640e1">systemVariableInt_P</a>(element,  name)&#160;&#160;&#160;{ element.name_P = <a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( name ); element.floatData = NULL; element.intData = NULL; element.strData = (char*)name; element.name = NULL; }</td></tr>
+<tr class="memdesc:acd41171f5bdd6f3ccff80969d62640e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the int type system variable creation for PROGMEM implementation.  <a href="_commander-_a_p_i_8hpp.html#acd41171f5bdd6f3ccff80969d62640e1">More...</a><br /></td></tr>
+<tr class="separator:acd41171f5bdd6f3ccff80969d62640e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50ac7bb14e82ee3cc7858323b0c68ac6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_a_p_i_8hpp.html#a50ac7bb14e82ee3cc7858323b0c68ac6">attachVariables</a>(name)&#160;&#160;&#160;attachVariablesFunction( name, sizeof( name ) / sizeof( name[ 0 ] ) )</td></tr>
+<tr class="memdesc:a50ac7bb14e82ee3cc7858323b0c68ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro simplifies the attachment of the system variable table.  <a href="_commander-_a_p_i_8hpp.html#a50ac7bb14e82ee3cc7858323b0c68ac6">More...</a><br /></td></tr>
+<tr class="separator:a50ac7bb14e82ee3cc7858323b0c68ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a1b53171feb22439a742d2b02da99e9f4" name="a1b53171feb22439a742d2b02da99e9f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b53171feb22439a742d2b02da99e9f4">&#9670;&#160;</a></span>__CONST_TXT__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define __CONST_TXT__</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">s</td><td>)</td>
+          <td>&#160;&#160;&#160;F(s)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Arduino detection. </p>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00057">57</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
 <a id="aff2cdea04953244073599693c685043a" name="aff2cdea04953244073599693c685043a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aff2cdea04953244073599693c685043a">&#9670;&#160;</a></span>apiElement</h2>
 
@@ -196,11 +246,17 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Arduino detection. </p>
-<p >This macro simplifies the API element creation.</p>
-<p >With this macro you can fill the API tree structure easily. </p>
+<p>This macro simplifies the API element creation. </p>
+<p >With this macro you can fill the API tree structure easily. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the command. The best practice is to use a const char array. </td></tr>
+    <tr><td class="paramname">desc</td><td>The description of the command. The best practice is to use a const char array. </td></tr>
+    <tr><td class="paramname">func</td><td>This function will be called, when this command gets executed. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00070">70</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00080">80</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -237,15 +293,23 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;{ element.name_P = F( name ); element.desc_P = F( desc ); element.func = func_arg; }</td>
+          <td></td><td>&#160;&#160;&#160;{ element.name_P = <a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( name ); element.desc_P = <a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( desc ); element.func = func_arg; }</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>This macro simplifies the API element creation for PROGMEM implementation. </p>
-<p >With this macro you can fill the API tree structure easily. It is used for PROGMEM implementation. </p>
+<p >With this macro you can fill the API tree structure easily. It is used for PROGMEM implementation. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>One element in the API tree. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the command. The best practice is to use a const char array. </td></tr>
+    <tr><td class="paramname">desc</td><td>The description of the command. The best practice is to use a const char array. </td></tr>
+    <tr><td class="paramname">func_arg</td><td>This function will be called, when this command gets executed. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00078">78</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00092">92</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -266,9 +330,32 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This macro simplifies the attachment of the API-tree. </p>
-<p >With this macro you can attach the API-tree to the class easier and faster than with attachTreeFunction. </p>
+<p >With this macro you can attach the API-tree to the class easier and faster than with attachTreeFunction. </p><dl class="section note"><dt>Note</dt><dd>Please use this macro instead of attachTreeFunction, because it is safer. It always calculates the correct size for the tree. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00086">86</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00101">101</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a50ac7bb14e82ee3cc7858323b0c68ac6" name="a50ac7bb14e82ee3cc7858323b0c68ac6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50ac7bb14e82ee3cc7858323b0c68ac6">&#9670;&#160;</a></span>attachVariables</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define attachVariables</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name</td><td>)</td>
+          <td>&#160;&#160;&#160;attachVariablesFunction( name, sizeof( name ) / sizeof( name[ 0 ] ) )</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This macro simplifies the attachment of the system variable table. </p>
+<p >With this macro you can attach the system variable table to the class easier and faster than with attachVariablesFunction. </p><dl class="section note"><dt>Note</dt><dd>Please use this macro instead of attachVariablesFunction, because it is safer. It always calculates the correct size for the table. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00157">157</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -279,12 +366,239 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define COMMANDER_API_VERSION&#160;&#160;&#160;(const char*)&quot;2.1.0&quot;</td>
+          <td class="memname">#define COMMANDER_API_VERSION&#160;&#160;&#160;(const char*)&quot;3.0.0&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00038">38</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+<p>Version string. </p>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00039">39</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad5ea851c207b99f1f705bc8416a81171" name="ad5ea851c207b99f1f705bc8416a81171"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ea851c207b99f1f705bc8416a81171">&#9670;&#160;</a></span>systemVariableFloat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define systemVariableFloat</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name</td><td>)</td>
+          <td>&#160;&#160;&#160;{ #name, &amp;name, NULL, NULL }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This macro simplifies the float type system variable creation. </p>
+<p >With this macro you can fill the system variable table easily. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the float variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Do not use &amp; operator before the name. Just use the name, the macro will handle the rest. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00108">108</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af742c4274ed250beab4db093c9565467" name="af742c4274ed250beab4db093c9565467"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af742c4274ed250beab4db093c9565467">&#9670;&#160;</a></span>systemVariableFloat_P</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define systemVariableFloat_P</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">element, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;{ element.name_P = <a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( name ); element.floatData = &amp;name; element.intData = NULL; element.strData = NULL; element.name = NULL; }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This macro simplifies the float type system variable creation for PROGMEM implementation. </p>
+<p >With this macro you can fill the system variable table easily. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>One element in the system variables table. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the float variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Do not use &amp; operator before the name. Just use the name, the macro will handle the rest. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00132">132</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8357c1311d08f0b9c4955ab43b0f6ba6" name="a8357c1311d08f0b9c4955ab43b0f6ba6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8357c1311d08f0b9c4955ab43b0f6ba6">&#9670;&#160;</a></span>systemVariableInt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define systemVariableInt</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name</td><td>)</td>
+          <td>&#160;&#160;&#160;{ #name, NULL, &amp;name, NULL }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This macro simplifies the int type system variable creation. </p>
+<p >With this macro you can fill the system variable table easily. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the int variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Do not use &amp; operator before the name. Just use the name, the macro will handle the rest. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00115">115</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acd41171f5bdd6f3ccff80969d62640e1" name="acd41171f5bdd6f3ccff80969d62640e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd41171f5bdd6f3ccff80969d62640e1">&#9670;&#160;</a></span>systemVariableInt_P <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define systemVariableInt_P</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">element, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;{ element.name_P = <a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( name ); element.floatData = NULL; element.intData = &amp;name; element.strData = NULL; element.name = NULL; }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This macro simplifies the int type system variable creation for PROGMEM implementation. </p>
+<p >This macro simplifies the char* or const char* type system variable creation for PROGMEM implementation.</p>
+<p >With this macro you can fill the system variable table easily. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>One element in the system variables table. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the char* or const char* variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Do not use &amp; operator before the name. Just use the name, the macro will handle the rest. Also, no const casting is needed.</dd></dl>
+<p>With this macro you can fill the system variable table easily. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>One element in the system variables table. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the int variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Do not use &amp; operator before the name. Just use the name, the macro will handle the rest. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00148">148</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acd41171f5bdd6f3ccff80969d62640e1" name="acd41171f5bdd6f3ccff80969d62640e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd41171f5bdd6f3ccff80969d62640e1">&#9670;&#160;</a></span>systemVariableInt_P <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define systemVariableInt_P</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">element, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;{ element.name_P = <a class="el" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( name ); element.floatData = NULL; element.intData = NULL; element.strData = (char*)name; element.name = NULL; }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This macro simplifies the int type system variable creation for PROGMEM implementation. </p>
+<p >This macro simplifies the char* or const char* type system variable creation for PROGMEM implementation.</p>
+<p >With this macro you can fill the system variable table easily. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>One element in the system variables table. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the char* or const char* variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Do not use &amp; operator before the name. Just use the name, the macro will handle the rest. Also, no const casting is needed.</dd></dl>
+<p>With this macro you can fill the system variable table easily. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>One element in the system variables table. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the int variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Do not use &amp; operator before the name. Just use the name, the macro will handle the rest. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00148">148</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3ff459ab1c5008c92fe86c3b9d2f8d5c" name="a3ff459ab1c5008c92fe86c3b9d2f8d5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ff459ab1c5008c92fe86c3b9d2f8d5c">&#9670;&#160;</a></span>systemVariableString</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define systemVariableString</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name</td><td>)</td>
+          <td>&#160;&#160;&#160;{ #name, NULL, NULL, (char*)name }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This macro simplifies the char* or const char* type system variable creation. </p>
+<p >With this macro you can fill the system variable table easily. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the char* or const char* variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Do not use &amp; operator before the name. Just use the name, the macro will handle the rest. Also, no const casting is needed. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_a_p_i_8hpp_source.html#l00122">122</a> of file <a class="el" href="_commander-_a_p_i_8hpp_source.html">Commander-API.hpp</a>.</p>
 
 </div>
 </div>
@@ -307,10 +621,10 @@ Macros</h2></td></tr>
         <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
       </a> &nbsp;|&nbsp;
       <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
-      <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+      <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Fri Jun 30 2023
+      </a> on Wed Aug 9 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -322,10 +636,10 @@ Macros</h2></td></tr>
           <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
         </a> &nbsp;|&nbsp;
         <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
-        <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+        <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Fri Jun 30 2023
+        </a> on Wed Aug 9 2023
       </small></address>
     </li>
   </ul>

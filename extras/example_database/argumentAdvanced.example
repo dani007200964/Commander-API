@@ -29,7 +29,7 @@ Commander commander;
 
 // We have to create the prototypes functions for our commands.
 // The arguments have to be the same for all command functions.
-void dog_func( char *args, Stream *response, void* parrent );
+bool dog_func( char *args, Stream *response, void* parrent );
 
 
 const char* dogGraphicsLine0 = {
@@ -152,7 +152,7 @@ while( {{ channel }}.available() ){
 ++--FUNCTION_IMPLEMENTATIONS--++
 
 /// This is an example function for the cat command
-void dog_func(char *args, Stream *response, void* parrent ){
+bool dog_func(char *args, Stream *response, void* parrent ){
 
     // Generic counter
     int i;
@@ -274,5 +274,5 @@ void dog_func(char *args, Stream *response, void* parrent ){
 
     response -> println();
 
-
+    return true;
 }

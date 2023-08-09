@@ -5,7 +5,7 @@
  * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2023.Aug.07
+ * Modified 2023.Aug.09
  *
  * This is a simple example, that demonstrates how
  * to use the base functionality of th Commander-API.
@@ -27,6 +27,8 @@ Commander::API_t API_tree[] = {
     API_ELEMENT_REBOOT,
     API_ELEMENT_ECHO,
     API_ELEMENT_ENV,
+    API_ELEMENT_EXPORT_TARGET,
+    API_ELEMENT_EXPORT,
     API_ELEMENT_MICROS,
     API_ELEMENT_MILLIS,
     API_ELEMENT_UPTIME,
@@ -41,6 +43,17 @@ Commander::API_t API_tree[] = {
     API_ELEMENT_ABS,
     API_ELEMENT_RANDOM,
     API_ELEMENT_NOT
+};
+
+// Global system variables.
+float tmpFloat = 0.0;
+int tmpInt = 0;
+
+// System Variable array. This array will store the
+// name and the instance of the system variables.
+Commander::SystemVariable_t systemVariables[] = {
+    systemVariableFloat( tmpFloat ),
+    systemVariableInt( tmpInt )
 };
 
 // This is a buffer to hold the incoming command.
@@ -67,6 +80,9 @@ void setup(){
     // We have to attach the API_tree array from the previous steps
     // to Commander to work properly.
     commander.attachTree( API_tree );
+
+    // Attach the system variable array to the command parser.
+    Commander::attachVariables( systemVariables );
 
     // After we attached the API_tree, Commander has to initialize
     // itself for the fastest runtime possible. It creates a balanced
@@ -105,7 +121,7 @@ void loop(){
             Serial.println();
             commander.execute( commandFromSerial, &Serial );
             commandIndex = 0;
-            Serial.print( "$: " );
+            Serial.print( "\r\n$: " );
         }
 
         // If we have a carriage-return character we simply

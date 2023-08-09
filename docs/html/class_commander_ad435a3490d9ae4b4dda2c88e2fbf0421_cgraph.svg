@@ -48,7 +48,7 @@ if (edges && edges.length) {
 <script type="text/javascript">
 var viewWidth = 565;
 var viewHeight = 56;
-var sectionId = 'dynsection-12';
+var sectionId = 'dynsection-15';
 </script>
 <script xlink:href="svgpan.js"/>
 <svg id="graph" class="graph">
@@ -105,7 +105,7 @@ var sectionId = 'dynsection-12';
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
-<g id="a_node4"><a xlink:href="class_commander.html#aec3ddca4426c77b7ac39c0eaea641f68" target="_top" xlink:title="Find an API element in the tree by alphabetical place.">
+<g id="a_node4"><a xlink:href="class_commander.html#a8634a1c3c680d0a598fa8b6b5445ca39" target="_top" xlink:title="Find an API element in the tree by alphabetical place.">
 <polygon fill="white" stroke="#666666" points="557,-30 449,-30 449,0 557,0 557,-30"/>
 <text text-anchor="start" x="457" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Commander::find_api</text>
 <text text-anchor="middle" x="503" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_index_by_place</text>

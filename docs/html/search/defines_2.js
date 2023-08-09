@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['neofetch_5fauthor_0',['NEOFETCH_AUTHOR',['../_commander-_a_p_i-_commands_8hpp.html#ac165a3e2a57b3412902515b88ded5a33',1,'Commander-API-Commands.hpp']]],
-  ['neofetch_5fcommand_5fparser_1',['NEOFETCH_COMMAND_PARSER',['../_commander-_a_p_i-_commands_8hpp.html#a3240124928ec3d486abe71ceb49774ad',1,'Commander-API-Commands.hpp']]],
-  ['neofetch_5fcompile_5fdate_2',['NEOFETCH_COMPILE_DATE',['../_commander-_a_p_i-_commands_8hpp.html#a9c0b4f54d8719aa7cb0603c034701536',1,'Commander-API-Commands.hpp']]],
-  ['neofetch_5fcompiler_3',['NEOFETCH_COMPILER',['../_commander-_a_p_i-_commands_8hpp.html#adbf594a7ac51cb52e716514b67524b91',1,'Commander-API-Commands.hpp']]],
-  ['neofetch_5fcpu_5ftype_5fauto_4',['NEOFETCH_CPU_TYPE_AUTO',['../_commander-_a_p_i-_commands_8hpp.html#abe99c2238e9d3878d6f860d1f13f2084',1,'Commander-API-Commands.hpp']]],
-  ['neofetch_5ffw_5fname_5',['NEOFETCH_FW_NAME',['../_commander-_a_p_i-_commands_8hpp.html#abd7d82ba8914edddf59330555d6fee1c',1,'Commander-API-Commands.hpp']]],
-  ['neofetch_5flicense_6',['NEOFETCH_LICENSE',['../_commander-_a_p_i-_commands_8hpp.html#a68127e17e6d0122537fca5487d5024a4',1,'Commander-API-Commands.hpp']]],
-  ['neofetch_5flogo_5fheight_7',['NEOFETCH_LOGO_HEIGHT',['../_commander-_a_p_i-_commands_8hpp.html#a19cd968df5ca2d2bbd0a9158be83df99',1,'Commander-API-Commands.hpp']]],
-  ['neofetch_5fterminal_8',['NEOFETCH_TERMINAL',['../_commander-_a_p_i-_commands_8hpp.html#a2291a3d857dc7f285666d07256c1ee45',1,'Commander-API-Commands.hpp']]]
+  ['commander_5fapi_5fversion_0',['COMMANDER_API_VERSION',['../_commander-_a_p_i_8hpp.html#a9dda1700b3dad0727a9042fec8405d53',1,'Commander-API.hpp']]],
+  ['commander_5fenable_5fpipe_5fmodule_1',['COMMANDER_ENABLE_PIPE_MODULE',['../_commander-_settings_8hpp.html#a70dd4d6223b7386a5299fd3913b59ede',1,'COMMANDER_ENABLE_PIPE_MODULE():&#160;Commander-Settings.hpp'],['../_commander-_settings_8hpp.html#a70dd4d6223b7386a5299fd3913b59ede',1,'COMMANDER_ENABLE_PIPE_MODULE():&#160;Commander-Settings.hpp']]],
+  ['commander_5fmax_5fcommand_5fsize_2',['COMMANDER_MAX_COMMAND_SIZE',['../_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456',1,'Commander-Settings.hpp']]],
+  ['commander_5fuse_5fwifi_5fclient_5fresponse_3',['COMMANDER_USE_WIFI_CLIENT_RESPONSE',['../_commander-_settings_8hpp.html#a7392802e05ee3ce93237a2d2d619e787',1,'Commander-Settings.hpp']]]
 ];

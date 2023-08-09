@@ -239,7 +239,28 @@ void Commander::recursive_optimizer( int32_t start_index, int32_t stop_index ){
 
 }
 
-void Commander::executeCommand( char *cmd, void* parent ){
+bool Commander::enablePipeModuleFunc( char* buffer, int bufferSize, commanderPipeChannel* pipeChannel_p ){
+
+    // If the size of the specified buffer is not equal to the
+    // required size, we have to return with error code.
+    if( bufferSize != COMMANDER_PIPE_BUFFER_SIZE ){
+        return false;
+    }
+
+    // If the commanderPipeChannel object is not specified correctly,
+    // we have to return with error code.
+    if( pipeChannel_p == NULL ){
+        return false;
+    }
+
+    // Save the parameters to the internal variables.
+    pipeArgBuffer = buffer;
+    pipeChannel = pipeChannel_p;
+
+    return true;
+}
+
+bool Commander::executeCommand( const char *cmd, void* parent ){
 
 	// The beginning of the argument list will be stored in this pointer
 	char *arg;
@@ -254,9 +275,11 @@ void Commander::executeCommand( char *cmd, void* parent ){
 	// Pointer to the selected command data.
 	API_t *commandData_ptr;
 
-	int32_t pipePos;
+	int pipePos;
 
-	uint32_t i;
+    bool executionStat;
+
+	int i;
 
 	// Copy the command data to the internal buffer.
 	// It is necessary because we have to modify the content
@@ -264,9 +287,19 @@ void Commander::executeCommand( char *cmd, void* parent ){
 	// get a bus-fault error without a buffer.
 	strncpy( tempBuff, cmd, COMMANDER_MAX_COMMAND_SIZE );
 
-	pipePos = hasChar( tempBuff, '|' );
+    // According to the finding in issue #19 this has to be added to make things more safe.
+    tempBuff[ sizeof( tempBuff ) - 1 ] = '\0';
+
+    // Try to find a pipe character in the input string.
+	pipePos = hasChar( tempBuff, '|', true );
 
 	if( pipePos >= 0 ){
+
+        // Check if piping is requested, but disabled.
+        if( pipeArgBuffer == NULL ){
+            response -> print( __CONST_TXT__( "The command contains piping but the pipe module is disabled!" ) );
+            return false;
+        }
 
 		// Terminate where pip is found.
 		tempBuff[ pipePos ] = '\0';
@@ -313,7 +346,7 @@ void Commander::executeCommand( char *cmd, void* parent ){
 	// Try to find the command datata.
 	commandData_ptr = (*this)[ tempBuff ];
 
-	// If it is not a NULL pointer, that means we have a mtach.
+	// If it is not a NULL pointer, that means we have a match.
 	if( commandData_ptr ){
 
 		// Because we have found the command in the API tree we have to choose
@@ -351,23 +384,25 @@ void Commander::executeCommand( char *cmd, void* parent ){
 		// If show_description flag is not set, than we have to execute the commands function.
 		else{
 
-			if( pipeChannel.available() > 0 ){
-
-				// pipeChannel.readBytesUntil( '\0', pipeArgBuffer, COMMANDER_MAX_COMMAND_SIZE );
+            // Check if piping is enabled.
+            // If so, check if we have any data in the pipe channel.
+			if( ( pipeArgBuffer != NULL ) && ( pipeChannel -> available() > 0 ) ){
 
 				i = 0;
 
-				while( pipeChannel.available() ){
+                // Copy all the data from the pipe channel to the pipe buffer.
+				while( pipeChannel -> available() ){
 
+                    // Check and handle overflow.
 					if( i < COMMANDER_MAX_COMMAND_SIZE ){
 
-						pipeArgBuffer[ i ] = pipeChannel.read();
+						pipeArgBuffer[ i ] = pipeChannel -> read();
 
 					}
 
 					else{
 
-						pipeChannel.read();
+						pipeChannel -> read();
 
 					}
 
@@ -375,40 +410,110 @@ void Commander::executeCommand( char *cmd, void* parent ){
 
 				}
 
+                // If the data fits in the buffer, terminate after the last valid data.
 				if( i < COMMANDER_MAX_COMMAND_SIZE ){
 
 					pipeArgBuffer[ i ] = '\0';
 
 				}
 
+                // Just in case terminate at the end of the pipe buffer.
 				pipeArgBuffer[ COMMANDER_MAX_COMMAND_SIZE - 1 ] = '\0';
 
+                // Use the pipe buffer as argument.
 				arg = pipeArgBuffer;
 
 			}
 
-			if( pipePos > 0 ){
+            // Check if piping is enabled.
+            // Check if we have at least one pipe left.
+			if( ( pipeArgBuffer != NULL ) && ( pipePos > 0 ) ){
 
-				// Execute commands function and redirect the output to pipe.
-				(commandData_ptr -> func)( arg, &pipeChannel, parent );
+				// Execute commands function and redirect the output to the pipe channel.
+				executionStat = (commandData_ptr -> func)( arg, pipeChannel, parent );
+                
+                // If the actual command execution was successful, we have to increment the pipeCounter
+                if( executionStat ){
+                    pipeCounter++;
+                }
 
 			}
 
+            // If piping is disabled or we ran out of pipes in the command string,
+            // we have to execute the command in the old fashion way.
 			else{
 
 				// Execute command function.
-				(commandData_ptr -> func)( arg, response, parent );
+				executionStat = (commandData_ptr -> func)( arg, response, parent );
 
 			}
 
-			if( pipePos > 0 ){
+            // Check if we had a problem during execution.
+            // If there is a problem, we have to return with error code.
+            if( executionStat == false ){
+
+                /*
+                response -> print( "pipeCounter: " );
+                response -> println( pipeCounter );
+                */
+
+                // Check if the piping went wrong.
+                int brokenPipePos = hasChar( originalCommandData, '|', pipeCounter, true );
+
+                if( brokenPipePos >= 0 ){
+
+                    // In case of broken pipe, inform the user about the problematic section.
+                    if( formatting ){
+                        response -> print( __CONST_TXT__( "\033[1;35m" ) );
+                    }
+
+                    response -> println( __CONST_TXT__( "\r\nBroken pipe!" ) );
+
+                    if( formatting ){
+                        response -> print( __CONST_TXT__( "\033[0;37m" ) );
+                    }
+
+                    response -> println( originalCommandData );
+                    
+                    for( i = 0; i < brokenPipePos; i++ ){
+                        response -> print( ' ' );
+                    }
+
+                    if( formatting ){
+                        response -> print( __CONST_TXT__( "\033[1;31m" ) );
+                    }
+
+                    response -> println( "\u25B2" );
+                    
+                    for( i = 0; i < brokenPipePos; i++ ){
+                        response -> print( ' ' );
+                    }
+
+                    response -> print( "\u2514 The pipe broke here" );
+                    
+                    if( formatting ){
+                        response -> print( __CONST_TXT__( "\033[0;37m" ) );
+                    }
+
+                }
+
+                return false;
+            }
+
+            // Check if piping is enabled.
+            // Check if we have at least one pipe left.
+			if( ( pipeArgBuffer != NULL ) && pipePos > 0 ){
 
 				// To remove whitespace from the new command begin.
 				while( tempBuff[ pipePos + 1 ] == ' ' ){
 					pipePos++;
 				}
 
-				executeCommand( &tempBuff[ pipePos + 1 ] );
+                // Execute the next command in the pipe.
+				if( executeCommand( &tempBuff[ pipePos + 1 ] ) ){
+                    // If the command execution fails, we have to return to break recursion.
+                    return false;
+                }
 
 			}
 
@@ -435,90 +540,61 @@ void Commander::executeCommand( char *cmd, void* parent ){
 
 	}
 
-	/*
-	// 'echo' is an internal function that prints what it gets, or an internal variable.
-	else if( strcmp( tempBuff, (const char*)"echo" ) == 0 ){
-
-		response -> print( arg );
-
-	}*/
-
 	else{
 
 		// If we went through the whole tree and we did not found the command in it,
 		// we have to notice the user abut the problem. Maybe a Type-O
 		response -> print( __CONST_TXT__( "Command \'" ) );
 		response -> print( tempBuff );
-		response -> println( __CONST_TXT__( "\' not found!" ) );
-
-		#ifdef COMMANDER_ENABLE_PIPE_MODULE
-
-		// Clear the pipe at error.
-		while( pipeChannel.available() ){
-
-			pipeChannel.read();
-
-		}
+		response -> print( __CONST_TXT__( "\' not found!" ) );
 		
-		#endif
-
 	}
-
+    return true;
 }
 
-void Commander::execute( char *cmd ){
+bool Commander::execute( const char *cmd ){
 
 	// Default execute handler, so the default response will be chosen.
 	response = &defaultResponse;
 
+    // Reset the pipe position tracker.
+    pipeCounter = 0;
+
+    // Save the address of the original message.
+    originalCommandData = cmd;
+
+    // If piping is enabled, we have to flush the pipe channel before command execution.
+    if( pipeArgBuffer != NULL ){
+        while( pipeChannel -> available() ){
+            pipeChannel -> read();
+        }
+    }
+
 	// Execute the command.
-	executeCommand( cmd );
+	return( executeCommand( cmd ) );
 
 }
 
-void Commander::execute( const char *cmd ){
+bool Commander::execute( const char *cmd, Stream *resp, void* parent ){
 
-	// Default execute handler, so the default response will be chosen.
-	response = &defaultResponse;
-
-	// Execute the command.
-	executeCommand( (char*)cmd );
-
-}
-
-void Commander::execute( char *cmd, Stream *resp ){
-
+    // Redirect the response to the specified Stream.
 	response = resp;
 
-	// Execute the command.
-	executeCommand( cmd );
+    // Reset the pipe position tracker.
+    pipeCounter = 0;
 
-}
+    // Save the address of the original message.
+    originalCommandData = cmd;
 
-void Commander::execute( const char *cmd, Stream *resp ){
-
-	response = resp;
-
-	// Execute the command.
-	executeCommand( (char*)cmd );
-
-}
-
-void Commander::execute( char *cmd, Stream *resp, void* parent ){
-
-	response = resp;
+    // If piping is enabled, we have to flush the pipe channel before command execution.
+    if( pipeArgBuffer != NULL ){
+        while( pipeChannel -> available() ){
+            pipeChannel -> read();
+        }
+    }
 
 	// Execute the command.
-	executeCommand( cmd, parent );
-
-}
-
-void Commander::execute( const char *cmd, Stream *resp, void* parent ){
-
-	response = resp;
-
-	// Execute the command.
-	executeCommand( (char*)cmd, parent );
+	return( executeCommand( cmd, parent ) );
 
 }
 
@@ -556,7 +632,7 @@ Commander::API_t* Commander::operator [] ( int i ){
 
 }
 
-Commander::API_t* Commander::operator [] ( char* name ){
+Commander::API_t* Commander::operator [] ( const char* name ){
 
 	// Stores the next elements address in the tree
 	API_t *next;
@@ -593,18 +669,6 @@ Commander::API_t* Commander::operator [] ( char* name ){
 
 	// If we did not found the command we return NULL.
 	return NULL;
-
-}
-
-Commander::API_t* Commander::operator [] ( const char* name ){
-
-	return (*this)[ (char*)name ];
-
-}
-
-void Commander::printHelp( bool description ){
-
-	printHelp( response, description );
 
 }
 
@@ -714,23 +778,63 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 
 }
 
-int32_t Commander::hasChar( char* str, char c ){
+int Commander::hasChar( const char* str, char c, bool ignoreString ){
 
-	int32_t cntr = 0;
+	int cntr = 0;
 
 	while( str[ cntr ] ){
 
-		if( str[ cntr ] == c ){
+        // Check if we have to ignore characters inside a string.
+        // If so, we have to check if we are in a string.
+        if( ignoreString && inString( str, cntr ) ){
+            // In this case we can skip to the next character.
+            cntr++;
+            continue;
+        }
 
+        // Check if the current character is the searched one.
+		if( str[ cntr ] == c ){
+            // If it is, return with its position( index ).
 			return cntr;
 
 		}
 
+        // Increment the counter.
 		cntr++;
 
 	}
 
+    // If we are here, that means, we did not found the character in the string :(
+    // Return with an invalid address.
 	return -1;
+
+}
+
+int Commander::hasChar( const char* str, char c, int number, bool ignoreString ){
+
+    // Generic counter.
+    int i;
+
+    // It will store the current result.
+    int result;
+
+    // It will store te total position.
+    int cntr = 0;
+
+    // Try to find the number'th occurrence in the input string.
+    for( i = 0; i < number; i++ ){
+
+        result = hasChar( &str[ cntr ], c, ignoreString );
+
+        if( result < 0 ){
+            return -1;
+        }
+
+        cntr += ( result + 1 );
+
+    }
+
+    return cntr - 1;
 
 }
 
@@ -740,9 +844,9 @@ int Commander::commander_strcmp_regular( API_t* element1, API_t* element2 ){
 
 }
 
-int Commander::commander_strcmp_tree_ram_regular( API_t* element1, char* element2 ){
+int Commander::commander_strcmp_tree_ram_regular( API_t* element1, const char* element2 ){
 
-	return strcmp( element1 -> name, (const char*)element2 );
+	return strcmp( element1 -> name, element2 );
 
 }
 
@@ -755,7 +859,7 @@ int Commander::commander_strcmp_progmem( API_t* element1, API_t* element2 ){
 
 }
 
-int Commander::commander_strcmp_tree_ram_progmem( API_t* element1, char* element2 ){
+int Commander::commander_strcmp_tree_ram_progmem( API_t* element1, const char* element2 ){
 
 	return strcmp_P( element2, (PGM_P)element1 -> name_P ) * -1;
 
@@ -805,7 +909,7 @@ Commander::SystemVariable_t* Commander::getSystemVariable( const char* name ){
 
 }
 
-void Commander::printSystemVariable( Stream* channel_p, const char* name ){
+void Commander::printSystemVariable( Stream* channel_p, const char* name, int decimalPlaces ){
 
 	SystemVariable_t* var;
 
@@ -822,9 +926,7 @@ void Commander::printSystemVariable( Stream* channel_p, const char* name ){
 	}
 
 	if( ( var -> floatData ) != NULL ){
-		channel_p -> print( (int)*var -> floatData );
-		channel_p -> print( '.' );
-		channel_p -> print( ( (int)( *(var -> floatData) * 100.0 ) ) % 100 );
+        channel_p -> print( *var -> floatData, decimalPlaces );
 		return;
 	}
 
@@ -877,3 +979,42 @@ void Commander::printSystemVariables( Stream* channel_p ){
 	}
 
 }
+
+bool Commander::inString( const char* source, int index ){
+
+    // Generic counter.
+    int i;
+
+    // It will store the return value.
+    bool ret = false;
+
+    // Check if the source is not set correctly.
+    if( source == NULL ){
+        return false;
+    }
+
+    // Check if the index is not set correctly.
+    if( index < 0 ){
+        return false;
+    }
+
+    if( index >= strlen( source ) ){
+        return false;
+    }
+
+    // Go through every character from the first to the indexed one.
+    for( i = 0; i < index; i++ ){
+
+        // Every time we find a string start/end character, which is the " character,
+        // we negate the return value.
+        if( source[ i ] == '\"' ){
+            ret = !ret;
+        }
+
+    }
+
+    // Return with the result.
+    return ret;
+    
+}
+

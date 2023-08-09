@@ -5,7 +5,7 @@
  * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2023.Aug.07
+ * Modified 2023.Aug.09
  *
  * This is a simple example, that demonstrates how
  * to use the base functionality of th Commander-API.
@@ -39,8 +39,8 @@ Commander commander;
 
 // We have to create the prototypes functions for our commands.
 // The arguments have to be the same for all command functions.
-void cat_func( char *args, Stream *response, void* parrent );
-void dog_func( char *args, Stream *response, void* parrent );
+bool cat_func( char *args, Stream *response, void* parrent );
+bool dog_func( char *args, Stream *response, void* parrent );
 
 // To tell Commander how many commands we have, it is necessary
 // to create an array, that holds some data that represents our
@@ -123,15 +123,17 @@ int main(){
 }
 
 /// This is an example function for the cat command
-void cat_func(char *args, Stream *response, void* parrent ){
+bool cat_func(char *args, Stream *response, void* parrent ){
 
   response -> print("Hello from cat function!\r\n");
+  return true;
 
 }
 
 /// This is an example function for the dog command
-void dog_func(char *args, Stream *response, void* parrent ){
+bool dog_func(char *args, Stream *response, void* parrent ){
 
   response -> print("Hello from dog function!\r\n");
+  return true;
 
 }

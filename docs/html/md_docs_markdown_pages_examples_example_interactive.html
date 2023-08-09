@@ -57,7 +57,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Commander-API
-   &#160;<span id="projectnumber">V2.1.0</span>
+   &#160;<span id="projectnumber">V3.0.0</span>
    </div>
    <div id="projectbrief">Simple Command Parser</div>
   </td>
@@ -142,7 +142,7 @@ Example Code:</h3>
 <div class="line"><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
 <div class="line"><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
 <div class="line"><span class="comment"> * This file is part of the Commander-API project.</span></div>
-<div class="line"><span class="comment"> * Modified 2023.Jun.30</span></div>
+<div class="line"><span class="comment"> * Modified 2023.Aug.09</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * This is a simple example, that demonstrates how</span></div>
 <div class="line"><span class="comment"> * to use the base functionality of th Commander-API.</span></div>
@@ -241,7 +241,7 @@ Example Code:</h3>
 <div class="line">        <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;\r&#39;</span> ){</div>
 <div class="line">            commandFromSerial[ commandIndex ] = <span class="charliteral">&#39;\0&#39;</span>;</div>
 <div class="line">            Serial.println();</div>
-<div class="line">            commander.<a class="code hl_function" href="class_commander.html#aafe1ff979eae34461aaee3aaf8ee474c">execute</a>( commandFromSerial, &amp;Serial );</div>
+<div class="line">            commander.<a class="code hl_function" href="class_commander.html#af6609b049d9524db60aac35dbba58cec">execute</a>( commandFromSerial, &amp;Serial );</div>
 <div class="line">            commandIndex = 0;</div>
 <div class="line">            Serial.print( <span class="stringliteral">&quot;$: &quot;</span> );</div>
 <div class="line">        }</div>
@@ -332,13 +332,13 @@ Example Code:</h3>
 <div class="line"> </div>
 <div class="line">}</div>
 <div class="ttc" id="a_commander-_a_p_i_8hpp_html"><div class="ttname"><a href="_commander-_a_p_i_8hpp.html">Commander-API.hpp</a></div></div>
-<div class="ttc" id="a_commander-_a_p_i_8hpp_html_aff2cdea04953244073599693c685043a"><div class="ttname"><a href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a></div><div class="ttdeci">#define apiElement(name, desc, func)</div><div class="ttdoc">Arduino detection.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00070">Commander-API.hpp:70</a></div></div>
+<div class="ttc" id="a_commander-_a_p_i_8hpp_html_aff2cdea04953244073599693c685043a"><div class="ttname"><a href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a></div><div class="ttdeci">#define apiElement(name, desc, func)</div><div class="ttdoc">This macro simplifies the API element creation.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00080">Commander-API.hpp:80</a></div></div>
 <div class="ttc" id="a_commander-_i_o_8hpp_html"><div class="ttname"><a href="_commander-_i_o_8hpp.html">Commander-IO.hpp</a></div></div>
-<div class="ttc" id="aclass_commander_html"><div class="ttname"><a href="class_commander.html">Commander</a></div><div class="ttdoc">Commander class.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00097">Commander-API.hpp:97</a></div></div>
-<div class="ttc" id="aclass_commander_html_a5d9d12c3d15cf350593f4c2b11ec05d8"><div class="ttname"><a href="class_commander.html#a5d9d12c3d15cf350593f4c2b11ec05d8">Commander::init</a></div><div class="ttdeci">void init()</div><div class="ttdoc">Initializer.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00061">Commander-API.cpp:61</a></div></div>
-<div class="ttc" id="aclass_commander_html_aac06e93506b035ac7b99aa4253c1ed17"><div class="ttname"><a href="class_commander.html#aac06e93506b035ac7b99aa4253c1ed17">Commander::attachDebugChannel</a></div><div class="ttdeci">void attachDebugChannel(Stream *resp)</div><div class="ttdoc">Debug channel for Stream.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00580">Commander-API.cpp:580</a></div></div>
-<div class="ttc" id="aclass_commander_html_aafe1ff979eae34461aaee3aaf8ee474c"><div class="ttname"><a href="class_commander.html#aafe1ff979eae34461aaee3aaf8ee474c">Commander::execute</a></div><div class="ttdeci">void execute(char *cmd)</div><div class="ttdoc">Default execution function.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00524">Commander-API.cpp:524</a></div></div>
-<div class="ttc" id="astruct_commander_1_1_a_p_i__t_html"><div class="ttname"><a href="struct_commander_1_1_a_p_i__t.html">Commander::API_t</a></div><div class="ttdoc">Structure for command data.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00109">Commander-API.hpp:109</a></div></div>
+<div class="ttc" id="aclass_commander_html"><div class="ttname"><a href="class_commander.html">Commander</a></div><div class="ttdoc">Commander class.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00168">Commander-API.hpp:168</a></div></div>
+<div class="ttc" id="aclass_commander_html_a5d9d12c3d15cf350593f4c2b11ec05d8"><div class="ttname"><a href="class_commander.html#a5d9d12c3d15cf350593f4c2b11ec05d8">Commander::init</a></div><div class="ttdeci">void init()</div><div class="ttdoc">Initializer.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00050">Commander-API.cpp:50</a></div></div>
+<div class="ttc" id="aclass_commander_html_aac06e93506b035ac7b99aa4253c1ed17"><div class="ttname"><a href="class_commander.html#aac06e93506b035ac7b99aa4253c1ed17">Commander::attachDebugChannel</a></div><div class="ttdeci">void attachDebugChannel(Stream *resp)</div><div class="ttdoc">Attach a debug channel to the object.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00493">Commander-API.cpp:493</a></div></div>
+<div class="ttc" id="aclass_commander_html_af6609b049d9524db60aac35dbba58cec"><div class="ttname"><a href="class_commander.html#af6609b049d9524db60aac35dbba58cec">Commander::execute</a></div><div class="ttdeci">void execute(const char *cmd)</div><div class="ttdoc">Default execution function.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00473">Commander-API.cpp:473</a></div></div>
+<div class="ttc" id="astruct_commander_1_1_a_p_i__t_html"><div class="ttname"><a href="struct_commander_1_1_a_p_i__t.html">Commander::API_t</a></div><div class="ttdoc">Structure for command data.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00180">Commander-API.hpp:180</a></div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
@@ -358,10 +358,10 @@ Example Code:</h3>
         <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
       </a> &nbsp;|&nbsp;
       <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
-      <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+      <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Fri Jun 30 2023
+      </a> on Wed Aug 9 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -373,10 +373,10 @@ Example Code:</h3>
           <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
         </a> &nbsp;|&nbsp;
         <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
-        <b>Commander-API V2.1.0</b> &nbsp;|&nbsp; Generated by:
+        <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Fri Jun 30 2023
+        </a> on Wed Aug 9 2023
       </small></address>
     </li>
   </ul>
