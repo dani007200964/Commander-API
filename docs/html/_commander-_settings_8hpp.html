@@ -140,8 +140,11 @@ Macros</h2></td></tr>
 <tr class="separator:a727fe1000dc5b9eec8192e41c945f456"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70dd4d6223b7386a5299fd3913b59ede"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_settings_8hpp.html#a70dd4d6223b7386a5299fd3913b59ede">COMMANDER_ENABLE_PIPE_MODULE</a></td></tr>
 <tr class="separator:a70dd4d6223b7386a5299fd3913b59ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0877718e9bbb79c1c306c457e19b40a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_settings_8hpp.html#aa0877718e9bbb79c1c306c457e19b40a">COMMANDER_PIPE_BUFFER_SIZE</a>&#160;&#160;&#160;( <a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a> + 1 )</td></tr>
+<tr class="memdesc:aa0877718e9bbb79c1c306c457e19b40a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length of the terminal command.  <a href="_commander-_settings_8hpp.html#aa0877718e9bbb79c1c306c457e19b40a">More...</a><br /></td></tr>
+<tr class="separator:aa0877718e9bbb79c1c306c457e19b40a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19cd968df5ca2d2bbd0a9158be83df99"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_settings_8hpp.html#a19cd968df5ca2d2bbd0a9158be83df99">NEOFETCH_LOGO_HEIGHT</a>&#160;&#160;&#160;12</td></tr>
-<tr class="memdesc:a19cd968df5ca2d2bbd0a9158be83df99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length of the terminal command.  <a href="_commander-_settings_8hpp.html#a19cd968df5ca2d2bbd0a9158be83df99">More...</a><br /></td></tr>
+<tr class="memdesc:a19cd968df5ca2d2bbd0a9158be83df99"><td class="mdescLeft">&#160;</td><td class="mdescRight">&zwj;**** neofetch settings****&zwj;///  <a href="_commander-_settings_8hpp.html#a19cd968df5ca2d2bbd0a9158be83df99">More...</a><br /></td></tr>
 <tr class="separator:a19cd968df5ca2d2bbd0a9158be83df99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd7d82ba8914edddf59330555d6fee1c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_commander-_settings_8hpp.html#abd7d82ba8914edddf59330555d6fee1c">NEOFETCH_FW_NAME</a>&#160;&#160;&#160;&quot;Firmware-name&quot;</td></tr>
 <tr class="separator:abd7d82ba8914edddf59330555d6fee1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,6 +214,25 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="aa0877718e9bbb79c1c306c457e19b40a" name="aa0877718e9bbb79c1c306c457e19b40a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0877718e9bbb79c1c306c457e19b40a">&#9670;&#160;</a></span>COMMANDER_PIPE_BUFFER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COMMANDER_PIPE_BUFFER_SIZE&#160;&#160;&#160;( <a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a> + 1 )</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Maximum length of the terminal command. </p>
+<p >This macro can be used create a buffer for piping. </p><dl class="section note"><dt>Note</dt><dd>The pipe buffer has to be a char type and the size of the buffer has to be as big as this define. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00080">80</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a7392802e05ee3ce93237a2d2d619e787" name="a7392802e05ee3ce93237a2d2d619e787"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7392802e05ee3ce93237a2d2d619e787">&#9670;&#160;</a></span>COMMANDER_USE_WIFI_CLIENT_RESPONSE</h2>
 
@@ -239,7 +261,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00138">138</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00141">141</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -255,7 +277,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00134">134</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00137">137</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -271,7 +293,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00126">126</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00129">129</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -287,7 +309,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00122">122</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00125">125</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -303,7 +325,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00094">94</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00097">97</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -319,7 +341,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00087">87</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00090">90</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -335,7 +357,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00142">142</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00145">145</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -351,10 +373,10 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Maximum length of the terminal command. </p>
-<p >&zwj;**** neofetch settings****&zwj;/// The neofetch logo have this many lines. </p>
+<p>&zwj;**** neofetch settings****&zwj;/// </p>
+<p >The neofetch logo have this many lines. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00083">83</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00086">86</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -370,7 +392,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00130">130</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00133">133</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -400,7 +422,7 @@ Macros</h2></td></tr>
 <div class="line">                            <span class="stringliteral">&quot;      -+#@@@@@@%*=:            -+#@@@@@@%*=.      \r\n&quot;</span>    \</div>
 <div class="line">                            <span class="stringliteral">&quot;\033[0;37m&quot;</span></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00105">105</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_settings_8hpp_source.html#l00108">108</a> of file <a class="el" href="_commander-_settings_8hpp_source.html">Commander-Settings.hpp</a>.</p>
 
 </div>
 </div>
@@ -426,7 +448,7 @@ Macros</h2></td></tr>
       <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Wed Aug 9 2023
+      </a> on Thu Aug 10 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -441,7 +463,7 @@ Macros</h2></td></tr>
         <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Wed Aug 9 2023
+        </a> on Thu Aug 10 2023
       </small></address>
     </li>
   </ul>

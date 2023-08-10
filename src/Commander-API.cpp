@@ -685,94 +685,40 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 
 	for( i = 0; i < API_tree_size; i++ ){
 
-		// Check if the description is required to print.
-		if( description ){
+        if( style ){
+            out -> print( __CONST_TXT__( "\033[1;32m" ) );
+        }
 
-			// Check if style is enabled.
-			if( style ){
+        if( memoryType == MEMORY_REGULAR ){
+            out -> print( API_tree[ find_api_index_by_place( i ) ].name );
+        }
+        #ifdef __AVR__
+        else if( memoryType == MEMORY_PROGMEM ){
+            out -> print( API_tree[ find_api_index_by_place( i ) ].name_P );
+        }
+        #endif
 
-				if( memoryType == MEMORY_REGULAR ){
+        if( style ){
+            out -> print( __CONST_TXT__( "\033[0;37m" ) );
+        }
 
-					out -> print( (const char*)"\033[1;32m" );
-					out -> print( API_tree[ find_api_index_by_place( i ) ].name );
-					out -> print( (const char*)"\033[0;37m" );
-					out -> print( ':' );
-					out -> print( ' ' );
-					out -> print( API_tree[ find_api_index_by_place( i ) ].desc );
-					out -> println();
+        // If description is not requested, we can skip the rest of this for loop.
+        if( !description ){
+            continue;
+        }
 
-				}
+        out -> print( __CONST_TXT__( ": " ) );
 
-				#ifdef __AVR__
+        if( memoryType == MEMORY_REGULAR ){
+            out -> print( API_tree[ find_api_index_by_place( i ) ].desc );
+        }
+        #ifdef __AVR__
+        else if( memoryType == MEMORY_PROGMEM ){
+            out -> print( API_tree[ find_api_index_by_place( i ) ].desc_P );
+        }
+        #endif
 
-				else if( memoryType == MEMORY_PROGMEM ){
-
-					out -> print( __CONST_TXT__( "\033[1;32m" ) );
-					out -> print( API_tree[ find_api_index_by_place( i ) ].name_P );
-					out -> print( __CONST_TXT__( "\033[0;37m" ) );
-					out -> print( ':' );
-					out -> print( ' ' );
-					out -> print( API_tree[ find_api_index_by_place( i ) ].desc_P );
-					out -> println();
-					out -> println();
-
-				}
-
-				#endif
-
-			}
-
-			else{
-
-				if( memoryType == MEMORY_REGULAR ){
-
-					out -> print( API_tree[ find_api_index_by_place( i ) ].name );
-					out -> print( ':' );
-					out -> print( ' ' );
-					out -> print( API_tree[ find_api_index_by_place( i ) ].desc );
-					out -> println();
-					out -> println();
-
-				}
-
-				#ifdef __AVR__
-
-				else if( memoryType == MEMORY_PROGMEM ){
-
-					out -> print( API_tree[ find_api_index_by_place( i ) ].name_P );
-					out -> print( ':' );
-					out -> print( ' ' );
-					out -> print( API_tree[ find_api_index_by_place( i ) ].desc_P );
-					out -> println();
-					out -> println();
-
-				}
-
-				#endif
-
-			}
-
-		}
-
-		else{
-
-			if( memoryType == MEMORY_REGULAR ){
-
-				out -> println( API_tree[ find_api_index_by_place( i ) ].name );
-
-			}
-
-			#ifdef __AVR__
-
-			else if( memoryType == MEMORY_PROGMEM ){
-
-				out -> println( API_tree[ find_api_index_by_place( i ) ].name_P );
-
-			}
-
-			#endif
-
-		}
+        out -> println();
 
 	}
 
@@ -1017,4 +963,69 @@ bool Commander::inString( const char* source, int index ){
     return ret;
     
 }
+
+void Commander::update( char* buffer, int bufferSize, Stream* channel_p ){
+
+    // It will hold the nex incoming character from the channel.
+    char c;
+
+    if( bufferSize <=0 ){
+        return;
+    }
+
+    if( channel_p == NULL ){
+        return;
+    }
+
+    // Check if there is any data incoming.
+    while( channel_p -> available() ){
+
+        // Read the next incoming character.
+        c = channel_p -> read();
+
+        // Every command from Serial is terminated with a new-line
+        // character. If a new-line character arrives, we have to
+        // terminate the string in the commandFromSerial buffer,
+        // and execute it. After execution, we have to reset the
+        // commandIndex counter to zero.
+        if( c == '\r' ){
+            buffer[ updateBufferCounter ] = '\0';
+            channel_p -> println();
+            execute( buffer, channel_p );
+            updateBufferCounter = 0;
+            channel_p -> print( "\r\n$: " );
+        }
+
+        // If we have a carriage-return character we simply
+        // ignore it.
+        else if( c == '\n' ){
+            continue;
+        }
+
+        // Handle backspace events.
+        else if( ( c == '\b' ) || ( c == 127 ) ){
+            if( updateBufferCounter > 0 ){
+                updateBufferCounter--;
+                channel_p -> print( "\b \b" );
+            }
+        }
+
+        // Every other case we just put the data to the next
+        // free space in the commandFromSerial buffer, increment
+        // the commandIndex, and check if it wants to overflow.
+        else{
+            buffer[ updateBufferCounter ] = c;
+            updateBufferCounter++;
+            if( updateBufferCounter >= bufferSize ){
+                updateBufferCounter = bufferSize - 1;
+            }
+            else{
+                channel_p -> print( c );
+            }
+        }
+
+    }
+
+}
+
 

@@ -159,13 +159,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab2488dc27cdc84e3a7510a89050e8415"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html#ab2488dc27cdc84e3a7510a89050e8415">write</a> (uint8_t b) override</td></tr>
 <tr class="memdesc:ab2488dc27cdc84e3a7510a89050e8415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write one byte to the channel.  <a href="classcommander_pipe_channel.html#ab2488dc27cdc84e3a7510a89050e8415">More...</a><br /></td></tr>
 <tr class="separator:ab2488dc27cdc84e3a7510a89050e8415"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae96d52bd4efdbb4f3db50aafaf09bcb8"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html#ae96d52bd4efdbb4f3db50aafaf09bcb8">write</a> (const uint8_t *<a class="el" href="classcommander_pipe_channel.html#aba5c84fa133bfafbc758e8c8260f7ce7">buffer</a>, size_t size) override</td></tr>
+<tr class="memitem:ae96d52bd4efdbb4f3db50aafaf09bcb8"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html#ae96d52bd4efdbb4f3db50aafaf09bcb8">write</a> (const uint8_t *<a class="el" href="classcommander_pipe_channel.html#a4fe9c98015164475eecc7350365e1362">buffer</a>, size_t size) override</td></tr>
 <tr class="separator:ae96d52bd4efdbb4f3db50aafaf09bcb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:aba5c84fa133bfafbc758e8c8260f7ce7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html#aba5c84fa133bfafbc758e8c8260f7ce7">buffer</a> [<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>]</td></tr>
-<tr class="separator:aba5c84fa133bfafbc758e8c8260f7ce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fe9c98015164475eecc7350365e1362"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html#a4fe9c98015164475eecc7350365e1362">buffer</a> [<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>+1]</td></tr>
+<tr class="separator:a4fe9c98015164475eecc7350365e1362"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6424ac704046904cd7af9e0a8a7861a0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html#a6424ac704046904cd7af9e0a8a7861a0">readPointer</a> = 0</td></tr>
 <tr class="separator:a6424ac704046904cd7af9e0a8a7861a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3eadb78162abc2acc4df2d9a4ba86227"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a> = 0</td></tr>
@@ -202,11 +202,6 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The available bytes in the channel. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00037">37</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcommander_pipe_channel_ad67f75499feea46a4f1cb71a0b98587b_icgraph.svg" width="622" height="68"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
 
 </div>
 </div>
@@ -296,11 +291,6 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will be removed from the channel. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00055">55</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcommander_pipe_channel_ac94b25ee07795603b3197f4c289efe92_icgraph.svg" width="622" height="68"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
 
 </div>
 </div>
@@ -380,8 +370,8 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aba5c84fa133bfafbc758e8c8260f7ce7" name="aba5c84fa133bfafbc758e8c8260f7ce7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba5c84fa133bfafbc758e8c8260f7ce7">&#9670;&#160;</a></span>buffer</h2>
+<a id="a4fe9c98015164475eecc7350365e1362" name="a4fe9c98015164475eecc7350365e1362"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fe9c98015164475eecc7350365e1362">&#9670;&#160;</a></span>buffer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -390,7 +380,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t commanderPipeChannel::buffer[<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>]</td>
+          <td class="memname">uint8_t commanderPipeChannel::buffer[<a class="el" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a>+1]</td>
         </tr>
       </table>
   </td>
@@ -474,7 +464,7 @@ Here is the caller graph for this function:</div>
       <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Wed Aug 9 2023
+      </a> on Thu Aug 10 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -489,7 +479,7 @@ Here is the caller graph for this function:</div>
         <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Wed Aug 9 2023
+        </a> on Thu Aug 10 2023
       </small></address>
     </li>
   </ul>

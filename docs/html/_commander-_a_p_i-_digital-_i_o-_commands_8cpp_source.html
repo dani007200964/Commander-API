@@ -163,7 +163,7 @@ $(document).ready(function(){initNavTree('_commander-_a_p_i-_digital-_i_o-_comma
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// These commands only work inside the Arduino environment by default.</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#ifdef ARDUINO</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="_commander-_a_p_i-_commands_8hpp.html#af1ce6ff8336c159da938303fbc2a2770">   39</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#af1ce6ff8336c159da938303fbc2a2770">commander_pinMode_func</a>( <span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parent ){</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="_commander-_a_p_i-_commands_8hpp.html#a2246eb22ddae467d2e4c311b95b1ca9f">   39</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a2246eb22ddae467d2e4c311b95b1ca9f">commander_pinMode_func</a>( <span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parent ){</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// AVR microcontrollers has small amount of dynamic memory.</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="comment">// For this reason the built in commands do not support long</span></div>
@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('_commander-_a_p_i-_digital-_i_o-_comma
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">if</span>( response != NULL ){</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            response -&gt; print( <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot; Pin has to be defined!&quot;</span> ) );</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">if</span>( inputFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() &amp;&amp; !outputFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() ){</div>
@@ -205,105 +205,108 @@ $(document).ready(function(){initNavTree('_commander-_a_p_i-_digital-_i_o-_comma
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        }</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    }</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="_commander-_a_p_i-_commands_8hpp.html#a6eccd6af580b31fb8ef7e6e038a0a322">   83</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a6eccd6af580b31fb8ef7e6e038a0a322">commander_digitalWrite_func</a>( <span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parent ){</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="comment">// AVR microcontrollers has small amount of dynamic memory.</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="comment">// For this reason the built in commands do not support long</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="comment">// argument names on AVR platforms.</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">    #ifdef __AVR__</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <a class="code hl_class" href="class_argument.html">Argument</a> pin( args, <span class="charliteral">&#39;p&#39;</span> );</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <a class="code hl_class" href="class_argument.html">Argument</a> highFlag( args, <span class="charliteral">&#39;h&#39;</span> );</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <a class="code hl_class" href="class_argument.html">Argument</a> lowFlag( args, <span class="charliteral">&#39;l&#39;</span> );</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">    #else</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <a class="code hl_class" href="class_argument.html">Argument</a> pin( args, <span class="charliteral">&#39;p&#39;</span>, <span class="stringliteral">&quot;pin&quot;</span> );</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <a class="code hl_class" href="class_argument.html">Argument</a> highFlag( args, <span class="charliteral">&#39;h&#39;</span>, <span class="stringliteral">&quot;high&quot;</span> );</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <a class="code hl_class" href="class_argument.html">Argument</a> lowFlag( args, <span class="charliteral">&#39;l&#39;</span>, <span class="stringliteral">&quot;low&quot;</span> );</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">    #endif</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    pin.<a class="code hl_function" href="class_argument.html#aeabd957dda6add595aa860761ea337f1">parseInt</a>();</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    highFlag.<a class="code hl_function" href="class_argument.html#a11a9933e5a65f1cbf0525cd9bd2a29ca">find</a>();</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    lowFlag.<a class="code hl_function" href="class_argument.html#a11a9933e5a65f1cbf0525cd9bd2a29ca">find</a>();</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">if</span>( !pin ){</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <a class="code hl_function" href="class_commander.html#a11b7236808d55ed1c497e719117cdf3d">Commander::printArgumentError</a>( response );</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordflow">if</span>( response != NULL ){</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            response -&gt; print( <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot; Pin has to be defined!&quot;</span> ) );</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        }</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">if</span>( lowFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() &amp;&amp; !highFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() ){</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        digitalWrite( (<span class="keywordtype">int</span>)pin, LOW );</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    }</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( !lowFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() &amp;&amp; highFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() ){</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        digitalWrite( (<span class="keywordtype">int</span>)pin, HIGH );</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">else</span>{</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <a class="code hl_function" href="class_commander.html#a11b7236808d55ed1c497e719117cdf3d">Commander::printArgumentError</a>( response );</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordflow">if</span>( response != NULL ){</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            response -&gt; print( <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot; Pin state has to be defined and can not be high and low at the same time!&quot;</span> ) );</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        }</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    }</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="_commander-_a_p_i-_commands_8hpp.html#a9ab5698b019086fe8d2c3d06a3f917fb">  127</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a9ab5698b019086fe8d2c3d06a3f917fb">commander_digitalRead_func</a>( <span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parent ){</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="_commander-_a_p_i-_commands_8hpp.html#af309a2eb04319e75d4cc91e93894846e">   84</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#af309a2eb04319e75d4cc91e93894846e">commander_digitalWrite_func</a>( <span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parent ){</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="comment">// AVR microcontrollers has small amount of dynamic memory.</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="comment">// For this reason the built in commands do not support long</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="comment">// argument names on AVR platforms.</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">    #ifdef __AVR__</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <a class="code hl_class" href="class_argument.html">Argument</a> pin( args, <span class="charliteral">&#39;p&#39;</span> );</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <a class="code hl_class" href="class_argument.html">Argument</a> highFlag( args, <span class="charliteral">&#39;h&#39;</span> );</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <a class="code hl_class" href="class_argument.html">Argument</a> lowFlag( args, <span class="charliteral">&#39;l&#39;</span> );</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">    #else</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <a class="code hl_class" href="class_argument.html">Argument</a> pin( args, <span class="charliteral">&#39;p&#39;</span>, <span class="stringliteral">&quot;pin&quot;</span> );</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <a class="code hl_class" href="class_argument.html">Argument</a> highFlag( args, <span class="charliteral">&#39;h&#39;</span>, <span class="stringliteral">&quot;high&quot;</span> );</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <a class="code hl_class" href="class_argument.html">Argument</a> lowFlag( args, <span class="charliteral">&#39;l&#39;</span>, <span class="stringliteral">&quot;low&quot;</span> );</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    pin.<a class="code hl_function" href="class_argument.html#aeabd957dda6add595aa860761ea337f1">parseInt</a>();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    highFlag.<a class="code hl_function" href="class_argument.html#a11a9933e5a65f1cbf0525cd9bd2a29ca">find</a>();</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    lowFlag.<a class="code hl_function" href="class_argument.html#a11a9933e5a65f1cbf0525cd9bd2a29ca">find</a>();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">if</span>( !pin ){</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <a class="code hl_function" href="class_commander.html#a11b7236808d55ed1c497e719117cdf3d">Commander::printArgumentError</a>( response );</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">if</span>( response != NULL ){</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            response -&gt; print( <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot; Pin has to be defined!&quot;</span> ) );</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">if</span>( lowFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() &amp;&amp; !highFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() ){</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        digitalWrite( (<span class="keywordtype">int</span>)pin, LOW );</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( !lowFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() &amp;&amp; highFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() ){</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        digitalWrite( (<span class="keywordtype">int</span>)pin, HIGH );</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <a class="code hl_function" href="class_commander.html#a11b7236808d55ed1c497e719117cdf3d">Commander::printArgumentError</a>( response );</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">if</span>( response != NULL ){</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            response -&gt; print( <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot; Pin state has to be defined and can not be high and low at the same time!&quot;</span> ) );</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        }</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>}</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="comment">// AVR microcontrollers has small amount of dynamic memory.</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="comment">// For this reason the built in commands do not support long</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="comment">// argument names on AVR platforms.</span></div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">    #ifdef __AVR__</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <a class="code hl_class" href="class_argument.html">Argument</a> pin( args, <span class="charliteral">&#39;p&#39;</span> );</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <a class="code hl_class" href="class_argument.html">Argument</a> txtFlag( args, <span class="charliteral">&#39;t&#39;</span> );</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="preprocessor">    #else</span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <a class="code hl_class" href="class_argument.html">Argument</a> pin( args, <span class="charliteral">&#39;p&#39;</span>, <span class="stringliteral">&quot;pin&quot;</span> );</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <a class="code hl_class" href="class_argument.html">Argument</a> txtFlag( args, <span class="charliteral">&#39;t&#39;</span>, <span class="stringliteral">&quot;text&quot;</span> );</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="preprocessor">    #endif</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    pin.<a class="code hl_function" href="class_argument.html#aeabd957dda6add595aa860761ea337f1">parseInt</a>();</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    txtFlag.<a class="code hl_function" href="class_argument.html#a11a9933e5a65f1cbf0525cd9bd2a29ca">find</a>();</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordtype">int</span> state;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">if</span>( !pin ){</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <a class="code hl_function" href="class_commander.html#a11b7236808d55ed1c497e719117cdf3d">Commander::printArgumentError</a>( response );</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordflow">if</span>( response != NULL ){</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            response -&gt; print( <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot; Pin has to be defined!&quot;</span> ) );</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        }</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    }</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    state = digitalRead( (<span class="keywordtype">int</span>)pin );</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="_commander-_a_p_i-_commands_8hpp.html#a488c98390245a3d0d7172f364ec91ed8">  129</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a488c98390245a3d0d7172f364ec91ed8">commander_digitalRead_func</a>( <span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parent ){</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="comment">// AVR microcontrollers has small amount of dynamic memory.</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="comment">// For this reason the built in commands do not support long</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="comment">// argument names on AVR platforms.</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="preprocessor">    #ifdef __AVR__</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <a class="code hl_class" href="class_argument.html">Argument</a> pin( args, <span class="charliteral">&#39;p&#39;</span> );</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <a class="code hl_class" href="class_argument.html">Argument</a> txtFlag( args, <span class="charliteral">&#39;t&#39;</span> );</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="preprocessor">    #else</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <a class="code hl_class" href="class_argument.html">Argument</a> pin( args, <span class="charliteral">&#39;p&#39;</span>, <span class="stringliteral">&quot;pin&quot;</span> );</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <a class="code hl_class" href="class_argument.html">Argument</a> txtFlag( args, <span class="charliteral">&#39;t&#39;</span>, <span class="stringliteral">&quot;text&quot;</span> );</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    pin.<a class="code hl_function" href="class_argument.html#aeabd957dda6add595aa860761ea337f1">parseInt</a>();</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    txtFlag.<a class="code hl_function" href="class_argument.html#a11a9933e5a65f1cbf0525cd9bd2a29ca">find</a>();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordtype">int</span> state;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordflow">if</span>( !pin ){</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <a class="code hl_function" href="class_commander.html#a11b7236808d55ed1c497e719117cdf3d">Commander::printArgumentError</a>( response );</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">if</span>( response != NULL ){</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            response -&gt; print( <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot; Pin has to be defined!&quot;</span> ) );</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    }</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordflow">if</span>( txtFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() ){</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    state = digitalRead( (<span class="keywordtype">int</span>)pin );</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        response -&gt; print( state ? <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot;HIGH&quot;</span> ) : <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot;LOW&quot;</span> ) );</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordflow">if</span>( txtFlag.<a class="code hl_function" href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">isFound</a>() ){</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        response -&gt; print( state ? <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot;HIGH&quot;</span> ) : <a class="code hl_define" href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a>( <span class="stringliteral">&quot;LOW&quot;</span> ) );</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    }</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        response -&gt; print( state );</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordflow">else</span>{</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        response -&gt; print( state );</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>}</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="a_commander-_a_p_i-_digital-_i_o-_commands_8cpp_html_a6eccd6af580b31fb8ef7e6e038a0a322"><div class="ttname"><a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a6eccd6af580b31fb8ef7e6e038a0a322">commander_digitalWrite_func</a></div><div class="ttdeci">void commander_digitalWrite_func(char *args, Stream *response, void *parent)</div><div class="ttdoc">Premade function for digitalWrite command.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp_source.html#l00083">Commander-API-Digital-IO-Commands.cpp:83</a></div></div>
-<div class="ttc" id="a_commander-_a_p_i-_digital-_i_o-_commands_8cpp_html_a9ab5698b019086fe8d2c3d06a3f917fb"><div class="ttname"><a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a9ab5698b019086fe8d2c3d06a3f917fb">commander_digitalRead_func</a></div><div class="ttdeci">void commander_digitalRead_func(char *args, Stream *response, void *parent)</div><div class="ttdoc">Premade function for digitalRead command.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp_source.html#l00127">Commander-API-Digital-IO-Commands.cpp:127</a></div></div>
-<div class="ttc" id="a_commander-_a_p_i-_digital-_i_o-_commands_8cpp_html_af1ce6ff8336c159da938303fbc2a2770"><div class="ttname"><a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#af1ce6ff8336c159da938303fbc2a2770">commander_pinMode_func</a></div><div class="ttdeci">void commander_pinMode_func(char *args, Stream *response, void *parent)</div><div class="ttdoc">Premade function for pinMode command.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp_source.html#l00039">Commander-API-Digital-IO-Commands.cpp:39</a></div></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>}</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_commander-_a_p_i-_digital-_i_o-_commands_8cpp_html_a2246eb22ddae467d2e4c311b95b1ca9f"><div class="ttname"><a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a2246eb22ddae467d2e4c311b95b1ca9f">commander_pinMode_func</a></div><div class="ttdeci">bool commander_pinMode_func(char *args, Stream *response, void *parent)</div><div class="ttdoc">Premade function for pinMode command.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp_source.html#l00039">Commander-API-Digital-IO-Commands.cpp:39</a></div></div>
+<div class="ttc" id="a_commander-_a_p_i-_digital-_i_o-_commands_8cpp_html_a488c98390245a3d0d7172f364ec91ed8"><div class="ttname"><a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a488c98390245a3d0d7172f364ec91ed8">commander_digitalRead_func</a></div><div class="ttdeci">bool commander_digitalRead_func(char *args, Stream *response, void *parent)</div><div class="ttdoc">Premade function for digitalRead command.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp_source.html#l00129">Commander-API-Digital-IO-Commands.cpp:129</a></div></div>
+<div class="ttc" id="a_commander-_a_p_i-_digital-_i_o-_commands_8cpp_html_af309a2eb04319e75d4cc91e93894846e"><div class="ttname"><a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#af309a2eb04319e75d4cc91e93894846e">commander_digitalWrite_func</a></div><div class="ttdeci">bool commander_digitalWrite_func(char *args, Stream *response, void *parent)</div><div class="ttdoc">Premade function for digitalWrite command.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp_source.html#l00084">Commander-API-Digital-IO-Commands.cpp:84</a></div></div>
 <div class="ttc" id="a_commander-_a_p_i_8hpp_html_a1b53171feb22439a742d2b02da99e9f4"><div class="ttname"><a href="_commander-_a_p_i_8hpp.html#a1b53171feb22439a742d2b02da99e9f4">__CONST_TXT__</a></div><div class="ttdeci">#define __CONST_TXT__(s)</div><div class="ttdoc">Arduino detection.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00057">Commander-API.hpp:57</a></div></div>
 <div class="ttc" id="aclass_argument_html"><div class="ttname"><a href="class_argument.html">Argument</a></div><div class="ttdoc">Argument class.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_arguments_8hpp_source.html#l00090">Commander-Arguments.hpp:90</a></div></div>
 <div class="ttc" id="aclass_argument_html_a11a9933e5a65f1cbf0525cd9bd2a29ca"><div class="ttname"><a href="class_argument.html#a11a9933e5a65f1cbf0525cd9bd2a29ca">Argument::find</a></div><div class="ttdeci">bool find()</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_arguments_8cpp_source.html#l00609">Commander-Arguments.cpp:609</a></div></div>
 <div class="ttc" id="aclass_argument_html_a5d0ae00347ef7108f6cab6c270ac5728"><div class="ttname"><a href="class_argument.html#a5d0ae00347ef7108f6cab6c270ac5728">Argument::isFound</a></div><div class="ttdeci">bool isFound()</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_arguments_8cpp_source.html#l00662">Commander-Arguments.cpp:662</a></div></div>
 <div class="ttc" id="aclass_argument_html_aeabd957dda6add595aa860761ea337f1"><div class="ttname"><a href="class_argument.html#aeabd957dda6add595aa860761ea337f1">Argument::parseInt</a></div><div class="ttdeci">bool parseInt()</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_arguments_8cpp_source.html#l00382">Commander-Arguments.cpp:382</a></div></div>
-<div class="ttc" id="aclass_commander_html_a11b7236808d55ed1c497e719117cdf3d"><div class="ttname"><a href="class_commander.html#a11b7236808d55ed1c497e719117cdf3d">Commander::printArgumentError</a></div><div class="ttdeci">static void printArgumentError(Stream *channel_p)</div><div class="ttdoc">Print 'Argument error!' to a specified Serial channel.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00741">Commander-API.cpp:741</a></div></div>
+<div class="ttc" id="aclass_commander_html_a11b7236808d55ed1c497e719117cdf3d"><div class="ttname"><a href="class_commander.html#a11b7236808d55ed1c497e719117cdf3d">Commander::printArgumentError</a></div><div class="ttdeci">static void printArgumentError(Stream *channel_p)</div><div class="ttdoc">Print 'Argument error!' to a specified Serial channel.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00877">Commander-API.cpp:877</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 
@@ -326,7 +329,7 @@ $(document).ready(function(){initNavTree('_commander-_a_p_i-_digital-_i_o-_comma
       <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Wed Aug 9 2023
+      </a> on Thu Aug 10 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -341,7 +344,7 @@ $(document).ready(function(){initNavTree('_commander-_a_p_i-_digital-_i_o-_comma
         <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Wed Aug 9 2023
+        </a> on Thu Aug 10 2023
       </small></address>
     </li>
   </ul>

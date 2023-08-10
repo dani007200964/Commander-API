@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['shortname_0',['shortName',['../class_argument.html#a8585973a6fb4c23c446b4e83edd7e27a',1,'Argument']]],
-  ['source_1',['source',['../class_argument.html#a548e24f45dcf5160f664f358c6eb455c',1,'Argument']]],
-  ['sourcesize_2',['sourceSize',['../class_argument.html#acf1ddfdbc705a7d5cda2f2da84683a1f',1,'Argument']]],
-  ['strdata_3',['strData',['../struct_commander_1_1_system_variable__t.html#a253038401496dee0ba78b83a483d0e9f',1,'Commander::SystemVariable_t']]],
-  ['systemvariable_4',['systemVariable',['../class_argument.html#af0505e5adf9b8f4241686fa8dcb5a4e8',1,'Argument']]]
+  ['readpointer_0',['readPointer',['../classcommander_pipe_channel.html#a6424ac704046904cd7af9e0a8a7861a0',1,'commanderPipeChannel']]],
+  ['response_1',['response',['../class_commander.html#a487e398f6d3510ac5d39d3d778a3db51',1,'Commander']]],
+  ['ret_2',['ret',['../class_argument.html#aa14a50e55622b38c695bca1f31c4fe1e',1,'Argument']]],
+  ['right_3',['right',['../struct_commander_1_1_a_p_i__t.html#ad9d2c017f07db989a8bb61eb5dea7fdc',1,'Commander::API_t']]]
 ];

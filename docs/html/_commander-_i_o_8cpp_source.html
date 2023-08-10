@@ -191,7 +191,7 @@ $(document).ready(function(){initNavTree('_commander-_i_o_8cpp_source.html','');
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">else</span>{</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        ret = (uint8_t)<a class="code hl_variable" href="classcommander_pipe_channel.html#aba5c84fa133bfafbc758e8c8260f7ce7">buffer</a>[ <a class="code hl_variable" href="classcommander_pipe_channel.html#a6424ac704046904cd7af9e0a8a7861a0">readPointer</a> ];</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        ret = (uint8_t)<a class="code hl_variable" href="classcommander_pipe_channel.html#a4fe9c98015164475eecc7350365e1362">buffer</a>[ <a class="code hl_variable" href="classcommander_pipe_channel.html#a6424ac704046904cd7af9e0a8a7861a0">readPointer</a> ];</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_variable" href="classcommander_pipe_channel.html#a6424ac704046904cd7af9e0a8a7861a0">readPointer</a>++;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">if</span>( <a class="code hl_variable" href="classcommander_pipe_channel.html#a6424ac704046904cd7af9e0a8a7861a0">readPointer</a> &gt;= <a class="code hl_define" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a> ){</div>
@@ -219,7 +219,7 @@ $(document).ready(function(){initNavTree('_commander-_i_o_8cpp_source.html','');
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">else</span>{</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">return</span> (uint8_t)<a class="code hl_variable" href="classcommander_pipe_channel.html#aba5c84fa133bfafbc758e8c8260f7ce7">buffer</a>[ <a class="code hl_variable" href="classcommander_pipe_channel.html#a6424ac704046904cd7af9e0a8a7861a0">readPointer</a> ];</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">return</span> (uint8_t)<a class="code hl_variable" href="classcommander_pipe_channel.html#a4fe9c98015164475eecc7350365e1362">buffer</a>[ <a class="code hl_variable" href="classcommander_pipe_channel.html#a6424ac704046904cd7af9e0a8a7861a0">readPointer</a> ];</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
@@ -227,7 +227,7 @@ $(document).ready(function(){initNavTree('_commander-_i_o_8cpp_source.html','');
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classcommander_pipe_channel.html#ab2488dc27cdc84e3a7510a89050e8415">  102</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="classcommander_pipe_channel.html#ab2488dc27cdc84e3a7510a89050e8415">commanderPipeChannel::write</a>( uint8_t data ){</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <a class="code hl_variable" href="classcommander_pipe_channel.html#aba5c84fa133bfafbc758e8c8260f7ce7">buffer</a>[ <a class="code hl_variable" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a> ] = data;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <a class="code hl_variable" href="classcommander_pipe_channel.html#a4fe9c98015164475eecc7350365e1362">buffer</a>[ <a class="code hl_variable" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a> ] = data;</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <a class="code hl_variable" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a>++;</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a> &gt;= <a class="code hl_define" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a> ){</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <a class="code hl_variable" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a> = 0;</div>
@@ -243,7 +243,7 @@ $(document).ready(function(){initNavTree('_commander-_i_o_8cpp_source.html','');
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">for</span>( i = 0; i &lt; size; i++ ){</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <a class="code hl_variable" href="classcommander_pipe_channel.html#aba5c84fa133bfafbc758e8c8260f7ce7">buffer</a>[ <a class="code hl_variable" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a> ] = data[ i ];</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <a class="code hl_variable" href="classcommander_pipe_channel.html#a4fe9c98015164475eecc7350365e1362">buffer</a>[ <a class="code hl_variable" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a> ] = data[ i ];</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <a class="code hl_variable" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a>++;</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="keywordflow">if</span>( <a class="code hl_variable" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a> &gt;= <a class="code hl_define" href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a> ){</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <a class="code hl_variable" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a> = 0;</div>
@@ -258,9 +258,9 @@ $(document).ready(function(){initNavTree('_commander-_i_o_8cpp_source.html','');
 <div class="ttc" id="a_commander-_settings_8hpp_html_a727fe1000dc5b9eec8192e41c945f456"><div class="ttname"><a href="_commander-_settings_8hpp.html#a727fe1000dc5b9eec8192e41c945f456">COMMANDER_MAX_COMMAND_SIZE</a></div><div class="ttdeci">#define COMMANDER_MAX_COMMAND_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_settings_8hpp_source.html#l00049">Commander-Settings.hpp:49</a></div></div>
 <div class="ttc" id="aclasscommander_pipe_channel_html_a0d04af635fbd36b8600372ac66fd5e34"><div class="ttname"><a href="classcommander_pipe_channel.html#a0d04af635fbd36b8600372ac66fd5e34">commanderPipeChannel::flush</a></div><div class="ttdeci">void flush() override</div><div class="ttdoc">Flush the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_i_o_8cpp_source.html#l00081">Commander-IO.cpp:81</a></div></div>
 <div class="ttc" id="aclasscommander_pipe_channel_html_a3eadb78162abc2acc4df2d9a4ba86227"><div class="ttname"><a href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">commanderPipeChannel::writePointer</a></div><div class="ttdeci">uint32_t writePointer</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_i_o_8hpp_source.html#l00136">Commander-IO.hpp:136</a></div></div>
+<div class="ttc" id="aclasscommander_pipe_channel_html_a4fe9c98015164475eecc7350365e1362"><div class="ttname"><a href="classcommander_pipe_channel.html#a4fe9c98015164475eecc7350365e1362">commanderPipeChannel::buffer</a></div><div class="ttdeci">uint8_t buffer[COMMANDER_MAX_COMMAND_SIZE+1]</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_i_o_8hpp_source.html#l00134">Commander-IO.hpp:134</a></div></div>
 <div class="ttc" id="aclasscommander_pipe_channel_html_a6424ac704046904cd7af9e0a8a7861a0"><div class="ttname"><a href="classcommander_pipe_channel.html#a6424ac704046904cd7af9e0a8a7861a0">commanderPipeChannel::readPointer</a></div><div class="ttdeci">uint32_t readPointer</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_i_o_8hpp_source.html#l00135">Commander-IO.hpp:135</a></div></div>
 <div class="ttc" id="aclasscommander_pipe_channel_html_ab2488dc27cdc84e3a7510a89050e8415"><div class="ttname"><a href="classcommander_pipe_channel.html#ab2488dc27cdc84e3a7510a89050e8415">commanderPipeChannel::write</a></div><div class="ttdeci">size_t write(uint8_t b) override</div><div class="ttdoc">Write one byte to the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_i_o_8cpp_source.html#l00102">Commander-IO.cpp:102</a></div></div>
-<div class="ttc" id="aclasscommander_pipe_channel_html_aba5c84fa133bfafbc758e8c8260f7ce7"><div class="ttname"><a href="classcommander_pipe_channel.html#aba5c84fa133bfafbc758e8c8260f7ce7">commanderPipeChannel::buffer</a></div><div class="ttdeci">uint8_t buffer[COMMANDER_MAX_COMMAND_SIZE]</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_i_o_8hpp_source.html#l00134">Commander-IO.hpp:134</a></div></div>
 <div class="ttc" id="aclasscommander_pipe_channel_html_abcc2883b6cd2d8ec9b30f104e0c1fd3e"><div class="ttname"><a href="classcommander_pipe_channel.html#abcc2883b6cd2d8ec9b30f104e0c1fd3e">commanderPipeChannel::peek</a></div><div class="ttdeci">int peek() override</div><div class="ttdoc">Peek the firtst byte from the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_i_o_8cpp_source.html#l00086">Commander-IO.cpp:86</a></div></div>
 <div class="ttc" id="aclasscommander_pipe_channel_html_ac94b25ee07795603b3197f4c289efe92"><div class="ttname"><a href="classcommander_pipe_channel.html#ac94b25ee07795603b3197f4c289efe92">commanderPipeChannel::read</a></div><div class="ttdeci">int read() override</div><div class="ttdoc">Read one byte form the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_i_o_8cpp_source.html#l00055">Commander-IO.cpp:55</a></div></div>
 <div class="ttc" id="aclasscommander_pipe_channel_html_ad67f75499feea46a4f1cb71a0b98587b"><div class="ttname"><a href="classcommander_pipe_channel.html#ad67f75499feea46a4f1cb71a0b98587b">commanderPipeChannel::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">Available bytes in the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_i_o_8cpp_source.html#l00037">Commander-IO.cpp:37</a></div></div>
@@ -286,7 +286,7 @@ $(document).ready(function(){initNavTree('_commander-_i_o_8cpp_source.html','');
       <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Wed Aug 9 2023
+      </a> on Thu Aug 10 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -301,7 +301,7 @@ $(document).ready(function(){initNavTree('_commander-_i_o_8cpp_source.html','');
         <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Wed Aug 9 2023
+        </a> on Thu Aug 10 2023
       </small></address>
     </li>
   </ul>

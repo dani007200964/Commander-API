@@ -5,5 +5,5 @@ var searchData=
   ['boardpinname_2',['boardPinName',['../structadc_pin_name_look_up__t.html#af7053c77cce9c2846a97d89cc1998ffb',1,'adcPinNameLookUp_t']]],
   ['boolfield_3',['boolField',['../class_argument.html#a08a33287ac78deb84a404eae4d6bf3ff',1,'Argument']]],
   ['boolfields_4',['boolFields',['../struct_argument_1_1bool_fields.html',1,'Argument']]],
-  ['buffer_5',['buffer',['../classcommander_pipe_channel.html#aba5c84fa133bfafbc758e8c8260f7ce7',1,'commanderPipeChannel']]]
+  ['buffer_5',['buffer',['../classcommander_pipe_channel.html#a4fe9c98015164475eecc7350365e1362',1,'commanderPipeChannel']]]
 ];

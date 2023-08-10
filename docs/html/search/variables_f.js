@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['writepointer_0',['writePointer',['../classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227',1,'commanderPipeChannel']]]
+  ['updatebuffercounter_0',['updateBufferCounter',['../class_commander.html#af9ac11a2e103f5b728d1c03337b782b5',1,'Commander']]]
 ];

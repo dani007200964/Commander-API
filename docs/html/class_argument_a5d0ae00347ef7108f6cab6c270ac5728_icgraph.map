@@ -1,6 +1,6 @@
 <map id="Argument::isFound" name="Argument::isFound">
 <area shape="rect" id="node1" title=" " alt="" coords="247,55,379,80"/>
-<area shape="rect" id="node2" href="$_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a9ab5698b019086fe8d2c3d06a3f917fb" title="Premade function for digitalRead command." alt="" coords="6,5,198,31"/>
-<area shape="rect" id="node3" href="$_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a6eccd6af580b31fb8ef7e6e038a0a322" title="Premade function for digitalWrite command." alt="" coords="5,55,199,80"/>
-<area shape="rect" id="node4" href="$_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#af1ce6ff8336c159da938303fbc2a2770" title="Premade function for pinMode command." alt="" coords="13,104,191,129"/>
+<area shape="rect" id="node2" href="$_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a488c98390245a3d0d7172f364ec91ed8" title="Premade function for digitalRead command." alt="" coords="6,5,198,31"/>
+<area shape="rect" id="node3" href="$_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#af309a2eb04319e75d4cc91e93894846e" title="Premade function for digitalWrite command." alt="" coords="5,55,199,80"/>
+<area shape="rect" id="node4" href="$_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a2246eb22ddae467d2e4c311b95b1ca9f" title="Premade function for pinMode command." alt="" coords="13,104,191,129"/>
 </map>

@@ -20,7 +20,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a9ab5698b019086fe8d2c3d06a3f917fb" target="_top" xlink:title="Premade function for digitalRead command.">
+<g id="a_node2"><a xlink:href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a488c98390245a3d0d7172f364ec91ed8" target="_top" xlink:title="Premade function for digitalRead command.">
 <polygon fill="white" stroke="#666666" points="144.5,-93 0.5,-93 0.5,-74 144.5,-74 144.5,-93"/>
 <text text-anchor="middle" x="72.5" y="-81" font-family="Helvetica,sans-Serif" font-size="10.00">commander_digitalRead_func</text>
 </a>
@@ -35,7 +35,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a6eccd6af580b31fb8ef7e6e038a0a322" target="_top" xlink:title="Premade function for digitalWrite command.">
+<g id="a_node3"><a xlink:href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#af309a2eb04319e75d4cc91e93894846e" target="_top" xlink:title="Premade function for digitalWrite command.">
 <polygon fill="white" stroke="#666666" points="145,-56 0,-56 0,-37 145,-37 145,-56"/>
 <text text-anchor="middle" x="72.5" y="-44" font-family="Helvetica,sans-Serif" font-size="10.00">commander_digitalWrite_func</text>
 </a>
@@ -50,7 +50,7 @@
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
-<g id="a_node4"><a xlink:href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#af1ce6ff8336c159da938303fbc2a2770" target="_top" xlink:title="Premade function for pinMode command.">
+<g id="a_node4"><a xlink:href="_commander-_a_p_i-_digital-_i_o-_commands_8cpp.html#a2246eb22ddae467d2e4c311b95b1ca9f" target="_top" xlink:title="Premade function for pinMode command.">
 <polygon fill="white" stroke="#666666" points="139,-19 6,-19 6,0 139,0 139,-19"/>
 <text text-anchor="middle" x="72.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">commander_pinMode_func</text>
 </a>

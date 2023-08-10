@@ -153,9 +153,17 @@ SOFTWARE.
 ///
 /// With this macro you can attach the system variable table
 /// to the class easier and faster than with attachVariablesFunction.
+/// @param name The name of the variable table. The type has to be Commander::SystemVariable_t[].
 /// @note Please use this macro instead of attachVariablesFunction, because it is safer. It always calculates the correct size for the table.
 #define attachVariables( name ) attachVariablesFunction( name, sizeof( name ) / sizeof( name[ 0 ] ) )
 
+/// This macro simplifies the pipe system setup.
+///
+/// With this macro you can setup the pipe system easily.
+/// @param buffer Pointer to a char buffer
+/// @param pipeChannel This is a pointer to a commanderPipeChannel object.
+/// @warning The buffer size has to be exactly COMMANDER_PIPE_BUFFER_SIZE!
+/// @note Please use this macro instead of enablePipeModuleFunc, because it is safer. It always calculates the correct size for the pipeBuffer.
 #define enablePipeModule( pipeBuffer, pipeChannel ) enablePipeModuleFunc( pipeBuffer, sizeof( pipeBuffer ) / sizeof( pipeBuffer[ 0 ] ), pipeChannel )
 
 /// Commander class.
@@ -359,9 +367,31 @@ public:
     ///              compatible frontends.
 	void printHelp( Stream* out, bool description, bool style = false );
 
+    /// Enable pipe functionality.
+    ///
+    /// With this function you can enable piping. The syntax for piping is more less the same as
+    /// with a Linux system. Sadly it is a bit resource hungry, because it requires a pipe buffer
+    /// and a pipe Stream to make it work. For this reason the required amount buffer memory is
+    /// at least three times as much as without the pipe module enabled.
+    /// @param buffer Pointer to a char buffer.
+    /// @param bufferSize The size of the buffer.
+    /// @param pipeChannel_p This is a pointer to a commanderPipeChannel object.
+    /// @returns If the pipe module is enabled it will return true. Otherwise most probably the buffer size is not set correctly.
+    /// @warning The buffer size has to be exactly COMMANDER_PIPE_BUFFER_SIZE!
+	/// @note There is a macro to simplify this process. Please use the enablePipeModule macro because it is safer!
 	bool enablePipeModuleFunc( char* buffer, int bufferSize, commanderPipeChannel* pipeChannel_p );
 
+	/// Enable formatting.
+    ///
+    /// If you want to get fancy, you can enable coloring on the output text.
+    /// @note It will only work with VT100 compatible host interface like PuTTY.
+    /// On Arduino terminal monitor it will result some garbage text.
+    /// @note Sadly Arduino terminal monitor not support VT100 yet @emoji :disappointed:
 	void enableFormatting();
+
+	/// Disable formatting.
+    ///
+    /// You can disable formatting with this function.
 	void disableFormatting();
 
 	/// Print 'Argument error!' to a specified Serial channel.
@@ -372,7 +402,27 @@ public:
 	/// @param channel_p Pointer to the Stream object where the message will be printed.
 	static void printArgumentError( Stream* channel_p );
 
+    /// Detect if character is in the string.
+    ///
+    /// You can detect if the index of a character is in a 'string' in a character array.
+    /// For example if the source looks like this:
+    /// @code{unparsed} -p "hello" bello' @endcode
+    /// And the index is 3 it will return true, because the h character is within two " characters.
+    /// If the index us 11 it will return false, because the b character is not in a string.
+    /// @param source Pointer to a source string. It has to be terminated!
+    /// @param index The index of the investigated character.
+    /// @returns As explained above.
     static bool inString( const char* source, int index );
+
+    /// Create a very very simple command lime.
+    ///
+    /// With this function you can create a very basic command line.
+    /// A buffer is required to store the incoming characters somewhere.
+    /// This function has to be called periodically to make it work.
+    /// @param buffer Pointer to a buffer.
+    /// @param bufferSize The size of the buffer. I recommend at least 20 character long buffer.
+    /// @param channel_p Pointer to a Stream object like Serial.
+    void update( char* buffer, int bufferSize, Stream* channel_p );
 
 private:
 
@@ -519,7 +569,12 @@ private:
     /// @note If this variable points to a valid address, the piping module will be enabled in the executeCommand function.
 	char* pipeArgBuffer = NULL;
 
+    /// This function tracks the current pipe in case of a piped command.
+    /// It can be used to backtrack a broken pipe position.
     int pipeCounter;
+
+    /// This variable tracks the next free elements index in the update functions buffer.
+    int updateBufferCounter = 0;
 
 };
 

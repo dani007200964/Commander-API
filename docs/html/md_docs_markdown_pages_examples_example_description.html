@@ -142,7 +142,7 @@ Example Code:</h3>
 <div class="line"><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
 <div class="line"><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
 <div class="line"><span class="comment"> * This file is part of the Commander-API project.</span></div>
-<div class="line"><span class="comment"> * Modified 2023.Aug.09</span></div>
+<div class="line"><span class="comment"> * Modified 2023.Aug.10</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * This is a simple example, that demonstrates how</span></div>
 <div class="line"><span class="comment"> * to use the base functionality of th Commander-API.</span></div>
@@ -159,8 +159,8 @@ Example Code:</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// We have to create the prototypes functions for our commands.</span></div>
 <div class="line"><span class="comment">// The arguments have to be the same for all command functions.</span></div>
-<div class="line"><span class="keywordtype">void</span> cat_func( <span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parrent );</div>
-<div class="line"><span class="keywordtype">void</span> dog_func( <span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parrent );</div>
+<div class="line"><span class="keywordtype">bool</span> cat_func( <span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parrent );</div>
+<div class="line"><span class="keywordtype">bool</span> dog_func( <span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parrent );</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// To tell Commander how many commands we have, it is necessary</span></div>
 <div class="line"><span class="comment">// to create an array, that holds some data that represents our</span></div>
@@ -214,11 +214,11 @@ Example Code:</h3>
 <div class="line">    <span class="comment">// the description data only for the specified command.</span></div>
 <div class="line">    <span class="comment">// It won&#39;t execute the command with the question mark operator.</span></div>
 <div class="line">    Serial.println( <span class="stringliteral">&quot;Printing description for &#39;cat&#39; command&quot;</span> );</div>
-<div class="line">    commander.<a class="code hl_function" href="class_commander.html#af6609b049d9524db60aac35dbba58cec">execute</a>( <span class="stringliteral">&quot;cat?&quot;</span>, &amp;Serial );</div>
+<div class="line">    commander.<a class="code hl_function" href="class_commander.html#a98c1328d154110366210326ada901d4e">execute</a>( <span class="stringliteral">&quot;cat?&quot;</span>, &amp;Serial );</div>
 <div class="line">    Serial.println();</div>
 <div class="line"> </div>
 <div class="line">    Serial.println( <span class="stringliteral">&quot;Printing description for &#39;dog&#39; command&quot;</span> );</div>
-<div class="line">    commander.<a class="code hl_function" href="class_commander.html#af6609b049d9524db60aac35dbba58cec">execute</a>( <span class="stringliteral">&quot;dog?&quot;</span>, &amp;Serial );</div>
+<div class="line">    commander.<a class="code hl_function" href="class_commander.html#a98c1328d154110366210326ada901d4e">execute</a>( <span class="stringliteral">&quot;dog?&quot;</span>, &amp;Serial );</div>
 <div class="line">    Serial.println();</div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -231,25 +231,27 @@ Example Code:</h3>
 <div class="line"> </div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> cat_func(<span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parrent ){</div>
+<div class="line"><span class="keywordtype">bool</span> cat_func(<span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parrent ){</div>
 <div class="line"> </div>
 <div class="line">  response -&gt; print(<span class="stringliteral">&quot;Hello from cat function!\r\n&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"> </div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> dog_func(<span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parrent ){</div>
+<div class="line"><span class="keywordtype">bool</span> dog_func(<span class="keywordtype">char</span> *args, Stream *response, <span class="keywordtype">void</span>* parrent ){</div>
 <div class="line"> </div>
 <div class="line">  response -&gt; print(<span class="stringliteral">&quot;Hello from dog function!\r\n&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"> </div>
 <div class="line">}</div>
 <div class="ttc" id="a_commander-_a_p_i_8hpp_html"><div class="ttname"><a href="_commander-_a_p_i_8hpp.html">Commander-API.hpp</a></div></div>
 <div class="ttc" id="a_commander-_a_p_i_8hpp_html_aff2cdea04953244073599693c685043a"><div class="ttname"><a href="_commander-_a_p_i_8hpp.html#aff2cdea04953244073599693c685043a">apiElement</a></div><div class="ttdeci">#define apiElement(name, desc, func)</div><div class="ttdoc">This macro simplifies the API element creation.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00080">Commander-API.hpp:80</a></div></div>
 <div class="ttc" id="a_commander-_i_o_8hpp_html"><div class="ttname"><a href="_commander-_i_o_8hpp.html">Commander-IO.hpp</a></div></div>
-<div class="ttc" id="aclass_commander_html"><div class="ttname"><a href="class_commander.html">Commander</a></div><div class="ttdoc">Commander class.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00168">Commander-API.hpp:168</a></div></div>
+<div class="ttc" id="aclass_commander_html"><div class="ttname"><a href="class_commander.html">Commander</a></div><div class="ttdoc">Commander class.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00170">Commander-API.hpp:170</a></div></div>
 <div class="ttc" id="aclass_commander_html_a5d9d12c3d15cf350593f4c2b11ec05d8"><div class="ttname"><a href="class_commander.html#a5d9d12c3d15cf350593f4c2b11ec05d8">Commander::init</a></div><div class="ttdeci">void init()</div><div class="ttdoc">Initializer.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00050">Commander-API.cpp:50</a></div></div>
-<div class="ttc" id="aclass_commander_html_aac06e93506b035ac7b99aa4253c1ed17"><div class="ttname"><a href="class_commander.html#aac06e93506b035ac7b99aa4253c1ed17">Commander::attachDebugChannel</a></div><div class="ttdeci">void attachDebugChannel(Stream *resp)</div><div class="ttdoc">Attach a debug channel to the object.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00493">Commander-API.cpp:493</a></div></div>
-<div class="ttc" id="aclass_commander_html_af6609b049d9524db60aac35dbba58cec"><div class="ttname"><a href="class_commander.html#af6609b049d9524db60aac35dbba58cec">Commander::execute</a></div><div class="ttdeci">void execute(const char *cmd)</div><div class="ttdoc">Default execution function.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00473">Commander-API.cpp:473</a></div></div>
-<div class="ttc" id="astruct_commander_1_1_a_p_i__t_html"><div class="ttname"><a href="struct_commander_1_1_a_p_i__t.html">Commander::API_t</a></div><div class="ttdoc">Structure for command data.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00180">Commander-API.hpp:180</a></div></div>
+<div class="ttc" id="aclass_commander_html_a98c1328d154110366210326ada901d4e"><div class="ttname"><a href="class_commander.html#a98c1328d154110366210326ada901d4e">Commander::execute</a></div><div class="ttdeci">bool execute(const char *cmd)</div><div class="ttdoc">Default execution function.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00555">Commander-API.cpp:555</a></div></div>
+<div class="ttc" id="aclass_commander_html_aac06e93506b035ac7b99aa4253c1ed17"><div class="ttname"><a href="class_commander.html#aac06e93506b035ac7b99aa4253c1ed17">Commander::attachDebugChannel</a></div><div class="ttdeci">void attachDebugChannel(Stream *resp)</div><div class="ttdoc">Attach a debug channel to the object.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8cpp_source.html#l00601">Commander-API.cpp:601</a></div></div>
+<div class="ttc" id="astruct_commander_1_1_a_p_i__t_html"><div class="ttname"><a href="struct_commander_1_1_a_p_i__t.html">Commander::API_t</a></div><div class="ttdoc">Structure for command data.</div><div class="ttdef"><b>Definition:</b> <a href="_commander-_a_p_i_8hpp_source.html#l00182">Commander-API.hpp:182</a></div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
@@ -272,7 +274,7 @@ Example Code:</h3>
       <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Wed Aug 9 2023
+      </a> on Thu Aug 10 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -287,7 +289,7 @@ Example Code:</h3>
         <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Wed Aug 9 2023
+        </a> on Thu Aug 10 2023
       </small></address>
     </li>
   </ul>

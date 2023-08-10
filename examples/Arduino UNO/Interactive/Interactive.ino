@@ -5,7 +5,7 @@
  * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2023.Aug.09
+ * Modified 2023.Aug.10
  *
  * This is a simple example, that demonstrates how
  * to use the base functionality of th Commander-API.
@@ -45,7 +45,7 @@ Commander::API_t API_tree[] = {
 };
 
 // This is a buffer to hold the incoming command.
-char commandFromSerial[ 30 ];
+char commandBuffer[ 30 ];
 
 // This variable tracks the location of the next free
 // space in the commandFromSerial buffer.
@@ -90,54 +90,7 @@ void setup(){
 // Infinite loop.
 void loop(){
 
-    // Check if there is any data incoming.
-    while( Serial.available() ){
-
-        // Read the next incoming character.
-        char c = Serial.read();
-
-        // Every command from Serial is terminated with a new-line
-        // character. If a new-line character arrives, we have to
-        // terminate the string in the commandFromSerial buffer,
-        // and execute it. After execution, we have to reset the
-        // commandIndex counter to zero.
-        if( c == '\r' ){
-            commandFromSerial[ commandIndex ] = '\0';
-            Serial.println();
-            commander.execute( commandFromSerial, &Serial );
-            commandIndex = 0;
-            Serial.print( "$: " );
-        }
-
-        // If we have a carriage-return character we simply
-        // ignore it.
-        else if( c == '\n' ){
-            continue;
-        }
-
-        // Handle backspace events.
-        else if( ( c == '\b' ) || ( c == 127 ) ){
-            if( commandIndex > 0 ){
-                commandIndex--;
-                Serial.print( "\b \b" );
-            }
-        }
-
-        // Every other case we just put the data to the next
-        // free space in the commandFromSerial buffer, increment
-        // the commandIndex, and check if it wants to overflow.
-        else{
-            commandFromSerial[ commandIndex ] = c;
-            commandIndex++;
-            if( commandIndex >= sizeof( commandFromSerial ) ){
-                commandIndex = sizeof( commandFromSerial ) - 1;
-            }
-            else{
-                Serial.print( c );
-            }
-        }
-
-    }
+    commander.update( commandBuffer, sizeof( commandBuffer ), &Serial );
 
 
 }

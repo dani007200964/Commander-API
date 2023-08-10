@@ -50,7 +50,7 @@ Commander::API_t API_tree[] = {
 };
 
 // This is a buffer to hold the incoming command.
-char commandFromSerial[ 30 ];
+char commandBuffer[ 30 ];
 
 // This variable tracks the location of the next free
 // space in the commandFromSerial buffer.
@@ -87,54 +87,7 @@ commander.init();
 
 ++--LOOP--++
 
-// Check if there is any data incoming.
-while( {{ channel }}.available() ){
-
-    // Read the next incoming character.
-    char c = {{ channel }}.read();
-
-    // Every command from Serial is terminated with a new-line
-    // character. If a new-line character arrives, we have to
-    // terminate the string in the commandFromSerial buffer,
-    // and execute it. After execution, we have to reset the
-    // commandIndex counter to zero.
-    if( c == '\r' ){
-        commandFromSerial[ commandIndex ] = '\0';
-        {{ channel }}.println();
-        commander.execute( commandFromSerial, &{{ channel }} );
-        commandIndex = 0;
-        {{ channel }}.print( "$: " );
-    }
-
-    // If we have a carriage-return character we simply
-    // ignore it.
-    else if( c == '\n' ){
-        continue;
-    }
-
-    // Handle backspace events.
-    else if( ( c == '\b' ) || ( c == 127 ) ){
-        if( commandIndex > 0 ){
-            commandIndex--;
-            {{ channel }}.print( "\b \b" );
-        }
-    }
-
-    // Every other case we just put the data to the next
-    // free space in the commandFromSerial buffer, increment
-    // the commandIndex, and check if it wants to overflow.
-    else{
-        commandFromSerial[ commandIndex ] = c;
-        commandIndex++;
-        if( commandIndex >= sizeof( commandFromSerial ) ){
-            commandIndex = sizeof( commandFromSerial ) - 1;
-        }
-        else{
-            {{ channel }}.print( c );
-        }
-    }
-
-}
+commander.update( commandBuffer, sizeof( commandBuffer ), &{{ channel }} );
 
 ++--FUNCTION_IMPLEMENTATIONS--++
 
