@@ -54,7 +54,7 @@ PROJECT_NUMBER         = V3.0.0
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = "Simple Command Parser"
+PROJECT_BRIEF          = "Lightweight Command Parser"
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
@@ -1357,11 +1357,11 @@ HTML_STYLESHEET        =
 # list). For an example see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  = docs/Style/doxygen-awesome.css \
-                         docs/Style/doxygen-awesome-sidebar-only.css \
-                         docs/Style/doxygen-awesome-sidebar-only-darkmode-toggle.css \
-                         docs/Style/doxygen-custom/custom.css \
-                         docs/Style/doxygen-custom/custom-alternative.css
+HTML_EXTRA_STYLESHEET  = docs/Style/doxygen-custom/custom.css \
+                         docs/Style/doxygen-custom/custom-alternative.css \
+                         docs/Style/doxygen-awesome-css/doxygen-awesome.css \
+                         docs/Style/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+                         docs/Style/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1371,12 +1371,13 @@ HTML_EXTRA_STYLESHEET  = docs/Style/doxygen-awesome.css \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = docs/Style/doxygen-custom/toggle-alternative-theme.js \
-                         docs/Style/doxygen-awesome-darkmode-toggle.js \
-                         docs/Style/doxygen-awesome-fragment-copy-button.js \
-                         docs/Style/doxygen-awesome-paragraph-link.js \
-                         docs/images/arduino_logo.png \
-                         docs/images/platformio_logo.png
+HTML_EXTRA_FILES       = docs/images/arduino_logo.png \
+                         docs/images/platformio_logo.png \
+                         docs/Style/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+                         docs/Style/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                         docs/Style/doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
+                         docs/Style/doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
+                         docs/Style/doxygen-awesome-css/doxygen-awesome-tabs.js
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme. Default setting AUTO_LIGHT

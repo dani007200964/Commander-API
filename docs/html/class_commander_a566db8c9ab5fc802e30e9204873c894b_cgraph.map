@@ -1,5 +1,5 @@
 <map id="Commander::update" name="Commander::update">
-<area shape="rect" id="node1" title=" " alt="" coords="5,35,144,60"/>
+<area shape="rect" id="node1" title="Create a very very simple command lime." alt="" coords="5,35,144,60"/>
 <area shape="rect" id="node2" href="$class_commander.html#a98c1328d154110366210326ada901d4e" title="Default execution function." alt="" coords="192,35,339,60"/>
 <area shape="rect" id="node3" href="$class_commander.html#a6db6d6ae40bbd49ca3036115b820813d" title="Command execution." alt="" coords="387,35,592,60"/>
 <area shape="rect" id="node4" href="$class_commander.html#a9b8d9afbf4e766034a2161109387c7ff" title="Search for a character in a string." alt="" coords="641,8,789,33"/>
