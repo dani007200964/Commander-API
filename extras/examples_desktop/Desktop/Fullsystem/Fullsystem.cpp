@@ -5,7 +5,7 @@
  * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Commander-API project.
- * Modified 2023.Aug.10
+ * Modified 2023.Sep.06
  *
  * This is a simple example, that demonstrates how
  * to use the base functionality of th Commander-API.
@@ -46,6 +46,7 @@ Commander::API_t API_tree[] = {
     API_ELEMENT_ENV,
     API_ELEMENT_EXPORT_TARGET,
     API_ELEMENT_EXPORT,
+    API_ELEMENT_MEMDUMP,
     API_ELEMENT_MICROS,
     API_ELEMENT_MILLIS,
     API_ELEMENT_UPTIME,
@@ -64,7 +65,7 @@ Commander::API_t API_tree[] = {
 
 // Global system variables.
 float tmpFloat = 0.0;
-int tmpInt = 0;
+int tmpInt = -1300;
 
 // System Variable array. This array will store the
 // name and the instance of the system variables.
@@ -114,6 +115,8 @@ int main(){
     // But recursion is a bit stack hungry, so please initialize
     // Commander at the beginning of your code to prevent stack-overlow.
     commander.init();
+
+    wprintf( L"Address of tmpInt: %p\r\n", (void*)&tmpInt );
 
     stdioChannel.println();
     stdioChannel.println( "---- Init Finished ----" );

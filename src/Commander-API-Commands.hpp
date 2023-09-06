@@ -424,5 +424,36 @@ bool commander_exportTarget_func( char *args, Stream *response, void* parent );
 /// @param response Response channel for messages.
 bool commander_export_func( char *args, Stream *response, void* parent );
 
+//-------- export function --------//
+#define API_ELEMENT_MEMDUMP_NAME         "memDump"
+
+#define API_ELEMENT_MEMDUMP_DESCRIPTION     "It is a tool to check data in the memory.\r\n\r\n"                     \
+                                            "usage: memDump [base address][type][options]\r\n\r\n"                  \
+                                            "base address: This is the start address of the memory region.\r\n"     \
+                                            "type: Type of the data in the specified address. Valid options:\r\n"   \
+                                            "  u8\r\n"                                                              \
+                                            "  s8\r\n"                                                              \
+                                            "  u16\r\n"                                                             \
+                                            "  s16\r\n"                                                             \
+                                            "  u32\r\n"                                                             \
+                                            "  s32\r\n"                                                             \
+                                            "Options:\r\n"                                                          \
+										    "  -h, --hex\tSet the output format to hex.\r\n"                        \
+										    "  -d, --dex\tSet the output format to decimal[ default ].\r\n"         \
+										    "  -b, --bin\tSet the output format to binary.\r\n"                     \
+										    "  -n, --number\t[int] Set the number of elements to be printed.\r\n"         \
+										    "  -e, --end\tAddress of the last element to be printed.\r\n\r\n"       \
+                                            "Example, print 10 bytes of data from address 0x00FF:\r\n"              \
+										    "  memDump 0x00FF u8 -h -n 10"
+
+#define API_ELEMENT_MEMDUMP apiElement( API_ELEMENT_MEMDUMP_NAME, API_ELEMENT_MEMDUMP_DESCRIPTION, commander_memDump_func )
+#ifdef __AVR__
+  #define API_ELEMENT_P_MEMDUMP( element ) apiElement_P( element, API_ELEMENT_MEMDUMP_NAME, API_ELEMENT_MEMDUMP_DESCRIPTION, commander_memDump_func )
+#endif
+/// Premade function for not command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+bool commander_memDump_func( char *args, Stream *response, void* parent );
+extern uint32_t memDumpAddressRanges[][ 2 ];
 
 #endif

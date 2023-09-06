@@ -34,6 +34,7 @@ Commander::API_t API_tree[] = {
     API_ELEMENT_ENV,
     API_ELEMENT_EXPORT_TARGET,
     API_ELEMENT_EXPORT,
+    API_ELEMENT_MEMDUMP,
     API_ELEMENT_MICROS,
     API_ELEMENT_MILLIS,
     API_ELEMENT_UPTIME,
@@ -52,7 +53,7 @@ Commander::API_t API_tree[] = {
 
 // Global system variables.
 float tmpFloat = 0.0;
-int tmpInt = 0;
+int tmpInt = -1300;
 
 // System Variable array. This array will store the
 // name and the instance of the system variables.
@@ -92,6 +93,8 @@ Commander::attachVariables( systemVariables );
 // But recursion is a bit stack hungry, so please initialize
 // Commander at the beginning of your code to prevent stack-overlow.
 commander.init();
+
+wprintf( L"Address of tmpInt: %p\r\n", (void*)&tmpInt );
 
 {{ channel }}.println();
 {{ channel }}.println( "---- Init Finished ----" );

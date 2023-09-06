@@ -46,7 +46,7 @@ void printCommandNotImplemented( Stream* channel_p ){
 
 #if defined( ESP32 ) || ( ESP8266 )
 
-void commander_ipconfig_func( char *args, Stream *response, void* parent ){
+bool commander_ipconfig_func( char *args, Stream *response, void* parent ){
 
   response -> println( "Wi-Fi:\r\n" );
 
@@ -61,7 +61,7 @@ void commander_ipconfig_func( char *args, Stream *response, void* parent ){
 
 }
 
-void commander_wifiStat_func( char *args, Stream *response, void* parent ){
+bool commander_wifiStat_func( char *args, Stream *response, void* parent ){
 
   response -> println( "Wi-Fi:\r\n" );
 
@@ -118,7 +118,7 @@ void commander_wifiStat_func( char *args, Stream *response, void* parent ){
 
 }
 
-void commander_wifiScan_func( char *args, Stream *response, void* parent ){
+bool commander_wifiScan_func( char *args, Stream *response, void* parent ){
 
   int num;
   int i;
@@ -176,7 +176,7 @@ void commander_wifiScan_func( char *args, Stream *response, void* parent ){
 
 #ifdef ESP32
 
-void commander_configTime_func( char *args, Stream *response, void* parent ){
+bool commander_configTime_func( char *args, Stream *response, void* parent ){
 
   int gmtOffset_sec;
   int daylightOffset_sec;
@@ -212,7 +212,7 @@ void commander_configTime_func( char *args, Stream *response, void* parent ){
 
 }
 
-void commander_dateTime_func( char *args, Stream *response, void* parent ){
+bool commander_dateTime_func( char *args, Stream *response, void* parent ){
 
   struct tm timeInfo;
 
