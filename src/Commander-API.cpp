@@ -97,7 +97,7 @@ void Commander::init(){
 	// correct alphabetical place.
 	for( i = 0; i < API_tree_size; i++ ){
 
-		API_tree[ i ].place = i;
+		API_tree[ i ].place = i + 1;
 
 	}
 
@@ -165,6 +165,7 @@ void Commander::swap_api_elements( uint16_t index, uint16_t place ){
 
 }
 
+/*
 void Commander::optimize_api_tree(){
 
 	uint32_t i;
@@ -236,6 +237,132 @@ void Commander::recursive_optimizer( int32_t start_index, int32_t stop_index ){
 	recursive_optimizer( start_index, mid - 1 );
 	recursive_optimizer( mid + 1, stop_index );
 
+
+}
+*/
+
+
+void Commander::optimize_api_tree(){
+
+    // Generic counter.
+	uint32_t i;
+
+    // Generic counter.
+    uint32_t j;
+
+    uint32_t levelMask;
+    uint8_t shiftIndex;
+    uint32_t levelElements;
+    uint32_t elementIndex;
+    uint32_t elementCounter;
+
+	// Stores the next elements address in the tree
+	API_t *next;
+
+	// Stores the previous elements address in the tree
+	API_t *prev;
+
+	// It will store string comparison result
+	int comp_res;
+
+    levelMask = API_tree_size;
+
+    // Create a mask for the MSB only( in 32-bit domain ).
+    levelMask = 0x80000000;
+    for( i = 0; i < 32; i++ ){
+
+        // Check if we found the firs bit, that is not zero.
+        if( ( API_tree_size & levelMask ) != 0 ){
+            break;
+        }
+
+        levelMask >>= 1;
+
+    }
+
+    dbgResponse -> println();
+
+    // Set the siftIndex to 1 by default.
+    shiftIndex = 1;
+
+    // Find how many bits are used for the tree and
+    // store the MSB index to the shiftIndex variable.
+    for( i = 0; i < 32; i++ ){
+
+        // Check if we found the firs bit, that is not zero.
+        if( ( levelMask & ( (uint32_t)1 << i ) ) != 0 ){
+            break;
+        }
+
+        shiftIndex++;
+
+    }
+
+    levelElements = 1;
+    elementCounter = 0;
+
+    for( i = levelMask; i != 0; i >>= 1 ){
+
+        // i variable will be the actual start index for the current level.
+        for( j = 0; j < levelElements; j++ ){
+
+            elementIndex = i | ( j << shiftIndex );
+
+        	dbgResponse -> print( __CONST_TXT__( "level: " ) );
+        	dbgResponse -> print( i, BIN );
+        	dbgResponse -> print( __CONST_TXT__( " elementIndex: " ) );
+        	dbgResponse -> print( elementIndex );
+
+            if( elementIndex > API_tree_size ){
+            	dbgResponse -> println( __CONST_TXT__( " skip" ) );
+                continue;
+            }
+
+            swap_api_elements( elementCounter, elementIndex );
+
+            // Create the connection for the parent leaf.
+            if( elementCounter > 0 ){
+
+                prev = &API_tree[ 0 ];
+
+                comp_res = ( this ->* commander_strcmp )( prev, &API_tree[ elementCounter ] );
+
+                (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
+
+                while( next != NULL ){
+
+                    prev = next;
+                    comp_res = ( this ->* commander_strcmp )( prev, &API_tree[ elementCounter ] );
+                    (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
+
+                }
+
+                if( comp_res > 0 ){
+                    prev -> left = &API_tree[ elementCounter ];
+                }
+
+                else{
+                    prev -> right = &API_tree[ elementCounter ];
+                }
+                dbgResponse -> print( __CONST_TXT__( " parent: " ) );
+                dbgResponse -> println( prev -> place );
+
+                //( comp_res > 0 ) ? ( ( prev->left ) = &API_tree[ elementCounter ] ) : ( ( prev->right ) = &API_tree[ elementCounter ] );
+
+            }
+
+            else{
+                dbgResponse -> println( __CONST_TXT__(" ROOT") );
+            }
+
+            elementCounter++;
+
+        }
+
+        levelElements <<= 1;
+        shiftIndex--;
+
+    }
 
 }
 

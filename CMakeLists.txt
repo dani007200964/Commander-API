@@ -48,6 +48,8 @@ set( SOURCES
     src/Commander-Utils.hpp
     src/Commander-Arguments.cpp
     src/Commander-Arguments.hpp
+    #src/Commander-Database.cpp
+    src/Commander-Database.hpp
     src/Commander-Settings.hpp
 
     extras/simulator/Arduino.h

@@ -205,9 +205,6 @@ private:
     Commander::SystemVariable_t* systemVariable = NULL;
 
 
-    //bool parsed = false;
-    //bool found = false;
-
     boolFields bFields;
 
     union returnData ret;

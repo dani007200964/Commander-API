@@ -30,8 +30,23 @@
 #include "Commander-API.hpp"
 #include "Commander-IO.hpp"
 #include "Commander-API-Commands.hpp"
+#include "Commander-Database.hpp"
 #include <math.h>
 
+CommanderDatabase<int>::dataRecord_t commandData[] = {
+    { 0, NULL, NULL, "Hello", 10 },
+    { 0, NULL, NULL, "Mizu", 30 },
+    { 0, NULL, NULL, "Cica", 10 },
+    { 0, NULL, NULL, "Kutya", 30 },
+    { 0, NULL, NULL, "Majom", 10 },
+    { 0, NULL, NULL, "Kaja", 10 },
+    { 0, NULL, NULL, "Kanya", 10 },
+    { 0, NULL, NULL, "Manya", 10 },
+    { 0, NULL, NULL, "Franya", 10 },
+    { 0, NULL, NULL, "Pia", 30 }
+};
+
+CommanderDatabase<int> commands( commandData, 10 );
 
 // Use stdio as Channel.
 stdioStream stdioChannel;
@@ -39,6 +54,7 @@ stdioStream stdioChannel;
 // We have to create an object from Commander class.
 Commander commander;
 
+/*
 // Add echo and env commands to the API tree.
 Commander::API_t API_tree[] = {
     API_ELEMENT_REBOOT,
@@ -62,10 +78,25 @@ Commander::API_t API_tree[] = {
     API_ELEMENT_RANDOM,
     API_ELEMENT_NOT
 };
+*/
+Commander::API_t API_tree[] = {
+    API_ELEMENT_REBOOT,
+    API_ELEMENT_ECHO,
+    API_ELEMENT_ENV,
+    API_ELEMENT_EXPORT_TARGET,
+    API_ELEMENT_EXPORT,
+    API_ELEMENT_MEMDUMP,
+    API_ELEMENT_MICROS,
+    API_ELEMENT_MILLIS,
+    API_ELEMENT_UPTIME,
+    API_ELEMENT_NEOFETCH
+};
 
 // Global system variables.
 float tmpFloat = 0.0;
 int tmpInt = -1300;
+
+
 
 // System Variable array. This array will store the
 // name and the instance of the system variables.
@@ -95,94 +126,12 @@ int main(){
     }
 
 
-    // There is an option to attach a debug channel to Commander.
-    // It can be handy to find any problems during the initialization
-    // phase. In this example, we will use stdioChannel for this.
-    commander.attachDebugChannel( &stdioChannel );
+    commands.attachDebugChannel( &stdioChannel );
+    commands.setDebugLevel( CommanderDatabase<int>::DEBUG_VERBOSE );
 
-    // At start, Commander does not know anything about our commands.
-    // We have to attach the API_tree array from the previous steps
-    // to Commander to work properly.
-    commander.attachTree( API_tree );
-
-    // Attach the system variable array to the command parser.
-    Commander::attachVariables( systemVariables );
-
-    // After we attached the API_tree, Commander has to initialize
-    // itself for the fastest runtime possible. It creates a balanced
-    // binary tree from the API_tree to boost the search speed.
-    // This part uses some recursion, to make the code space small.
-    // But recursion is a bit stack hungry, so please initialize
-    // Commander at the beginning of your code to prevent stack-overlow.
-    commander.init();
-
-    wprintf( L"Address of tmpInt: %p\r\n", (void*)&tmpInt );
-
-    stdioChannel.println();
-    stdioChannel.println( "---- Init Finished ----" );
-    stdioChannel.println();
-
-    stdioChannel.println( "Type something" );
-    stdioChannel.print( "$: " );
-
-
-
-    // Infinite loop.
-    while( 1 ){
-
-
-        // Check if there is any data incoming.
-        while( stdioChannel.available() ){
-
-            // Read the next incoming character.
-            char c = stdioChannel.read();
-
-            // Every command from Serial is terminated with a new-line
-            // character. If a new-line character arrives, we have to
-            // terminate the string in the commandFromSerial buffer,
-            // and execute it. After execution, we have to reset the
-            // commandIndex counter to zero.
-            if( c == '\r' ){
-                commandFromSerial[ commandIndex ] = '\0';
-                stdioChannel.println();
-                commander.execute( commandFromSerial, &stdioChannel );
-                commandIndex = 0;
-                stdioChannel.print( "\r\n$: " );
-            }
-
-            // If we have a carriage-return character we simply
-            // ignore it.
-            else if( c == '\n' ){
-                continue;
-            }
-
-            // Handle backspace events.
-            else if( ( c == '\b' ) || ( c == 127 ) ){
-                if( commandIndex > 0 ){
-                    commandIndex--;
-                    stdioChannel.print( "\b \b" );
-                }
-            }
-
-            // Every other case we just put the data to the next
-            // free space in the commandFromSerial buffer, increment
-            // the commandIndex, and check if it wants to overflow.
-            else{
-                commandFromSerial[ commandIndex ] = c;
-                commandIndex++;
-                if( commandIndex >= sizeof( commandFromSerial ) ){
-                    commandIndex = sizeof( commandFromSerial ) - 1;
-                }
-                else{
-                    stdioChannel.print( c );
-                }
-            }
-
-        }
-
-
-
-    }
+    commands.init();
+    stdioChannel.println( commands[ "Hello" ] -> name );
+    stdioChannel.println( commands[ "Hello" ] -> place );
 
     return 0;
 
