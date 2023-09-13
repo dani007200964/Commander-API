@@ -37,7 +37,16 @@ SOFTWARE.
 
 #include <stdint.h>
 #include "Stream.h"
-#include "Commander-API.hpp"
+
+// Clever solution to handle constant string data.
+// Thank you ondras12345!
+#ifndef __CONST_TXT__
+    #if defined(ARDUINO) && defined(__AVR__)
+        #define __CONST_TXT__(s) F(s)
+    #else
+        #define __CONST_TXT__(s) (const char*)(s)
+    #endif
+#endif
 
 template< typename T >
 class CommanderDatabase{
@@ -77,6 +86,10 @@ public:
 
 	dataRecord_t* operator [] ( const char* name );
 
+    int findIndexByPlace( int place );
+
+    uint16_t getSize();
+
 private:
 	/// Starting address of the API-tree.
 	dataRecord_t* dataTree = NULL;
@@ -99,8 +112,6 @@ private:
 	int strcmpElementElementRegular( dataRecord_t* element1, dataRecord_t* element2 );
 
 	int strcmpElementCharArrayRegular( dataRecord_t* element1, const char* element2 );
-
-    int findIndexByPlace( int place );
 
     void swapElements( uint16_t index, uint16_t place );
 
@@ -464,5 +475,10 @@ typename CommanderDatabase< T >::dataRecord_t* CommanderDatabase< T >::operator 
 	return NULL;
 
 }
+template< typename T >
+uint16_t CommanderDatabase< T >::getSize(){
+    return dataTreeSize;
+}
+
 
 #endif

@@ -36,334 +36,17 @@ SOFTWARE.
 
 const char *Commander::version = COMMANDER_API_VERSION;
 
-void Commander::attachTreeFunction( API_t *API_tree_p, uint32_t API_tree_size_p ){
+void Commander::attachTreeFunction( Commander::systemCommand_t* API_tree_p, uint32_t API_tree_size_p ){
 
-	// Save parameters to internal variables.
-	API_tree      = API_tree_p;
-	API_tree_size = API_tree_size_p;
+	regularCommands = CommanderDatabase<API_t>( API_tree_p, API_tree_size_p );
 
 	dbgResponse -> print( __CONST_TXT__( "API tree attached with " ) );
-	dbgResponse -> print( API_tree_size );
+	dbgResponse -> print( API_tree_size_p );
 	dbgResponse -> println( __CONST_TXT__( " commands." ) );
 }
 
 void Commander::init(){
-
-	// Generic conter variables.
-	uint32_t i;
-	uint32_t j;
-
-	// Temporary variable, used to flip elements.
-	API_t temp;
-
-	commander_strcmp = &Commander::commander_strcmp_regular;
-	commander_strcmp_tree_ram = &Commander::commander_strcmp_tree_ram_regular;
-
-	#ifdef __AVR__
-
-	if( API_tree[ 0 ].name == NULL ){
-
-		memoryType = MEMORY_PROGMEM;
-		commander_strcmp = &Commander::commander_strcmp_progmem;
-		commander_strcmp_tree_ram = &Commander::commander_strcmp_tree_ram_progmem;
-
-	}
-
-	#endif
-
-	dbgResponse -> println( __CONST_TXT__( "Commander init start" ) );
-
-	// Make the tree ordered by alphabet.
-	dbgResponse -> print( __CONST_TXT__( "  Creating alphabetical order... " ) );
-
-	// Bubble sort. We need to sort the commands into an alphabetical order.
-	for( i = 0; i < API_tree_size; i++ ){
-
-		for( j = i + 1; j < API_tree_size; j++ ){
-
-			if( ( this ->* commander_strcmp )( &API_tree[ i ], &API_tree[ j ] ) > 0 ){
-
-				temp = API_tree[ i ];
-				API_tree[ i ] = API_tree[ j ];
-				API_tree[ j ] = temp;
-
-			}
-
-		}
-
-	}
-
-	// Fill the place variable in the tree with
-	// correct alphabetical place.
-	for( i = 0; i < API_tree_size; i++ ){
-
-		API_tree[ i ].place = i + 1;
-
-	}
-
-	dbgResponse -> println( __CONST_TXT__( "[ OK ]" ) );
-
-	// Optimize the tree to make it balanced.
-	// It is necessary to speed up the command
-	// search phase.
-	dbgResponse -> print( __CONST_TXT__( "  Create balanced binary structure... " ) );
-	optimize_api_tree();
-
-	dbgResponse -> println( __CONST_TXT__( "[ OK ]" ) );
-	dbgResponse -> println( __CONST_TXT__( "Commander init finished!" ) );
-
-}
-
-int Commander::find_api_index_by_place( int place ){
-
-	// Generic counter variable
-	uint32_t i;
-
-	if( place < 0 ){
-
-		return 0;
-
-	}
-
-	// Go through all commands
-	for( i = 0; i < API_tree_size; i++ ){
-
-		// Check that if we found the desired command
-		if( API_tree[i].place == place ){
-
-			// If we found it, return the index of it.
-			return i;
-
-		}
-
-	}
-
-	return 0;
-
-}
-
-void Commander::swap_api_elements( uint16_t index, uint16_t place ){
-
-  // Buffer that will temporary hold an element.
-  // This is required for a swap.
-  API_t buffer;
-
-  // This variable will store the address of the element defined by the second argument( place ).
-  uint16_t current_index;
-
-  // Find the index in the array by place of the 'i'-th element
-  current_index = find_api_index_by_place( place );
-
-  // save the context of the 'i'-th element to the buffer
-  buffer = API_tree[index];
-
-  // write the 'current_index'-th element to the 'i'-th element
-  API_tree[index] = API_tree[current_index];
-
-  // write the buffer to the 'current_index'-th element
-  API_tree[current_index] = buffer;
-
-}
-
-/*
-void Commander::optimize_api_tree(){
-
-	uint32_t i;
-
-	//API_t buffer;
-
-	// Stores the next elements address in the tree
-	API_t *next;
-
-	// Stores the previous elements address in the tree
-	API_t *prev;
-
-	// It will store string comparison result
-	int comp_res;
-
-	// recursive optimizer need to initialize elementCounter to 0
-	elementCounter = 0;
-
-	// recursively finds the order which is optimal for a balanced tree
-	recursive_optimizer( 0, API_tree_size - 1 );
-
-	// The order is good, but the connection between the branches broken,
-	// because we swapped the API_tree array elements.
-	// To fix this problem we have to add elements from index 1 and
-	// place them in the binary tree.
-	for( i = 1; i < API_tree_size; i++ ){
-
-		prev = &API_tree[ 0 ];
-
-		comp_res = ( this ->* commander_strcmp )( prev, &API_tree[ i ] );
-
-		(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
-
-		while( next != NULL ){
-
-			prev = next;
-			comp_res = ( this ->* commander_strcmp )( prev, &API_tree[ i ] );
-			(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
-
-		}
-
-		( comp_res > 0 ) ? ( ( prev->left ) = &API_tree[ i ] ) : ( ( prev->right ) = &API_tree[ i ] );
-
-	}
-
-}
-
-void Commander::recursive_optimizer( int32_t start_index, int32_t stop_index ){
-
-	// The middle number between start and stop index
-	// will be stored in this variable.
-	int32_t mid;
-
-	// Detect the end of recursion.
-	if( start_index > stop_index ){
-
-		return;
-
-	}
-
-	// Find the middle of the interval
-	mid = ( start_index + stop_index ) / 2;
-
-	// Put the right element to it's place
-	swap_api_elements( elementCounter, mid );
-	elementCounter++;
-
-	// Do some recursion for the other intervals
-	recursive_optimizer( start_index, mid - 1 );
-	recursive_optimizer( mid + 1, stop_index );
-
-
-}
-*/
-
-
-void Commander::optimize_api_tree(){
-
-    // Generic counter.
-	uint32_t i;
-
-    // Generic counter.
-    uint32_t j;
-
-    uint32_t levelMask;
-    uint8_t shiftIndex;
-    uint32_t levelElements;
-    uint32_t elementIndex;
-    uint32_t elementCounter;
-
-	// Stores the next elements address in the tree
-	API_t *next;
-
-	// Stores the previous elements address in the tree
-	API_t *prev;
-
-	// It will store string comparison result
-	int comp_res;
-
-    levelMask = API_tree_size;
-
-    // Create a mask for the MSB only( in 32-bit domain ).
-    levelMask = 0x80000000;
-    for( i = 0; i < 32; i++ ){
-
-        // Check if we found the firs bit, that is not zero.
-        if( ( API_tree_size & levelMask ) != 0 ){
-            break;
-        }
-
-        levelMask >>= 1;
-
-    }
-
-    dbgResponse -> println();
-
-    // Set the siftIndex to 1 by default.
-    shiftIndex = 1;
-
-    // Find how many bits are used for the tree and
-    // store the MSB index to the shiftIndex variable.
-    for( i = 0; i < 32; i++ ){
-
-        // Check if we found the firs bit, that is not zero.
-        if( ( levelMask & ( (uint32_t)1 << i ) ) != 0 ){
-            break;
-        }
-
-        shiftIndex++;
-
-    }
-
-    levelElements = 1;
-    elementCounter = 0;
-
-    for( i = levelMask; i != 0; i >>= 1 ){
-
-        // i variable will be the actual start index for the current level.
-        for( j = 0; j < levelElements; j++ ){
-
-            elementIndex = i | ( j << shiftIndex );
-
-        	dbgResponse -> print( __CONST_TXT__( "level: " ) );
-        	dbgResponse -> print( i, BIN );
-        	dbgResponse -> print( __CONST_TXT__( " elementIndex: " ) );
-        	dbgResponse -> print( elementIndex );
-
-            if( elementIndex > API_tree_size ){
-            	dbgResponse -> println( __CONST_TXT__( " skip" ) );
-                continue;
-            }
-
-            swap_api_elements( elementCounter, elementIndex );
-
-            // Create the connection for the parent leaf.
-            if( elementCounter > 0 ){
-
-                prev = &API_tree[ 0 ];
-
-                comp_res = ( this ->* commander_strcmp )( prev, &API_tree[ elementCounter ] );
-
-                (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
-
-                while( next != NULL ){
-
-                    prev = next;
-                    comp_res = ( this ->* commander_strcmp )( prev, &API_tree[ elementCounter ] );
-                    (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
-
-                }
-
-                if( comp_res > 0 ){
-                    prev -> left = &API_tree[ elementCounter ];
-                }
-
-                else{
-                    prev -> right = &API_tree[ elementCounter ];
-                }
-                dbgResponse -> print( __CONST_TXT__( " parent: " ) );
-                dbgResponse -> println( prev -> place );
-
-                //( comp_res > 0 ) ? ( ( prev->left ) = &API_tree[ elementCounter ] ) : ( ( prev->right ) = &API_tree[ elementCounter ] );
-
-            }
-
-            else{
-                dbgResponse -> println( __CONST_TXT__(" ROOT") );
-            }
-
-            elementCounter++;
-
-        }
-
-        levelElements <<= 1;
-        shiftIndex--;
-
-    }
-
+    regularCommands.init();
 }
 
 bool Commander::enablePipeModuleFunc( char* buffer, int bufferSize, commanderPipeChannel* pipeChannel_p ){
@@ -400,7 +83,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 	uint8_t show_description = 0;
 
 	// Pointer to the selected command data.
-	API_t *commandData_ptr;
+	systemCommand_t* commandData_ptr;
 
 	int pipePos;
 
@@ -471,7 +154,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 	}
 
 	// Try to find the command datata.
-	commandData_ptr = (*this)[ tempBuff ];
+	commandData_ptr = regularCommands[ tempBuff ];
 
 	// If it is not a NULL pointer, that means we have a match.
 	if( commandData_ptr ){
@@ -487,7 +170,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 				response -> print( commandData_ptr -> name );
 				response -> print( ':' );
 				response -> print( ' ' );
-				response -> println( commandData_ptr -> desc );
+				response -> println( commandData_ptr -> data.desc );
 
 			}
 
@@ -557,7 +240,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 			if( ( pipeArgBuffer != NULL ) && ( pipePos > 0 ) ){
 
 				// Execute commands function and redirect the output to the pipe channel.
-				executionStat = (commandData_ptr -> func)( arg, pipeChannel, parent );
+				executionStat = ( commandData_ptr -> data.func )( arg, pipeChannel, parent );
                 
                 // If the actual command execution was successful, we have to increment the pipeCounter
                 if( executionStat ){
@@ -571,7 +254,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 			else{
 
 				// Execute command function.
-				executionStat = (commandData_ptr -> func)( arg, response, parent );
+				executionStat = ( commandData_ptr -> data.func )( arg, response, parent );
 
 			}
 
@@ -746,59 +429,6 @@ void Commander::disableDebug(){
 
 }
 
-Commander::API_t* Commander::operator [] ( int i ){
-
-	// Detect wrong addressing.
-	if( ( i < 0 ) || ( i >= (int)API_tree_size ) ){
-
-		return NULL;
-
-	}
-
-	return &API_tree[ i ];
-
-}
-
-Commander::API_t* Commander::operator [] ( const char* name ){
-
-	// Stores the next elements address in the tree
-	API_t *next;
-
-	// Stores the previous elements address in the tree
-	API_t *prev;
-
-	// It will store string compersation result
-	int comp_res;
-
-	prev = &API_tree[ 0 ];
-
-	comp_res = ( (*this).*(commander_strcmp_tree_ram) )( prev, name );
-	
-	(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
-
-	// Go through the binary tree until you find a match, or until you find the
-	// end of the tree.
-	while( ( comp_res !=0 ) && ( next != NULL ) ){
-
-		prev = next;
-		comp_res = ( (*this).*(commander_strcmp_tree_ram) )( prev, name );
-		(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
-
-	}
-
-	// If comp_res variable has a zero in it, that means in the last iteration
-	// we had a match.
-	if( comp_res == 0 ){
-
-		return prev;
-
-	}
-
-	// If we did not found the command we return NULL.
-	return NULL;
-
-}
-
 void Commander::printHelp( Stream* out, bool description, bool style ){
 
 	uint32_t i;
@@ -810,14 +440,15 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 		out -> println( __CONST_TXT__( "---- Available commands ----\r\n" ) );
 	}
 
-	for( i = 0; i < API_tree_size; i++ ){
+	for( i = 0; i < regularCommands.getSize(); i++ ){
 
         if( style ){
             out -> print( __CONST_TXT__( "\033[1;32m" ) );
         }
 
         if( memoryType == MEMORY_REGULAR ){
-            out -> print( API_tree[ find_api_index_by_place( i ) ].name );
+            //out -> print( API_tree[ find_api_index_by_place( i ) ].name );
+            out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> name );
         }
         #ifdef __AVR__
         else if( memoryType == MEMORY_PROGMEM ){
@@ -837,7 +468,7 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
         out -> print( __CONST_TXT__( ": " ) );
 
         if( memoryType == MEMORY_REGULAR ){
-            out -> print( API_tree[ find_api_index_by_place( i ) ].desc );
+            out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> data.desc );
         }
         #ifdef __AVR__
         else if( memoryType == MEMORY_PROGMEM ){
@@ -908,18 +539,6 @@ int Commander::hasChar( const char* str, char c, int number, bool ignoreString )
     }
 
     return cntr - 1;
-
-}
-
-int Commander::commander_strcmp_regular( API_t* element1, API_t* element2 ){
-
-	return strcmp( element1 -> name, element2 -> name );
-
-}
-
-int Commander::commander_strcmp_tree_ram_regular( API_t* element1, const char* element2 ){
-
-	return strcmp( element1 -> name, element2 );
 
 }
 

@@ -35,6 +35,7 @@ SOFTWARE.
 
 void apiTreeDumpFunction( Commander::API_t* tree, int treeSize, Stream* out ){
 
+    /*
 	int i;
 	int j;
 
@@ -116,5 +117,5 @@ void apiTreeDumpFunction( Commander::API_t* tree, int treeSize, Stream* out ){
 		out -> println();
 
 	}
-
+    */
 }

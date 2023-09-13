@@ -79,6 +79,8 @@ Commander::API_t API_tree[] = {
     API_ELEMENT_NOT
 };
 */
+
+/*
 Commander::API_t API_tree[] = {
     API_ELEMENT_REBOOT,
     API_ELEMENT_ECHO,
@@ -90,6 +92,16 @@ Commander::API_t API_tree[] = {
     API_ELEMENT_MILLIS,
     API_ELEMENT_UPTIME,
     API_ELEMENT_NEOFETCH
+};
+
+*/
+
+bool cat_func( char *args, Stream *response, void* parrent );
+bool dog_func( char *args, Stream *response, void* parrent );
+
+Commander::systemCommand_t systemCommands[] = {
+    { 0, NULL, NULL, "cat", { "cat func description.", cat_func } },
+    { 0, NULL, NULL, "dog", { "dog func description.", dog_func } }
 };
 
 // Global system variables.
@@ -126,13 +138,43 @@ int main(){
     }
 
 
-    commands.attachDebugChannel( &stdioChannel );
-    commands.setDebugLevel( CommanderDatabase<int>::DEBUG_VERBOSE );
+    //commands.attachDebugChannel( &stdioChannel );
+    //commands.setDebugLevel( CommanderDatabase<int>::DEBUG_VERBOSE );
 
-    commands.init();
-    stdioChannel.println( commands[ "Hello" ] -> name );
-    stdioChannel.println( commands[ "Hello" ] -> place );
+    //commands.init();
+    //stdioChannel.println( commands[ "Hello" ] -> name );
+    //stdioChannel.println( commands[ "Hello" ] -> place );
 
-    return 0;
+    // There is an option to attach a debug channel to Commander.
+    // It can be handy to find any problems during the initialization
+    // phase. In this example, we will use {{ channel }} for this.
+    commander.attachDebugChannel( &stdioChannel );
 
+    // At start, Commander does not know anything about our commands.
+    // We have to attach the API_tree array from the previous steps
+    // to Commander to work properly.
+    commander.attachTree( systemCommands );
+
+    // After we attached the API_tree, Commander has to initialize
+    // itself for the fastest runtime possible. It creates a balanced
+    // binary tree from the API_tree to boost the search speed.
+    // This part uses some recursion, to make the code space small.
+    // But recursion is a bit stack hungry, so please initialize
+    // Commander at the beginning of your code to prevent stack-overlow.
+    commander.init();
+
+    while( 1 ){
+        commander.update( commandFromSerial, sizeof( commandFromSerial ), &stdioChannel );
+    }
+
+}
+
+bool cat_func( char *args, Stream *response, void* parrent ){
+    response -> println( "Hello from cat func!" );
+    return true;
+}
+
+bool dog_func( char *args, Stream *response, void* parrent ){
+    response -> println( "Hello from dog func!" );
+    return true;
 }
