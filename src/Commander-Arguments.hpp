@@ -165,7 +165,7 @@ public:
     bool parseStringFunction( char* buffer, int bufferSize );
     bool find();
     bool isFound();
-    Commander::SystemVariable_t* getSystemVariable();
+    Commander::systemVariable_t* getSystemVariable();
 
 private:
 
@@ -202,7 +202,7 @@ private:
     // If long named argument is used, this will store pointer to its long name.
     const char* longName = NULL;
 
-    Commander::SystemVariable_t* systemVariable = NULL;
+    Commander::systemVariable_t* systemVariable = NULL;
 
 
     boolFields bFields;

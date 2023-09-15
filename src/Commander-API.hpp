@@ -81,7 +81,8 @@ SOFTWARE.
 /// @param name The name of the command. The best practice is to use a const char array.
 /// @param desc The description of the command. The best practice is to use a const char array.
 /// @param func This function will be called, when this command gets executed.
-#define apiElement( name, desc, func ) { 0, NULL, NULL, (const char*)name, (const char*)desc, func }
+#define apiElement( name, desc, func ) { 0, NULL, NULL, (const char*)name, { (const char*)desc, func } }
+//#define apiElement( name, desc, func ) { 0, NULL, NULL, (const char*)name, (const char*)desc, func }
 
 #ifdef __AVR__
 
@@ -93,7 +94,14 @@ SOFTWARE.
 /// @param name The name of the command. The best practice is to use a const char array.
 /// @param desc The description of the command. The best practice is to use a const char array.
 /// @param func_arg This function will be called, when this command gets executed.
-#define apiElement_P( element, name, desc, func_arg ) { element.name_P = __CONST_TXT__( name ); element.desc_P = __CONST_TXT__( desc ); element.func = func_arg; }
+#define apiElement_P( element, name_p, desc_p, func_P ) {  element.place = 0;                              \
+                                                            element.left = NULL;                            \
+                                                            element.right = NULL;                           \
+                                                            element.name_p = __CONST_TXT__( name );         \
+                                                            element.data.desc_P = __CONST_TXT__( desc );    \
+                                                            element.data.func_p = func;                     \
+                                                         }
+//#define apiElement_P( element, name, desc, func_arg ) { element.name_P = __CONST_TXT__( name ); element.desc_P = __CONST_TXT__( desc ); element.func = func_arg; }
 
 #endif
 
@@ -109,21 +117,21 @@ SOFTWARE.
 /// With this macro you can fill the system variable table easily.
 /// @param name The name of the float variable.
 /// @note Do not use & operator before the name. Just use the name, the macro will handle the rest.
-#define systemVariableFloat( name ) { #name, &name, NULL, NULL }
+#define systemVariableFloat( name ) { 0, NULL, NULL, #name, { Commander::VARIABLE_FLOAT, { (float*)&name } } }
 
 /// This macro simplifies the int type system variable creation.
 ///
 /// With this macro you can fill the system variable table easily.
 /// @param name The name of the int variable.
 /// @note Do not use & operator before the name. Just use the name, the macro will handle the rest.
-#define systemVariableInt( name ) { #name, NULL, &name, NULL }
+#define systemVariableInt( name ) { 0, NULL, NULL, #name, { Commander::VARIABLE_INT, { (float*)&name } } }
 
 /// This macro simplifies the char* or const char* type system variable creation.
 ///
 /// With this macro you can fill the system variable table easily.
 /// @param name The name of the char* or const char* variable.
 /// @note Do not use & operator before the name. Just use the name, the macro will handle the rest. Also, no const casting is needed.
-#define systemVariableString( name ) { #name, NULL, NULL, (char*)name }
+#define systemVariableString( name ) { 0, NULL, NULL, #name, { Commander::VARIABLE_STRING, { (float*)name } } }
 
 #ifdef __AVR__
 
@@ -186,6 +194,13 @@ public:
 	/// Library version string.
 	static const char *version;
 
+    typedef enum{
+        DEBUG_OFF = 0,
+        DEBUG_ERROR = 1,
+        DEBUG_DEBUG = 2,
+        DEBUG_VERBOSE = 3
+    }debugLevel_t;
+
 	/// Structure for command data.
 	///
 	/// Every command will get a structure like this.
@@ -206,31 +221,26 @@ public:
     typedef CommanderDatabase<API_t>::dataRecord_t systemCommand_t;
 
     /// Enum for system variable type.
-	enum variableType_t{
+	enum systemVariableType_t{
 		VARIABLE_FLOAT,     ///< Used for float data.
 		VARIABLE_INT,       ///< Used for int data.
 		VARIABLES_STRING    ///< Used for string data.
 	};
 
-	/// Structure for system variable data.
-    ///
-    /// Every system variable get a structure like this.
-    /// The structure stores the name of the variable along
-    /// with a pointer to its source and the type.
-	typedef struct{
-
-	  	const char *name;               ///<  Name of the variable.
+	typedef union{
 
 		float* floatData;               ///< In case of float type, it will store the address of the actual variable. Otherwise it has to be NULL!
 		int* intData;                   ///< In case of int type, it will store the address of the actual variable. Otherwise it has to be NULL!
 		char* strData;                  ///< In case of char* type, it will store the address of the actual variable. Otherwise it has to be NULL!
 
-		#ifdef __AVR__
-		__FlashStringHelper *name_P;    ///< Name of the variable( stored in PROGMEM )
-		#endif
+	} systemVariablePointer_t;
 
+    typedef struct{
+        systemVariableType_t type;
+        systemVariablePointer_t data;
+    } systemVariableData_t;
 
-	}SystemVariable_t;
+    typedef CommanderDatabase<systemVariableData_t>::dataRecord_t systemVariable_t;
 
 	enum memoryType_t{
 		MEMORY_REGULAR,		///< Regular memory implementation
@@ -254,7 +264,7 @@ public:
     /// variables list to the object. This array contains
 	/// the data for each variable.
 	/// @note There is a macro to simplify this process. Please use the attachVariables macro because it is safer!
-	static void attachVariablesFunction( SystemVariable_t* variables_p, uint32_t variables_size_p );
+	static void attachVariablesFunction( systemVariable_t* variables_p, uint32_t variables_size_p );
 
     /// Get the instance if a system variable by its name.
     ///
@@ -262,7 +272,7 @@ public:
     /// structure element by the name if the system variable.
     /// @param name The name of the system variable.
     /// @returns If the variable is found, it will return the address of the control structure. Otherwise it will return NULL.
-	static SystemVariable_t* getSystemVariable( const char* name );
+	static systemVariable_t* getSystemVariable( const char* name );
 
     /// Print the value of a system variable.
     ///
@@ -322,20 +332,7 @@ public:
     /// @note If you call this function the debug messages will be enabled automatically.
 	void attachDebugChannel( Stream *resp );
 
-	/// Enables debug messages.
-	void enableDebug();
-
-	/// Disables debug messages.
-	void disableDebug();
-
-	/// Find an API element in the tree by alphabetical place.
-    ///
-    /// With this function you can find an element in the API-tree by
-    /// its alphabetical place in the tree.
-    /// @param place The place of the searched element.
-    /// @returns It will return the index of the element if it is found. If the element is not found it will return 0.
-    /// @warning It can be only used after the init function finished its job!
-	int find_api_index_by_place( int place );
+    static void setDebugLevel( debugLevel_t debugLevel_p );
 
 	/// Print the help text to a specified Stream.
 	///
@@ -417,11 +414,8 @@ private:
 
     CommanderDatabase<API_t> regularCommands;
 
-	static SystemVariable_t *variables;
-	static uint32_t variables_size;
-
-	/// Internal variable for counting purpose.
-	uint32_t elementCounter;
+    
+    static CommanderDatabase<systemVariableData_t> systemVariables;
 
 	/// Internal command buffer. The command data
 	/// has to be copied to this buffer. It is necessary
@@ -462,22 +456,16 @@ private:
 
 	#endif
 
-	/// Default response handler class.
-	commandResponse defaultResponse;
-
 	/// Pointer to response class. By default it
 	/// points to the default response handler.
-	Stream *response = &defaultResponse;
+	Stream *response = NULL;
 
 	/// Flag to enable or disable debug messages.
-	bool debugEnabled = false;
-
-	/// Default response handler for debug messages.
-	commandResponse defaultDebugResponse;
+	static debugLevel_t debugLevel;
 
 	/// Pointer to response class. By default it
 	/// points to the default debug response handler.
-	Stream *dbgResponse = &defaultDebugResponse;
+	Stream *dbgResponse = NULL;
 
 	/// Command execution.
 	///

@@ -73,6 +73,8 @@ if (RUN_TESTS)
         extras/Unity/src/unity.h
         extras/tests/testStream.cpp
         extras/tests/testStream.hpp
+        #extras/tests/testCases/Commander-Database/test_constructor.cpp
+        #extras/tests/testCases/Commander-Database/test_debug.cpp
     )
 
 endif()
@@ -105,8 +107,10 @@ endif()
 if(RUN_TESTS)
 
     # Unit testing
-    add_executable( test_init ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_init.cpp )
-    add_executable( test_piping ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_piping.cpp )
+    add_executable( test_constructor ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_constructor.cpp )
+    add_executable( test_debug ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_debug.cpp )
+    add_executable( test_init ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_init.cpp )
+    add_executable( test_search ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_search.cpp )
 
 endif()
 

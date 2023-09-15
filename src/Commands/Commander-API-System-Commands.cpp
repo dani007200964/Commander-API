@@ -35,7 +35,7 @@ SOFTWARE.
 
 bool commander_echo_func( char *args, Stream *response, void* parent ){
 
-    Commander::SystemVariable_t* systemVariable;
+    Commander::systemVariable_t* systemVariable;
 
     if( response == NULL ){
         return false;
@@ -85,7 +85,7 @@ bool commander_env_func( char *args, Stream *response, void* parent ){
 
 }
 
-Commander::SystemVariable_t* exportTarget = NULL;
+Commander::systemVariable_t* exportTarget = NULL;
 
 bool commander_exportTarget_func( char *args, Stream *response, void* parent ){
 
@@ -151,12 +151,12 @@ bool commander_export_func( char *args, Stream *response, void* parent ){
 
     if( number ){
 
-        if( ( exportTarget -> floatData ) != NULL ){
-            *exportTarget -> floatData = (float)number;
+        if( ( exportTarget -> data.type ) == Commander::VARIABLE_FLOAT ){
+            *( exportTarget -> data.data.floatData ) = (float)number;
         }
 
-        else if( ( exportTarget -> intData ) != NULL ){
-            *exportTarget -> intData = (int)( (float)number );
+        else if( ( exportTarget -> data.type ) == Commander::VARIABLE_INT ){
+            *( exportTarget -> data.data.intData ) = (int)( (float)number );
         }
 
         else{

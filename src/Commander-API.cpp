@@ -36,13 +36,21 @@ SOFTWARE.
 
 const char *Commander::version = COMMANDER_API_VERSION;
 
+Commander::debugLevel_t Commander::debugLevel = Commander::DEBUG_OFF;
+
 void Commander::attachTreeFunction( Commander::systemCommand_t* API_tree_p, uint32_t API_tree_size_p ){
 
 	regularCommands = CommanderDatabase<API_t>( API_tree_p, API_tree_size_p );
+    regularCommands.setDebugLevel( (CommanderDatabase<Commander::API_t>::debugLevel_t)debugLevel );
 
-	dbgResponse -> print( __CONST_TXT__( "API tree attached with " ) );
-	dbgResponse -> print( API_tree_size_p );
-	dbgResponse -> println( __CONST_TXT__( " commands." ) );
+    if( ( dbgResponse != NULL ) && ( debugLevel >= DEBUG_DEBUG ) ){
+
+        dbgResponse -> print( __CONST_TXT__( "API tree attached with " ) );
+        dbgResponse -> print( API_tree_size_p );
+        dbgResponse -> println( __CONST_TXT__( " commands." ) );
+
+    }
+
 }
 
 void Commander::init(){
@@ -107,7 +115,10 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
         // Check if piping is requested, but disabled.
         if( pipeArgBuffer == NULL ){
-            response -> print( __CONST_TXT__( "The command contains piping but the pipe module is disabled!" ) );
+
+            if( response != NULL ){
+                response -> print( __CONST_TXT__( "The command contains piping but the pipe module is disabled!" ) );
+            }
             return false;
         }
 
@@ -166,11 +177,15 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
 			if( memoryType == MEMORY_REGULAR ){
 
-				// Print the description text to the output channel.
-				response -> print( commandData_ptr -> name );
-				response -> print( ':' );
-				response -> print( ' ' );
-				response -> println( commandData_ptr -> data.desc );
+                if( response != NULL ){
+
+                    // Print the description text to the output channel.
+                    response -> print( commandData_ptr -> name );
+                    response -> print( ':' );
+                    response -> print( ' ' );
+                    response -> println( commandData_ptr -> data.desc );
+
+                }
 
 			}
 
@@ -178,11 +193,15 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
 			else if( memoryType == MEMORY_PROGMEM ){
 
-				// Print the description text to the output channel.
-				response -> print( commandData_ptr -> name_P );
-				response -> print( ':' );
-				response -> print( ' ' );
-				response -> println( commandData_ptr -> desc_P );
+                if( response != NULL ){
+
+                    // Print the description text to the output channel.
+                    response -> print( commandData_ptr -> name_P );
+                    response -> print( ':' );
+                    response -> print( ' ' );
+                    response -> println( commandData_ptr -> desc_P );
+
+                }
 
 			}
 
@@ -272,37 +291,41 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
                 if( brokenPipePos >= 0 ){
 
-                    // In case of broken pipe, inform the user about the problematic section.
-                    if( formatting ){
-                        response -> print( __CONST_TXT__( "\033[1;35m" ) );
-                    }
+                    if( response != NULL ){
 
-                    response -> println( __CONST_TXT__( "\r\nBroken pipe!" ) );
+                        // In case of broken pipe, inform the user about the problematic section.
+                        if( formatting ){
+                            response -> print( __CONST_TXT__( "\033[1;35m" ) );
+                        }
 
-                    if( formatting ){
-                        response -> print( __CONST_TXT__( "\033[0;37m" ) );
-                    }
+                        response -> println( __CONST_TXT__( "\r\nBroken pipe!" ) );
 
-                    response -> println( originalCommandData );
-                    
-                    for( i = 0; i < brokenPipePos; i++ ){
-                        response -> print( ' ' );
-                    }
+                        if( formatting ){
+                            response -> print( __CONST_TXT__( "\033[0;37m" ) );
+                        }
 
-                    if( formatting ){
-                        response -> print( __CONST_TXT__( "\033[1;31m" ) );
-                    }
+                        response -> println( originalCommandData );
+                        
+                        for( i = 0; i < brokenPipePos; i++ ){
+                            response -> print( ' ' );
+                        }
 
-                    response -> println( "\u25B2" );
-                    
-                    for( i = 0; i < brokenPipePos; i++ ){
-                        response -> print( ' ' );
-                    }
+                        if( formatting ){
+                            response -> print( __CONST_TXT__( "\033[1;31m" ) );
+                        }
 
-                    response -> print( "\u2514 The pipe broke here" );
-                    
-                    if( formatting ){
-                        response -> print( __CONST_TXT__( "\033[0;37m" ) );
+                        response -> println( "\u25B2" );
+                        
+                        for( i = 0; i < brokenPipePos; i++ ){
+                            response -> print( ' ' );
+                        }
+
+                        response -> print( "\u2514 The pipe broke here" );
+                        
+                        if( formatting ){
+                            response -> print( __CONST_TXT__( "\033[0;37m" ) );
+                        }
+
                     }
 
                 }
@@ -352,11 +375,15 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
 	else{
 
-		// If we went through the whole tree and we did not found the command in it,
-		// we have to notice the user abut the problem. Maybe a Type-O
-		response -> print( __CONST_TXT__( "Command \'" ) );
-		response -> print( tempBuff );
-		response -> print( __CONST_TXT__( "\' not found!" ) );
+        if( response != NULL ){
+
+            // If we went through the whole tree and we did not found the command in it,
+            // we have to notice the user abut the problem. Maybe a Type-O
+            response -> print( __CONST_TXT__( "Command \'" ) );
+            response -> print( tempBuff );
+            response -> print( __CONST_TXT__( "\' not found!" ) );
+
+        }
 		
 	}
     return true;
@@ -365,7 +392,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 bool Commander::execute( const char *cmd ){
 
 	// Default execute handler, so the default response will be chosen.
-	response = &defaultResponse;
+	response = NULL;
 
     // Reset the pipe position tracker.
     pipeCounter = 0;
@@ -411,22 +438,12 @@ bool Commander::execute( const char *cmd, Stream *resp, void* parent ){
 void Commander::attachDebugChannel( Stream *resp ){
 
 	dbgResponse = resp;
-
-	// Enable debug messages.
-	debugEnabled = true;
+	debugLevel;
 
 }
 
-void Commander::enableDebug(){
-
-	debugEnabled = true;
-
-}
-
-void Commander::disableDebug(){
-
-	debugEnabled = false;
-
+void Commander::setDebugLevel( Commander::debugLevel_t debugLevel_p ){
+    debugLevel = debugLevel_p;
 }
 
 void Commander::printHelp( Stream* out, bool description, bool style ){
@@ -577,39 +594,26 @@ void Commander::printArgumentError( Stream* channel_p ){
 
 }
 
-Commander::SystemVariable_t* Commander::variables = NULL;
-uint32_t Commander::variables_size = 0;
+CommanderDatabase<Commander::systemVariableData_t> Commander::systemVariables = CommanderDatabase<systemVariableData_t>();
 
-void Commander::attachVariablesFunction( Commander::SystemVariable_t* variables_p, uint32_t variables_size_p ){
-	variables = variables_p;
-	variables_size = variables_size_p;
+void Commander::attachVariablesFunction( systemVariable_t* variables_p, uint32_t variables_size_p ){
+	systemVariables = CommanderDatabase<systemVariableData_t>( variables_p, variables_size_p );
+    systemVariables.setDebugLevel( (CommanderDatabase<Commander::systemVariableData_t>::debugLevel_t)debugLevel );
 }
 
-Commander::SystemVariable_t* Commander::getSystemVariable( const char* name ){
-
-	int i;
-
-	for( i = 0; i < variables_size; i++ ){
-
-		if( strcmp( name, variables[ i ].name ) == 0 ){
-			return &variables[ i ];
-		}
-
-	}
-
-	return NULL;
-
+Commander::systemVariable_t* Commander::getSystemVariable( const char* name ){
+	return systemVariables[ name ];
 }
 
 void Commander::printSystemVariable( Stream* channel_p, const char* name, int decimalPlaces ){
 
-	SystemVariable_t* var;
+	systemVariable_t* var;
 
 	if( channel_p == NULL ){
 		return;
 	}
 
-	var= getSystemVariable( name );
+	var = getSystemVariable( name );
 
 	if( var == NULL ){
 
@@ -617,56 +621,62 @@ void Commander::printSystemVariable( Stream* channel_p, const char* name, int de
 
 	}
 
-	if( ( var -> floatData ) != NULL ){
-        channel_p -> print( *var -> floatData, decimalPlaces );
-		return;
-	}
-
-	if( ( var -> intData ) != NULL ){
-		channel_p -> print( *var -> intData );
-		return;
-	}
-
-	if( ( var -> strData ) != NULL ){
-		channel_p -> print( var -> strData );
-		return;
-	}
+    switch( var -> data.type ){
+        case VARIABLE_FLOAT:
+            channel_p -> print( (float)*( var -> data.data.floatData ), decimalPlaces );
+            break;
+        case VARIABLE_INT:
+            channel_p -> print( (int)*( var -> data.data.intData ) );
+            break;
+        case VARIABLES_STRING:
+            channel_p -> print( (char*)( var -> data.data.strData ) );
+            break;
+        default:
+            channel_p -> print( __CONST_TXT__( "Variable ERROR" ) );
+            break;
+    }
 
 }
 
 void Commander::printSystemVariables( Stream* channel_p ){
 
 	uint32_t i;
+	systemVariable_t* var;
 
 	if( channel_p == NULL ){
 		return;
 	}
 
-	if( ( variables_size == 0 ) || ( variables == NULL ) ){
+	if( systemVariables.getSize() == 0 ){
 
 		channel_p -> print( __CONST_TXT__( "No system variables found!" ) );
 		return;
 
 	}
 
-	for( i = 0; i < variables_size; i++ ){
+	for( i = 0; i < systemVariables.getSize(); i++ ){
 
-		channel_p -> print( variables[ i ].name );
+        var = systemVariables[ i ];
 
-		if( variables[ i ].floatData != NULL ){
-			channel_p -> print( __CONST_TXT__( ": float = " ) );
-			channel_p -> println( *variables[ i ].floatData );
-		}
+		channel_p -> print( var -> name );
 
-		else if( variables[ i ].intData != NULL ){
-			channel_p -> print( __CONST_TXT__( ": int = " ) );
-			channel_p -> println( *variables[ i ].intData );
-		}
-
-		else if( variables[ i ].strData != NULL ){
-			channel_p -> print( __CONST_TXT__( ": str = " ) );
-			channel_p -> println( variables[ i ].strData );
-		}
+        switch( var -> data.type ){
+            case VARIABLE_FLOAT:
+    			channel_p -> print( __CONST_TXT__( ": float = " ) );
+                channel_p -> println( (float)*( var -> data.data.floatData ) );
+                break;
+            case VARIABLE_INT:
+    			channel_p -> print( __CONST_TXT__( ": int = " ) );
+                channel_p -> println( (int)*( var -> data.data.intData ) );
+                break;
+            case VARIABLES_STRING:
+    			channel_p -> print( __CONST_TXT__( ": str = " ) );
+                channel_p -> println( (char*)( var -> data.data.strData ) );
+                break;
+            default:
+                channel_p -> println( __CONST_TXT__( ": Variable ERROR" ) );
+                break;
+        }
 
 	}
 

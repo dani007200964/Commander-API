@@ -49,45 +49,112 @@ SOFTWARE.
 #endif
 
 template< typename T >
+/// Database class
+///
+/// This class is designed to create a database for any type of data.
+/// Every element has to have a unique name, which is case sensitive.
+/// The elements can be accessed by their names.
 class CommanderDatabase{
 
 public:
 
+    /// Debug level definitions.
     typedef enum{
-        DEBUG_OFF = 0,
-        DEBUG_ERROR = 1,
-        DEBUG_DEBUG = 2,
-        DEBUG_VERBOSE = 3
+        DEBUG_OFF       = 0,    ///< All debug messages will be turned off.
+        DEBUG_ERROR     = 1,    ///< Only error messages will be printed.
+        DEBUG_DEBUG     = 2,    ///< Some debug data and the error messages will be printed.
+        DEBUG_VERBOSE   = 3     ///< All debug messages will be turned on.
     }debugLevel_t;
 
+	/// Data record element.
 	struct dataRecord_t{
 
-	  	uint16_t place;                                         ///<  This will store the alphabetical place of the command in the tree
-	  	dataRecord_t *left;                              ///<  Left element on a binary tree branch
-	  	dataRecord_t *right;                             ///<  Right element on a binary tree branch
-	  	const char *name;                                       ///<  Name of the command
+	  	uint16_t place;                     ///<  This will store the alphabetical place of the element in the tree
+	  	dataRecord_t *left;                 ///<  Left element in the binary tree branch
+	  	dataRecord_t *right;                ///<  Right element in the binary tree branch
+	  	const char *name;                   ///<  Name of the element
 
-        T data;
+        T data;                             ///< Stored data. It comes from the template, so it can be any type of data.
 
 		#ifdef __AVR__
-		__FlashStringHelper *name_P;							///< Name of the command( stored in PROGMEM )
+		__FlashStringHelper *name_P;        ///< Name of the element( stored in PROGMEM )
 		#endif
 
 	};
 
+    /// Empty constructor.
     CommanderDatabase();
+
+    /// Constructor.
+    ///
+    /// To construct a working object, this must be used.
+    /// @param dataTree_p Pointer to the data array. The element type must be
+    ///                   a configured dataRecord_t. For example:
+    ///                   `CommanderDatabase<int>::dataRecord_t testData[ 10 ]`
+    ///                   will create a data array for integer type with 10 elements.
+    /// @param dataTreeSize_p The size of the data array in elements.
     CommanderDatabase( dataRecord_t* dataTree_p, uint16_t dataTreeSize_p );
+    
+    /// Redirect debug messages.
+    ///
+    /// You can specify an output stream, where the debug
+    /// messages will be printed. By default it is not
+    /// specified and no debug messages will be printed.
+    /// @param debugChannel_p Pointer to a stream, where the debug messages will be printed.
+    /// @note You have to call this function before init, if you need any debug data.
     void attachDebugChannel( Stream* debugChannel_p );
+
+    /// Set the debug level.
+    ///
+    /// You can set, how detailed debug is needed.
+    /// @param debugLevel_p Please check @ref debugLevel_t for more information.
+    /// @note You have to specify a Stream for the debug messages with
+    ///       @ref attachDebugChannel.
     void setDebugLevel( debugLevel_t debugLevel_p );
 
+    /// Init function.
+    ///
+    /// This function must be called in the init section of your system.
+    /// It will generate a balanced binary tree structure from the data tree.
+    /// @returns If anything goes well, it will return true. If something wrong
+    ///          happens during the tree generation, it will return false.
     bool init();
 
+    /// Overload for indexing operator
+    ///
+    /// The indexing operator is overloaded and it can be used
+    /// with an integer to get a pointer to the data tree element.
+    /// The indexing is protected against wrong addressing.
+    /// @param i Index of the element in the tree. If the index is
+    ///          incorrect, the returned value will be NULL.
+    /// @returns The address of the indexed element.
 	dataRecord_t* operator [] ( int i );
 
+    /// Overload for indexing operator
+    ///
+    /// The indexing operator is overloaded and it can be used
+    /// with a string to get a pointer to an element by its
+    /// name parameter. If it is not found, NULL will be returned.
+    /// @param name The name of the searched element.
+    /// @returns The address of the element which has the
+    ///          same name as the name parameter.
 	dataRecord_t* operator [] ( const char* name );
 
+    /// Find array index by element place.
+    ///
+    /// This function returns the array index( from 0 to tree size - 1 )
+    /// of an element by its place variable. It can be handy because the
+    /// actual place not represents the real index in the binary tree.
+    /// @param place Place of the searched element.
+    /// @returns The array index of the element if the place is found.
+    ///          If the place is invalid or not found, the returned value
+    ///          will be 0 to avoid bad addressing.
     int findIndexByPlace( int place );
 
+    /// Get tree size
+    ///
+    /// You can get the size of the tree wit this function.
+    /// @returns The size of the tree in elements.
     uint16_t getSize();
 
 private:
@@ -97,9 +164,14 @@ private:
 	/// Number of elements in the API-tree.
 	uint16_t dataTreeSize = 0;
 
+    /// Pointer to a Stream object, which will be used as debug output.
     Stream* debugChannel = NULL;
 
+    /// Debug level.
     debugLevel_t debugLevel = DEBUG_OFF;
+
+    /// If initialised correctly, it will be true.
+    bool initFlag = false;
 
 	/// Function pointer to an internal strcmp like function.
 	/// It uses the regular version by default.
@@ -113,9 +185,11 @@ private:
 
 	int strcmpElementCharArrayRegular( dataRecord_t* element1, const char* element2 );
 
-    void swapElements( uint16_t index, uint16_t place );
+    void swapElements( uint16_t a, uint16_t b );
 
     bool optimizeDataTree();
+
+    friend class CommanderDatabaseUT;
 
 };
 
@@ -126,6 +200,7 @@ CommanderDatabase< T >::CommanderDatabase(){
     dataTreeSize = 0;
     debugChannel = NULL;
     debugLevel = DEBUG_OFF;
+    initFlag = false;
 
 }
 
@@ -136,6 +211,7 @@ CommanderDatabase< T >::CommanderDatabase( struct dataRecord_t* dataTree_p, uint
     dataTreeSize = dataTreeSize_p;
     debugChannel = NULL;
     debugLevel = DEBUG_OFF;
+    initFlag = false;
 
 }
 
@@ -165,12 +241,6 @@ int CommanderDatabase< T >::findIndexByPlace( int place ){
 	// Generic counter variable
 	uint16_t i;
 
-	if( place < 0 ){
-
-		return 0;
-
-	}
-
 	// Go through all commands
 	for( i = 0; i < dataTreeSize; i++ ){
 
@@ -190,26 +260,25 @@ int CommanderDatabase< T >::findIndexByPlace( int place ){
 
 
 template< typename T >
-void CommanderDatabase< T >::swapElements( uint16_t index, uint16_t place ){
+void CommanderDatabase< T >::swapElements( uint16_t a, uint16_t b ){
 
     // Buffer that will temporary hold an element.
     // This is required for a swap.
     dataRecord_t buffer;
 
-    // This variable will store the address of the element defined by the second argument( place ).
-    uint16_t current_index;
+    // Protect against overflow.
+    if( a >= dataTreeSize ){
+        return;
+    }
 
-    // Find the index in the array by place of the 'i'-th element
-    current_index = findIndexByPlace( place );
+    // Protect against overflow.
+    if( b >= dataTreeSize ){
+        return;
+    }
 
-    // save the context of the 'i'-th element to the buffer
-    buffer = dataTree[ index ];
-
-    // write the 'current_index'-th element to the 'i'-th element
-    dataTree[ index ] = dataTree[ current_index ];
-
-    // write the buffer to the 'current_index'-th element
-    dataTree[ current_index ] = buffer;
+    buffer = dataTree[ a ];
+    dataTree[ a ] = dataTree[ b ];
+    dataTree[ b ] = buffer;
 
 }
 
@@ -304,32 +373,59 @@ bool CommanderDatabase< T >::optimizeDataTree(){
                 continue;
             }
 
-            swapElements( elementCounter, elementIndex );
+            swapElements( elementCounter, findIndexByPlace( elementIndex ) );
 
             // Create the connection for the parent leaf.
             if( elementCounter > 0 ){
 
+                // The first element is the starting node.
                 prev = &dataTree[ 0 ];
 
+                // Compare the next leafs name with the new items name.
                 comp_res = ( this ->* strcmpElementElement )( prev, &dataTree[ elementCounter ] );
 
+                // Check if we found a match.
+                if( comp_res == 0 ){
+                    // This is a problem, because each element has to be unique.
+                    return false;
+                }
+
+                // Otherwise check which leaf will be the next.
                 (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
 
                 while( next != NULL ){
 
                     prev = next;
+    
+                    // Compare the next leafs name with the new items name.
                     comp_res = ( this ->* strcmpElementElement )( prev, &dataTree[ elementCounter ] );
+
+                    // Check if we found a match.
+                    if( comp_res == 0 ){
+                        // This is a problem, because each element has to be unique.
+                        return false;
+                    }
+
+                    // Otherwise check which leaf will be the next.
                     (comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
 
                 }
 
+                // Check which side will be used to store the new item.
                 if( comp_res > 0 ){
                     prev -> left = &dataTree[ elementCounter ];
                 }
 
-                else{
+                else if( comp_res < 0 ){
                     prev -> right = &dataTree[ elementCounter ];
                 }
+
+                // Check if we found a match.
+                else{
+                    // This is a problem, because each element has to be unique.
+                    return false;
+                }
+
                 if( ( debugChannel != NULL ) && ( debugLevel == DEBUG_VERBOSE ) ){
                     debugChannel -> print( __CONST_TXT__( " parent: " ) );
                     debugChannel -> println( prev -> place );
@@ -415,9 +511,10 @@ bool CommanderDatabase< T >::init(){
         debugChannel -> println( __CONST_TXT__( "Create balanced binary structure... " ) );
     }
 
-	optimizeDataTree();
+    initFlag = optimizeDataTree();
 
-    return true;
+	return initFlag;
+
 }
 
 
@@ -426,9 +523,7 @@ typename CommanderDatabase< T >::dataRecord_t* CommanderDatabase< T >::operator 
 
 	// Detect wrong addressing.
 	if( ( i < 0 ) || ( i >= (int)dataTreeSize ) ){
-
 		return NULL;
-
 	}
 
 	return &dataTree[ i ];
@@ -447,6 +542,10 @@ typename CommanderDatabase< T >::dataRecord_t* CommanderDatabase< T >::operator 
 	// It will store string compersation result
 	int comp_res;
 
+    if( initFlag == false ){
+        return NULL;
+    }
+
 	prev = &dataTree[ 0 ];
 
 	comp_res = ( this ->* strcmpElementCharArray )( prev, name );
@@ -455,7 +554,7 @@ typename CommanderDatabase< T >::dataRecord_t* CommanderDatabase< T >::operator 
 
 	// Go through the binary tree until you find a match, or until you find the
 	// end of the tree.
-	while( ( comp_res !=0 ) && ( next != NULL ) ){
+	while( ( comp_res != 0 ) && ( next != NULL ) ){
 
 		prev = next;
 		comp_res = ( this ->* strcmpElementCharArray )( prev, name );

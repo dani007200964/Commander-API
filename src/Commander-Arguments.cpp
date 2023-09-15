@@ -401,13 +401,13 @@ bool Argument::parseInt(){
 
     if( systemVariable != NULL ){
 
-        if( ( systemVariable -> intData ) != NULL ){
-            ret.i = *systemVariable -> intData;
+        if( ( systemVariable -> data.type ) == Commander::VARIABLE_INT ){
+            ret.i = *( systemVariable -> data.data.intData );
             status = 1;
         }
 
-        else if( ( systemVariable -> floatData ) != NULL ){
-            ret.f = (int)*systemVariable -> floatData;
+        else if( ( systemVariable -> data.type ) == Commander::VARIABLE_FLOAT ){
+            ret.f = (int)*( systemVariable -> data.data.floatData );
             bFields.parsed = true;
         }
 
@@ -449,15 +449,17 @@ bool Argument::parseFloat(){
 
     if( systemVariable != NULL ){
 
-        if( ( systemVariable -> floatData ) != NULL ){
-            ret.f = *systemVariable -> floatData;
+        if( ( systemVariable -> data.type ) == Commander::VARIABLE_FLOAT ){
+            ret.f = *( systemVariable -> data.data.floatData );
             bFields.parsed = true;
         }
 
-        else if( ( systemVariable -> intData ) != NULL ){
-            ret.f = (float)*systemVariable -> intData;
+        else if( ( systemVariable -> data.type ) == Commander::VARIABLE_INT ){
+            ret.i = (float)*( systemVariable -> data.data.intData );
             bFields.parsed = true;
         }
+
+
 
     }
 
@@ -529,10 +531,10 @@ bool Argument::parseStringFunction( char* buffer, int bufferSize ){
 
     if( systemVariable != NULL ){
 
-        if( ( systemVariable -> strData ) != NULL ){
-            ret.c = systemVariable -> strData;
-            strncpy( buffer, systemVariable -> strData, bufferSize );
-            systemVariable -> strData[ bufferSize - 1 ] = '\0';
+        if( ( systemVariable -> data.type ) == Commander::VARIABLES_STRING ){
+            ret.c = systemVariable -> data.data.strData;
+            strncpy( buffer, systemVariable -> data.data.strData, bufferSize );
+            buffer[ bufferSize - 1 ] = '\0';
             bFields.parsed = true;
             return true;
         }
@@ -722,7 +724,7 @@ bool Argument::inString( int index ){
     
 }
 
-Commander::SystemVariable_t* Argument::getSystemVariable(){
+Commander::systemVariable_t* Argument::getSystemVariable(){
     return systemVariable;
 }
 

@@ -80,8 +80,8 @@ Commander::API_t API_tree[] = {
 };
 */
 
-/*
-Commander::API_t API_tree[] = {
+
+Commander::systemCommand_t systemCommands[] = {
     API_ELEMENT_REBOOT,
     API_ELEMENT_ECHO,
     API_ELEMENT_ENV,
@@ -94,15 +94,19 @@ Commander::API_t API_tree[] = {
     API_ELEMENT_NEOFETCH
 };
 
-*/
 
+
+/*
 bool cat_func( char *args, Stream *response, void* parrent );
 bool dog_func( char *args, Stream *response, void* parrent );
 
 Commander::systemCommand_t systemCommands[] = {
-    { 0, NULL, NULL, "cat", { "cat func description.", cat_func } },
-    { 0, NULL, NULL, "dog", { "dog func description.", dog_func } }
+    //{ 0, NULL, NULL, "cat", { "cat func description.", cat_func } },
+    //{ 0, NULL, NULL, "dog", { "dog func description.", dog_func } }
+    apiElement( "cat", "cat func description.", cat_func ),
+    apiElement( "dog", "dog func description.", dog_func )
 };
+*/
 
 // Global system variables.
 float tmpFloat = 0.0;
@@ -112,7 +116,11 @@ int tmpInt = -1300;
 
 // System Variable array. This array will store the
 // name and the instance of the system variables.
-Commander::SystemVariable_t systemVariables[] = {
+Commander::systemVariable_t systemVariables[] = {
+    //systemVariableFloat( tmpFloat ),
+    //systemVariableInt( tmpInt )
+    //{ 0, NULL, NULL, "temFloat", { Commander::VARIABLE_FLOAT, { (float*)&tmpFloat } } },
+    //{ 0, NULL, NULL, "tmpInt", { Commander::VARIABLE_INT, { (float*)&tmpInt } } }
     systemVariableFloat( tmpFloat ),
     systemVariableInt( tmpInt )
 };
@@ -162,6 +170,8 @@ int main(){
     // But recursion is a bit stack hungry, so please initialize
     // Commander at the beginning of your code to prevent stack-overlow.
     commander.init();
+
+    commander.attachVariablesFunction( systemVariables, 2 );
 
     while( 1 ){
         commander.update( commandFromSerial, sizeof( commandFromSerial ), &stdioChannel );

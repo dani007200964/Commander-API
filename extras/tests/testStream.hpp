@@ -38,7 +38,7 @@ SOFTWARE.
 #include <conio.h>
 #include <stdint.h>
 
-#define TEST_STREAM_BUFFER_SIZE 2048
+#define TEST_STREAM_BUFFER_SIZE 1024
 
 class testStream : public Stream{
 
@@ -70,6 +70,7 @@ public:
 	uint32_t rxReadPointer = 0;
 	uint32_t rxWritePointer = 0;
 
+    // Ebbe kerul a print eredmenye.
   char txBuffer[ TEST_STREAM_BUFFER_SIZE ];
 	uint32_t txReadPointer = 0;
 	uint32_t txWritePointer = 0;
