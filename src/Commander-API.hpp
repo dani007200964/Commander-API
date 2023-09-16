@@ -81,7 +81,7 @@ SOFTWARE.
 /// @param name The name of the command. The best practice is to use a const char array.
 /// @param desc The description of the command. The best practice is to use a const char array.
 /// @param func This function will be called, when this command gets executed.
-#define apiElement( name, desc, func ) { 0, NULL, NULL, (const char*)name, { (const char*)desc, func } }
+#define systemCommand( name, desc, func ) { 0, NULL, NULL, (const char*)name, { (const char*)desc, func } }
 //#define apiElement( name, desc, func ) { 0, NULL, NULL, (const char*)name, (const char*)desc, func }
 
 #ifdef __AVR__
@@ -94,7 +94,7 @@ SOFTWARE.
 /// @param name The name of the command. The best practice is to use a const char array.
 /// @param desc The description of the command. The best practice is to use a const char array.
 /// @param func_arg This function will be called, when this command gets executed.
-#define apiElement_P( element, name_p, desc_p, func_P ) {  element.place = 0;                              \
+#define systemCommand_P( element, name_p, desc_p, func_P ) {  element.place = 0;                              \
                                                             element.left = NULL;                            \
                                                             element.right = NULL;                           \
                                                             element.name_p = __CONST_TXT__( name );         \

@@ -2,17 +2,28 @@
 
 Argument::Argument( const char* source_p, int place_p ){
 
+    // Save the source and set its size to an invalid value by default.
+    // if the source is valid, the size will be calculated accordingly.
     source = source_p;
     sourceSize = -1;
 
+    // Save the place to an internal variable.
     place = place_p;
+
+    // In this case the short name is irrelevant,
+    // set it to string terminator.
     shortName = '\0';
+
+    // In this case the long name is irrelevant,
+    // set it to NULL.
     longName = NULL;
-    //parsed = false;
-    //found = false;
+
+    // By default set te parsed and found flags to false.
     bFields.parsed = false;
     bFields.found = false;
 
+    // If the source is defined correctly,
+    // calculate its size.
     if( source ){
         sourceSize = strlen( source );
     }
@@ -21,17 +32,28 @@ Argument::Argument( const char* source_p, int place_p ){
 
 Argument::Argument( const char* source_p, char shortName_p ){
 
+    // Save the source and set its size to an invalid value by default.
+    // if the source is valid, the size will be calculated accordingly.
     source = source_p;
     sourceSize = -1;
 
+    // In this case the place is irrelevant,
+    // set it to -1.
     place = -1;
+
+    // Save the short name character to internal variable.
     shortName = shortName_p;
+
+    // long name is not defined with this constructor,
+    // set it to NULL.
     longName = NULL;
-    //parsed = false;
-    //found = false;
+
+    // By default set te parsed and found flags to false.
     bFields.parsed = false;
     bFields.found = false;
 
+    // If the source is defined correctly,
+    // calculate its size.
     if( source ){
         sourceSize = strlen( source );
     }
@@ -40,17 +62,27 @@ Argument::Argument( const char* source_p, char shortName_p ){
 
 Argument::Argument( const char* source_p, char shortName_p, const char* longName_p ){
 
+    // Save the source and set its size to an invalid value by default.
+    // if the source is valid, the size will be calculated accordingly.
     source = source_p;
     sourceSize = -1;
 
+    // In this case the place is irrelevant,
+    // set it to -1.
     place = -1;
+
+    // Save the short name character to internal variable.
     shortName = shortName_p;
+
+    // Save the pointer to the long name.
     longName = longName_p;
-    //parsed = false;
-    //found = false;
+
+    // By default set te parsed and found flags to false.
     bFields.parsed = false;
     bFields.found = false;
 
+    // If the source is defined correctly,
+    // calculate its size.
     if( source ){
         sourceSize = strlen( source );
     }

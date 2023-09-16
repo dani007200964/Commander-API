@@ -546,6 +546,7 @@ typename CommanderDatabase< T >::dataRecord_t* CommanderDatabase< T >::operator 
         return NULL;
     }
 
+    // Thee roo node will be the first element.
 	prev = &dataTree[ 0 ];
 
 	comp_res = ( this ->* strcmpElementCharArray )( prev, name );
@@ -578,6 +579,5 @@ template< typename T >
 uint16_t CommanderDatabase< T >::getSize(){
     return dataTreeSize;
 }
-
 
 #endif

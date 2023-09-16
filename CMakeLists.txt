@@ -44,8 +44,6 @@ set( SOURCES
     src/Commander-API.hpp
     src/Commander-IO.cpp
     src/Commander-IO.hpp
-    src/Commander-Utils.cpp
-    src/Commander-Utils.hpp
     src/Commander-Arguments.cpp
     src/Commander-Arguments.hpp
     #src/Commander-Database.cpp
@@ -107,10 +105,15 @@ endif()
 if(RUN_TESTS)
 
     # Unit testing
-    add_executable( test_constructor ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_constructor.cpp )
-    add_executable( test_debug ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_debug.cpp )
-    add_executable( test_init ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_init.cpp )
-    add_executable( test_search ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_search.cpp )
+
+    # -- Commander-Database --
+    #add_executable( test_constructor ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_constructor.cpp )
+    #add_executable( test_debug ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_debug.cpp )
+    #add_executable( test_init ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_init.cpp )
+    #add_executable( test_search ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_search.cpp )
+
+    # -- Commander-Arguments --
+    add_executable( test_search ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Arguments/test_constructor.cpp )
 
 endif()
 

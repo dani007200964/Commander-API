@@ -223,6 +223,8 @@ private:
 
     int substring( char* str1, char* str2 );
 
+    friend class ArgumentUT;
+
 };
 
 #endif

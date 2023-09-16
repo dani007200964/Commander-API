@@ -60,14 +60,14 @@ void printCommandNotImplemented( Stream* channel_p );
 //**** System functions ****//
 
 //-------- reboot function --------//
-#define API_ELEMENT_REBOOT_NAME		    "reboot"
+#define SYSTEM_COMMAND_REBOOT_NAME		    "reboot"
 
-#define API_ELEMENT_REBOOT_DESCRIPTION	"Reboots the device.\r\n\r\n"	\
-                                      	"usage: reboot\r\n"				\
+#define SYSTEM_COMMAND_REBOOT_DESCRIPTION	"Reboots the device.\r\n\r\n"	\
+                                          	"usage: reboot\r\n"				\
 
-#define API_ELEMENT_REBOOT apiElement( API_ELEMENT_REBOOT_NAME, API_ELEMENT_REBOOT_DESCRIPTION, commander_reboot_func )
+#define SYSTEM_COMMAND_REBOOT systemCommand( SYSTEM_COMMAND_REBOOT_NAME, SYSTEM_COMMAND_REBOOT_DESCRIPTION, commander_reboot_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_REBOOT( element ) apiElement_P( element, API_ELEMENT_REBOOT_NAME, API_ELEMENT_REBOOT_DESCRIPTION, commander_reboot_func )
+    #define SYSTEM_COMMAND_P_REBOOT( element ) systemCommand_P( element, SYSTEM_COMMAND_REBOOT_NAME, SYSTEM_COMMAND_REBOOT_DESCRIPTION, commander_reboot_func )
 #endif
 /// Premade function for reboot command. It reboots the core.
 /// @param args Pointer to the argument string.
@@ -75,14 +75,14 @@ void printCommandNotImplemented( Stream* channel_p );
 bool commander_reboot_func( char *args, Stream *response, void* parent );
 
 //---- echo function ----//
-#define API_ELEMENT_ECHO_NAME			"echo"
+#define SYSTEM_COMMAND_ECHO_NAME			"echo"
 
-#define API_ELEMENT_ECHO_DESCRIPTION	"Echoes back the input data. The input data can be a system variable.\r\n\r\n"  \
-                                    	"usage: echo [input data or system variable]"
+#define SYSTEM_COMMAND_ECHO_DESCRIPTION     "Echoes back the input data. The input data can be a system variable.\r\n\r\n"  \
+                                    	    "usage: echo [input data or system variable]"
 
-#define API_ELEMENT_ECHO apiElement( API_ELEMENT_ECHO_NAME, API_ELEMENT_ECHO_DESCRIPTION, commander_echo_func )
+#define SYSTEM_COMMAND_ECHO systemCommand( SYSTEM_COMMAND_ECHO_NAME, SYSTEM_COMMAND_ECHO_DESCRIPTION, commander_echo_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_ECHO( element ) apiElement_P( element, API_ELEMENT_ECHO_NAME, API_ELEMENT_ECHO_DESCRIPTION, commander_echo_func )
+    #define SYSTEM_COMMAND_P_ECHO( element ) systemCommand_P( element, SYSTEM_COMMAND_ECHO_NAME, SYSTEM_COMMAND_ECHO_DESCRIPTION, commander_echo_func )
 #endif
 /// Premade function for echo command.
 /// @param args Pointer to the argument string.
@@ -90,14 +90,14 @@ bool commander_reboot_func( char *args, Stream *response, void* parent );
 bool commander_echo_func( char *args, Stream *response, void* parent );
 
 //---- env function ----//
-#define API_ELEMENT_ENV_NAME			"env"
+#define SYSTEM_COMMAND_ENV_NAME			"env"
 
-#define API_ELEMENT_ENV_DESCRIPTION		"Lists all hte system variables.\r\n\r\n"   \
+#define SYSTEM_COMMAND_ENV_DESCRIPTION		"Lists all hte system variables.\r\n\r\n"   \
                                     	"usage: env\r\n"							\
 
-#define API_ELEMENT_ENV apiElement( API_ELEMENT_ENV_NAME, API_ELEMENT_ENV_DESCRIPTION, commander_env_func )
+#define SYSTEM_COMMAND_ENV systemCommand( SYSTEM_COMMAND_ENV_NAME, SYSTEM_COMMAND_ENV_DESCRIPTION, commander_env_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_ENV( element ) apiElement_P( element, API_ELEMENT_ENV_NAME, API_ELEMENT_ENV_DESCRIPTION, commander_env_func )
+  #define SYSTEM_COMMAND_P_ENV( element ) systemCommand_P( element, SYSTEM_COMMAND_ENV_NAME, SYSTEM_COMMAND_ENV_DESCRIPTION, commander_env_func )
 #endif
 /// Premade function for echo command.
 /// @param args Pointer to the argument string.
@@ -105,14 +105,14 @@ bool commander_echo_func( char *args, Stream *response, void* parent );
 bool commander_env_func( char *args, Stream *response, void* parent );
 
 //-------- micros functions --------//
-#define API_ELEMENT_MICROS_NAME			"micros"
+#define SYSTEM_COMMAND_MICROS_NAME			"micros"
 
-#define API_ELEMENT_MICROS_DESCRIPTION	"Returns the number of microseconds passed since the program started.\r\n\r\n"	\
+#define SYSTEM_COMMAND_MICROS_DESCRIPTION	"Returns the number of microseconds passed since the program started.\r\n\r\n"	\
                                     	"usage: micros\r\n"																\
 
-#define API_ELEMENT_MICROS apiElement( API_ELEMENT_MICROS_NAME, API_ELEMENT_MICROS_DESCRIPTION, commander_micros_func )
+#define SYSTEM_COMMAND_MICROS systemCommand( SYSTEM_COMMAND_MICROS_NAME, SYSTEM_COMMAND_MICROS_DESCRIPTION, commander_micros_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_MICROS( element ) apiElement_P( element, API_ELEMENT_MICROS_NAME, API_ELEMENT_MICROS_DESCRIPTION, commander_micros_func )
+  #define SYSTEM_COMMAND_P_MICROS( element ) systemCommand_P( element, SYSTEM_COMMAND_MICROS_NAME, SYSTEM_COMMAND_MICROS_DESCRIPTION, commander_micros_func )
 #endif
 /// Premade function for micros command.
 /// @param args Pointer to the argument string.
@@ -120,14 +120,14 @@ bool commander_env_func( char *args, Stream *response, void* parent );
 bool commander_micros_func( char *args, Stream *response, void* parent );
 
 //-------- millis functions --------//
-#define API_ELEMENT_MILLIS_NAME			"millis"
+#define SYSTEM_COMMAND_MILLIS_NAME			"millis"
 
-#define API_ELEMENT_MILLIS_DESCRIPTION	"Returns the number of milliseconds passed since the program started.\r\n\r\n"	\
+#define SYSTEM_COMMAND_MILLIS_DESCRIPTION	"Returns the number of milliseconds passed since the program started.\r\n\r\n"	\
                                     	"usage: millis\r\n"																\
 
-#define API_ELEMENT_MILLIS apiElement( API_ELEMENT_MILLIS_NAME, API_ELEMENT_MILLIS_DESCRIPTION, commander_millis_func )
+#define SYSTEM_COMMAND_MILLIS systemCommand( SYSTEM_COMMAND_MILLIS_NAME, SYSTEM_COMMAND_MILLIS_DESCRIPTION, commander_millis_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_MILLIS( element ) apiElement_P( element, API_ELEMENT_MILLIS_NAME, API_ELEMENT_MILLIS_DESCRIPTION, commander_millis_func )
+  #define SYSTEM_COMMAND_P_MILLIS( element ) systemCommand_P( element, SYSTEM_COMMAND_MILLIS_NAME, SYSTEM_COMMAND_MILLIS_DESCRIPTION, commander_millis_func )
 #endif
 /// Premade function for millis command.
 /// @param args Pointer to the argument string.
@@ -135,14 +135,14 @@ bool commander_micros_func( char *args, Stream *response, void* parent );
 bool commander_millis_func( char *args, Stream *response, void* parent );
 
 //-------- uptime functions --------//
-#define API_ELEMENT_UPTIME_NAME			"uptime"
+#define SYSTEM_COMMAND_UPTIME_NAME			"uptime"
 
-#define API_ELEMENT_UPTIME_DESCRIPTION	"Returns the time passed since the program started.\r\n\r\n"	\
+#define SYSTEM_COMMAND_UPTIME_DESCRIPTION	"Returns the time passed since the program started.\r\n\r\n"	\
                                     	"usage: uptime\r\n"																\
 
-#define API_ELEMENT_UPTIME apiElement( API_ELEMENT_UPTIME_NAME, API_ELEMENT_UPTIME_DESCRIPTION, commander_uptime_func )
+#define SYSTEM_COMMAND_UPTIME systemCommand( SYSTEM_COMMAND_UPTIME_NAME, SYSTEM_COMMAND_UPTIME_DESCRIPTION, commander_uptime_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_UPTIME( element ) apiElement_P( element, API_ELEMENT_UPTIME_NAME, API_ELEMENT_UPTIME_DESCRIPTION, commander_uptime_func )
+  #define SYSTEM_COMMAND_P_UPTIME( element ) systemCommand_P( element, SYSTEM_COMMAND_UPTIME_NAME, SYSTEM_COMMAND_UPTIME_DESCRIPTION, commander_uptime_func )
 #endif
 /// Premade function for uptime command.
 /// @param args Pointer to the argument string.
@@ -150,15 +150,15 @@ bool commander_millis_func( char *args, Stream *response, void* parent );
 bool commander_uptime_func( char *args, Stream *response, void* parent );
 
 //-------- neofetch function --------//
-#define API_ELEMENT_NEOFETCH_NAME			"neofetch"
+#define SYSTEM_COMMAND_NEOFETCH_NAME			"neofetch"
 
-#define API_ELEMENT_NEOFETCH_DESCRIPTION	"Nice looking system information.\r\n\r\n"	\
+#define SYSTEM_COMMAND_NEOFETCH_DESCRIPTION	"Nice looking system information.\r\n\r\n"	\
                                     		"usage: neofetch\r\n"																\
 
 
-#define API_ELEMENT_NEOFETCH apiElement( API_ELEMENT_NEOFETCH_NAME, API_ELEMENT_NEOFETCH_DESCRIPTION, commander_neofetch_func )
+#define SYSTEM_COMMAND_NEOFETCH systemCommand( SYSTEM_COMMAND_NEOFETCH_NAME, SYSTEM_COMMAND_NEOFETCH_DESCRIPTION, commander_neofetch_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_NEOFETCH( element ) apiElement_P( element, API_ELEMENT_NEOFETCH_NAME, API_ELEMENT_NEOFETCH_DESCRIPTION, commander_neofetch_func )
+  #define SYSTEM_COMMAND_P_NEOFETCH( element ) systemCommand_P( element, SYSTEM_COMMAND_NEOFETCH_NAME, SYSTEM_COMMAND_NEOFETCH_DESCRIPTION, commander_neofetch_func )
 #endif
 /// Premade function for neofetch command.
 /// @param args Pointer to the argument string.
@@ -166,53 +166,53 @@ bool commander_uptime_func( char *args, Stream *response, void* parent );
 bool commander_neofetch_func( char *args, Stream *response, void* parent );
 
 //-------- Digital I-O functions --------//
-#define API_ELEMENT_PINMODE_NAME		"pinMode"
+#define SYSTEM_COMMAND_PINMODE_NAME		"pinMode"
 
-#define API_ELEMENT_PINMODE_DESCRIPTION	"Set the direction of a pin.\r\n\r\n"		\
+#define SYSTEM_COMMAND_PINMODE_DESCRIPTION	"Set the direction of a pin.\r\n\r\n"		\
                                         "usage: pinMode [options]\r\n"				\
                                         "Options:\r\n"								\
                                         "  -p, --pin\t[int] Pin identifier.\r\n"	\
                                         "  -o, --output\tSet mode to output.\r\n"	\
                                         "  -i, --input\tSet mode to input.\r\n"
 
-#define API_ELEMENT_PINMODE apiElement( API_ELEMENT_PINMODE_NAME, API_ELEMENT_PINMODE_DESCRIPTION, commander_pinMode_func )
+#define SYSTEM_COMMAND_PINMODE systemCommand( SYSTEM_COMMAND_PINMODE_NAME, SYSTEM_COMMAND_PINMODE_DESCRIPTION, commander_pinMode_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_PINMODE( element ) apiElement_P( element, API_ELEMENT_PINMODE_NAME, API_ELEMENT_PINMODE_DESCRIPTION, commander_pinMode_func )
+  #define SYSTEM_COMMAND_P_PINMODE( element ) systemCommand_P( element, SYSTEM_COMMAND_PINMODE_NAME, SYSTEM_COMMAND_PINMODE_DESCRIPTION, commander_pinMode_func )
 #endif
 /// Premade function for pinMode command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
 bool commander_pinMode_func( char *args, Stream *response, void* parent );
 
-#define API_ELEMENT_DIGITALWRITE_NAME			"digitalWrite"
+#define SYSTEM_COMMAND_DIGITALWRITE_NAME			"digitalWrite"
 
-#define API_ELEMENT_DIGITALWRITE_DESCRIPTION	"Set the state of an output pin.\r\n\r\n"			\
+#define SYSTEM_COMMAND_DIGITALWRITE_DESCRIPTION	"Set the state of an output pin.\r\n\r\n"			\
                                         		"usage: digitalWrite [options]\r\n"					\
                                         		"Options:\r\n"										\
                                         		"  -p, --pin\t[int] Pin identifier.\r\n"			\
                                         		"  -h, --high\tSet output mode to logic high.\r\n"	\
                                         		"  -l, --low\tSet output mode to logic high.\r\n"
 
-#define API_ELEMENT_DIGITALWRITE apiElement( API_ELEMENT_DIGITALWRITE_NAME, API_ELEMENT_DIGITALWRITE_DESCRIPTION, commander_digitalWrite_func )
+#define SYSTEM_COMMAND_DIGITALWRITE systemCommand( SYSTEM_COMMAND_DIGITALWRITE_NAME, SYSTEM_COMMAND_DIGITALWRITE_DESCRIPTION, commander_digitalWrite_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_DIGITALWRITE( element ) apiElement_P( element, API_ELEMENT_DIGITALWRITE_NAME, API_ELEMENT_DIGITALWRITE_DESCRIPTION, commander_digitalWrite_func )
+  #define SYSTEM_COMMAND_P_DIGITALWRITE( element ) systemCommand_P( element, SYSTEM_COMMAND_DIGITALWRITE_NAME, SYSTEM_COMMAND_DIGITALWRITE_DESCRIPTION, commander_digitalWrite_func )
 #endif
 /// Premade function for digitalWrite command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
 bool commander_digitalWrite_func( char *args, Stream *response, void* parent );
 
-#define API_ELEMENT_DIGITALREAD_NAME			"digitalRead"
+#define SYSTEM_COMMAND_DIGITALREAD_NAME			"digitalRead"
 
-#define API_ELEMENT_DIGITALREAD_DESCRIPTION		"Read the state of a pin.\r\n\r\n"							\
+#define SYSTEM_COMMAND_DIGITALREAD_DESCRIPTION		"Read the state of a pin.\r\n\r\n"							\
                                         		"usage: digitalRead [options]\r\n"							\
                                         		"Options:\r\n"												\
                                         		"  -p, --pin\t[int] Pin identifier.\r\n"					\
                                         		"  -t, --text\tSet return format to text[ LOW, HIGH ].\r\n"
 
-#define API_ELEMENT_DIGITALREAD apiElement( API_ELEMENT_DIGITALREAD_NAME, API_ELEMENT_DIGITALREAD_DESCRIPTION, commander_digitalRead_func )
+#define SYSTEM_COMMAND_DIGITALREAD systemCommand( SYSTEM_COMMAND_DIGITALREAD_NAME, SYSTEM_COMMAND_DIGITALREAD_DESCRIPTION, commander_digitalRead_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_DIGITALREAD( element ) apiElement_P( element, API_ELEMENT_DIGITALREAD_NAME, API_ELEMENT_DIGITALREAD_DESCRIPTION, commander_digitalRead_func )
+  #define SYSTEM_COMMAND_P_DIGITALREAD( element ) systemCommand_P( element, SYSTEM_COMMAND_DIGITALREAD_NAME, SYSTEM_COMMAND_DIGITALREAD_DESCRIPTION, commander_digitalRead_func )
 #endif
 /// Premade function for digitalRead command.
 /// @param args Pointer to the argument string.
@@ -220,16 +220,16 @@ bool commander_digitalWrite_func( char *args, Stream *response, void* parent );
 bool commander_digitalRead_func( char *args, Stream *response, void* parent );
 
 //-------- analogRead functions --------//
-#define API_ELEMENT_ANALOGREAD_NAME				"analogRead"
+#define SYSTEM_COMMAND_ANALOGREAD_NAME				"analogRead"
 
-#define API_ELEMENT_ANALOGREAD_DESCRIPTION		"Reads the value from the specified analog pin.\r\n\r\n"			\
+#define SYSTEM_COMMAND_ANALOGREAD_DESCRIPTION		"Reads the value from the specified analog pin.\r\n\r\n"			\
                                         		"usage: analogRead [options]\r\n"									\
                                         		"Options:\r\n"														\
                                         		"  -p, --pin\t[int] Pin identifier( A0 -> 0, A5 -> 5... )."
 
-#define API_ELEMENT_ANALOGREAD apiElement( API_ELEMENT_ANALOGREAD_NAME, API_ELEMENT_ANALOGREAD_DESCRIPTION, commander_analogRead_func )
+#define SYSTEM_COMMAND_ANALOGREAD systemCommand( SYSTEM_COMMAND_ANALOGREAD_NAME, SYSTEM_COMMAND_ANALOGREAD_DESCRIPTION, commander_analogRead_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_ANALOGREAD( element ) apiElement_P( element, API_ELEMENT_ANALOGREAD_NAME, API_ELEMENT_ANALOGREAD_DESCRIPTION, commander_analogRead_func )
+  #define SYSTEM_COMMAND_P_ANALOGREAD( element ) systemCommand_P( element, SYSTEM_COMMAND_ANALOGREAD_NAME, SYSTEM_COMMAND_ANALOGREAD_DESCRIPTION, commander_analogRead_func )
 #endif
 /// Premade function for analogRead command.
 /// @param args Pointer to the argument string.
@@ -237,18 +237,18 @@ bool commander_digitalRead_func( char *args, Stream *response, void* parent );
 bool commander_analogRead_func( char *args, Stream *response, void* parent );
 
 //-------- analogWrite functions --------//
-#define API_ELEMENT_ANALOGWRITE_NAME			"analogWrite"
+#define SYSTEM_COMMAND_ANALOGWRITE_NAME			"analogWrite"
 
-#define API_ELEMENT_ANALOGWRITE_DESCRIPTION		"Writes an analog value (PWM wave) to a pin.\r\n\r\n"	\
+#define SYSTEM_COMMAND_ANALOGWRITE_DESCRIPTION		"Writes an analog value (PWM wave) to a pin.\r\n\r\n"	\
                                         		"usage: analogWrite [options]\r\n"						\
                                         		"Options:\r\n"											\
                                         		"  -p, --pin\t[int] Pin identifier."					\
                                         		"  -d, --duty\t[int] Duty cycle[ 0 - 255 ]."			\
 												"  -v, --value\t[int] Value in percentage[ 0 - 100 ]."
 
-#define API_ELEMENT_ANALOGWRITE apiElement( API_ELEMENT_ANALOGWRITE_NAME, API_ELEMENT_ANALOGWRITE_DESCRIPTION, commander_analogWrite_func )
+#define SYSTEM_COMMAND_ANALOGWRITE systemCommand( SYSTEM_COMMAND_ANALOGWRITE_NAME, SYSTEM_COMMAND_ANALOGWRITE_DESCRIPTION, commander_analogWrite_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_ANALOGWRITE( element ) apiElement_P( element, API_ELEMENT_ANALOGWRITE_NAME, API_ELEMENT_ANALOGWRITE_DESCRIPTION, commander_analogWrite_func )
+  #define SYSTEM_COMMAND_P_ANALOGWRITE( element ) systemCommand_P( element, SYSTEM_COMMAND_ANALOGWRITE_NAME, SYSTEM_COMMAND_ANALOGWRITE_DESCRIPTION, commander_analogWrite_func )
 #endif
 /// Premade function for analogRead command.
 /// @param args Pointer to the argument string.
@@ -259,19 +259,19 @@ bool commander_analogWrite_func( char *args, Stream *response, void* parent );
 
 #if defined( ESP32 ) || ( ESP8266 )
 
-#define API_ELEMENT_IPCONFIG apiElement( "ipconfig", "Print network information.", commander_ipconfig_func )
+#define SYSTEM_COMMAND_IPCONFIG systemCommand( "ipconfig", "Print network information.", commander_ipconfig_func )
 /// Premade function for ipconfig command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
 void commander_ipconfig_func( char *args, Stream *response, void* parent );
 
-#define API_ELEMENT_WIFISTAT apiElement( "wifiStat", "Print WiFi information.", commander_wifiStat_func )
+#define SYSTEM_COMMAND_WIFISTAT systemCommand( "wifiStat", "Print WiFi information.", commander_wifiStat_func )
 /// Premade function for wifiStat command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
 void commander_wifiStat_func( char *args, Stream *response, void* parent );
 
-#define API_ELEMENT_WIFISCAN apiElement( "wifiScan", "Search for available networks around.", commander_wifiScan_func )
+#define SYSTEM_COMMAND_WIFISCAN systemCommand( "wifiScan", "Search for available networks around.", commander_wifiScan_func )
 /// Premade function for wifiScan command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
@@ -281,13 +281,13 @@ void commander_wifiScan_func( char *args, Stream *response, void* parent );
 
 #ifdef ESP32
 
-#define API_ELEMENT_CONFIGTIME apiElement( "configTime", "Configure NTP time settings.\r\n\tExample: configTime [ GMT Offset Sec ] [ DL Offset Sec ] [ Server ]\r\n\t[ GMT Offset Sec ] - UTC offset for your timezone in seconds.\r\n\t[ GMT Offset Sec ] - Daylight offset in sec.\r\n\t[ Server ] - NTP Server Address( optional, default: pool.ntp.org )", commander_configTime_func )
+#define SYSTEM_COMMAND_CONFIGTIME systemCommand( "configTime", "Configure NTP time settings.\r\n\tExample: configTime [ GMT Offset Sec ] [ DL Offset Sec ] [ Server ]\r\n\t[ GMT Offset Sec ] - UTC offset for your timezone in seconds.\r\n\t[ GMT Offset Sec ] - Daylight offset in sec.\r\n\t[ Server ] - NTP Server Address( optional, default: pool.ntp.org )", commander_configTime_func )
 /// Premade function for wifiScan command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
 void commander_configTime_func( char *args, Stream *response, void* parent );
 
-#define API_ELEMENT_DATETIME apiElement( "dateTime", "Returns the NTP synchronised date and time.", commander_dateTime_func )
+#define SYSTEM_COMMAND_DATETIME systemCommand( "dateTime", "Returns the NTP synchronised date and time.", commander_dateTime_func )
 /// Premade function for wifiScan command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
@@ -296,9 +296,9 @@ void commander_dateTime_func( char *args, Stream *response, void* parent );
 #endif
 
 //-------- sin function --------//
-#define API_ELEMENT_SIN_NAME			"sin"
+#define SYSTEM_COMMAND_SIN_NAME			"sin"
 
-#define API_ELEMENT_SIN_DESCRIPTION		"Sine function.\r\n\r\n"	                                            \
+#define SYSTEM_COMMAND_SIN_DESCRIPTION		"Sine function.\r\n\r\n"	                                            \
                                         "usage: sin [options]\r\n"						                        \
                                         "Options:\r\n"									                        \
                                         "  -d, --deg\t[float] Input angle in degrees.\r\n"                      \
@@ -307,9 +307,9 @@ void commander_dateTime_func( char *args, Stream *response, void* parent );
                                         "\t\t[ optional, 2 digits by default. ]."
                                         
 
-#define API_ELEMENT_SIN apiElement( API_ELEMENT_SIN_NAME, API_ELEMENT_SIN_DESCRIPTION, commander_sin_func )
+#define SYSTEM_COMMAND_SIN systemCommand( SYSTEM_COMMAND_SIN_NAME, SYSTEM_COMMAND_SIN_DESCRIPTION, commander_sin_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_SIN( element ) apiElement_P( element, API_ELEMENT_SIN_NAME, API_ELEMENT_SIN_DESCRIPTION, commander_sin_func )
+  #define SYSTEM_COMMAND_P_SIN( element ) systemCommand_P( element, SYSTEM_COMMAND_SIN_NAME, SYSTEM_COMMAND_SIN_DESCRIPTION, commander_sin_func )
 #endif
 /// Premade function for sin command.
 /// @param args Pointer to the argument string.
@@ -317,9 +317,9 @@ void commander_dateTime_func( char *args, Stream *response, void* parent );
 bool commander_sin_func( char *args, Stream *response, void* parent );
 
 //-------- sin function --------//
-#define API_ELEMENT_COS_NAME			"cos"
+#define SYSTEM_COMMAND_COS_NAME			"cos"
 
-#define API_ELEMENT_COS_DESCRIPTION		"Cosine function.\r\n\r\n"	                                            \
+#define SYSTEM_COMMAND_COS_DESCRIPTION		"Cosine function.\r\n\r\n"	                                            \
                                         "usage: cos [options]\r\n"						                        \
                                         "Options:\r\n"									                        \
                                         "  -d, --deg\t[float] Input angle in degrees.\r\n"                      \
@@ -328,9 +328,9 @@ bool commander_sin_func( char *args, Stream *response, void* parent );
                                         "\t\t[ optional, 2 digits by default. ]."
                                         
 
-#define API_ELEMENT_COS apiElement( API_ELEMENT_COS_NAME, API_ELEMENT_COS_DESCRIPTION, commander_cos_func )
+#define SYSTEM_COMMAND_COS systemCommand( SYSTEM_COMMAND_COS_NAME, SYSTEM_COMMAND_COS_DESCRIPTION, commander_cos_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_COS( element ) apiElement_P( element, API_ELEMENT_COS_NAME, API_ELEMENT_COS_DESCRIPTION, commander_cos_func )
+  #define SYSTEM_COMMAND_P_COS( element ) systemCommand_P( element, SYSTEM_COMMAND_COS_NAME, SYSTEM_COMMAND_COS_DESCRIPTION, commander_cos_func )
 #endif
 /// Premade function for cos command.
 /// @param args Pointer to the argument string.
@@ -338,17 +338,17 @@ bool commander_sin_func( char *args, Stream *response, void* parent );
 bool commander_cos_func( char *args, Stream *response, void* parent );
 
 //-------- abs function --------//
-#define API_ELEMENT_ABS_NAME			"abs"
+#define SYSTEM_COMMAND_ABS_NAME			"abs"
 
-#define API_ELEMENT_ABS_DESCRIPTION		"Calculates the absolute value of a number.\r\n\r\n"                    \
+#define SYSTEM_COMMAND_ABS_DESCRIPTION		"Calculates the absolute value of a number.\r\n\r\n"                    \
                                         "usage: abs [float][options]\r\n"                                       \
                                         "Options:\r\n"									                        \
 										"  -p, --places\t[int] The number of decimal places can be defined\r\n" \
                                         "\t\t[ optional, 2 digits by default. ]."
 
-#define API_ELEMENT_ABS apiElement( API_ELEMENT_ABS_NAME, API_ELEMENT_ABS_DESCRIPTION, commander_abs_func )
+#define SYSTEM_COMMAND_ABS systemCommand( SYSTEM_COMMAND_ABS_NAME, SYSTEM_COMMAND_ABS_DESCRIPTION, commander_abs_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_ABS( element ) apiElement_P( element, API_ELEMENT_ABS_NAME, API_ELEMENT_ABS_DESCRIPTION, commander_abs_func )
+  #define SYSTEM_COMMAND_P_ABS( element ) systemCommand_P( element, SYSTEM_COMMAND_ABS_NAME, SYSTEM_COMMAND_ABS_DESCRIPTION, commander_abs_func )
 #endif
 /// Premade function for abs command.
 /// @param args Pointer to the argument string.
@@ -356,18 +356,18 @@ bool commander_cos_func( char *args, Stream *response, void* parent );
 bool commander_abs_func( char *args, Stream *response, void* parent );
 
 //-------- random function --------//
-#define API_ELEMENT_RANDOM_NAME         "random"
+#define SYSTEM_COMMAND_RANDOM_NAME         "random"
 
-#define API_ELEMENT_RANDOM_DESCRIPTION  "Generates a random number.\r\n\r\n"                       \
+#define SYSTEM_COMMAND_RANDOM_DESCRIPTION  "Generates a random number.\r\n\r\n"                       \
                                         "usage: random [options]\r\n"                              \
                                         "Options:\r\n"									           \
 										"  -u, --upper\t[int] Upper bound of the random value\r\n" \
 										"  -l, --lower\t[int] Lower bound of the random value\r\n" \
                                         "\t\t[ optional, 0 default. ]."
 
-#define API_ELEMENT_RANDOM apiElement( API_ELEMENT_RANDOM_NAME, API_ELEMENT_RANDOM_DESCRIPTION, commander_random_func )
+#define SYSTEM_COMMAND_RANDOM systemCommand( SYSTEM_COMMAND_RANDOM_NAME, SYSTEM_COMMAND_RANDOM_DESCRIPTION, commander_random_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_RANDOM( element ) apiElement_P( element, API_ELEMENT_RANDOM_NAME, API_ELEMENT_RANDOM_DESCRIPTION, commander_random_func )
+  #define SYSTEM_COMMAND_P_RANDOM( element ) systemCommand_P( element, SYSTEM_COMMAND_RANDOM_NAME, SYSTEM_COMMAND_RANDOM_DESCRIPTION, commander_random_func )
 #endif
 /// Premade function for random command.
 /// @param args Pointer to the argument string.
@@ -375,14 +375,14 @@ bool commander_abs_func( char *args, Stream *response, void* parent );
 bool commander_random_func( char *args, Stream *response, void* parent );
 
 //-------- not function --------//
-#define API_ELEMENT_NOT_NAME            "not"
+#define SYSTEM_COMMAND_NOT_NAME            "not"
 
-#define API_ELEMENT_NOT_DESCRIPTION     "If the input is 0, it will return 1. Any other cases, it will return 0.\r\n\r\n"   \
+#define SYSTEM_COMMAND_NOT_DESCRIPTION     "If the input is 0, it will return 1. Any other cases, it will return 0.\r\n\r\n"   \
                                         "usage: not [int]"
 
-#define API_ELEMENT_NOT apiElement( API_ELEMENT_NOT_NAME, API_ELEMENT_NOT_DESCRIPTION, commander_not_func )
+#define SYSTEM_COMMAND_NOT systemCommand( SYSTEM_COMMAND_NOT_NAME, SYSTEM_COMMAND_NOT_DESCRIPTION, commander_not_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_NOT( element ) apiElement_P( element, API_ELEMENT_NOT_NAME, API_ELEMENT_NOT_DESCRIPTION, commander_not_func )
+  #define SYSTEM_COMMAND_P_NOT( element ) systemCommand_P( element, SYSTEM_COMMAND_NOT_NAME, SYSTEM_COMMAND_NOT_DESCRIPTION, commander_not_func )
 #endif
 /// Premade function for not command.
 /// @param args Pointer to the argument string.
@@ -392,16 +392,16 @@ bool commander_not_func( char *args, Stream *response, void* parent );
 
 
 //-------- exportTarget function --------//
-#define API_ELEMENT_EXPORT_TARGET_NAME          "exportTarget"
+#define SYSTEM_COMMAND_EXPORT_TARGET_NAME          "exportTarget"
 
-#define API_ELEMENT_EXPORT_TARGET_DESCRIPTION   "You can get or set the target of the export command.\r\n\r\n"                          \
+#define SYSTEM_COMMAND_EXPORT_TARGET_DESCRIPTION   "You can get or set the target of the export command.\r\n\r\n"                          \
                                                 "usage: selectExport [target]\r\n\r\n"                                                  \
                                                 "target: The target has to be an integer, or a float system variable.\r\n"              \
                                                 "\t If target is not defined, the command will print the name of the current target."
 
-#define API_ELEMENT_EXPORT_TARGET apiElement( API_ELEMENT_EXPORT_TARGET_NAME, API_ELEMENT_EXPORT_TARGET_DESCRIPTION, commander_exportTarget_func )
+#define SYSTEM_COMMAND_EXPORT_TARGET systemCommand( SYSTEM_COMMAND_EXPORT_TARGET_NAME, SYSTEM_COMMAND_EXPORT_TARGET_DESCRIPTION, commander_exportTarget_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_EXPORT_TARGET( element ) apiElement_P( element, API_ELEMENT_EXPORT_TARGET_NAME, API_ELEMENT_EXPORT_TARGET_DESCRIPTION, commander_exportTarget_func )
+  #define SYSTEM_COMMAND_P_EXPORT_TARGET( element ) systemCommand_P( element, SYSTEM_COMMAND_EXPORT_TARGET_NAME, SYSTEM_COMMAND_EXPORT_TARGET_DESCRIPTION, commander_exportTarget_func )
 #endif
 /// Premade function for not command.
 /// @param args Pointer to the argument string.
@@ -409,15 +409,15 @@ bool commander_not_func( char *args, Stream *response, void* parent );
 bool commander_exportTarget_func( char *args, Stream *response, void* parent );
 
 //-------- export function --------//
-#define API_ELEMENT_EXPORT_NAME         "export"
+#define SYSTEM_COMMAND_EXPORT_NAME         "export"
 
-#define API_ELEMENT_EXPORT_DESCRIPTION  "It will write the given value to the selected export target.\r\n\r\n"  \
+#define SYSTEM_COMMAND_EXPORT_DESCRIPTION  "It will write the given value to the selected export target.\r\n\r\n"  \
                                         "usage: export [value]\r\n\r\n"                                         \
                                         "value: The value has to be an integer, or a float."
 
-#define API_ELEMENT_EXPORT apiElement( API_ELEMENT_EXPORT_NAME, API_ELEMENT_EXPORT_DESCRIPTION, commander_export_func )
+#define SYSTEM_COMMAND_EXPORT systemCommand( SYSTEM_COMMAND_EXPORT_NAME, SYSTEM_COMMAND_EXPORT_DESCRIPTION, commander_export_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_EXPORT( element ) apiElement_P( element, API_ELEMENT_EXPORT_NAME, API_ELEMENT_EXPORT_DESCRIPTION, commander_export_func )
+  #define SYSTEM_COMMAND_P_EXPORT( element ) systemCommand_P( element, SYSTEM_COMMAND_EXPORT_NAME, SYSTEM_COMMAND_EXPORT_DESCRIPTION, commander_export_func )
 #endif
 /// Premade function for not command.
 /// @param args Pointer to the argument string.
@@ -425,9 +425,9 @@ bool commander_exportTarget_func( char *args, Stream *response, void* parent );
 bool commander_export_func( char *args, Stream *response, void* parent );
 
 //-------- export function --------//
-#define API_ELEMENT_MEMDUMP_NAME         "memDump"
+#define SYSTEM_COMMAND_MEMDUMP_NAME         "memDump"
 
-#define API_ELEMENT_MEMDUMP_DESCRIPTION     "It is a tool to check data in the memory.\r\n\r\n"                     \
+#define SYSTEM_COMMAND_MEMDUMP_DESCRIPTION     "It is a tool to check data in the memory.\r\n\r\n"                     \
                                             "usage: memDump [base address][type][options]\r\n\r\n"                  \
                                             "base address: This is the start address of the memory region.\r\n"     \
                                             "type: Type of the data in the specified address. Valid options:\r\n"   \
@@ -446,9 +446,9 @@ bool commander_export_func( char *args, Stream *response, void* parent );
                                             "Example, print 10 bytes of data from address 0x00FF:\r\n"              \
 										    "  memDump 0x00FF u8 -h -n 10"
 
-#define API_ELEMENT_MEMDUMP apiElement( API_ELEMENT_MEMDUMP_NAME, API_ELEMENT_MEMDUMP_DESCRIPTION, commander_memDump_func )
+#define SYSTEM_COMMAND_MEMDUMP systemCommand( SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_DESCRIPTION, commander_memDump_func )
 #ifdef __AVR__
-  #define API_ELEMENT_P_MEMDUMP( element ) apiElement_P( element, API_ELEMENT_MEMDUMP_NAME, API_ELEMENT_MEMDUMP_DESCRIPTION, commander_memDump_func )
+  #define SYSTEM_COMMAND_P_MEMDUMP( element ) systemCommand_P( element, SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_DESCRIPTION, commander_memDump_func )
 #endif
 /// Premade function for not command.
 /// @param args Pointer to the argument string.
