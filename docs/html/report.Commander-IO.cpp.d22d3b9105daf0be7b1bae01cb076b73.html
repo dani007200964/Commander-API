@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2023-09-16 16:37:04</td>
+      <td>2023-09-21 17:41:59</td>
     </tr>
   </table>
 </div>
@@ -42,7 +42,7 @@
     <tr>
       <th scope="row">Lines:</th>
       <td>0</td>
-      <td>33</td>
+      <td>31</td>
       <td class="coverage-none">0.0%</td>
     </tr>
     <tr>
@@ -54,7 +54,7 @@
     <tr>
       <th scope="row">Branches:</th>
       <td>0</td>
-      <td>16</td>
+      <td>14</td>
       <td class="coverage-none">0.0%</td>
     </tr>
   </table>
@@ -86,57 +86,57 @@
     </tr>
     <tr>
       <td>
-        <a href="#l81">commanderPipeChannel::flush()</a>
+        <a href="#l70">commanderPipeChannel::flush()</a>
       </td>
       <td>
-        <a href="#l81">81</a>
+        <a href="#l70">70</a>
       </td>
       <td>
-        <a href="#l81"> not called</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="#l86">commanderPipeChannel::peek()</a>
-      </td>
-      <td>
-        <a href="#l86">86</a>
-      </td>
-      <td>
-        <a href="#l86"> not called</a>
+        <a href="#l70"> not called</a>
       </td>
     </tr>
     <tr>
       <td>
-        <a href="#l55">commanderPipeChannel::read()</a>
+        <a href="#l75">commanderPipeChannel::peek()</a>
       </td>
       <td>
-        <a href="#l55">55</a>
+        <a href="#l75">75</a>
       </td>
       <td>
-        <a href="#l55"> not called</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="#l114">commanderPipeChannel::write(unsigned char const*, unsigned long long)</a>
-      </td>
-      <td>
-        <a href="#l114">114</a>
-      </td>
-      <td>
-        <a href="#l114"> not called</a>
+        <a href="#l75"> not called</a>
       </td>
     </tr>
     <tr>
       <td>
-        <a href="#l102">commanderPipeChannel::write(unsigned char)</a>
+        <a href="#l47">commanderPipeChannel::read()</a>
       </td>
       <td>
-        <a href="#l102">102</a>
+        <a href="#l47">47</a>
       </td>
       <td>
-        <a href="#l102"> not called</a>
+        <a href="#l47"> not called</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="#l98">commanderPipeChannel::write(unsigned char const*, unsigned long long)</a>
+      </td>
+      <td>
+        <a href="#l98">98</a>
+      </td>
+      <td>
+        <a href="#l98"> not called</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="#l85">commanderPipeChannel::write(unsigned char)</a>
+      </td>
+      <td>
+        <a href="#l85">85</a>
+      </td>
+      <td>
+        <a href="#l85"> not called</a>
       </td>
     </tr>
   </table>
@@ -452,21 +452,21 @@
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">	</span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="p">){</span></td>
+      <td class="src uncoveredLine"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">readPointer</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l44" href="#l44">44</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">readPointer</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l45" href="#l45">45</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="p">}</span></td>
+      <td class="src "><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l46" href="#l46">46</a></td>
@@ -479,8 +479,8 @@
       <td class="lineno"><a id="l47" href="#l47">47</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="k">else</span><span class="p">{</span></td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="kt">int</span><span class="w"> </span><span class="nf">commanderPipeChannel::read</span><span class="p">(){</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l48" href="#l48">48</a></td>
@@ -493,8 +493,8 @@
       <td class="lineno"><a id="l49" href="#l49">49</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">COMMANDER_MAX_COMMAND_SIZE</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">writePointer</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l50" href="#l50">50</a></td>
@@ -507,22 +507,22 @@
       <td class="lineno"><a id="l51" href="#l51">51</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="p">}</span></td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">	</span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="p">){</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l52" href="#l52">52</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l53" href="#l53">53</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="p">}</span></td>
+      <td class="src "><span class="w">	</span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l54" href="#l54">54</a></td>
@@ -535,50 +535,50 @@
       <td class="lineno"><a id="l55" href="#l55">55</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="kt">int</span><span class="w"> </span><span class="nf">commanderPipeChannel::read</span><span class="p">(){</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">	</span><span class="k">else</span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l56" href="#l56">56</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">		</span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">COMMANDER_MAX_COMMAND_SIZE</span><span class="w"> </span><span class="p">){</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l57" href="#l57">57</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span></td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l58" href="#l58">58</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="src "><span class="w">		</span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l59" href="#l59">59</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">	</span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="p">){</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l60" href="#l60">60</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
+      <td class="lineno"><a id="l60" href="#l60">60</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">		</span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="n">buffer</span><span class="p">[</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="p">];</span></td>
+    </tr>
+    <tr class="source-line">
       <td class="lineno"><a id="l61" href="#l61">61</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span></td>
+      <td class="src uncoveredLine"><span class="w">		</span><span class="n">readPointer</span><span class="o">++</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l62" href="#l62">62</a></td>
@@ -605,8 +605,8 @@
       <td class="lineno"><a id="l65" href="#l65">65</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="k">else</span><span class="p">{</span></td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l66" href="#l66">66</a></td>
@@ -619,183 +619,183 @@
       <td class="lineno"><a id="l67" href="#l67">67</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="n">buffer</span><span class="p">[</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="p">];</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l68" href="#l68">68</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="n">readPointer</span><span class="o">++</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l69" href="#l69">69</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="src "><span class="c1">/// Flush the channel.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l70" href="#l70">70</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">COMMANDER_MAX_COMMAND_SIZE</span><span class="w"> </span><span class="p">){</span></td>
+      <td class="src uncoveredLine"><span class="kt">void</span><span class="w"> </span><span class="nf">commanderPipeChannel::flush</span><span class="p">(){</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l71" href="#l71">71</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">			</span><span class="n">readPointer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">	</span><span class="c1">// Honestly I don&#39;t know what to do.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l72" href="#l72">72</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">		</span><span class="p">}</span></td>
+      <td class="src "><span class="w">	</span><span class="c1">// Arduino flush methods are weird.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l73" href="#l73">73</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l74" href="#l74">74</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="p">}</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l75" href="#l75">75</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l76" href="#l76">76</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l77" href="#l77">77</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l78" href="#l78">78</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="p">}</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l79" href="#l79">79</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l80" href="#l80">80</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="c1">/// Flush the channel.</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l81" href="#l81">81</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="kt">void</span><span class="w"> </span><span class="nf">commanderPipeChannel::flush</span><span class="p">(){</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l82" href="#l82">82</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="c1">// Hinestly I don&#39;t know what to do.</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l83" href="#l83">83</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="c1">// Arduino flush methods are wierd.</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l84" href="#l84">84</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
       <td class="src uncoveredLine"><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l85" href="#l85">85</a></td>
+      <td class="lineno"><a id="l74" href="#l74">74</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l86" href="#l86">86</a></td>
+      <td class="lineno"><a id="l75" href="#l75">75</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
       <td class="src uncoveredLine"><span class="kt">int</span><span class="w"> </span><span class="nf">commanderPipeChannel::peek</span><span class="p">(){</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l87" href="#l87">87</a></td>
+      <td class="lineno"><a id="l76" href="#l76">76</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l88" href="#l88">88</a></td>
+      <td class="lineno"><a id="l77" href="#l77">77</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
       <td class="src uncoveredLine"><span class="w">	</span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="p">){</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l89" href="#l89">89</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l90" href="#l90">90</a></td>
+      <td class="lineno"><a id="l78" href="#l78">78</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
       <td class="src uncoveredLine"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l91" href="#l91">91</a></td>
+      <td class="lineno"><a id="l79" href="#l79">79</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">	</span><span class="p">}</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l80" href="#l80">80</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l92" href="#l92">92</a></td>
+      <td class="lineno"><a id="l81" href="#l81">81</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="n">buffer</span><span class="p">[</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="p">];</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l82" href="#l82">82</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="p">}</span></td>
+      <td class="src "></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l83" href="#l83">83</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="p">}</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l84" href="#l84">84</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l85" href="#l85">85</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="kt">size_t</span><span class="w"> </span><span class="nf">commanderPipeChannel::write</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">){</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l86" href="#l86">86</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l87" href="#l87">87</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">COMMANDER_MAX_COMMAND_SIZE</span><span class="w"> </span><span class="p">){</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l88" href="#l88">88</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l89" href="#l89">89</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">    </span><span class="p">}</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l90" href="#l90">90</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l91" href="#l91">91</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">    </span><span class="n">buffer</span><span class="p">[</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">;</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l92" href="#l92">92</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">    </span><span class="n">writePointer</span><span class="o">++</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l93" href="#l93">93</a></td>
@@ -808,8 +808,8 @@
       <td class="lineno"><a id="l94" href="#l94">94</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="k">else</span><span class="p">{</span></td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l95" href="#l95">95</a></td>
@@ -822,8 +822,8 @@
       <td class="lineno"><a id="l96" href="#l96">96</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="n">buffer</span><span class="p">[</span><span class="w"> </span><span class="n">readPointer</span><span class="w"> </span><span class="p">];</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l97" href="#l97">97</a></td>
@@ -836,8 +836,8 @@
       <td class="lineno"><a id="l98" href="#l98">98</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="p">}</span></td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="kt">size_t</span><span class="w"> </span><span class="nf">commanderPipeChannel::write</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">){</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l99" href="#l99">99</a></td>
@@ -851,7 +851,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="p">}</span></td>
+      <td class="src "><span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l101" href="#l101">101</a></td>
@@ -865,7 +865,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="kt">size_t</span><span class="w"> </span><span class="nf">commanderPipeChannel::write</span><span class="p">(</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">){</span></td>
+      <td class="src uncoveredLine"><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">){</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l103" href="#l103">103</a></td>
@@ -879,192 +879,87 @@
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">  </span><span class="n">buffer</span><span class="p">[</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">;</span></td>
+      <td class="src uncoveredLine"><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">COMMANDER_MAX_COMMAND_SIZE</span><span class="w"> </span><span class="p">){</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l105" href="#l105">105</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">	</span><span class="n">writePointer</span><span class="o">++</span><span class="p">;</span></td>
+      <td class="src uncoveredLine"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l106" href="#l106">106</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">	</span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">COMMANDER_MAX_COMMAND_SIZE</span><span class="w"> </span><span class="p">){</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">        </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l107" href="#l107">107</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="n">writePointer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l108" href="#l108">108</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="p">}</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l109" href="#l109">109</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l110" href="#l110">110</a></td>
+      <td class="lineno"><a id="l108" href="#l108">108</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span></td>
+      <td class="src uncoveredLine"><span class="w">        </span><span class="n">buffer</span><span class="p">[</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">];</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l109" href="#l109">109</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">        </span><span class="n">writePointer</span><span class="o">++</span><span class="p">;</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l110" href="#l110">110</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l111" href="#l111">111</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="src "><span class="w">    </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l112" href="#l112">112</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="p">}</span></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l113" href="#l113">113</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">size</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l114" href="#l114">114</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="kt">size_t</span><span class="w"> </span><span class="nf">commanderPipeChannel::write</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">){</span></td>
+      <td class="linecount "></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l115" href="#l115">115</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l116" href="#l116">116</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="p">;</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l117" href="#l117">117</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l118" href="#l118">118</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">	</span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">){</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l119" href="#l119">119</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l120" href="#l120">120</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="n">buffer</span><span class="p">[</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">];</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l121" href="#l121">121</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="n">writePointer</span><span class="o">++</span><span class="p">;</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l122" href="#l122">122</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">		</span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">writePointer</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">COMMANDER_MAX_COMMAND_SIZE</span><span class="w"> </span><span class="p">){</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l123" href="#l123">123</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">			</span><span class="n">writePointer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l124" href="#l124">124</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">		</span><span class="p">}</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l125" href="#l125">125</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l126" href="#l126">126</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">	</span><span class="p">}</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l127" href="#l127">127</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l128" href="#l128">128</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">size</span><span class="p">;</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l129" href="#l129">129</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l130" href="#l130">130</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
       <td class="src "><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l131" href="#l131">131</a></td>
+      <td class="lineno"><a id="l116" href="#l116">116</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>

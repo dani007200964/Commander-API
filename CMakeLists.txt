@@ -105,15 +105,30 @@ endif()
 if(RUN_TESTS)
 
     # Unit testing
+    # Every target has to be started with 'test_'
 
     # -- Commander-Database --
-    #add_executable( test_constructor ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_constructor.cpp )
-    #add_executable( test_debug ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_debug.cpp )
-    #add_executable( test_init ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_init.cpp )
-    #add_executable( test_search ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_search.cpp )
+    #add_executable( test_commander_database_constructor ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_constructor.cpp )
+    #add_executable( test_commander_database_debug ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_debug.cpp )
+    #add_executable( test_commander_database_init ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_init.cpp )
+    #add_executable( test_commander_database_search ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Database/test_search.cpp )
 
     # -- Commander-Arguments --
-    add_executable( test_search ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Arguments/test_constructor.cpp )
+    #add_executable( test_commander_arguments_constructor ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Arguments/test_constructor.cpp )
+    #add_executable( test_commander_arguments_find_functions ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Arguments/test_find_functions.cpp )
+    #add_executable( test_commander_arguments_parser_short_name ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Arguments/test_parser_short_name.cpp )
+    #add_executable( test_commander_arguments_parser_long_name ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Arguments/test_parser_long_name.cpp )
+
+    # -- Commander-IO --
+    #add_executable( test_commander_io_constructor ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-IO/test_constructor.cpp )
+    #add_executable( test_commander_io_write ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-IO/test_write.cpp )
+    #add_executable( test_commander_io_available ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-IO/test_available.cpp )
+    #add_executable( test_commander_io_read ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-IO/test_read.cpp )
+    #add_executable( test_commander_io_peek ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-IO/test_peek.cpp )
+
+    # -- Commander-Commands / Analog-IO-Commands --
+    #add_executable( test_commander_commands_analog_io_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Analog-IO-Commands/test_analog_io_commands.cpp )
+    add_executable( test_commander_commands_digital_io_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Digital-IO-Commands/test_digital_io_commands.cpp )
 
 endif()
 

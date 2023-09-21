@@ -35,6 +35,8 @@ SOFTWARE.
 
 // These commands only work inside the Arduino environment by default.
 #ifdef ARDUINO
+    #include "Arduino.h"
+#endif
 
 bool commander_pinMode_func( char *args, Stream *response, void* parent ){
 
@@ -64,11 +66,15 @@ bool commander_pinMode_func( char *args, Stream *response, void* parent ){
     }
 
     if( inputFlag.isFound() && !outputFlag.isFound() ){
-        pinMode( (int)pin, INPUT );
+        #ifdef ARDUINO
+            pinMode( (int)pin, INPUT );
+        #endif
     }
 
     else if( !inputFlag.isFound() && outputFlag.isFound() ){
-        pinMode( (int)pin, OUTPUT );
+        #ifdef ARDUINO
+            pinMode( (int)pin, OUTPUT );
+        #endif
     }
 
     else{
@@ -109,11 +115,15 @@ bool commander_digitalWrite_func( char *args, Stream *response, void* parent ){
     }
 
     if( lowFlag.isFound() && !highFlag.isFound() ){
-        digitalWrite( (int)pin, LOW );
+        #ifdef ARDUINO
+            digitalWrite( (int)pin, LOW );
+        #endif
     }
 
     else if( !lowFlag.isFound() && highFlag.isFound() ){
-        digitalWrite( (int)pin, HIGH );
+        #ifdef ARDUINO
+            digitalWrite( (int)pin, HIGH );
+        #endif
     }
 
     else{
@@ -151,7 +161,11 @@ bool commander_digitalRead_func( char *args, Stream *response, void* parent ){
         return false;
     }
 
-    state = digitalRead( (int)pin );
+    #ifdef ARDUINO
+        state = digitalRead( (int)pin );
+    #else
+        state = 0;
+    #endif
 
     if( txtFlag.isFound() ){
 
@@ -167,7 +181,3 @@ bool commander_digitalRead_func( char *args, Stream *response, void* parent ){
 
     return true;
 }
-
-#else
-
-#endif

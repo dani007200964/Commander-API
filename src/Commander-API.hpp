@@ -224,7 +224,7 @@ public:
 	enum systemVariableType_t{
 		VARIABLE_FLOAT,     ///< Used for float data.
 		VARIABLE_INT,       ///< Used for int data.
-		VARIABLES_STRING    ///< Used for string data.
+		VARIABLE_STRING    ///< Used for string data.
 	};
 
 	typedef union{
@@ -403,6 +403,9 @@ public:
     /// @param bufferSize The size of the buffer. I recommend at least 20 character long buffer.
     /// @param channel_p Pointer to a Stream object like Serial.
     void update( char* buffer, int bufferSize, Stream* channel_p );
+
+    // 2 decimal point.
+    static int floatToString( float number, char* buffer, int bufferSize );
 
 private:
 

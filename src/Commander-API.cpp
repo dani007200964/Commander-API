@@ -224,15 +224,11 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
                     // Check and handle overflow.
 					if( i < COMMANDER_MAX_COMMAND_SIZE ){
-
 						pipeArgBuffer[ i ] = pipeChannel -> read();
-
 					}
 
 					else{
-
 						pipeChannel -> read();
-
 					}
 
 					i++;
@@ -241,9 +237,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
                 // If the data fits in the buffer, terminate after the last valid data.
 				if( i < COMMANDER_MAX_COMMAND_SIZE ){
-
 					pipeArgBuffer[ i ] = '\0';
-
 				}
 
                 // Just in case terminate at the end of the pipe buffer.
@@ -436,10 +430,7 @@ bool Commander::execute( const char *cmd, Stream *resp, void* parent ){
 }
 
 void Commander::attachDebugChannel( Stream *resp ){
-
 	dbgResponse = resp;
-	debugLevel;
-
 }
 
 void Commander::setDebugLevel( Commander::debugLevel_t debugLevel_p ){
@@ -599,6 +590,11 @@ CommanderDatabase<Commander::systemVariableData_t> Commander::systemVariables = 
 void Commander::attachVariablesFunction( systemVariable_t* variables_p, uint32_t variables_size_p ){
 	systemVariables = CommanderDatabase<systemVariableData_t>( variables_p, variables_size_p );
     systemVariables.setDebugLevel( (CommanderDatabase<Commander::systemVariableData_t>::debugLevel_t)debugLevel );
+    
+    // Try to init the variables object.
+    if( !systemVariables.init() ){
+        systemVariables = CommanderDatabase<systemVariableData_t>();
+    }
 }
 
 Commander::systemVariable_t* Commander::getSystemVariable( const char* name ){
@@ -628,7 +624,7 @@ void Commander::printSystemVariable( Stream* channel_p, const char* name, int de
         case VARIABLE_INT:
             channel_p -> print( (int)*( var -> data.data.intData ) );
             break;
-        case VARIABLES_STRING:
+        case VARIABLE_STRING:
             channel_p -> print( (char*)( var -> data.data.strData ) );
             break;
         default:
@@ -669,7 +665,7 @@ void Commander::printSystemVariables( Stream* channel_p ){
     			channel_p -> print( __CONST_TXT__( ": int = " ) );
                 channel_p -> println( (int)*( var -> data.data.intData ) );
                 break;
-            case VARIABLES_STRING:
+            case VARIABLE_STRING:
     			channel_p -> print( __CONST_TXT__( ": str = " ) );
                 channel_p -> println( (char*)( var -> data.data.strData ) );
                 break;
@@ -700,7 +696,7 @@ bool Commander::inString( const char* source, int index ){
         return false;
     }
 
-    if( index >= strlen( source ) ){
+    if( index >= (int)strlen( source ) ){
         return false;
     }
 
@@ -784,4 +780,63 @@ void Commander::update( char* buffer, int bufferSize, Stream* channel_p ){
 
 }
 
+int Commander::floatToString( float number, char* buffer, int bufferSize ){
 
+    // Used to generate string from float.
+    bool negative = false;
+
+    // This variable is used to round the float value correctly.
+    float roundVal;
+
+    // This will hold the decimal part of the float number.
+    int decimalPart;
+
+    // This will hold the fraction part of the float number.
+    int fractionPart;
+
+    // Return status for snprintf;
+    int status;
+
+    if( bufferSize < 2 ){
+        return -1;
+    }
+
+    // Check if the number is negative.
+    // If it is, set the negative flag,
+    // and make it positive.
+    if( number < 0 ){
+        negative = true;
+        number = -number;
+    }
+
+    // Round the result correctly.
+    // For example 9.999 with precision of 2 will be printed as 10.00.
+    roundVal = 0.5f;
+    roundVal /= 100.0;
+    number += roundVal;
+
+    // Split the number to decimal and fraction parts
+    decimalPart = (int)number;
+    fractionPart = (int)( ( number - (float)decimalPart ) * 100.0f );
+
+    // If the number is negative, put a '-' character to the first element
+    // of the buffer and increment its position. Also decrement the buffer
+    // size, because we used the first position.
+    if( negative ){
+        buffer[ 0 ] = '-';
+        buffer++;
+        bufferSize--;
+    }
+    else{
+        status = snprintf( buffer, bufferSize, "%d.%0*d", decimalPart, 2, fractionPart );
+    }
+
+    // If we had to print a '-' character because a negative number,
+    // we had to increment the status, if the status is not 0 or negative.
+    if( ( status > 0 ) && negative ){
+        status++;
+    }
+
+    return status;
+
+}

@@ -69,6 +69,13 @@ rebuild = False
 install = False
 checkout = False
 
+# By default configure it for windows minGW makefiles
+cmakeCompiler = "MinGW"
+
+# Check if the system is Linux( tested on Ubuntu )
+if sys.platform.startswith( "linux" ):
+    cmakeCompiler = "Unix"
+
 # Process the arguments
 for opt, arg in opts:
 
@@ -158,7 +165,7 @@ if ( 'simulator' in target ) or ( 'all' in target ):
     print()
 
     # Create CMake structure
-    command = 'cmake .. -G "MinGW Makefiles" -DBUILD_SIMULATOR=ON'
+    command = 'cmake .. -G "' + cmakeCompiler + ' Makefiles" -DBUILD_SIMULATOR=ON'
     terminalProcess = subprocess.Popen( command, shell=True )
     terminalProcess.wait()
 
@@ -195,7 +202,7 @@ if ( 'examples' in target ) or ( 'all' in target ):
     print()
 
     # Create CMake structure
-    command = 'cmake .. -G "MinGW Makefiles" -DBUILD_EXAMPLES=ON'
+    command = 'cmake .. -G "' + cmakeCompiler + ' Makefiles" -DBUILD_EXAMPLES=ON'
     terminalProcess = subprocess.Popen( command, shell=True )
     terminalProcess.wait()
 
@@ -232,7 +239,7 @@ if ( 'web' in target ) or ( 'all' in target ):
     print()
 
     # Create CMake structure
-    command = 'emcmake cmake .. -G "MinGW Makefiles" -DBUILD_WEBASSEMBLY=ON'
+    command = 'emcmake cmake .. -G "' + cmakeCompiler +' Makefiles" -DBUILD_WEBASSEMBLY=ON'
     terminalProcess = subprocess.Popen( command, shell=True )
     terminalProcess.wait()
 
@@ -308,7 +315,7 @@ if ( 'test' in target ) or ( 'all' in target ):
     print()
 
     # Create CMake structure
-    command = 'cmake .. -G "MinGW Makefiles" -DRUN_TESTS=ON'
+    command = 'cmake .. -G "' + cmakeCompiler + ' Makefiles" -DRUN_TESTS=ON'
     terminalProcess = subprocess.Popen( command, shell=True )
     terminalProcess.wait()
 

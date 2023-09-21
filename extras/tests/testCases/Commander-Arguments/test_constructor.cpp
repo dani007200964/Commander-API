@@ -55,6 +55,8 @@ public:
     //---- Test cases ----//
     void testConstructor_constCharPtr_int();
     void testConstructor_constCharPtr_char();
+    void testConstructor_constCharPtr_char_constCharPtr();
+    void test_getSystemVariable();
 
 };
 
@@ -145,24 +147,83 @@ void ArgumentUT::testConstructor_constCharPtr_char(){
     targetObject = Argument( testData, testShortName );
 
     // Test if the constructor sets them correctly.
-    TEST_ASSERT_EQUAL_PTR_MESSAGE( testData, target -> source, "Incorrect value, injection failed!" );
-    TEST_ASSERT_EQUAL_INT_MESSAGE( strlen( testData ), target -> sourceSize, "Incorrect value, injection failed!" );
-    TEST_ASSERT_EQUAL_INT_MESSAGE( -1, target -> place, "Incorrect value, injection failed!" );
-    TEST_ASSERT_EQUAL_CHAR_MESSAGE( testShortName, target -> shortName, "Incorrect value, injection failed!" );
-    TEST_ASSERT_EQUAL_PTR_MESSAGE( NULL, target -> longName, "Incorrect value, injection failed!" );
-    TEST_ASSERT_FALSE_MESSAGE( target -> bFields.parsed, "Incorrect value, injection failed!" );
-    TEST_ASSERT_FALSE_MESSAGE( target -> bFields.found, "Incorrect value, injection failed!" );
+    TEST_ASSERT_EQUAL_PTR( testData, target -> source );
+    TEST_ASSERT_EQUAL_INT( strlen( testData ), target -> sourceSize );
+    TEST_ASSERT_EQUAL_INT( -1, target -> place );
+    TEST_ASSERT_EQUAL_CHAR( testShortName, target -> shortName );
+    TEST_ASSERT_EQUAL_PTR( NULL, target -> longName );
+    TEST_ASSERT_FALSE( target -> bFields.parsed );
+    TEST_ASSERT_FALSE( target -> bFields.found );
 
     // Call the constructor with wrong source parameter.
     targetObject = Argument( NULL, testShortName );
 
     // Test if the constructor detects the problem.
-    TEST_ASSERT_EQUAL_PTR_MESSAGE( NULL, target -> source, "Incorrect value, injection failed!" );
-    TEST_ASSERT_EQUAL_INT_MESSAGE( -1, target -> sourceSize, "Incorrect value, injection failed!" );
+    TEST_ASSERT_EQUAL_PTR( NULL, target -> source );
+    TEST_ASSERT_EQUAL_INT( -1, target -> sourceSize );
 }
 
 void testConstructor_constCharPtr_char( void ){
     testerObject.testConstructor_constCharPtr_char();
+}
+
+void ArgumentUT::testConstructor_constCharPtr_char_constCharPtr(){
+
+    const char* testData = "test argument list";
+    char testShortName = 's';
+    const char* testLongName = "long";
+
+    // Messing up the data to check if it will be corrected by the empty constructor.
+    target -> source = (const char*) 30;
+    target -> sourceSize = 10;
+    target -> place = 20;
+    target -> shortName = 'A';
+    target -> longName = (const char*) 40;
+    target -> bFields.parsed = true;
+    target -> bFields.found = true;
+
+    // Test if the incorrect parameters are passed correctly.
+    TEST_ASSERT_EQUAL_PTR_MESSAGE( 30, target -> source, "Incorrect value, injection failed!" );
+    TEST_ASSERT_EQUAL_INT_MESSAGE( 10, target -> sourceSize, "Incorrect value, injection failed!" );
+    TEST_ASSERT_EQUAL_INT_MESSAGE( 20, target -> place, "Incorrect value, injection failed!" );
+    TEST_ASSERT_EQUAL_CHAR_MESSAGE( 'A', target -> shortName, "Incorrect value, injection failed!" );
+    TEST_ASSERT_EQUAL_PTR_MESSAGE( 40, target -> longName, "Incorrect value, injection failed!" );
+    TEST_ASSERT_TRUE_MESSAGE( target -> bFields.parsed, "Incorrect value, injection failed!" );
+    TEST_ASSERT_TRUE_MESSAGE( target -> bFields.found, "Incorrect value, injection failed!" );
+
+    // Call the constructor.
+    targetObject = Argument( testData, testShortName, testLongName );
+
+    // Test if the constructor sets them correctly.
+    TEST_ASSERT_EQUAL_PTR( testData, target -> source );
+    TEST_ASSERT_EQUAL_INT( strlen( testData ), target -> sourceSize );
+    TEST_ASSERT_EQUAL_INT( -1, target -> place );
+    TEST_ASSERT_EQUAL_CHAR( testShortName, target -> shortName );
+    TEST_ASSERT_EQUAL_STRING( testLongName, target -> longName );
+    TEST_ASSERT_FALSE( target -> bFields.parsed );
+    TEST_ASSERT_FALSE( target -> bFields.found );
+
+    // Call the constructor with wrong source parameter.
+    targetObject = Argument( NULL, testShortName, (const char*)NULL );
+
+    // Test if the constructor detects the problem.
+    TEST_ASSERT_EQUAL_PTR( NULL, target -> source );
+    TEST_ASSERT_EQUAL_PTR( NULL, target -> longName );
+    TEST_ASSERT_EQUAL_INT( -1, target -> sourceSize );
+}
+
+void testConstructor_constCharPtr_char_constCharPtr( void ){
+    testerObject.testConstructor_constCharPtr_char_constCharPtr();
+}
+
+void ArgumentUT::test_getSystemVariable(){
+    Commander::systemVariable_t* var;
+    var = target -> getSystemVariable();
+    TEST_ASSERT_EQUAL_PTR( target -> systemVariable, var );
+}
+
+void test_getSystemVariable( void ){
+    testerObject.test_getSystemVariable();
 }
 
 int main(){
@@ -171,6 +232,8 @@ int main(){
 
     RUN_TEST( testConstructor_constCharPtr_int );
     RUN_TEST( testConstructor_constCharPtr_char );
+    RUN_TEST( testConstructor_constCharPtr_char_constCharPtr );
+    RUN_TEST( test_getSystemVariable );
 
     return UNITY_END();
 

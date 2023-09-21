@@ -35,7 +35,8 @@ SOFTWARE.
 
 // These commands only work inside the Arduino environment by default.
 #ifdef ARDUINO
-#include "Arduino.h"
+    #include "Arduino.h"
+#endif
 
 typedef struct{
     int adcPinIndex;
@@ -71,10 +72,12 @@ adcPinNameLookUp_t adcLookUp[] = {
 int adcLookUpSize = sizeof( adcLookUp ) / sizeof( adcLookUp[ 0 ] );
 
 #else
-
-adcPinNameLookUp_t* adcLookUp;
-int adcLookUpSize = 0;
-
+    adcPinNameLookUp_t adcLookUp[] = {
+        { 0, 0 },
+        { 1, 0 },
+        { 2, 0 }
+    };
+    int adcLookUpSize = sizeof( adcLookUp ) / sizeof( adcLookUp[ 0 ] );
 #endif
 
 bool commander_analogRead_func( char *args, Stream *response, void* parent ){
@@ -98,7 +101,7 @@ bool commander_analogRead_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
         }
-        return;
+        return false;
     }
 
     // If adcLookUpSize is zero, that means the pin identifier is
@@ -126,12 +129,18 @@ bool commander_analogRead_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Incorrect pin identifier!" ) );
         }
-        return;
+        return false;
     }
 
-    value = analogRead( arduinoPin );
+    #ifdef ARDUINO
+        value = analogRead( arduinoPin );
+    #else
+        value = 0;
+    #endif
 
     response -> print( value );
+
+    return true;
 
 }
 
@@ -149,10 +158,12 @@ int pwmLookUp[] = {
 int pwmLookUpSize = sizeof( pwmLookUp ) / sizeof( pwmLookUp[ 0 ] );
 
 #else
-
-int* pwmLookUp;
-int pwmLookUpSize = 0;
-
+    int pwmLookUp[] = {
+        0,
+        1,
+        2
+    };
+    int pwmLookUpSize = sizeof( pwmLookUp ) / sizeof( pwmLookUp[ 0 ] );
 #endif
 
 bool commander_analogWrite_func( char *args, Stream *response, void* parent ){
@@ -183,7 +194,7 @@ bool commander_analogWrite_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Pin has to be defined!" ) );
         }
-        return;
+        return false;
     }
 
     if( duty && !value ){
@@ -204,7 +215,7 @@ bool commander_analogWrite_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Duty or value has to be defined, but not both!" ) );
         }
-        return;
+        return false;
     }
 
     // If adcLookUpSize is zero, that means the pin identifier is
@@ -232,12 +243,12 @@ bool commander_analogWrite_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Incorrect pin identifier!" ) );
         }
-        return;
+        return false;
     }
 
-    analogWrite( arduinoPin, pwm );
+    #ifdef ARDUINO
+        analogWrite( arduinoPin, pwm );
+    #endif
 
+    return true;
 }
-
-
-#endif

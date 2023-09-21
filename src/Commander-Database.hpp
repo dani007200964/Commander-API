@@ -189,6 +189,12 @@ private:
 
     bool optimizeDataTree();
 
+    /// Custom strcmp function.
+    ///
+    /// It works like the original strcmp, but it terminates
+    /// to space character as well.
+    int strcmpDB( const char *p1, const char* p2 );
+
     friend class CommanderDatabaseUT;
 
 };
@@ -227,12 +233,12 @@ void CommanderDatabase< T >::setDebugLevel( debugLevel_t debugLevel_p ){
 
 template< typename T >
 int CommanderDatabase< T >::strcmpElementElementRegular( dataRecord_t* element1, dataRecord_t* element2 ){
-	return strcmp( element1 -> name, element2 -> name );
+	return strcmpDB( element1 -> name, element2 -> name );
 }
 
 template< typename T >
 int CommanderDatabase< T >::strcmpElementCharArrayRegular( dataRecord_t* element1, const char* element2 ){
-	return strcmp( element1 -> name, element2 );
+	return strcmpDB( element1 -> name, element2 );
 }
 
 template< typename T >
@@ -504,6 +510,16 @@ bool CommanderDatabase< T >::init(){
 
 	}
 
+    if( ( debugChannel != NULL ) && ( debugLevel >= DEBUG_DEBUG ) ){
+        debugChannel -> println( __CONST_TXT__( "Prepare leaf connections..." ) );
+    }
+
+    // Prepare all leaf connections.
+	for( i = 0; i < dataTreeSize; i++ ){
+		dataTree[ i ].left = NULL;
+		dataTree[ i ].right = NULL;
+	}
+    
     // Optimize the tree to make it balanced.
 	// It is necessary to speed up the command
 	// search phase.
@@ -575,9 +591,41 @@ typename CommanderDatabase< T >::dataRecord_t* CommanderDatabase< T >::operator 
 	return NULL;
 
 }
+
 template< typename T >
 uint16_t CommanderDatabase< T >::getSize(){
     return dataTreeSize;
 }
+
+template< typename T >
+int CommanderDatabase< T >::strcmpDB( const char *p1, const char* p2 ){
+    const unsigned char *s1 = (const unsigned char *) p1;
+    const unsigned char *s2 = (const unsigned char *) p2;
+
+    unsigned char c1;
+    unsigned char c2;
+
+    do{
+        c1 = (unsigned char) *s1;
+        c2 = (unsigned char) *s2;
+
+        s1++;
+        s2++;
+
+        if( ( c1 == ' ' ) || ( c2 == ' ' ) ){
+            c1 = '\0';
+            c2 = '\0';
+        }
+
+        if( c1 == '\0' ){
+            return c2 - c1;
+        }
+
+    } while( c1 == c2 );
+
+    return c2 - c1;
+
+}
+
 
 #endif

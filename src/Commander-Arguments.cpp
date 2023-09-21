@@ -94,7 +94,6 @@ int Argument::findShortName(){
     // Tracks the current index of the investigated character.
     int index = 0;
     int searchIndex = 0;
-    int offset = 0;
 
     // Array, that contains the searched argument name.
     char expected[ 3 ] = { '-', '\0', '\0' };
@@ -151,14 +150,9 @@ int Argument::findShortName(){
     // found = true;
     bFields.found = true;
 
-    // Jump after the short name. It is 2 characters long.
-    //index += 2;
-
     // Check and handle buffer overflow.
     if( index > sourceSize ){
-
         return -1;
-
     }
 
     // Remove white space characters.
@@ -168,9 +162,7 @@ int Argument::findShortName(){
 
         // Check and handle buffer overflow.
         if( index > sourceSize ){
-
             return -1;
-
         }
 
     }
@@ -217,11 +209,10 @@ int Argument::findLongName(){
         indexFirst = index + substring( expected, (char*)&source[ index ] );
         indexSecond = index + substring( (char*)longName, (char*)&source[ index ] );
 
-        // If the '--' string can not be found in the rest of the source array, we have to quit.
+        // If the '--' string can not be found in the rest of the source array,
+        // we have to quit with a negative number.
         if( ( indexFirst - index ) < 0 ){
-
             return -1;
-
         }
 
         // We have to check if we are in a string.
@@ -229,22 +220,19 @@ int Argument::findLongName(){
             //If it is the case we have to search further.
             index++;
             continue;
-
         }
 
-        // If the first and the second part is next to each other, the second part is 2 characters
-        // behind the first part. 
+        // If the first and the second part is next to each other,
+        // the second part must be 2 characters behind the first part. 
         if( ( indexSecond - indexFirst ) != 2 ){
-
             // If it is not the case, we have to search further.
             // We increment the index, and start a next iteration.
             index++;
             continue;
-
         }
 
         // If we are here, that means we found a valid combination of
-        // the two parts. Still we have to check the next character after the
+        // the two parts. Still, we have to check the next character after the
         // second part.
         // For example:
         // --name
@@ -255,11 +243,10 @@ int Argument::findLongName(){
 
         // Check and handle buffer overflow.
         if( index > sourceSize ){
-
             return -1;
-
         }
 
+        // Check if we found string terminator at the end of the long name.
         if( source[ index ] == '\0' ){
             // Set the found flag
             // found = true;
@@ -269,27 +256,35 @@ int Argument::findLongName(){
 
         // We need at least one white space character after the name.
         if( !( ( source[ index ] == ' ' ) || ( source[ index ] == '\t' ) ) ){
-
             // If it is not the case, we have to search further.
             // We increment the index, and start a next iteration from here.
+            index++;
             continue;
-
         }
 
+        // If we are here, that means, we have a white
+        // space character after the found long name.
         // Set the found flag
         // found = true;
         bFields.found = true;
 
-        // Remove white space characters.
+        // 'Remove' white space characters. Basically, we skip every white space
+        // characters to find the real index of the first character of the argument.
         while( ( source[ index ] == ' ' ) || ( source[ index ] == '\t' ) ){
 
             index++;
 
+            // Check if we found string terminator.
+            if( source[ index ] == '\0' ){
+                // Set the found flag
+                // found = true;
+                bFields.found = true;
+                return index;
+            }
+
             // Check and handle buffer overflow.
             if( index > sourceSize ){
-
                 return -1;
-
             }
 
         }
@@ -299,14 +294,17 @@ int Argument::findLongName(){
 
     }
 
+    // If we are here, that means, w did not found the long name.
+    // In this case, we have to return wit negative number.
     return -1;
 
 }
 
-int Argument::findPlace(){
+int Argument::findByPlace(){
 
     int placeCounter = 0;
     int index = 0;
+    int startIndex = 0;;
 
     bool prevWhiteSpace = false;
     bool whiteSpace;
@@ -321,8 +319,20 @@ int Argument::findPlace(){
         return -1;
     }
 
+    // Remove white space characters.
+    while( ( source[ startIndex ] == ' ' ) || ( source[ startIndex ] == '\t' ) ){
+
+        startIndex++;
+
+        // Check and handle buffer overflow.
+        if( startIndex >= sourceSize ){
+            return -1;
+        }
+
+    }
+
     // Iterate through all the characters in the source buffer.
-    for( index = 0; index < sourceSize; index++ ){
+    for( index = startIndex; index < sourceSize; index++ ){
 
         // Check if we found the right place.
         if( placeCounter == place ){
@@ -334,9 +344,7 @@ int Argument::findPlace(){
 
                 // Check and handle buffer overflow.
                 if( index >= sourceSize ){
-
                     return -1;
-
                 }
 
             }
@@ -348,6 +356,7 @@ int Argument::findPlace(){
 
         // Detect if we changing from non whitespace to whitespace character.
         whiteSpace = ( source[ index ] == ' ' ) || ( source[ index ] == '\t' );
+        whiteSpace &= !inString( index );
 
         if( ( prevWhiteSpace == false ) && ( whiteSpace == true ) ){
 
@@ -387,13 +396,11 @@ int Argument::findStart(){
         if( startIndex < 0 ){
 
             // Try to find by place.
-            startIndex = findPlace();
+            startIndex = findByPlace();
 
             // If it fails we can't do anything.
             if( startIndex < 0 ){
-
                 return -1;
-
             }
 
         }
@@ -402,9 +409,7 @@ int Argument::findStart(){
 
     // Check if it is a system variable.
     if( source[ startIndex ] == '$' ){
-
         systemVariable = Commander::getSystemVariable( &source[ startIndex + 1 ] );
-
     }
 
     return startIndex;
@@ -439,8 +444,8 @@ bool Argument::parseInt(){
         }
 
         else if( ( systemVariable -> data.type ) == Commander::VARIABLE_FLOAT ){
-            ret.f = (int)*( systemVariable -> data.data.floatData );
-            bFields.parsed = true;
+            ret.i = (int)*( systemVariable -> data.data.floatData );
+            status = 1;
         }
 
     }
@@ -487,11 +492,9 @@ bool Argument::parseFloat(){
         }
 
         else if( ( systemVariable -> data.type ) == Commander::VARIABLE_INT ){
-            ret.i = (float)*( systemVariable -> data.data.intData );
+            ret.f = (float)*( systemVariable -> data.data.intData );
             bFields.parsed = true;
         }
-
-
 
     }
 
@@ -502,9 +505,8 @@ bool Argument::parseFloat(){
             // Try to convert string to integer number.
             ret.f = (float)atof( &source[ startIndex ] );
 
-            // Check if the conversation was succesful.
+            // Check if the conversation was successful.
             // Store the result to the parsed variable.
-
             bFields.parsed = true;
         }
 
@@ -520,9 +522,6 @@ bool Argument::parseStringFunction( char* buffer, int bufferSize ){
     // It will store the start address of the data for the current argument.
     int startIndex;
 
-    // It will store the status of the string to integer conversation.
-    int status;
-
     // Points to the next free element in the buffer.
     int bufferIndex;
 
@@ -532,19 +531,20 @@ bool Argument::parseStringFunction( char* buffer, int bufferSize ){
     // Next character that is rad from the source buffer.
     char c;
 
+    // Return status for snprintf;
+    int status;
+
     // Clear the parsed flag.
     // parsed = false;
     bFields.parsed = false;
 
-    // Set an invalid addres to the outStringBuffer by default.
+    // Set an invalid address to the outStringBuffer by default.
     // outStringBuffer = NULL;
     ret.c = NULL;
 
     // Check for invalid buffer size.
     if( bufferSize < 1 ){
-
         return false;
-
     }
 
     // Try to find the argument.
@@ -561,14 +561,45 @@ bool Argument::parseStringFunction( char* buffer, int bufferSize ){
         return false;
     }
 
+    // If a system variable is requested, but it is not found, we have a problem.
+    if( ( source[ startIndex ] == '$' ) && systemVariable == NULL ){
+        return false;
+    }
+
     if( systemVariable != NULL ){
 
-        if( ( systemVariable -> data.type ) == Commander::VARIABLES_STRING ){
-            ret.c = systemVariable -> data.data.strData;
+        if( ( systemVariable -> data.type ) == Commander::VARIABLE_STRING ){
             strncpy( buffer, systemVariable -> data.data.strData, bufferSize );
             buffer[ bufferSize - 1 ] = '\0';
+            ret.c = buffer;
             bFields.parsed = true;
             return true;
+        }
+
+        else if( ( systemVariable -> data.type ) == Commander::VARIABLE_INT ){
+            status = snprintf( buffer, bufferSize, "%d", *systemVariable -> data.data.intData );
+            buffer[ bufferSize - 1 ] = '\0';
+            if( ( status > 0 ) && ( status < bufferSize ) ){
+                ret.c = buffer;
+                bFields.parsed = true;
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+        else if( ( systemVariable -> data.type ) == Commander::VARIABLE_FLOAT ){
+            status = Commander::floatToString( *systemVariable -> data.data.floatData, buffer, bufferSize );
+            buffer[ bufferSize - 1 ] = '\0';
+            if( ( status > 0 ) && ( status < bufferSize ) ){
+                ret.c = buffer;
+                bFields.parsed = true;
+                return true;
+            }
+            else{
+                return false;
+            }
         }
 
     }
