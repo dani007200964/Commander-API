@@ -180,6 +180,12 @@ bool commander_abs_func( char *args, Stream *response, void* parent ){
     number.parseFloat();
     places.parseInt();
 
+    if( !number ){
+        Commander::printArgumentError( response );
+        response -> print( __CONST_TXT__( " Input number has to be defined!" ) );
+        return false;
+    }
+
     if( places ){
 
         if( (int)places < 1 ){
@@ -248,6 +254,12 @@ bool commander_not_func( char *args, Stream *response, void* parent ){
     }
 
     number.parseInt();
+
+    if( !number ){
+        Commander::printArgumentError( response );
+        response -> print( __CONST_TXT__( " Input value has to be defined!" ) );
+        return false;
+    }
 
     if( (int)number == 0 ){
         response -> print( 1 );

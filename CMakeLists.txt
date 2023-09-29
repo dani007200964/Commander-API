@@ -128,7 +128,12 @@ if(RUN_TESTS)
 
     # -- Commander-Commands / Analog-IO-Commands --
     #add_executable( test_commander_commands_analog_io_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Analog-IO-Commands/test_analog_io_commands.cpp )
-    add_executable( test_commander_commands_digital_io_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Digital-IO-Commands/test_digital_io_commands.cpp )
+
+    # -- Commander-Commands / Analog-IO-Commands --
+    #add_executable( test_commander_commands_digital_io_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Digital-IO-Commands/test_digital_io_commands.cpp )
+
+    # -- Commander-Commands / Math-Commands --
+    add_executable( test_commander_commands_math_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Math-Commands/test_math_commands.cpp )
 
 endif()
 

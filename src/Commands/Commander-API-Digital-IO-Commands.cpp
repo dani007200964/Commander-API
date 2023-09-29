@@ -82,6 +82,7 @@ bool commander_pinMode_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Pin mode has to be defined and can not be input and output at the same time!" ) );
         }
+        return false;
     }
 
     return true;
@@ -131,6 +132,7 @@ bool commander_digitalWrite_func( char *args, Stream *response, void* parent ){
         if( response != NULL ){
             response -> print( __CONST_TXT__( " Pin state has to be defined and can not be high and low at the same time!" ) );
         }
+        return false;
     }
 
     return true;
