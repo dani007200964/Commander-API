@@ -157,7 +157,7 @@ SOFTWARE.
 /// @param element One element in the system variables table.
 /// @param name The name of the int variable.
 /// @note Do not use & operator before the name. Just use the name, the macro will handle the rest.
-#define systemVariableInt_P( element, name ) { element.name_P = __CONST_TXT__( name ); element.floatData = NULL; element.intData = NULL; element.strData = (char*)name; element.name = NULL; }
+#define systemVariableString_P( element, name ) { element.name_P = __CONST_TXT__( name ); element.floatData = NULL; element.intData = NULL; element.strData = (char*)name; element.name = NULL; }
 
 #endif
 

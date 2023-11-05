@@ -190,7 +190,7 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
         return false;
     }
 
-    if( sscanf( &buffer[ 2 ],"%x", &startAddressNumber ) != 1 ){
+    if( sscanf( &buffer[ 2 ],"%" PRIx32, &startAddressNumber ) != 1 ){
         Commander::printArgumentError( response );
         response -> print( __CONST_TXT__( " Start address format is not correct! Example: 0x012ABC" ) );
         return false;
@@ -239,7 +239,7 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
             return false;
         }
 
-        if( sscanf( &buffer[ 2 ],"%x", &endAddressNumber ) != 1 ){
+        if( sscanf( &buffer[ 2 ],"%" PRIx32, &endAddressNumber ) != 1 ){
             return false;
         }
 
@@ -299,11 +299,11 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     }
 
     response -> print( __CONST_TXT__( "Start Address: 0x" ) );
-    snprintf( buffer, sizeof( buffer ), "%08x", startAddressNumber );
+    snprintf( buffer, sizeof( buffer ), "%08" PRIx32, startAddressNumber );
     response -> println( buffer );
 
     response -> print( __CONST_TXT__( "End Address: 0x" ) );
-    snprintf( buffer, sizeof( buffer ), "%08x", endAddressNumber );
+    snprintf( buffer, sizeof( buffer ), "%08" PRIx32, endAddressNumber );
     response -> println( buffer );
 
     response -> print( __CONST_TXT__( "Number of elements: " ) );
@@ -321,7 +321,7 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
         }
 
         j = 8 * ( bytesInData - i - 1 );
-        snprintf( buffer, sizeof( buffer ), " %02d:%02d |", j + 7, j);
+        snprintf( buffer, sizeof( buffer ), " %02" PRIu32 ":%02" PRIu32 " |", j + 7, j);
         buffer[ sizeof( buffer ) - 1 ] = '\0';
         response -> print( buffer );
 
@@ -333,7 +333,7 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
 
         dataPointer = (uint32_t)( startAddressNumber + i * bytesInData );
         response -> print( __CONST_TXT__( "0x" ) );
-        snprintf( buffer, sizeof( buffer ), "%08x", dataPointer );
+        snprintf( buffer, sizeof( buffer ), "%08" PRIx32, dataPointer );
         buffer[ sizeof( buffer ) - 1 ] = '\0';
         response -> print( buffer );
         response -> print( __CONST_TXT__( " |" ) );

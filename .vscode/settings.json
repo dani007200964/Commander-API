@@ -10,6 +10,7 @@
         "initializer_list": "cpp",
         "xstring": "cpp",
         "xlocale": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "xmemory": "cpp"
     }
 }

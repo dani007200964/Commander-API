@@ -142,14 +142,14 @@ public:
 
     /// Find array index by element place.
     ///
-    /// This function returns the array index( from 0 to tree size - 1 )
+    /// This function returns the array index( from 1 to tree size )
     /// of an element by its place variable. It can be handy because the
     /// actual place not represents the real index in the binary tree.
     /// @param place Place of the searched element.
     /// @returns The array index of the element if the place is found.
     ///          If the place is invalid or not found, the returned value
     ///          will be 0 to avoid bad addressing.
-    int findIndexByPlace( int place );
+    uint16_t findIndexByPlace( uint16_t place );
 
     /// Get tree size
     ///
@@ -242,13 +242,13 @@ int CommanderDatabase< T >::strcmpElementCharArrayRegular( dataRecord_t* element
 }
 
 template< typename T >
-int CommanderDatabase< T >::findIndexByPlace( int place ){
+uint16_t CommanderDatabase< T >::findIndexByPlace( uint16_t place ){
 
 	// Generic counter variable
 	uint16_t i;
 
 	// Go through all commands
-	for( i = 0; i < dataTreeSize; i++ ){
+	for( i = 1; i <= dataTreeSize; i++ ){
 
 		// Check that if we found the desired command
 		if( dataTree[ i ].place == place ){
