@@ -128,7 +128,6 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     // This variable will hold the data itself;
     uint8_t data[ 4 ];
 
-<<<<<<< HEAD
     #ifdef __AVR__
         Argument endAddress( args, 'e' );
         Argument number( args, 'n' );
@@ -144,12 +143,6 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
         Argument binFlag( args, 'b', "bin" );
         Argument charFlag( args, 'c', "char" );
     #endif
-=======
-    Argument decFlag( args, 'd', "dec" );
-    Argument hexFlag( args, 'h', "hex" );
-    Argument binFlag( args, 'b', "bin" );
-    Argument charFlag( args, 'c', "char" );
->>>>>>> 3ce251959e38d12224dcee4b764fcbbd8c5bfd9e
 
     memDumpFormat_t outputFormat = FORMAT_HEX;
 
@@ -187,38 +180,22 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     // Start address and data type is not optional.
     if( !startAddress || !dataType ){
         Commander::printArgumentError( response );
-<<<<<<< HEAD
         response -> print( __CONST_TXT__( " Start address and data type has to be specified!" ) );
-=======
-        response -> print( " Start address and data type has to be specified!" );
->>>>>>> 3ce251959e38d12224dcee4b764fcbbd8c5bfd9e
         return false;
     }
 
     if( ( buffer[ 0 ] != '0' ) || ( ( buffer[ 1 ] != 'x' ) && ( buffer[ 1 ] != 'X' ) ) ){
-<<<<<<< HEAD
         Commander::printArgumentError( response );
         response -> print( __CONST_TXT__( " Start address format is not correct! It has to start with 0x..." ) );
         return false;
     }
 
     if( sscanf( &buffer[ 2 ],"%x", &startAddressNumber ) != 1 ){
-=======
->>>>>>> 3ce251959e38d12224dcee4b764fcbbd8c5bfd9e
         Commander::printArgumentError( response );
         response -> print( __CONST_TXT__( " Start address format is not correct! Example: 0x012ABC" ) );
         return false;
     }
 
-<<<<<<< HEAD
-=======
-    if( sscanf( &buffer[ 2 ],"%x", &startAddressNumber ) != 1 ){
-        Commander::printArgumentError( response );
-        response -> print( " Start address format is not correct! Example: 0x012ABC" );
-        return false;
-    }
-
->>>>>>> 3ce251959e38d12224dcee4b764fcbbd8c5bfd9e
     for( i = 0; i < 12; i++ ){
 
         if( strcmp( (char*)dataType, memDumpTypes[ i ] ) == 0 ){
@@ -252,11 +229,7 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
         bytesInData = 4;
     }
 
-<<<<<<< HEAD
     response -> print( __CONST_TXT__( "Data Type: " ) );
-=======
-    response -> print( "Data Type: " );
->>>>>>> 3ce251959e38d12224dcee4b764fcbbd8c5bfd9e
     response -> println( memDumpTypes[ i ] );
 
     endAddress.parseString( buffer );
@@ -286,11 +259,7 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     else if( number && !endAddress ){
         if( (int)number < 0 ){
             Commander::printArgumentError( response );
-<<<<<<< HEAD
             response -> print( __CONST_TXT__( " Number can not be negative!" ) );
-=======
-            response -> print( " Number can not be negative!" );
->>>>>>> 3ce251959e38d12224dcee4b764fcbbd8c5bfd9e
             return false;
         }
 
@@ -311,38 +280,6 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     // Check if the address range is valid.
     j = 0;
     for( i = 0; i < numberOfMemDumpAddressRanges; i++ ){
-<<<<<<< HEAD
-=======
-
-        j =      startAddressNumber >= memDumpAddressRanges[ i ][ 0 ];
-        j = j && startAddressNumber <  memDumpAddressRanges[ i ][ 1 ];
-        j = j && endAddressNumber   >= memDumpAddressRanges[ i ][ 0 ];
-        j = j && endAddressNumber   <  memDumpAddressRanges[ i ][ 1 ];
-
-        if( j ){
-            break;
-        }
-
-    }
-
-    if( !j ){
-        Commander::printArgumentError( response );
-        response -> print( " The specified address range is not accessible!" );
-        return false;
-    }
-
-    response -> print( "Start Address: 0x" );
-    snprintf( buffer, sizeof( buffer ), "%08x", startAddressNumber );
-    response -> println( buffer );
-
-    response -> print( "End Address: 0x" );
-    snprintf( buffer, sizeof( buffer ), "%08x", endAddressNumber );
-    response -> println( buffer );
-
-    response -> print( "Number of elements: " );
-    snprintf( buffer, sizeof( buffer ), "%" PRIu32, numberOfData );
-    response -> println( buffer );
->>>>>>> 3ce251959e38d12224dcee4b764fcbbd8c5bfd9e
 
         j =      startAddressNumber >= memDumpAddressRanges[ i ][ 0 ];
         j = j && startAddressNumber <  memDumpAddressRanges[ i ][ 1 ];
@@ -395,7 +332,6 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     for( i = 0; i < numberOfData; i++ ){
 
         dataPointer = (uint32_t)( startAddressNumber + i * bytesInData );
-<<<<<<< HEAD
         response -> print( __CONST_TXT__( "0x" ) );
         snprintf( buffer, sizeof( buffer ), "%08x", dataPointer );
         buffer[ sizeof( buffer ) - 1 ] = '\0';
@@ -403,13 +339,6 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
         response -> print( __CONST_TXT__( " |" ) );
 
         *data = (uint32_t)*( (uint32_t*)( (intptr_t)dataPointer ) );
-=======
-        response -> print( "0x" );
-        snprintf( buffer, sizeof( buffer ), "%08x", dataPointer );
-        buffer[ sizeof( buffer ) - 1 ] = '\0';
-        response -> print( buffer );
-        response -> print( " |" );
->>>>>>> 3ce251959e38d12224dcee4b764fcbbd8c5bfd9e
 
         *data = (uint32_t)*( (uint32_t*)( (intptr_t)dataPointer ) );
 
