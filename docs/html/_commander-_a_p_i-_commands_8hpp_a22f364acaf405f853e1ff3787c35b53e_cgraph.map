@@ -3,10 +3,10 @@
 <area shape="rect" id="node2" href="$class_argument.html#aeabd957dda6add595aa860761ea337f1" title=" " alt="" coords="274,80,406,105"/>
 <area shape="rect" id="node10" href="$class_commander.html#a11b7236808d55ed1c497e719117cdf3d" title="Print &#39;Argument error!&#39; to a specified Serial channel." alt="" coords="249,130,431,170"/>
 <area shape="rect" id="node3" href="$class_argument.html#a7fab3d983e4a63b93e6f50df82ed6f84" title=" " alt="" coords="479,80,613,105"/>
-<area shape="rect" id="node4" href="$class_argument.html#a19696736b23d7f4f4c6e4125e67f59a8" title=" " alt="" coords="683,5,851,31"/>
-<area shape="rect" id="node7" href="$class_argument.html#a267c2e9b46491f60b264c39e08ad5686" title=" " alt="" coords="697,104,836,129"/>
-<area shape="rect" id="node8" href="$class_argument.html#a3ec1ea9ca2d489a987e0fa335daaf061" title=" " alt="" coords="681,55,852,80"/>
-<area shape="rect" id="node9" href="$class_commander.html#aed49189003860bfa85ab3bf8d320c5f6" title="Get the instance if a system variable by its name." alt="" coords="661,153,872,179"/>
-<area shape="rect" id="node5" href="$class_argument.html#af21c1965c64a5f3984cbf42bcf1eec5f" title=" " alt="" coords="924,5,1055,31"/>
-<area shape="rect" id="node6" href="$class_argument.html#a8f98fbce9e55886c0b3a84c6f92572e5" title=" " alt="" coords="920,55,1059,80"/>
+<area shape="rect" id="node4" href="$class_argument.html#a41a3be1503f99c0ab973d0c7b45fe2bd" title="Find the start position of a place dependent argument." alt="" coords="689,5,844,31"/>
+<area shape="rect" id="node6" href="$class_argument.html#a19696736b23d7f4f4c6e4125e67f59a8" title="Find the start position of a long named argument." alt="" coords="683,55,851,80"/>
+<area shape="rect" id="node8" href="$class_argument.html#a3ec1ea9ca2d489a987e0fa335daaf061" title="Find the start position of a short named argument." alt="" coords="681,104,852,129"/>
+<area shape="rect" id="node9" href="$class_commander.html#a8c61dd05384f4a5d02932c602f8d8e00" title="Get the instance if a system variable by its name." alt="" coords="661,153,872,179"/>
+<area shape="rect" id="node5" href="$class_argument.html#af21c1965c64a5f3984cbf42bcf1eec5f" title=" " alt="" coords="924,55,1055,80"/>
+<area shape="rect" id="node7" href="$class_argument.html#a8f98fbce9e55886c0b3a84c6f92572e5" title=" " alt="" coords="920,104,1059,129"/>
 </map>

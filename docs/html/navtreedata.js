@@ -47,7 +47,8 @@ var NAVTREE =
           [ "Variables", "functions_vars.html", null ],
           [ "Typedefs", "functions_type.html", null ],
           [ "Enumerations", "functions_enum.html", null ],
-          [ "Enumerator", "functions_eval.html", null ]
+          [ "Enumerator", "functions_eval.html", null ],
+          [ "Related Functions", "functions_rela.html", null ]
         ] ]
       ] ]
     ] ],

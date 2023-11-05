@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['getsystemvariable_0',['getSystemVariable',['../class_commander.html#aed49189003860bfa85ab3bf8d320c5f6',1,'Commander::getSystemVariable()'],['../class_argument.html#a578656131acb2afb90691ed5d949daa5',1,'Argument::getSystemVariable()']]]
+  ['getsize_0',['getSize',['../class_commander_database.html#a638ea7bd764d1d4a7533317561fa5fbb',1,'CommanderDatabase']]],
+  ['getsystemvariable_1',['getSystemVariable',['../class_commander.html#a8c61dd05384f4a5d02932c602f8d8e00',1,'Commander::getSystemVariable()'],['../class_argument.html#a3fcba064664dc671c8d32611fb904661',1,'Argument::getSystemVariable()']]]
 ];

@@ -6,6 +6,7 @@ var classcommander_pipe_channel =
     [ "read", "classcommander_pipe_channel.html#ac94b25ee07795603b3197f4c289efe92", null ],
     [ "write", "classcommander_pipe_channel.html#ae96d52bd4efdbb4f3db50aafaf09bcb8", null ],
     [ "write", "classcommander_pipe_channel.html#ab2488dc27cdc84e3a7510a89050e8415", null ],
+    [ "commanderPipeChannelUT", "classcommander_pipe_channel.html#a2dd65deae9fc500b2e6bd2253cb7041c", null ],
     [ "buffer", "classcommander_pipe_channel.html#a4fe9c98015164475eecc7350365e1362", null ],
     [ "readPointer", "classcommander_pipe_channel.html#a6424ac704046904cd7af9e0a8a7861a0", null ],
     [ "writePointer", "classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227", null ]

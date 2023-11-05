@@ -1,7 +1,7 @@
 <map id="Argument::find" name="Argument::find">
 <area shape="rect" id="node1" title=" " alt="" coords="5,31,112,56"/>
-<area shape="rect" id="node2" href="$class_argument.html#a19696736b23d7f4f4c6e4125e67f59a8" title=" " alt="" coords="161,5,329,31"/>
-<area shape="rect" id="node5" href="$class_argument.html#a3ec1ea9ca2d489a987e0fa335daaf061" title=" " alt="" coords="160,55,331,80"/>
+<area shape="rect" id="node2" href="$class_argument.html#a19696736b23d7f4f4c6e4125e67f59a8" title="Find the start position of a long named argument." alt="" coords="161,5,329,31"/>
+<area shape="rect" id="node5" href="$class_argument.html#a3ec1ea9ca2d489a987e0fa335daaf061" title="Find the start position of a short named argument." alt="" coords="160,55,331,80"/>
 <area shape="rect" id="node3" href="$class_argument.html#af21c1965c64a5f3984cbf42bcf1eec5f" title=" " alt="" coords="383,5,513,31"/>
 <area shape="rect" id="node4" href="$class_argument.html#a8f98fbce9e55886c0b3a84c6f92572e5" title=" " alt="" coords="379,55,517,80"/>
 </map>

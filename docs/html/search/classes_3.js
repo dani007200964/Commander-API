@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['returndata_0',['returnData',['../union_argument_1_1return_data.html',1,'Argument']]]
+  ['datarecord_5ft_0',['dataRecord_t',['../struct_commander_database_1_1data_record__t.html',1,'CommanderDatabase']]]
 ];

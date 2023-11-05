@@ -77,14 +77,6 @@ if (RUN_TESTS)
 
 endif()
 
-if( BUILD_EXAMPLES )
-
-    set( CUSTOM_COMMANDS
-        extras/simulator/CustomCommands.cpp
-    )
-
-endif()
-
 # Commander settings
 add_compile_definitions(
     # SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
@@ -133,19 +125,25 @@ if(RUN_TESTS)
     #add_executable( test_commander_commands_digital_io_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Digital-IO-Commands/test_digital_io_commands.cpp )
 
     # -- Commander-Commands / Math-Commands --
-    add_executable( test_commander_commands_math_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Math-Commands/test_math_commands.cpp )
+    #add_executable( test_commander_commands_math_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Math-Commands/test_math_commands.cpp )
 
-endif()
+    # -- Commander-Commands / System-Commands --
+    #add_executable( test_commander_commands_system_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/System-Commands/test_system_commands.cpp )
+
+    # -- Commander-Commands / Memory-Commands --
+    add_executable( test_commander_commands_memory_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Memory-Commands/test_memory_commands.cpp )
+
+    endif()
 
 # Do not edit this comment and do not write anything after it!
 # It will be generated with the exampleGenerator.py script.
 #---- Examples Section ----#
 
 if( BUILD_EXAMPLES )
-	add_executable( Fullsystem ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_desktop/Desktop/Fullsystem/Fullsystem.cpp )
+	add_executable( Memory ${SOURCES} extras/examples_desktop/Desktop/Memory/Memory.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
-	add_executable( Fullsystem ${SOURCES} ${CUSTOM_COMMANDS} extras/examples_emscripten/Emscripten/Fullsystem/Fullsystem.cpp )
-	target_link_options( Fullsystem PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( Memory ${SOURCES} extras/examples_emscripten/Emscripten/Memory/Memory.cpp )
+	target_link_options( Memory PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 endif()

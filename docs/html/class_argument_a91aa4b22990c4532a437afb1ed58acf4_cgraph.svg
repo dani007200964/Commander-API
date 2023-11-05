@@ -46,9 +46,9 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 631;
+var viewWidth = 659;
 var viewHeight = 138;
-var sectionId = 'dynsection-17';
+var sectionId = 'dynsection-18';
 </script>
 <script xlink:href="svgpan.js"/>
 <svg id="graph" class="graph">
@@ -58,8 +58,8 @@ var sectionId = 'dynsection-17';
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#999999" stroke="#666666" points="152,-74 0,-74 0,-55 152,-55 152,-74"/>
-<text text-anchor="middle" x="76" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::parseStringFunction</text>
+<polygon fill="#999999" stroke="#666666" points="152,-55 0,-55 0,-36 152,-36 152,-55"/>
+<text text-anchor="middle" x="76" y="-43" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::parseStringFunction</text>
 </a>
 </g>
 </g>
@@ -67,118 +67,139 @@ var sectionId = 'dynsection-17';
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="class_argument.html#a7fab3d983e4a63b93e6f50df82ed6f84" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="289,-74 188,-74 188,-55 289,-55 289,-74"/>
-<text text-anchor="middle" x="238.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::findStart</text>
+<polygon fill="white" stroke="#666666" points="303,-74 202,-74 202,-55 303,-55 303,-74"/>
+<text text-anchor="middle" x="252.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::findStart</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="#63b8ff" d="M152.08,-64.5C160.57,-64.5 169.14,-64.5 177.4,-64.5"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="177.68,-68 187.68,-64.5 177.68,-61 177.68,-68"/>
+<path fill="none" stroke="#63b8ff" d="M152.02,-53.67C165.36,-55.12 179.08,-56.62 191.92,-58.01"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="191.68,-61.51 202,-59.11 192.44,-54.55 191.68,-61.51"/>
+</g>
+<!-- Node9 -->
+<g id="node9" class="node">
+<title>Node9</title>
+<g id="a_node9"><a xlink:href="class_commander.html#a829d1662c915bbc4d066f3f74d7a60dc" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="317,-37 188,-37 188,-18 317,-18 317,-37"/>
+<text text-anchor="middle" x="252.5" y="-25" font-family="Helvetica,sans-Serif" font-size="10.00">Commander::floatToString</text>
+</a>
+</g>
+</g>
+<!-- Node1&#45;&gt;Node9 -->
+<g id="edge11" class="edge">
+<title>Node1&#45;&gt;Node9</title>
+<path fill="none" stroke="#63b8ff" d="M152.02,-37.76C160.49,-36.89 169.12,-36 177.57,-35.13"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="178.2,-38.58 187.78,-34.07 177.48,-31.62 178.2,-38.58"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="class_argument.html#a19696736b23d7f4f4c6e4125e67f59a8" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="467,-130 341,-130 341,-111 467,-111 467,-130"/>
-<text text-anchor="middle" x="404" y="-118" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::findLongName</text>
+<g id="a_node3"><a xlink:href="class_argument.html#a41a3be1503f99c0ab973d0c7b45fe2bd" target="_top" xlink:title="Find the start position of a place dependent argument.">
+<polygon fill="white" stroke="#666666" points="490,-130 374,-130 374,-111 490,-111 490,-130"/>
+<text text-anchor="middle" x="432" y="-118" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::findByPlace</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node2&#45;&gt;Node3</title>
-<path fill="none" stroke="#63b8ff" d="M258.1,-74.01C275.15,-82.43 301.27,-94.57 325,-102.5 331.46,-104.66 338.32,-106.65 345.17,-108.46"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="344.61,-111.93 355.16,-110.99 346.32,-105.15 344.61,-111.93"/>
+<path fill="none" stroke="#63b8ff" d="M276.11,-74.16C296.08,-82.45 326.11,-94.31 353,-102.5 360.12,-104.67 367.67,-106.72 375.16,-108.6"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="374.39,-112.02 384.94,-110.98 376.05,-105.22 374.39,-112.02"/>
 </g>
-<!-- Node6 -->
-<g id="node6" class="node">
-<title>Node6</title>
-<g id="a_node6"><a xlink:href="class_argument.html#a267c2e9b46491f60b264c39e08ad5686" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="456,-56 352,-56 352,-37 456,-37 456,-56"/>
-<text text-anchor="middle" x="404" y="-44" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::findPlace</text>
+<!-- Node5 -->
+<g id="node5" class="node">
+<title>Node5</title>
+<g id="a_node5"><a xlink:href="class_argument.html#a19696736b23d7f4f4c6e4125e67f59a8" target="_top" xlink:title="Find the start position of a long named argument.">
+<polygon fill="white" stroke="#666666" points="495,-93 369,-93 369,-74 495,-74 495,-93"/>
+<text text-anchor="middle" x="432" y="-81" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::findLongName</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node6 -->
-<g id="edge5" class="edge">
-<title>Node2&#45;&gt;Node6</title>
-<path fill="none" stroke="#63b8ff" d="M289.44,-59C306.01,-57.18 324.64,-55.13 341.94,-53.22"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="342.39,-56.69 351.95,-52.12 341.63,-49.74 342.39,-56.69"/>
+<!-- Node2&#45;&gt;Node5 -->
+<g id="edge4" class="edge">
+<title>Node2&#45;&gt;Node5</title>
+<path fill="none" stroke="#63b8ff" d="M303.42,-69.84C320.55,-71.68 340.08,-73.77 358.63,-75.75"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="358.49,-79.26 368.81,-76.84 359.24,-72.3 358.49,-79.26"/>
 </g>
 <!-- Node7 -->
 <g id="node7" class="node">
 <title>Node7</title>
-<g id="a_node7"><a xlink:href="class_argument.html#a3ec1ea9ca2d489a987e0fa335daaf061" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="468,-93 340,-93 340,-74 468,-74 468,-93"/>
-<text text-anchor="middle" x="404" y="-81" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::findShortName</text>
+<g id="a_node7"><a xlink:href="class_argument.html#a3ec1ea9ca2d489a987e0fa335daaf061" target="_top" xlink:title="Find the start position of a short named argument.">
+<polygon fill="white" stroke="#666666" points="496,-56 368,-56 368,-37 496,-37 496,-56"/>
+<text text-anchor="middle" x="432" y="-44" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::findShortName</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node7 -->
-<g id="edge6" class="edge">
+<g id="edge7" class="edge">
 <title>Node2&#45;&gt;Node7</title>
-<path fill="none" stroke="#63b8ff" d="M289.44,-70.3C302.09,-71.77 315.94,-73.38 329.49,-74.96"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="329.42,-78.47 339.76,-76.15 330.23,-71.52 329.42,-78.47"/>
+<path fill="none" stroke="#63b8ff" d="M303.42,-59.44C320.29,-57.73 339.49,-55.78 357.78,-53.92"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="358.24,-57.4 367.83,-52.91 357.53,-50.43 358.24,-57.4"/>
 </g>
 <!-- Node8 -->
 <g id="node8" class="node">
 <title>Node8</title>
-<g id="a_node8"><a xlink:href="class_commander.html#aed49189003860bfa85ab3bf8d320c5f6" target="_top" xlink:title="Get the instance if a system variable by its name.">
-<polygon fill="white" stroke="#666666" points="483,-19 325,-19 325,0 483,0 483,-19"/>
-<text text-anchor="middle" x="404" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Commander::getSystemVariable</text>
+<g id="a_node8"><a xlink:href="class_commander.html#a8c61dd05384f4a5d02932c602f8d8e00" target="_top" xlink:title="Get the instance if a system variable by its name.">
+<polygon fill="white" stroke="#666666" points="511,-19 353,-19 353,0 511,0 511,-19"/>
+<text text-anchor="middle" x="432" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Commander::getSystemVariable</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node8 -->
-<g id="edge9" class="edge">
+<g id="edge10" class="edge">
 <title>Node2&#45;&gt;Node8</title>
-<path fill="none" stroke="#63b8ff" d="M258.8,-54.94C275.88,-46.78 301.65,-35.18 325,-27.5 331.48,-25.37 338.33,-23.4 345.19,-21.6"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="346.34,-24.92 355.19,-19.09 344.63,-18.13 346.34,-24.92"/>
+<path fill="none" stroke="#63b8ff" d="M289.47,-54.92C298.56,-52.17 308.23,-48.98 317,-45.5 333.63,-38.91 336.17,-33.55 353,-27.5 358.92,-25.37 365.19,-23.43 371.49,-21.68"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="372.6,-25.01 381.39,-19.09 370.83,-18.24 372.6,-25.01"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="class_argument.html#af21c1965c64a5f3984cbf42bcf1eec5f" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="620,-130 522,-130 522,-111 620,-111 620,-130"/>
-<text text-anchor="middle" x="571" y="-118" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::inString</text>
+<polygon fill="white" stroke="#666666" points="648,-93 550,-93 550,-74 648,-74 648,-93"/>
+<text text-anchor="middle" x="599" y="-81" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::inString</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node3&#45;&gt;Node4</title>
-<path fill="none" stroke="#63b8ff" d="M467.38,-120.5C481.92,-120.5 497.35,-120.5 511.7,-120.5"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="511.94,-124 521.94,-120.5 511.94,-117 511.94,-124"/>
+<path fill="none" stroke="#63b8ff" d="M475.49,-110.97C496.87,-106.18 522.97,-100.32 545.58,-95.25"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="546.37,-98.66 555.37,-93.06 544.84,-91.83 546.37,-98.66"/>
 </g>
-<!-- Node5 -->
-<g id="node5" class="node">
-<title>Node5</title>
-<g id="a_node5"><a xlink:href="class_argument.html#a8f98fbce9e55886c0b3a84c6f92572e5" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="623,-93 519,-93 519,-74 623,-74 623,-93"/>
-<text text-anchor="middle" x="571" y="-81" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::substring</text>
+<!-- Node5&#45;&gt;Node4 -->
+<g id="edge5" class="edge">
+<title>Node5&#45;&gt;Node4</title>
+<path fill="none" stroke="#63b8ff" d="M495.38,-83.5C509.92,-83.5 525.35,-83.5 539.7,-83.5"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="539.94,-87 549.94,-83.5 539.94,-80 539.94,-87"/>
+</g>
+<!-- Node6 -->
+<g id="node6" class="node">
+<title>Node6</title>
+<g id="a_node6"><a xlink:href="class_argument.html#a8f98fbce9e55886c0b3a84c6f92572e5" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="651,-56 547,-56 547,-37 651,-37 651,-56"/>
+<text text-anchor="middle" x="599" y="-44" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::substring</text>
 </a>
 </g>
 </g>
-<!-- Node3&#45;&gt;Node5 -->
-<g id="edge4" class="edge">
-<title>Node3&#45;&gt;Node5</title>
-<path fill="none" stroke="#63b8ff" d="M447.49,-110.97C468.87,-106.18 494.97,-100.32 517.58,-95.25"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="518.37,-98.66 527.37,-93.06 516.84,-91.83 518.37,-98.66"/>
+<!-- Node5&#45;&gt;Node6 -->
+<g id="edge6" class="edge">
+<title>Node5&#45;&gt;Node6</title>
+<path fill="none" stroke="#63b8ff" d="M475.49,-73.97C496.87,-69.18 522.97,-63.32 545.58,-58.25"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="546.37,-61.66 555.37,-56.06 544.84,-54.83 546.37,-61.66"/>
 </g>
 <!-- Node7&#45;&gt;Node4 -->
-<g id="edge7" class="edge">
-<title>Node7&#45;&gt;Node4</title>
-<path fill="none" stroke="#63b8ff" d="M447.49,-93.03C468.87,-97.82 494.97,-103.68 517.58,-108.75"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="516.84,-112.17 527.37,-110.94 518.37,-105.34 516.84,-112.17"/>
-</g>
-<!-- Node7&#45;&gt;Node5 -->
 <g id="edge8" class="edge">
-<title>Node7&#45;&gt;Node5</title>
-<path fill="none" stroke="#63b8ff" d="M468.32,-83.5C481.52,-83.5 495.4,-83.5 508.53,-83.5"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="508.87,-87 518.87,-83.5 508.87,-80 508.87,-87"/>
+<title>Node7&#45;&gt;Node4</title>
+<path fill="none" stroke="#63b8ff" d="M475.49,-56.03C496.87,-60.82 522.97,-66.68 545.58,-71.75"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="544.84,-75.17 555.37,-73.94 546.37,-68.34 544.84,-75.17"/>
+</g>
+<!-- Node7&#45;&gt;Node6 -->
+<g id="edge9" class="edge">
+<title>Node7&#45;&gt;Node6</title>
+<path fill="none" stroke="#63b8ff" d="M496.32,-46.5C509.52,-46.5 523.4,-46.5 536.53,-46.5"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="536.87,-50 546.87,-46.5 536.87,-43 536.87,-50"/>
 </g>
 </g>
 </svg>

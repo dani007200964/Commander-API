@@ -199,7 +199,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
                     response -> print( commandData_ptr -> name_P );
                     response -> print( ':' );
                     response -> print( ' ' );
-                    response -> println( commandData_ptr -> desc_P );
+                    response -> println( commandData_ptr -> data.desc_P );
 
                 }
 
@@ -460,7 +460,7 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
         }
         #ifdef __AVR__
         else if( memoryType == MEMORY_PROGMEM ){
-            out -> print( API_tree[ find_api_index_by_place( i ) ].name_P );
+            out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> name_P );
         }
         #endif
 
@@ -480,7 +480,7 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
         }
         #ifdef __AVR__
         else if( memoryType == MEMORY_PROGMEM ){
-            out -> print( API_tree[ find_api_index_by_place( i ) ].desc_P );
+            out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> data.desc_P );
         }
         #endif
 
@@ -550,6 +550,7 @@ int Commander::hasChar( const char* str, char c, int number, bool ignoreString )
 
 }
 
+/*
 #ifdef __AVR__
 
 int Commander::commander_strcmp_progmem( API_t* element1, API_t* element2 ){
@@ -566,6 +567,7 @@ int Commander::commander_strcmp_tree_ram_progmem( API_t* element1, const char* e
 }
 
 #endif
+*/
 
 void Commander::enableFormatting(){
 	formatting = true;

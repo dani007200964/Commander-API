@@ -117,6 +117,7 @@ $(document).ready(function(){initNavTree('classcommander_pipe_channel.html','');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classcommander_pipe_channel-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">commanderPipeChannel Class Reference</div></div>
 </div><!--header-->
@@ -162,10 +163,15 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a6424ac704046904cd7af9e0a8a7861a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3eadb78162abc2acc4df2d9a4ba86227"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html#a3eadb78162abc2acc4df2d9a4ba86227">writePointer</a> = 0</td></tr>
 <tr class="separator:a3eadb78162abc2acc4df2d9a4ba86227"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a2dd65deae9fc500b2e6bd2253cb7041c"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommander_pipe_channel.html#a2dd65deae9fc500b2e6bd2253cb7041c">commanderPipeChannelUT</a></td></tr>
+<tr class="separator:a2dd65deae9fc500b2e6bd2253cb7041c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8hpp_source.html#l00103">103</a> of file <a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8hpp_source.html#l00060">60</a> of file <a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad67f75499feea46a4f1cb71a0b98587b" name="ad67f75499feea46a4f1cb71a0b98587b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad67f75499feea46a4f1cb71a0b98587b">&#9670;&#160;</a></span>available()</h2>
@@ -222,7 +228,7 @@ Private Attributes</h2></td></tr>
 
 <p>Flush the channel. </p>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00081">81</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00070">70</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
 
 </div>
 </div>
@@ -252,7 +258,7 @@ Private Attributes</h2></td></tr>
 <p>Peek the firtst byte from the channel. </p>
 <dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will NOT be removed from the channel. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00086">86</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00075">75</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
 
 </div>
 </div>
@@ -282,7 +288,7 @@ Private Attributes</h2></td></tr>
 <p>Read one byte form the channel. </p>
 <dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will be removed from the channel. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00055">55</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00047">47</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
 
 </div>
 </div>
@@ -320,7 +326,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00114">114</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00098">98</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
 
 </div>
 </div>
@@ -355,9 +361,34 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The number of bytes that has been sucessfully written to the channel. Because it is the base class, it returns 0. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes that has been successfully written to the channel. Because it is the base class, it returns 0. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00102">102</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8cpp_source.html#l00085">85</a> of file <a class="el" href="_commander-_i_o_8cpp_source.html">Commander-IO.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a2dd65deae9fc500b2e6bd2253cb7041c" name="a2dd65deae9fc500b2e6bd2253cb7041c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dd65deae9fc500b2e6bd2253cb7041c">&#9670;&#160;</a></span>commanderPipeChannelUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class commanderPipeChannelUT</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8hpp_source.html#l00095">95</a> of file <a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>.</p>
 
 </div>
 </div>
@@ -382,7 +413,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8hpp_source.html#l00134">134</a> of file <a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8hpp_source.html#l00091">91</a> of file <a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>.</p>
 
 </div>
 </div>
@@ -406,7 +437,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8hpp_source.html#l00135">135</a> of file <a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8hpp_source.html#l00092">92</a> of file <a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>.</p>
 
 </div>
 </div>
@@ -430,7 +461,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8hpp_source.html#l00136">136</a> of file <a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_commander-_i_o_8hpp_source.html#l00093">93</a> of file <a class="el" href="_commander-_i_o_8hpp_source.html">Commander-IO.hpp</a>.</p>
 
 </div>
 </div>
@@ -456,7 +487,7 @@ Private Attributes</h2></td></tr>
       <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Thu Aug 10 2023
+      </a> on Wed Oct 18 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Commander-API">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -471,7 +502,7 @@ Private Attributes</h2></td></tr>
         <b>Commander-API V3.0.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Thu Aug 10 2023
+        </a> on Wed Oct 18 2023
       </small></address>
     </li>
   </ul>

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['name_0',['name',['../struct_commander_1_1_a_p_i__t.html#a7b91a8bdba77b1a0e3e2ac7d91a39587',1,'Commander::API_t::name()'],['../struct_commander_1_1_system_variable__t.html#a95db46c1abdb3951a7069a851e008846',1,'Commander::SystemVariable_t::name()']]],
-  ['name_5fp_1',['name_P',['../struct_commander_1_1_a_p_i__t.html#a9ed94edd0385fde9d7f1a54a3d036c2f',1,'Commander::API_t::name_P()'],['../struct_commander_1_1_system_variable__t.html#abf0ae6dfe04d31d040b86d077cf9d408',1,'Commander::SystemVariable_t::name_P()']]],
+  ['name_0',['name',['../struct_commander_database_1_1data_record__t.html#a00531cc2f18749a71a58c9fda2b9f2a8',1,'CommanderDatabase::dataRecord_t']]],
+  ['name_5fp_1',['name_P',['../struct_commander_database_1_1data_record__t.html#aa080250f91bef9cc566e63a3b752ea22',1,'CommanderDatabase::dataRecord_t']]],
   ['neofetch_5fauthor_2',['NEOFETCH_AUTHOR',['../_commander-_settings_8hpp.html#ac165a3e2a57b3412902515b88ded5a33',1,'Commander-Settings.hpp']]],
   ['neofetch_5fcommand_5fparser_3',['NEOFETCH_COMMAND_PARSER',['../_commander-_settings_8hpp.html#a3240124928ec3d486abe71ceb49774ad',1,'Commander-Settings.hpp']]],
   ['neofetch_5fcompile_5fdate_4',['NEOFETCH_COMPILE_DATE',['../_commander-_settings_8hpp.html#a9c0b4f54d8719aa7cb0603c034701536',1,'Commander-Settings.hpp']]],

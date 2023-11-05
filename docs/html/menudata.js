@@ -81,7 +81,6 @@ var menudata={children:[
 {text:"b",url:"functions_vars.html#index_b"},
 {text:"c",url:"functions_vars.html#index_c"},
 {text:"d",url:"functions_vars.html#index_d"},
-{text:"e",url:"functions_vars.html#index_e"},
 {text:"f",url:"functions_vars.html#index_f"},
 {text:"i",url:"functions_vars.html#index_i"},
 {text:"l",url:"functions_vars.html#index_l"},
@@ -97,6 +96,7 @@ var menudata={children:[
 {text:"w",url:"functions_vars.html#index_w"}]},
 {text:"Typedefs",url:"functions_type.html"},
 {text:"Enumerations",url:"functions_enum.html"},
-{text:"Enumerator",url:"functions_eval.html"}]}]}]},
+{text:"Enumerator",url:"functions_eval.html"},
+{text:"Related Functions",url:"functions_rela.html"}]}]}]},
 {text:"📈 Coverage",url:"md_docs_markdown_pages_coverage.html#coverage"},
 {text:"🚧 Developer Zone",url:"md_docs_markdown_pages_developer_zone.html#developer_zone"}]}

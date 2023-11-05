@@ -446,7 +446,8 @@ bool commander_export_func( char *args, Stream *response, void* parent );
                                             "Example, print 10 bytes of data from address 0x00FF:\r\n"              \
 										    "  memDump 0x00FF u8 -h -n 10"
 
-#define SYSTEM_COMMAND_MEMDUMP systemCommand( SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_DESCRIPTION, commander_memDump_func )
+#define SYSTEM_COMMAND_MEMDUMP    systemCommand( SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_DESCRIPTION, commander_memDump_func )
+#define SYSTEM_COMMAND_MEMDUMP_ND systemCommand( SYSTEM_COMMAND_MEMDUMP_NAME, "", commander_memDump_func )
 #ifdef __AVR__
   #define SYSTEM_COMMAND_P_MEMDUMP( element ) systemCommand_P( element, SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_DESCRIPTION, commander_memDump_func )
 #endif

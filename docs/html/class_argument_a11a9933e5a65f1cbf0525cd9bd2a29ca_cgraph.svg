@@ -20,7 +20,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="class_argument.html#a19696736b23d7f4f4c6e4125e67f59a8" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="class_argument.html#a19696736b23d7f4f4c6e4125e67f59a8" target="_top" xlink:title="Find the start position of a long named argument.">
 <polygon fill="white" stroke="#666666" points="243,-56 117,-56 117,-37 243,-37 243,-56"/>
 <text text-anchor="middle" x="180" y="-44" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::findLongName</text>
 </a>
@@ -35,7 +35,7 @@
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
-<g id="a_node5"><a xlink:href="class_argument.html#a3ec1ea9ca2d489a987e0fa335daaf061" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_argument.html#a3ec1ea9ca2d489a987e0fa335daaf061" target="_top" xlink:title="Find the start position of a short named argument.">
 <polygon fill="white" stroke="#666666" points="244,-19 116,-19 116,0 244,0 244,-19"/>
 <text text-anchor="middle" x="180" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Argument::findShortName</text>
 </a>

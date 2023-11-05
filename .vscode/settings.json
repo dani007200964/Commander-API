@@ -9,6 +9,7 @@
         "cmath": "cpp",
         "initializer_list": "cpp",
         "xstring": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "ios": "cpp"
     }
 }

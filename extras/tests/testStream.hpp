@@ -38,7 +38,7 @@ SOFTWARE.
 #include <conio.h>
 #include <stdint.h>
 
-#define TEST_STREAM_BUFFER_SIZE 1024
+#define TEST_STREAM_BUFFER_SIZE 4096
 
 class testStream : public Stream{
 

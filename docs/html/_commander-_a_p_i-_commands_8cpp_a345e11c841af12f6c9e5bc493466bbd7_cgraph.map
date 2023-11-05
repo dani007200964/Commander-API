@@ -1,0 +1,4 @@
+<map id="commander_configTime_func" name="commander_configTime_func">
+<area shape="rect" id="node1" title="Premade function for wifiScan command." alt="" coords="5,13,196,38"/>
+<area shape="rect" id="node2" href="$class_commander.html#a11b7236808d55ed1c497e719117cdf3d" title="Print &#39;Argument error!&#39; to a specified Serial channel." alt="" coords="244,5,425,45"/>
+</map>

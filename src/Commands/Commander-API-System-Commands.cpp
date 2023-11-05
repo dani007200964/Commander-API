@@ -89,37 +89,28 @@ Commander::systemVariable_t* exportTarget = NULL;
 
 bool commander_exportTarget_func( char *args, Stream *response, void* parent ){
 
-    Argument intNumber( args, 0 );
+    Argument number( args, 0 );
     Argument floatNumber( args, 0 );
 
     if( response == NULL ){
         return false;
     }
 
-    intNumber.parseInt();
-    floatNumber.parseFloat();
+    number.parseFloat();
 
-    if( strncmp( (const char*)args, "", 2 ) == 0 ){
+    if( number.getSystemVariable() != NULL ){
+        exportTarget = number.getSystemVariable();
 
-        if( exportTarget == NULL ){
-            response -> print( __CONST_TXT__( " Target for export is not set!" ) );
+        // Check if the variable is a string. String can not be modified.
+        if( exportTarget -> data.type == Commander::VARIABLE_STRING ){
+            exportTarget = NULL;
+
+            Commander::printArgumentError( response );
+            response -> print( __CONST_TXT__( " Variable '" ) );
+            response -> print( args );
+            response -> print( __CONST_TXT__( "' is a string. String system variables can not be modified!" ) );
+            return false;
         }
-
-        else{
-            response -> print( __CONST_TXT__( "Export target is: " ) );
-            response -> print( exportTarget -> name );
-        }
-
-        return true;
-
-    }
-
-    if( intNumber ){
-        exportTarget = intNumber.getSystemVariable();
-    }
-
-    else if( floatNumber ){
-        exportTarget = floatNumber.getSystemVariable();
     }
 
     else{
@@ -160,8 +151,8 @@ bool commander_export_func( char *args, Stream *response, void* parent ){
         }
 
         else{
-            Commander::printArgumentError( response );
-            response -> print( __CONST_TXT__( " Only integer or float targets are supported!" ) );
+            // Only integer or float target is supported.
+            // No error message required, because it should not be happening.
             return false;
         }
     }
