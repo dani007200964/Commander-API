@@ -424,11 +424,14 @@ bool commander_exportTarget_func( char *args, Stream *response, void* parent );
 /// @param response Response channel for messages.
 bool commander_export_func( char *args, Stream *response, void* parent );
 
-//-------- export function --------//
+//-------- memDump function --------//
 #define SYSTEM_COMMAND_MEMDUMP_NAME         "memDump"
 
-#define SYSTEM_COMMAND_MEMDUMP_DESCRIPTION     "It is a tool to check data in the memory.\r\n\r\n"                     \
-                                            "usage: memDump [base address][type][options]\r\n\r\n"                  \
+#define SYSTEM_COMMAND_MEMDUMP_BRIEF        "It is a tool to check data in the memory.\r\n\r\n"
+
+#define SYSTEM_COMMAND_MEMDUMP_LINK         "https://giphy.com/embed/1hGu7ketlpuuWjwvMA/video"
+
+#define SYSTEM_COMMAND_MEMDUMP_DESCRIPTION  "usage: memDump [base address][type][options]\r\n\r\n"                  \
                                             "base address: This is the start address of the memory region.\r\n"     \
                                             "type: Type of the data in the specified address. Valid options:\r\n"   \
                                             "  u8\r\n"                                                              \
@@ -446,15 +449,48 @@ bool commander_export_func( char *args, Stream *response, void* parent );
                                             "Example, print 10 bytes of data from address 0x00FF:\r\n"              \
 										    "  memDump 0x00FF u8 -h -n 10"
 
+<<<<<<< HEAD
+#define SYSTEM_COMMAND_MEMDUMP_NO_DESC systemCommand( SYSTEM_COMMAND_MEMDUMP_NAME, "", commander_memDump_func )
+#define SYSTEM_COMMAND_MEMDUMP_SHORT_DESC systemCommand( SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_BRIEF, commander_memDump_func )
+#define SYSTEM_COMMAND_MEMDUMP_LINK_DESC systemCommand( SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_LINK, commander_memDump_func )
+#define SYSTEM_COMMAND_MEMDUMP_FULL_DESC systemCommand( SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_BRIEF SYSTEM_COMMAND_MEMDUMP_DESCRIPTION, commander_memDump_func )
+=======
 #define SYSTEM_COMMAND_MEMDUMP    systemCommand( SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_DESCRIPTION, commander_memDump_func )
 #define SYSTEM_COMMAND_MEMDUMP_ND systemCommand( SYSTEM_COMMAND_MEMDUMP_NAME, "", commander_memDump_func )
+>>>>>>> 3ce251959e38d12224dcee4b764fcbbd8c5bfd9e
 #ifdef __AVR__
-  #define SYSTEM_COMMAND_P_MEMDUMP( element ) systemCommand_P( element, SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_DESCRIPTION, commander_memDump_func )
+    #define SYSTEM_COMMAND_P_MEMDUMP( element ) systemCommand_P( element, SYSTEM_COMMAND_MEMDUMP_NAME, SYSTEM_COMMAND_MEMDUMP_DESCRIPTION, commander_memDump_func )
+    #define SYSTEM_COMMAND_MEMDUMP SYSTEM_COMMAND_MEMDUMP_NO_DESC
+#else
+    #define SYSTEM_COMMAND_MEMDUMP SYSTEM_COMMAND_MEMDUMP_FULL_DESC
+#endif
+/// Premade function for memDump command.
+/// @param args Pointer to the argument string.
+/// @param response Response channel for messages.
+bool commander_memDump_func( char *args, Stream *response, void* parent );
+
+//-------- i2cScan function --------//
+#define SYSTEM_COMMAND_I2CSCAN_NAME         "i2cScan"
+
+#define SYSTEM_COMMAND_I2CSCAN_BRIEF        "It is a tool to detect slaves on a specified I2C bus.\r\n\r\n"
+
+#define SYSTEM_COMMAND_I2CSCAN_LINK         "https://giphy.com/embed/1hGu7ketlpuuWjwvMA/video"
+
+#define SYSTEM_COMMAND_I2CSCAN_DESCRIPTION  "usage: i2cScan\r\n\r\n"    \
+
+#define SYSTEM_COMMAND_I2CSCAN_NO_DESC systemCommand( SYSTEM_COMMAND_I2CSCAN_NAME, "", commander_i2cScan_func )
+#define SYSTEM_COMMAND_I2CSCAN_SHORT_DESC systemCommand( SYSTEM_COMMAND_I2CSCAN_NAME, SYSTEM_COMMAND_I2CSCAN_BRIEF, commander_i2cScan_func )
+#define SYSTEM_COMMAND_I2CSCAN_LINK_DESC systemCommand( SYSTEM_COMMAND_I2CSCAN_NAME, SYSTEM_COMMAND_I2CSCAN_LINK, commander_i2cScan_func )
+#define SYSTEM_COMMAND_I2CSCAN_FULL_DESC systemCommand( SYSTEM_COMMAND_I2CSCAN_NAME, SYSTEM_COMMAND_I2CSCAN_BRIEF SYSTEM_COMMAND_I2CSCAN_DESCRIPTION, commander_i2cScan_func )
+#ifdef __AVR__
+    #define SYSTEM_COMMAND_P_I2CSCAN( element ) systemCommand_P( element, SYSTEM_COMMAND_I2CSCAN_NAME, SYSTEM_COMMAND_I2CSCAN_DESCRIPTION, commander_i2cScan_func )
+    #define SYSTEM_COMMAND_I2CSCAN SYSTEM_COMMAND_I2CSCAN_NO_DESC
+#else
+    #define SYSTEM_COMMAND_I2CSCAN SYSTEM_COMMAND_I2CSCAN_FULL_DESC
 #endif
 /// Premade function for not command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-bool commander_memDump_func( char *args, Stream *response, void* parent );
-extern uint32_t memDumpAddressRanges[][ 2 ];
+bool commander_i2cScan_func( char *args, Stream *response, void* parent );
 
 #endif
