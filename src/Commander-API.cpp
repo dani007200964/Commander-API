@@ -448,7 +448,7 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 		out -> println( __CONST_TXT__( "---- Available commands ----\r\n" ) );
 	}
 
-	for( i = 0; i < regularCommands.getSize(); i++ ){
+	for( i = 1; i <= regularCommands.getSize(); i++ ){
 
         if( style ){
             out -> print( __CONST_TXT__( "\033[1;32m" ) );
@@ -470,6 +470,7 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 
         // If description is not requested, we can skip the rest of this for loop.
         if( !description ){
+            out -> println();
             continue;
         }
 

@@ -248,7 +248,7 @@ uint16_t CommanderDatabase< T >::findIndexByPlace( uint16_t place ){
 	uint16_t i;
 
 	// Go through all commands
-	for( i = 1; i <= dataTreeSize; i++ ){
+	for( i = 0; i < dataTreeSize; i++ ){
 
 		// Check that if we found the desired command
 		if( dataTree[ i ].place == place ){
