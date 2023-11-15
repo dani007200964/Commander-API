@@ -39,7 +39,7 @@ SOFTWARE.
 #include <stddef.h>
 #include <stdarg.h>
 
-#include "Commander-Settings.hpp"
+#include "Commander-DefaultSettings.hpp"
 
 #include "Stream.h"
 

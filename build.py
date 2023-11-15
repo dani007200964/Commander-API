@@ -152,6 +152,11 @@ if install:
     quit()
 
 
+# Check if the build directory exists.
+# If not, create it.
+if os.path.isdir( rootDirectory + "/" + buildDirectoryName ) == False:
+    os.mkdir( rootDirectory + "/" + buildDirectoryName )
+
 # We have to change directory to the build directory to make CMake happy.
 os.chdir( rootDirectory + "/" + buildDirectoryName )
 
@@ -415,6 +420,26 @@ if ( 'doc' in target ) or ( 'all' in target ):
         sys.exit( 4 )
 
     print( 'Coverage report data generated here: {:s}'.format( rootDirectory + "/" + buildDirectoryName + "/report/report.html" ) )
+
+
+    # Append some styling to the report css to make it more readable.
+
+    styleLines = [
+        "\n\n/*--- Modified styles ---*/\n"
+        ".no { color: darkorange } /* Name.Constant */\n"
+        ".s { color: darkorange } /* Literal.String */\n"
+        ".sc { color: darkorange } /* Literal.String.Char */\n"
+        ".kt { color: darkorange } /* Keyword.Type */\n"
+        ".o { color: #8bcbff } /* Operator */\n"
+        ".mi { color: #6a81ff } /* Literal.Number.Integer */\n"
+        ".nf { color: #abb8ff } /* Name.Function */\n"
+        ".nc { color: #abb8ff; font-weight: bold } /* Name.Class */\n"
+        ".nn { color: #abb8ff; font-weight: bold } /* Name.Namespace */\n"
+    ]
+
+    cssFile = open( rootDirectory + "/" + buildDirectoryName + "/report/report.css", "a")
+    cssFile.writelines(styleLines)
+    cssFile.close()
 
     # Copy report data to Doxygen source folder
     reportFiles = os.listdir( rootDirectory + "/" + buildDirectoryName + "/report" )

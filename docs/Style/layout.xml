@@ -10,6 +10,7 @@
         <tab type="usergroup" visible="yes" url="@ref example_argumentbasic" title="Basic" intro=""/>
       </tab>
     </tab>
+    <tab type="usergroup" visible="yes" url="@ref user_settings" title="⚙️ User Settings" intro=""/>
     <tab type="modules" visible="yes" title="" intro=""/>
     <tab type="namespaces" visible="yes" title="">
       <tab type="namespacelist" visible="yes" title="" intro=""/>

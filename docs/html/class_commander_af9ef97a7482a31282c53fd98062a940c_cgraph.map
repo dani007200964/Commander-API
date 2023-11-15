@@ -1,4 +1,0 @@
-<map id="Commander::printSystemVariable" name="Commander::printSystemVariable">
-<area shape="rect" id="node1" title="Print the value of a system variable." alt="" coords="5,5,223,31"/>
-<area shape="rect" id="node2" href="$class_commander.html#a8c61dd05384f4a5d02932c602f8d8e00" title="Get the instance if a system variable by its name." alt="" coords="271,5,481,31"/>
-</map>

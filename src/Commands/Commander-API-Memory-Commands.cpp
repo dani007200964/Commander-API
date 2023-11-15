@@ -31,7 +31,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "inttypes.h"
+// This macro is required to make the formatting work. Without this, it won't compile.
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
 #include "../Commander-API-Commands.hpp"
 
 #define BYTE_TO_BINARY_PATTERN  "0b%c%c%c%c%c%c%c%c"

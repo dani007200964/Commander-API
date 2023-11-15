@@ -147,6 +147,15 @@ void test_commander_memDump_func_regular(){
 
     TEST_ASSERT_TRUE( status );
 
+    // Simple memDump with 10 i8 type with hex formatting
+    streamObject.clearRx();
+    streamObject.clearTx();
+
+    sprintf( command, "%s i8 -n 10 -h", startAddress );
+    status = commander_memDump_func( command, &streamObject, NULL );
+
+    TEST_ASSERT_TRUE( status );
+
     // Simple memDump with 10 i8 type with decimal formatting
     streamObject.clearRx();
     streamObject.clearTx();
@@ -161,6 +170,15 @@ void test_commander_memDump_func_regular(){
     streamObject.clearTx();
 
     sprintf( command, "%s i8 -n 10 -b", startAddress );
+    status = commander_memDump_func( command, &streamObject, NULL );
+
+    TEST_ASSERT_TRUE( status );
+
+    // Simple memDump with 10 i8 type with character formatting
+    streamObject.clearRx();
+    streamObject.clearTx();
+
+    sprintf( command, "%s i8 -n 50 -c", startAddress );
     status = commander_memDump_func( command, &streamObject, NULL );
 
     TEST_ASSERT_TRUE( status );

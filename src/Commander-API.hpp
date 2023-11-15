@@ -41,7 +41,7 @@ SOFTWARE.
 #include "stdint.h"
 #include "string.h"
 
-#include "Commander-Settings.hpp"
+#include "Commander-DefaultSettings.hpp"
 #include "Commander-IO.hpp"
 
 #include "Stream.h"

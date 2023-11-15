@@ -431,6 +431,13 @@ bool Commander::execute( const char *cmd, Stream *resp, void* parent ){
 
 void Commander::attachDebugChannel( Stream *resp ){
 	dbgResponse = resp;
+    if( resp != NULL ){
+        regularCommands.attachDebugChannel( resp );
+        systemVariables.attachDebugChannel( resp );
+        
+        regularCommands.setDebugLevel( (CommanderDatabase<Commander::API_t>::debugLevel_t)debugLevel );
+        systemVariables.setDebugLevel( (CommanderDatabase<Commander::systemVariableData_t>::debugLevel_t)debugLevel );
+    }
 }
 
 void Commander::setDebugLevel( Commander::debugLevel_t debugLevel_p ){

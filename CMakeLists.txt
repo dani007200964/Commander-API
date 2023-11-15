@@ -48,7 +48,7 @@ set( SOURCES
     src/Commander-Arguments.hpp
     #src/Commander-Database.cpp
     src/Commander-Database.hpp
-    src/Commander-Settings.hpp
+    src/Commander-DefaultSettings.hpp
 
     extras/simulator/Arduino.h
     extras/simulator/Print.cpp
@@ -131,7 +131,10 @@ if(RUN_TESTS)
     #add_executable( test_commander_commands_system_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/System-Commands/test_system_commands.cpp )
 
     # -- Commander-Commands / Memory-Commands --
-    add_executable( test_commander_commands_memory_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Memory-Commands/test_memory_commands.cpp )
+    #add_executable( test_commander_commands_memory_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Memory-Commands/test_memory_commands.cpp )
+
+    # -- Commander-Commands / Neofetch-Command --
+    add_executable( test_commander_commands_neofetch_command ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Neofetch-Command/test_neofetch_command.cpp )
 
     endif()
 
