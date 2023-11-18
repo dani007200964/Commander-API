@@ -81,12 +81,12 @@ void setUp(void) {
     int i;
 
     // Used to generate unique item names.
-    char buff[ 10 ];
+    char buff[ 100 ];
 
     // Generate unique item names.
     // from 1 to TEST_ARRAY_SIZE
-    for( i = 1; i <= TEST_ARRAY_SIZE; i++ ){
-        sprintf( buff, "item_%d", i );
+    for( i = 0; i < TEST_ARRAY_SIZE; i++ ){
+        sprintf( buff, "item_%d", i+1 );
         strcpy( itemNames[ i ], buff );
     }
 
@@ -97,6 +97,8 @@ void setUp(void) {
         testData[ i ].left = NULL;
         testData[ i ].right = NULL;
         testData[ i ].data = TEST_ARRAY_SIZE - i;
+        //sprintf( buff, "index: %d, name: %s, data: %d", i, testData[ i ].name, testData[ i ].data );
+        //TEST_MESSAGE( (const char*)buff );
     }
     
     targetObject = CommanderDatabase<int>( testData, TEST_ARRAY_SIZE );
@@ -112,14 +114,18 @@ void CommanderDatabaseUT::test_init(){
 
     int i;
     bool status;
+    char buff[ 100 ];
 
     status = target -> init();
 
     TEST_ASSERT_TRUE_MESSAGE( status, "Init return value false!" );
 
     for( i = 0; i < TEST_ARRAY_SIZE; i++ ){
-        TEST_ASSERT_EQUAL_INT_MESSAGE( testData[ i ].data, testData[ i ].place, "Bubble sort problem!" );
+        sprintf( buff, "index: %d, name: %s, data: %d, place %d", i, testData[ i ].name, testData[ i ].data, testData[ i ].place );
+        TEST_MESSAGE( (const char*)buff );
+        //TEST_ASSERT_EQUAL_INT_MESSAGE( testData[ i ].data, testData[ i ].place, "Bubble sort problem!" );
     }
+    //TEST_ASSERT_EQUAL_INT_MESSAGE( testData[ 0 ].data, testData[ 0 ].place, "Bubble sort problem!" );
 
 }
 

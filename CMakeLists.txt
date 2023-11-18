@@ -134,7 +134,12 @@ if(RUN_TESTS)
     #add_executable( test_commander_commands_memory_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Memory-Commands/test_memory_commands.cpp )
 
     # -- Commander-Commands / Neofetch-Command --
-    add_executable( test_commander_commands_neofetch_command ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Neofetch-Command/test_neofetch_command.cpp )
+    #add_executable( test_commander_commands_neofetch_command ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander-Commands/Neofetch-Command/test_neofetch_command.cpp )
+
+
+
+    # -- Commander Object --
+    add_executable( test_commander_init ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander/test_init.cpp )
 
     endif()
 

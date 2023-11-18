@@ -296,7 +296,7 @@ public:
 	/// Firstly it makes the API-tree alphabetically ordered, then
 	/// creates a balanced binary tree from it. It is necessary to
 	/// speed up the search process.
-	void init();
+	bool init();
 
 	/// Default execution function.
 	///
@@ -512,6 +512,9 @@ private:
 
     /// This variable tracks the next free elements index in the update functions buffer.
     int updateBufferCounter = 0;
+
+    /// For unit testing.
+    friend class CommanderUT;
 
 };
 

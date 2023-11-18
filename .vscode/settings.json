@@ -11,6 +11,7 @@
         "xstring": "cpp",
         "xlocale": "cpp",
         "ios": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "system_error": "cpp"
     }
 }

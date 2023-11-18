@@ -78,8 +78,8 @@ void test_commander_env_func_regular(){
     streamObject.clearTx();
     status = commander_env_func( (char*)"", &streamObject, NULL );
 
-    sprintf( expected, "tmpInt: int = %d\r\ntmpStr: str = %s\r\ntmpFloat: float = %.2f\r\n", tmpInt, tmpStr, tmpFloat );
-    TEST_ASSERT_EQUAL_STRING( streamObject.txBuffer, expected );
+    sprintf( expected, "tmpInt: int = %d\r\ntmpFloat: float = %.2f\r\ntmpStr: str = %s\r\n", tmpInt, tmpFloat, tmpStr );
+    TEST_ASSERT_EQUAL_STRING( expected, streamObject.txBuffer );
     TEST_ASSERT_TRUE( status );
 
     // Simple env modified run
@@ -90,8 +90,8 @@ void test_commander_env_func_regular(){
     streamObject.clearTx();
     status = commander_env_func( (char*)"", &streamObject, NULL );
 
-    sprintf( expected, "tmpInt: int = %d\r\ntmpStr: str = %s\r\ntmpFloat: float = %.2f\r\n", tmpInt, tmpStr, tmpFloat );
-    TEST_ASSERT_EQUAL_STRING( streamObject.txBuffer, expected );
+    sprintf( expected, "tmpInt: int = %d\r\ntmpFloat: float = %.2f\r\ntmpStr: str = %s\r\n", tmpInt, tmpFloat, tmpStr );
+    TEST_ASSERT_EQUAL_STRING( expected, streamObject.txBuffer );
     TEST_ASSERT_TRUE( status );
 
 
@@ -329,7 +329,6 @@ void test_commander_export_func_regular(){
 void test_commander_export_func_invalid(){
 
     bool status;
-    char expected[ 1000 ];
 
     // Invalid export with string to float
     streamObject.clearRx();

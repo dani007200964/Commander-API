@@ -441,7 +441,12 @@ if ( 'doc' in target ) or ( 'all' in target ):
     cssFile.writelines(styleLines)
     cssFile.close()
 
-    # Copy report data to Doxygen source folder
+    # Check if the html directory exists.
+    # If not, create it.
+    if os.path.isdir( rootDirectory + "/docs/html/" ) == False:
+        os.mkdir( rootDirectory + "/docs/html/" )
+
+    # Copy report data to Doxygen html folder
     reportFiles = os.listdir( rootDirectory + "/" + buildDirectoryName + "/report" )
     for reportFile in reportFiles:
         shutil.copyfile( rootDirectory + "/" + buildDirectoryName + "/report/" + reportFile,  rootDirectory + "/docs/html/" + reportFile )

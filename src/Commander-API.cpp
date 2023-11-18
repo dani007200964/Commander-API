@@ -41,7 +41,11 @@ Commander::debugLevel_t Commander::debugLevel = Commander::DEBUG_OFF;
 void Commander::attachTreeFunction( Commander::systemCommand_t* API_tree_p, uint32_t API_tree_size_p ){
 
 	regularCommands = CommanderDatabase<API_t>( API_tree_p, API_tree_size_p );
-    regularCommands.setDebugLevel( (CommanderDatabase<Commander::API_t>::debugLevel_t)debugLevel );
+
+    if( dbgResponse != NULL ){
+        regularCommands.setDebugLevel( (CommanderDatabase<Commander::API_t>::debugLevel_t)debugLevel );
+        regularCommands.attachDebugChannel( dbgResponse );
+    }
 
     if( ( dbgResponse != NULL ) && ( debugLevel >= DEBUG_DEBUG ) ){
 
@@ -53,8 +57,8 @@ void Commander::attachTreeFunction( Commander::systemCommand_t* API_tree_p, uint
 
 }
 
-void Commander::init(){
-    regularCommands.init();
+bool Commander::init(){
+    return regularCommands.init();
 }
 
 bool Commander::enablePipeModuleFunc( char* buffer, int bufferSize, commanderPipeChannel* pipeChannel_p ){
@@ -431,13 +435,6 @@ bool Commander::execute( const char *cmd, Stream *resp, void* parent ){
 
 void Commander::attachDebugChannel( Stream *resp ){
 	dbgResponse = resp;
-    if( resp != NULL ){
-        regularCommands.attachDebugChannel( resp );
-        systemVariables.attachDebugChannel( resp );
-        
-        regularCommands.setDebugLevel( (CommanderDatabase<Commander::API_t>::debugLevel_t)debugLevel );
-        systemVariables.setDebugLevel( (CommanderDatabase<Commander::systemVariableData_t>::debugLevel_t)debugLevel );
-    }
 }
 
 void Commander::setDebugLevel( Commander::debugLevel_t debugLevel_p ){

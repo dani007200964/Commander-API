@@ -256,6 +256,7 @@ private:
 
     int substring( char* str1, char* str2 );
 
+    // For unit testing.
     friend class ArgumentUT;
 
 };

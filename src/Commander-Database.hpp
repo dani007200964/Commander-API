@@ -368,7 +368,7 @@ bool CommanderDatabase< T >::optimizeDataTree(){
             if( ( debugChannel != NULL ) && ( debugLevel == DEBUG_VERBOSE ) ){
                 debugChannel -> print( __CONST_TXT__( "  level: " ) );
                 debugChannel -> print( i, BIN );
-                debugChannel -> print( __CONST_TXT__( " elementIndex: " ) );
+                debugChannel -> print( __CONST_TXT__( " idx: " ) );
                 debugChannel -> print( elementIndex );
             }
 
@@ -468,6 +468,9 @@ bool CommanderDatabase< T >::init(){
 	// Temporary variable, used to flip elements.
 	dataRecord_t temp;
 
+    bool swapped;
+    int compareResult;
+
 	strcmpElementElement = &CommanderDatabase::strcmpElementElementRegular;
 	strcmpElementCharArray = &CommanderDatabase::strcmpElementCharArrayRegular;
 
@@ -478,19 +481,31 @@ bool CommanderDatabase< T >::init(){
 
 	// Simple bubble sort.
     // We need to sort the elements into an alphabetical order.
-	for( i = 0; i < dataTreeSize; i++ ){
+	for( i = 0; i < (uint16_t)( dataTreeSize - 1 ); i++ ){
+        swapped = false;
+		for( j = 0; j < (uint16_t)( dataTreeSize - i - 1 ); j++ ){
 
-		for( j = i + 1; j < dataTreeSize; j++ ){
+            compareResult = ( this ->* strcmpElementElement )( &dataTree[ j ], &dataTree[ j + 1 ] );
 
-			if( ( this ->* strcmpElementElement )( &dataTree[ i ], &dataTree[ j ] ) > 0 ){
+            // Every element has to have an unique name.
+            if( compareResult == 0 ){
+                return false;
+            }
+            
+			if( compareResult < 0 ){
 
-				temp = dataTree[ i ];
-				dataTree[ i ] = dataTree[ j ];
-				dataTree[ j ] = temp;
+				temp = dataTree[ j ];
+				dataTree[ j ] = dataTree[ j + 1 ];
+				dataTree[ j + 1 ] = temp;
+                swapped = true;
 
 			}
 
 		}
+
+        if( !swapped ){
+            break;
+        }
 
 	}
 

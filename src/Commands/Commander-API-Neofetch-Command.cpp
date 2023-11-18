@@ -124,6 +124,90 @@ bool commander_neofetch_func( char *args, Stream *response, void* parent ){
     response -> print( __CONST_TXT__( "C" ) );
     rowCounter++;
 
+    //--- Print Custom Field-0 if it is available
+    #if defined( NEOFETCH_CUSTOM_FIELD_0 ) && defined( NEOFETCH_CUSTOM_VALUE_0 )
+        set_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_FIELD_0 ) );
+        response -> print( __CONST_TXT__( ": " ) );
+        reset_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_VALUE_0 ) );
+        response -> print( __CONST_TXT__( "\r\n\033[" ) );
+        // Move the cursor right as much as wide is the logo.
+        response -> print( NEOFETCH_LOGO_WIDTH );
+        response -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;
+    #endif
+
+    //--- Print Custom Field-1 if it is available
+    #if defined( NEOFETCH_CUSTOM_FIELD_1 ) && defined( NEOFETCH_CUSTOM_VALUE_1 )
+        set_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_FIELD_1 ) );
+        response -> print( __CONST_TXT__( ": " ) );
+        reset_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_VALUE_1 ) );
+        response -> print( __CONST_TXT__( "\r\n\033[" ) );
+        // Move the cursor right as much as wide is the logo.
+        response -> print( NEOFETCH_LOGO_WIDTH );
+        response -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;
+    #endif
+
+    //--- Print Custom Field-2 if it is available
+    #if defined( NEOFETCH_CUSTOM_FIELD_2 ) && defined( NEOFETCH_CUSTOM_VALUE_2 )
+        set_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_FIELD_2 ) );
+        response -> print( __CONST_TXT__( ": " ) );
+        reset_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_VALUE_2 ) );
+        response -> print( __CONST_TXT__( "\r\n\033[" ) );
+        // Move the cursor right as much as wide is the logo.
+        response -> print( NEOFETCH_LOGO_WIDTH );
+        response -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;
+    #endif
+
+    //--- Print Custom Field-3 if it is available
+    #if defined( NEOFETCH_CUSTOM_FIELD_3 ) && defined( NEOFETCH_CUSTOM_VALUE_3 )
+        set_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_FIELD_3 ) );
+        response -> print( __CONST_TXT__( ": " ) );
+        reset_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_VALUE_3 ) );
+        response -> print( __CONST_TXT__( "\r\n\033[" ) );
+        // Move the cursor right as much as wide is the logo.
+        response -> print( NEOFETCH_LOGO_WIDTH );
+        response -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;
+    #endif
+
+    //--- Print Custom Field-4 if it is available
+    #if defined( NEOFETCH_CUSTOM_FIELD_4 ) && defined( NEOFETCH_CUSTOM_VALUE_4 )
+        set_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_FIELD_4 ) );
+        response -> print( __CONST_TXT__( ": " ) );
+        reset_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_VALUE_4 ) );
+        response -> print( __CONST_TXT__( "\r\n\033[" ) );
+        // Move the cursor right as much as wide is the logo.
+        response -> print( NEOFETCH_LOGO_WIDTH );
+        response -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;
+    #endif
+
+    //--- Print Custom Field-5 if it is available
+    #if defined( NEOFETCH_CUSTOM_FIELD_5 ) && defined( NEOFETCH_CUSTOM_VALUE_5 )
+        set_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_FIELD_5 ) );
+        response -> print( __CONST_TXT__( ": " ) );
+        reset_neofetch_field_format( response );
+        response -> print( __CONST_TXT__( NEOFETCH_CUSTOM_VALUE_5 ) );
+        response -> print( __CONST_TXT__( "\r\n\033[" ) );
+        // Move the cursor right as much as wide is the logo.
+        response -> print( NEOFETCH_LOGO_WIDTH );
+        response -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;
+    #endif
+
     //--- Print the license information
     set_neofetch_field_format( response );
     response -> print( __CONST_TXT__( "License: " ) );
