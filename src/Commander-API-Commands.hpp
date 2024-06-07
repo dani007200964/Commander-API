@@ -34,7 +34,9 @@ SOFTWARE.
 /// Arduino detection
 #ifdef ARDUINO
 #include "Arduino.h"
+#ifndef ESP32
 #include "Wire.h"
+#endif
 #endif
 
 #include <math.h>
