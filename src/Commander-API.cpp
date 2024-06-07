@@ -221,7 +221,7 @@ void Commander::optimize_api_tree(){
 	API_t *prev;
 
 	// It will store string comparison result
-	int32_t comp_res;
+	int comp_res;
 
 	// recursive optimizer need to initialize elementCounter to 0
 	elementCounter = 0;
@@ -613,7 +613,7 @@ Commander::API_t* Commander::operator [] ( char* name ){
 	API_t *prev;
 
 	// It will store string compersation result
-	int8_t comp_res;
+	int comp_res;
 
 	prev = &API_tree[ 0 ];
 
