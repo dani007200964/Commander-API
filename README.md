@@ -30,7 +30,8 @@ The full documentation can be found [here](https://dani007200964.github.io/Comma
 ## Donation
 If this project help you reduce time to develop, you can give me a cup of coffee :coffee: :coffee: :coffee:
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://ko-fi.com/danielhajnal)
+[<img src="docs/images/ko_fi_button.png" height="48">](https://ko-fi.com/danielhajnal)
+
 
 ## License & copyright
 © Daniel Hajnal
