@@ -194,8 +194,6 @@ void testSetDebugLevel( void ){
 
 void CommanderUT::testSetDebugChannel(){
 
-    bool stat;
-
     target -> setDebugLevel( Commander::DEBUG_VERBOSE );
 
     target -> attachDebugChannel( &streamObject );

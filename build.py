@@ -399,7 +399,7 @@ if ( 'doc' in target ) or ( 'all' in target ):
     if os.path.isdir( rootDirectory + "/" + buildDirectoryName + "/report" ) == False:
         os.mkdir( rootDirectory + "/" + buildDirectoryName + "/report" )
 
-    shutil.copyfile( rootDirectory + "/docs/Style/gcovr/style.css",  rootDirectory + "/" + buildDirectoryName + "/style.css" )
+    shutil.copyfile( rootDirectory + "/extras/gcovr/style.css",  rootDirectory + "/" + buildDirectoryName + "/style.css" )
 
     # Run gcovr to evaluate coverage
     command = "gcovr -r .. --html-details --html-css style.css -o report/report.html"
@@ -441,6 +441,11 @@ if ( 'doc' in target ) or ( 'all' in target ):
     cssFile.writelines(styleLines)
     cssFile.close()
 
+    # Check if the docs directory exists.
+    # If not, create it.
+    if os.path.isdir( rootDirectory + "/docs/" ) == False:
+        os.mkdir( rootDirectory + "/docs/" )
+
     # Check if the html directory exists.
     # If not, create it.
     if os.path.isdir( rootDirectory + "/docs/html/" ) == False:
@@ -472,6 +477,11 @@ if ( 'doc' in target ) or ( 'all' in target ):
     badgeValue = "{:.1f}%".format( linePercentage )
 
     coverageBadge = anybadge.Badge( label="Coverage", value=badgeValue, default_color=badgeColor )
+
+    # Check if the images directory exists.
+    # If not, create it.
+    if os.path.isdir( rootDirectory + "/docs/images/" ) == False:
+        os.mkdir( rootDirectory + "/docs/images/" )
 
     if os.path.exists( rootDirectory + "/docs/images/coverage_badge.svg" ):
         os.remove( rootDirectory + "/docs/images/coverage_badge.svg" )

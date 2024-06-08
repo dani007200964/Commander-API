@@ -498,6 +498,8 @@ private:
     ///          will be returned. If it can not be found, a negative number will be returned.
 	int hasChar( const char* str, char c, int number, bool ignoreString = true );
 
+    void printBrokenPipe();
+
 	/// Channel for the internal piping.
 	commanderPipeChannel* pipeChannel = NULL;
 

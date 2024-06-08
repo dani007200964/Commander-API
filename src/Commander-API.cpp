@@ -284,8 +284,10 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
                 response -> println( pipeCounter );
                 */
 
+               /*
+
                 // Check if the piping went wrong.
-                int brokenPipePos = hasChar( originalCommandData, '|', pipeCounter, true );
+                brokenPipePos = hasChar( originalCommandData, '|', pipeCounter, true );
 
                 if( brokenPipePos >= 0 ){
 
@@ -328,6 +330,14 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
                 }
 
+                */
+
+            	if( pipePos > 0 ){
+            		tempBuff[ pipePos ] = '|';
+            	}
+
+                printBrokenPipe();
+
                 return false;
             }
 
@@ -341,7 +351,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 				}
 
                 // Execute the next command in the pipe.
-				if( executeCommand( &tempBuff[ pipePos + 1 ] ) ){
+				if( !executeCommand( &tempBuff[ pipePos + 1 ] ) ){
                     // If the command execution fails, we have to return to break recursion.
                     return false;
                 }
@@ -374,6 +384,14 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 	else{
 
         if( response != NULL ){
+            if( pipePos > 0 ){
+				tempBuff[ pipePos ] = '|';
+                printBrokenPipe();
+            }
+            else if( pipeCounter > 0 ){
+                printBrokenPipe();
+
+            }
 
             // If we went through the whole tree and we did not found the command in it,
             // we have to notice the user abut the problem. Maybe a Type-O
@@ -382,6 +400,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
             response -> print( __CONST_TXT__( "\' not found!" ) );
 
         }
+        return false;
 		
 	}
     return true;
@@ -444,6 +463,10 @@ void Commander::setDebugLevel( Commander::debugLevel_t debugLevel_p ){
 void Commander::printHelp( Stream* out, bool description, bool style ){
 
 	uint32_t i;
+
+    if( out == NULL ){
+        return;
+    }
 
 	if( style ){
 		out -> println( __CONST_TXT__( "\033[1;31m----\033[1;32m Available commands \033[1;31m----\033[0;37m\r\n" ) );
@@ -845,5 +868,75 @@ int Commander::floatToString( float number, char* buffer, int bufferSize ){
     }
 
     return status;
+
+}
+
+void Commander::printBrokenPipe(){
+
+    int i;
+    int brokenPipePos;
+
+    // Check if the piping went wrong.
+    brokenPipePos = hasChar( originalCommandData, '|', pipeCounter + 1, true );
+
+    // Check if the first pipe is broken.
+    //if( brokenPipePos < 0 ){
+    //    brokenPipePos = hasChar( originalCommandData, '|', true );
+    //}
+
+    // Check if the last command was bad.
+    //if( ( pipeCounter > 0 ) && ( brokenPipePos < 0 ) ){
+    //	brokenPipePos = strlen( originalCommandData );
+    //}
+
+    if( brokenPipePos >= 0 ){
+
+        if( response != NULL ){
+
+            // In case of broken pipe, inform the user about the problematic section.
+            if( formatting ){
+                response -> print( __CONST_TXT__( "\033[1;35m" ) );
+            }
+
+            response -> println( __CONST_TXT__( "\r\nBroken pipe!" ) );
+
+            if( formatting ){
+                response -> print( __CONST_TXT__( "\033[0;37m" ) );
+            }
+
+            response -> println( originalCommandData );
+            
+            for( i = 0; i < brokenPipePos; i++ ){
+                response -> print( ' ' );
+            }
+
+            if( formatting ){
+                response -> print( __CONST_TXT__( "\033[1;31m" ) );
+            }
+
+            response -> println( "\u25B2" );
+            
+            for( i = 0; i < brokenPipePos; i++ ){
+                response -> print( ' ' );
+            }
+
+            response -> println( "\u2514 The pipe broke here" );
+            
+            if( formatting ){
+                response -> print( __CONST_TXT__( "\033[0;37m" ) );
+            }
+
+            if( pipeChannel -> available() ){
+            	response -> print( __CONST_TXT__( "Pipe data: " ) );
+                while( pipeChannel -> available() ){
+                	response -> print( (char)pipeChannel -> read() );
+                }
+            	response -> println();
+
+            }
+
+        }
+
+    }
 
 }

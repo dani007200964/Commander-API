@@ -140,6 +140,9 @@ if(RUN_TESTS)
 
     # -- Commander Object --
     add_executable( test_commander_init ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander/test_init.cpp )
+    add_executable( test_commander_execute ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander/test_execute.cpp )
+    add_executable( test_commander_piping ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander/test_piping.cpp )
+    add_executable( test_commander_helper_functions ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/Commander/test_helper_functions.cpp )
 
     endif()
 
