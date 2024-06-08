@@ -89,7 +89,7 @@ typedef enum{
     FORMAT_CHAR
 }memDumpFormat_t;
 
-bool commander_memDump_func( char *args, Stream *response, void* parent ){
+bool commander_memDump_func( char *args, CommandCaller* caller ){
 
     // Generic counter.
     uint32_t i;
@@ -149,9 +149,11 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     memDumpFormat_t outputFormat = FORMAT_HEX;
 
     // If response is not available, return.
-    if( response == NULL ){
+    /*
+    if( caller -> channel == NULL ){
         return false;
     }
+    */
 
     // Try to parse the arguments
     startAddress.parseString( buffer );
@@ -181,20 +183,20 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     
     // Start address and data type is not optional.
     if( !startAddress || !dataType ){
-        Commander::printArgumentError( response );
-        response -> print( __CONST_TXT__( " Start address and data type has to be specified!" ) );
+        Commander::printArgumentError( caller );
+        caller -> print( __CONST_TXT__( " Start address and data type has to be specified!" ) );
         return false;
     }
 
     if( ( buffer[ 0 ] != '0' ) || ( ( buffer[ 1 ] != 'x' ) && ( buffer[ 1 ] != 'X' ) ) ){
-        Commander::printArgumentError( response );
-        response -> print( __CONST_TXT__( " Start address format is not correct! It has to start with 0x..." ) );
+        Commander::printArgumentError( caller );
+        caller -> print( __CONST_TXT__( " Start address format is not correct! It has to start with 0x..." ) );
         return false;
     }
 
     if( sscanf( &buffer[ 2 ],"%" PRIx32, &startAddressNumber ) != 1 ){
-        Commander::printArgumentError( response );
-        response -> print( __CONST_TXT__( " Start address format is not correct! Example: 0x012ABC" ) );
+        Commander::printArgumentError( caller );
+        caller -> print( __CONST_TXT__( " Start address format is not correct! Example: 0x012ABC" ) );
         return false;
     }
 
@@ -207,8 +209,8 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     }
 
     if( i >= 12 ){
-        Commander::printArgumentError( response );
-        response -> print( __CONST_TXT__( " Data type format is not correct! Example: u8" ) );
+        Commander::printArgumentError( caller );
+        caller -> print( __CONST_TXT__( " Data type format is not correct! Example: u8" ) );
         return false;
     }
 
@@ -231,8 +233,8 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
         bytesInData = 4;
     }
 
-    response -> print( __CONST_TXT__( "Data Type: " ) );
-    response -> println( memDumpTypes[ i ] );
+    caller -> print( __CONST_TXT__( "Data Type: " ) );
+    caller -> println( memDumpTypes[ i ] );
 
     endAddress.parseString( buffer );
     if( endAddress && !number ){
@@ -246,8 +248,8 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
         }
 
         if( endAddressNumber < startAddressNumber ){
-            Commander::printArgumentError( response );
-            response -> print( __CONST_TXT__( " Start address is greater, than end address!" ) );
+            Commander::printArgumentError( caller );
+            caller -> print( __CONST_TXT__( " Start address is greater, than end address!" ) );
             return false;
         }
 
@@ -260,8 +262,8 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
 
     else if( number && !endAddress ){
         if( (int)number < 0 ){
-            Commander::printArgumentError( response );
-            response -> print( __CONST_TXT__( " Number can not be negative!" ) );
+            Commander::printArgumentError( caller );
+            caller -> print( __CONST_TXT__( " Number can not be negative!" ) );
             return false;
         }
 
@@ -270,8 +272,8 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     }
 
     else if( number && endAddress ){
-        Commander::printArgumentError( response );
-        response -> print( __CONST_TXT__( " Number and end address can not be defined at the same time!" ) );
+        Commander::printArgumentError( caller );
+        caller -> print( __CONST_TXT__( " Number and end address can not be defined at the same time!" ) );
         return false;
     }
 
@@ -295,50 +297,50 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
     }
 
     if( !j ){
-        Commander::printArgumentError( response );
-        response -> print( __CONST_TXT__( " The specified address range is not accessible!" ) );
+        Commander::printArgumentError( caller );
+        caller -> print( __CONST_TXT__( " The specified address range is not accessible!" ) );
         return false;
     }
 
-    response -> print( __CONST_TXT__( "Start Address: 0x" ) );
+    caller -> print( __CONST_TXT__( "Start Address: 0x" ) );
     snprintf( buffer, sizeof( buffer ), "%08" PRIx32, startAddressNumber );
-    response -> println( buffer );
+    caller -> println( buffer );
 
-    response -> print( __CONST_TXT__( "End Address: 0x" ) );
+    caller -> print( __CONST_TXT__( "End Address: 0x" ) );
     snprintf( buffer, sizeof( buffer ), "%08" PRIx32, endAddressNumber );
-    response -> println( buffer );
+    caller -> println( buffer );
 
-    response -> print( __CONST_TXT__( "Number of elements: " ) );
+    caller -> print( __CONST_TXT__( "Number of elements: " ) );
     snprintf( buffer, sizeof( buffer ), "%" PRIu32, numberOfData );
-    response -> println( buffer );
+    caller -> println( buffer );
 
-    response -> print( __CONST_TXT__( "  Address  |" ) );
+    caller -> print( __CONST_TXT__( "  Address  |" ) );
 
     for( i = 0; i < bytesInData; i++ ){
 
         if( outputFormat == FORMAT_BIN ){
             for( j = 0; j < 5; j++ ){
-                response -> print( ' ' );
+                caller -> print( ' ' );
             }
         }
 
         j = 8 * ( bytesInData - i - 1 );
         snprintf( buffer, sizeof( buffer ), " %02" PRIu32 ":%02" PRIu32 " |", j + 7, j);
         buffer[ sizeof( buffer ) - 1 ] = '\0';
-        response -> print( buffer );
+        caller -> print( buffer );
 
     }
 
-    response -> println( __CONST_TXT__( " Value" ) );
+    caller -> println( __CONST_TXT__( " Value" ) );
 
     for( i = 0; i < numberOfData; i++ ){
 
         dataPointer = (uint32_t)( startAddressNumber + i * bytesInData );
-        response -> print( __CONST_TXT__( "0x" ) );
+        caller -> print( __CONST_TXT__( "0x" ) );
         snprintf( buffer, sizeof( buffer ), "%08" PRIx32, dataPointer );
         buffer[ sizeof( buffer ) - 1 ] = '\0';
-        response -> print( buffer );
-        response -> print( __CONST_TXT__( " |" ) );
+        caller -> print( buffer );
+        caller -> print( __CONST_TXT__( " |" ) );
 
         *data = (uint32_t)*( (uint32_t*)( (intptr_t)dataPointer ) );
 
@@ -375,51 +377,51 @@ bool commander_memDump_func( char *args, Stream *response, void* parent ){
             }
 
             buffer[ sizeof( buffer ) - 1 ] = '\0';
-            response -> print( buffer );
+            caller -> print( buffer );
 
         }
 
-        response -> print( ' ' );
+        caller -> print( ' ' );
         switch( type ){
             case UNSIGNED_8_BIT:
                 //response -> print( (uint8_t)*( (uint8_t*)( (intptr_t)dataPointer ) ) );
                 //snprintf( buffer, sizeof( buffer ), "%3d", (uint8_t)*( (uint8_t*)( (intptr_t)dataPointer ) ) );
                 snprintf( buffer, sizeof( buffer ), "%3d", (uint8_t)*(uint8_t*)data );
-                response -> print( buffer );
+                caller -> print( buffer );
                 break;
             case SIGNED_8_BIT:
                 //response -> print( (int8_t)*( (int8_t*)( (intptr_t)dataPointer ) ) );
                 //snprintf( buffer, sizeof( buffer ), "%3d", (uint8_t)*( (uint8_t*)( (intptr_t)dataPointer ) ) );
                 snprintf( buffer, sizeof( buffer ), "%3d", (int8_t)*(int8_t*)data );
-                response -> print( buffer );
+                caller -> print( buffer );
                 break;
             case UNSIGNED_16_BIT:
                 //response -> print( (uint16_t)*( (uint16_t*)( (intptr_t)dataPointer ) ) );
                 //snprintf( buffer, sizeof( buffer ), "%" PRIu16, (uint16_t)*( (uint16_t*)( (intptr_t)dataPointer ) ) );
                 snprintf( buffer, sizeof( buffer ), "%" PRIu16, (uint16_t)*(uint16_t*)data );
-                response -> print( buffer );
+                caller -> print( buffer );
                 break;
             case SIGNED_16_BIT:
                 //response -> print( (int16_t)*( (int16_t*)( (intptr_t)dataPointer ) ) );
                 //snprintf( buffer, sizeof( buffer ), "%" PRId16, (uint16_t)*( (uint16_t*)( (intptr_t)dataPointer ) ) );
                 snprintf( buffer, sizeof( buffer ), "%" PRId16, (int16_t)*(int16_t*)data );
-                response -> print( buffer );
+                caller -> print( buffer );
                 break;
             case UNSIGNED_32_BIT:
                 //response -> print( (uint32_t)*( (uint32_t*)( (intptr_t)dataPointer ) ) );
                 //snprintf( buffer, sizeof( buffer ), "%" PRIu32, (uint32_t)*( (uint32_t*)( (intptr_t)dataPointer ) ) );
                 snprintf( buffer, sizeof( buffer ), "%" PRIu32, (uint32_t)*(uint32_t*)data );
-                response -> print( buffer );
+                caller -> print( buffer );
                 break;
             default:
                 //response -> print( (int32_t)*( (int32_t*)( (intptr_t)dataPointer ) ) );
                 //snprintf( buffer, sizeof( buffer ), "%" PRId32, (uint32_t)*( (uint32_t*)( (intptr_t)dataPointer ) ) );
                 snprintf( buffer, sizeof( buffer ), "%" PRId32, (int32_t)*(int32_t*)data );
-                response -> print( buffer );
+                caller -> print( buffer );
                 break;
         }
 
-        response -> println();
+        caller -> println();
 
     }
 

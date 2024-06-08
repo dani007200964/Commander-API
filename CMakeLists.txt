@@ -49,6 +49,8 @@ set( SOURCES
     #src/Commander-Database.cpp
     src/Commander-Database.hpp
     src/Commander-DefaultSettings.hpp
+    src/Commander-Caller-Interface.hpp
+    src/Commander-Caller-Interface.cpp
 
     extras/simulator/Arduino.h
     extras/simulator/Print.cpp

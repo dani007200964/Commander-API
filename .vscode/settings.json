@@ -13,5 +13,6 @@
         "ios": "cpp",
         "xmemory": "cpp",
         "system_error": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

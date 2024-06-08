@@ -48,6 +48,8 @@ SOFTWARE.
 
 #include "Commander-Database.hpp"
 
+#include "Commander-Caller-Interface.hpp"
+
 /// Arduino detection
 #ifdef ARDUINO
 #include "Arduino.h"
@@ -210,7 +212,7 @@ public:
 
 	  	const char *desc;                                       ///<  Description of the command
 
-	  	bool(*func)( char*, Stream *response, void* parent );   ///<  Function pointer to the command function
+	  	bool(*func)( char*, CommandCaller* caller );   ///<  Function pointer to the command function
 
 		#ifdef __AVR__
 		__FlashStringHelper *desc_P;							///< Description of the command( stored in PROGMEM )
@@ -298,15 +300,6 @@ public:
 	/// speed up the search process.
 	bool init();
 
-	/// Default execution function.
-	///
-	/// This function tries to execute a command.
-	/// It uses the default response channel, so
-	/// the messages from the command handler won't
-	/// be visible.
-    /// @param cmd This is a command string and it will be executed.
-	bool execute( const char *cmd );
-
 	/// Execution function for Stream response.
 	///
 	/// This function tries to execute a command.
@@ -315,12 +308,10 @@ public:
 	/// will be passed to the selected Stream
 	/// object.
     /// @param cmd This is a command string and it will be executed.
-    /// @param resp Pointer to a Stream object. The output data will be printed to this Stream.
-    ///             This pointer will be accessible from the function that is assigned to the command.
-    /// @param parent This can be a pointer to anything. The reason why it is implemented, is because
+    /// @param caller_p This can be a pointer to anything. The reason why it is implemented, is because
     ///               the Shellminator project needed a simple way to communicate with the caller
     ///               terminal from the called command function. It is optional, the default value for it is NULL.
-	bool execute( const char *cmd, Stream *resp, void* parent = NULL );
+	bool execute( const char *cmd, Stream* channel_p = NULL, CommandCaller* caller_p = NULL );
 
 	/// Attach a debug channel to the object.
 	///
@@ -459,10 +450,6 @@ private:
 
 	#endif
 
-	/// Pointer to response class. By default it
-	/// points to the default response handler.
-	Stream *response = NULL;
-
 	/// Flag to enable or disable debug messages.
 	static debugLevel_t debugLevel;
 
@@ -475,7 +462,7 @@ private:
 	/// This function executes a command. Before calling this
 	/// function, the response pointer and it's channel has to
 	/// be configured correctly.
-	bool executeCommand( const char *cmd, void* parent = NULL );
+	bool executeCommand( const char *cmd );
 
 	/// Search for a character in a string.
 	/// @param str Pointer to a character array where the search will be.
@@ -517,6 +504,9 @@ private:
 
     /// For unit testing.
     friend class CommanderUT;
+
+    CommandCaller defaultCommandCaller;
+    CommandCaller *caller = NULL;
 
 };
 

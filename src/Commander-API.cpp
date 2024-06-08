@@ -82,7 +82,7 @@ bool Commander::enablePipeModuleFunc( char* buffer, int bufferSize, commanderPip
     return true;
 }
 
-bool Commander::executeCommand( const char *cmd, void* parent ){
+bool Commander::executeCommand( const char *cmd ){
 
 	// The beginning of the argument list will be stored in this pointer
 	char *arg;
@@ -120,13 +120,13 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
         // Check if piping is requested, but disabled.
         if( pipeArgBuffer == NULL ){
 
-            if( response != NULL ){
-                response -> print( __CONST_TXT__( "The command contains piping but the pipe module is disabled!" ) );
-            }
+            //if( caller -> channel != NULL ){
+                caller -> print( __CONST_TXT__( "The command contains piping but the pipe module is disabled!" ) );
+            //}
             return false;
         }
 
-		// Terminate where pip is found.
+		// Terminate where pipe is found.
 		tempBuff[ pipePos ] = '\0';
 
 	}
@@ -181,15 +181,15 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
 			if( memoryType == MEMORY_REGULAR ){
 
-                if( response != NULL ){
+                //if( caller -> channel != NULL ){
 
                     // Print the description text to the output channel.
-                    response -> print( commandData_ptr -> name );
-                    response -> print( ':' );
-                    response -> print( ' ' );
-                    response -> println( commandData_ptr -> data.desc );
+                    caller -> print( commandData_ptr -> name );
+                    caller -> print( ':' );
+                    caller -> print( ' ' );
+                    caller -> println( commandData_ptr -> data.desc );
 
-                }
+                //}
 
 			}
 
@@ -197,15 +197,15 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
 			else if( memoryType == MEMORY_PROGMEM ){
 
-                if( response != NULL ){
+                //if( response != NULL ){
 
                     // Print the description text to the output channel.
-                    response -> print( commandData_ptr -> name_P );
-                    response -> print( ':' );
-                    response -> print( ' ' );
-                    response -> println( commandData_ptr -> data.desc_P );
+                    caller -> print( commandData_ptr -> name_P );
+                    caller -> print( ':' );
+                    caller -> print( ' ' );
+                    caller -> println( commandData_ptr -> data.desc_P );
 
-                }
+                //}
 
 			}
 
@@ -257,7 +257,10 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 			if( ( pipeArgBuffer != NULL ) && ( pipePos > 0 ) ){
 
 				// Execute commands function and redirect the output to the pipe channel.
-				executionStat = ( commandData_ptr -> data.func )( arg, pipeChannel, parent );
+                Stream* tmp = caller -> getChannel();
+                caller -> setChannel( pipeChannel );
+				executionStat = ( commandData_ptr -> data.func )( arg, caller );
+                caller -> setChannel( tmp );
                 
                 // If the actual command execution was successful, we have to increment the pipeCounter
                 if( executionStat ){
@@ -271,7 +274,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 			else{
 
 				// Execute command function.
-				executionStat = ( commandData_ptr -> data.func )( arg, response, parent );
+				executionStat = ( commandData_ptr -> data.func )( arg, caller );
 
 			}
 
@@ -369,13 +372,13 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 		// We have to check for single or described help function.
 		if( strcmp( arg, (const char*)"-d" ) == 0 ){
 
-			printHelp( response, true, formatting );
+			printHelp( caller, true, formatting );
 
 		}
 
 		else{
 
-			printHelp( response, false, formatting );
+			printHelp( caller, false, formatting );
 
 		}
 
@@ -383,7 +386,7 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
 	else{
 
-        if( response != NULL ){
+        //if( caller -> channel != NULL ){
             if( pipePos > 0 ){
 				tempBuff[ pipePos ] = '|';
                 printBrokenPipe();
@@ -395,21 +398,33 @@ bool Commander::executeCommand( const char *cmd, void* parent ){
 
             // If we went through the whole tree and we did not found the command in it,
             // we have to notice the user abut the problem. Maybe a Type-O
-            response -> print( __CONST_TXT__( "Command \'" ) );
-            response -> print( tempBuff );
-            response -> print( __CONST_TXT__( "\' not found!" ) );
+            caller -> print( __CONST_TXT__( "Command \'" ) );
+            caller -> print( tempBuff );
+            caller -> print( __CONST_TXT__( "\' not found!" ) );
 
-        }
+        //}
         return false;
 		
 	}
     return true;
 }
 
-bool Commander::execute( const char *cmd ){
+bool Commander::execute( const char *cmd, Stream* channel_p, CommandCaller* caller_p ){
 
-	// Default execute handler, so the default response will be chosen.
-	response = NULL;
+    if( channel_p == NULL ){
+        caller = &defaultCommandCaller;
+        caller -> clearChannel();
+    }
+
+    else{
+        if( caller_p == NULL ){
+            caller = &defaultCommandCaller;
+            caller -> setChannel( channel_p );
+        }
+        else{
+            caller = caller_p;
+        }
+    }
 
     // Reset the pipe position tracker.
     pipeCounter = 0;
@@ -426,29 +441,6 @@ bool Commander::execute( const char *cmd ){
 
 	// Execute the command.
 	return( executeCommand( cmd ) );
-
-}
-
-bool Commander::execute( const char *cmd, Stream *resp, void* parent ){
-
-    // Redirect the response to the specified Stream.
-	response = resp;
-
-    // Reset the pipe position tracker.
-    pipeCounter = 0;
-
-    // Save the address of the original message.
-    originalCommandData = cmd;
-
-    // If piping is enabled, we have to flush the pipe channel before command execution.
-    if( pipeArgBuffer != NULL ){
-        while( pipeChannel -> available() ){
-            pipeChannel -> read();
-        }
-    }
-
-	// Execute the command.
-	return( executeCommand( cmd, parent ) );
 
 }
 
@@ -891,51 +883,51 @@ void Commander::printBrokenPipe(){
 
     if( brokenPipePos >= 0 ){
 
-        if( response != NULL ){
+        //if( caller -> channel != NULL ){
 
             // In case of broken pipe, inform the user about the problematic section.
             if( formatting ){
-                response -> print( __CONST_TXT__( "\033[1;35m" ) );
+                caller -> print( __CONST_TXT__( "\033[1;35m" ) );
             }
 
-            response -> println( __CONST_TXT__( "\r\nBroken pipe!" ) );
+            caller -> println( __CONST_TXT__( "\r\nBroken pipe!" ) );
 
             if( formatting ){
-                response -> print( __CONST_TXT__( "\033[0;37m" ) );
+                caller -> print( __CONST_TXT__( "\033[0;37m" ) );
             }
 
-            response -> println( originalCommandData );
+            caller -> println( originalCommandData );
             
             for( i = 0; i < brokenPipePos; i++ ){
-                response -> print( ' ' );
+                caller -> print( ' ' );
             }
 
             if( formatting ){
-                response -> print( __CONST_TXT__( "\033[1;31m" ) );
+                caller -> print( __CONST_TXT__( "\033[1;31m" ) );
             }
 
-            response -> println( "\u25B2" );
+            caller -> println( "\u25B2" );
             
             for( i = 0; i < brokenPipePos; i++ ){
-                response -> print( ' ' );
+                caller -> print( ' ' );
             }
 
-            response -> println( "\u2514 The pipe broke here" );
+            caller -> println( "\u2514 The pipe broke here" );
             
             if( formatting ){
-                response -> print( __CONST_TXT__( "\033[0;37m" ) );
+                caller -> print( __CONST_TXT__( "\033[0;37m" ) );
             }
 
             if( pipeChannel -> available() ){
-            	response -> print( __CONST_TXT__( "Pipe data: " ) );
+            	caller -> print( __CONST_TXT__( "Pipe data: " ) );
                 while( pipeChannel -> available() ){
-                	response -> print( (char)pipeChannel -> read() );
+                	caller -> print( (char)pipeChannel -> read() );
                 }
-            	response -> println();
+            	caller -> println();
 
             }
 
-        }
+        //}
 
     }
 

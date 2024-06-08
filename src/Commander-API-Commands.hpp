@@ -54,6 +54,7 @@ SOFTWARE.
 
 #include "Commander-API.hpp"
 #include "Commander-Arguments.hpp"
+#include "Commander-Caller-Interface.hpp"
 
 void printCommandNotImplemented( Stream* channel_p );
 
@@ -462,7 +463,7 @@ bool commander_export_func( char *args, Stream *response, void* parent );
 /// Premade function for memDump command.
 /// @param args Pointer to the argument string.
 /// @param response Response channel for messages.
-bool commander_memDump_func( char *args, Stream *response, void* parent );
+bool commander_memDump_func( char *args, CommandCaller* caller );
 
 //-------- i2cScan function --------//
 #define SYSTEM_COMMAND_I2CSCAN_NAME         "i2cScan"

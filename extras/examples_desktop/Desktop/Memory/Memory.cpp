@@ -39,13 +39,21 @@ stdioStream stdioChannel;
 // We have to create an object from Commander class.
 Commander commander;
 
+bool cat_func( char *args, CommandCaller* caller );
+bool dog_func( char *args, CommandCaller* caller );
+bool sum_func( char *args, CommandCaller* caller );
+
 // Add echo and env commands to the API tree.
 Commander::systemCommand_t API_tree[] = {
-    SYSTEM_COMMAND_MEMDUMP
+    systemCommand( "cat", "Description for cat command.", cat_func ),
+    systemCommand( "dog", "Description for dog command.", dog_func ),
+    systemCommand( "sum", "This function sums two number from the argument list.", sum_func )    
 };
 
 char commandBuffer[ COMMAND_SIZE ];
 
+char pipeBuffer[ COMMANDER_PIPE_BUFFER_SIZE ];
+commanderPipeChannel pipeChannel;
 
 
 
@@ -74,9 +82,11 @@ int main(){
     // itself for the fastest runtime possible. It creates a balanced
     // binary tree from the API_tree to boost the search speed.
     // This part uses some recursion, to make the code space small.
-    // But recursion is a bit stack hungry, so please initialize
+    // But recursion is a bit stack hungry, so pleacatse initialize
     // Commander at the beginning of your code to prevent stack-overlow.
     commander.init();
+
+    commander.enablePipeModule( pipeBuffer, &pipeChannel );
 
     stdioChannel.println();
     stdioChannel.println( "---- Init Finished ----" );
@@ -100,4 +110,63 @@ int main(){
 
     return 0;
 
+}
+
+
+/// This is an example function for the cat command
+bool cat_func( char *args, CommandCaller* caller ){
+
+  caller -> print("Hello from cat function!\r\n");
+  return true;
+
+}
+
+/// This is an example function for the dog command
+bool dog_func( char *args, CommandCaller* caller ){
+
+  caller -> print("Hello from dog function!\r\n");
+  return true;
+
+}
+
+/// This is an example function for the sum command
+bool sum_func( char *args, CommandCaller* caller ){
+
+  // These variables will hold the value of the
+  // two numbers, that has to be summed.
+  int a = 0;
+  int b = 0;
+
+  // This variable will hold the result of the
+  // argument parser.
+  int argResult;
+
+  // This variable will hold the sum result.
+  int sum = 0;
+
+  argResult = sscanf( args, "%d %d", &a, &b );
+
+  // We have to check that we parsed successfully the two
+  // numbers from the argument string.
+  if( argResult != 2 ){
+
+    // If we could not parse two numbers, we have an argument problem.
+    // We print out the problem to the response channel.
+    caller -> print( "Argument error! Two numbers required, separated with a blank space.\r\n" );
+
+    // Sadly we have to stop the command execution and return.
+    return false;
+
+  }
+
+  // Calculate the sum.
+  sum = a + b;
+
+  // Print out the result.
+  caller -> print( a );
+  caller -> print( " + " );
+  caller -> print( b );
+  caller -> print( " = " );
+  caller -> println( sum );
+    return true;
 }

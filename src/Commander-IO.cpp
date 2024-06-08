@@ -31,6 +31,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+// Todo: This implementation is horrible, we need a circular buffer!
 
 #include "Commander-IO.hpp"
 
