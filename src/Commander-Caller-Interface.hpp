@@ -74,7 +74,7 @@ public:
     virtual void beep(){}
     virtual void setBannerText( const char* text_p ){}
     virtual void setPathText( const char* text_p ){}
-    virtual void clear( const char* text_p ){}
+    virtual void clear(){}
 
 private:
     Stream* channel = NULL;
