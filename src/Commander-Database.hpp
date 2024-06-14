@@ -157,6 +157,8 @@ public:
     /// @returns The size of the tree in elements.
     uint16_t getSize();
 
+    int completeFragment( const char* fragment, char* buffer, int buffer_size );
+
 private:
 	/// Starting address of the API-tree.
 	dataRecord_t* dataTree = NULL;
@@ -181,9 +183,21 @@ private:
 	/// It uses the regular version by default.
 	int( CommanderDatabase::*strcmpElementCharArray )( dataRecord_t* element1, const char* element2 );
 
+	/// Function pointer to an internal strcmp like function.
+	/// It uses the regular version by default.
+	int( CommanderDatabase::*strncmpElementElement )( dataRecord_t* element1, dataRecord_t* element2, size_t num  );
+
+	/// Function pointer to an internal strncmp like function.
+	/// It uses the regular version by default.
+	int( CommanderDatabase::*strncmpElementCharArray )( dataRecord_t* element1, const char* element2, size_t num );
+
 	int strcmpElementElementRegular( dataRecord_t* element1, dataRecord_t* element2 );
 
 	int strcmpElementCharArrayRegular( dataRecord_t* element1, const char* element2 );
+
+	int strncmpElementElementRegular( dataRecord_t* element1, dataRecord_t* element2, size_t num );
+
+	int strncmpElementCharArrayRegular( dataRecord_t* element1, const char* element2, size_t num );
 
     void swapElements( uint16_t a, uint16_t b );
 
@@ -194,6 +208,8 @@ private:
     /// It works like the original strcmp, but it terminates
     /// to space character as well.
     int strcmpDB( const char *p1, const char* p2 );
+
+    int strncmpDB( const char *p1, const char* p2, size_t num );
 
     friend class CommanderDatabaseUT;
 
@@ -239,6 +255,16 @@ int CommanderDatabase< T >::strcmpElementElementRegular( dataRecord_t* element1,
 template< typename T >
 int CommanderDatabase< T >::strcmpElementCharArrayRegular( dataRecord_t* element1, const char* element2 ){
 	return strcmpDB( element1 -> name, element2 );
+}
+
+template< typename T >
+int CommanderDatabase< T >::strncmpElementElementRegular( dataRecord_t* element1, dataRecord_t* element2, size_t num ){
+	return strncmpDB( element1 -> name, element2 -> name, num );
+}
+
+template< typename T >
+int CommanderDatabase< T >::strncmpElementCharArrayRegular( dataRecord_t* element1, const char* element2, size_t num ){
+	return strncmpDB( element1 -> name, element2, num );
 }
 
 template< typename T >
@@ -474,6 +500,9 @@ bool CommanderDatabase< T >::init(){
 	strcmpElementElement = &CommanderDatabase::strcmpElementElementRegular;
 	strcmpElementCharArray = &CommanderDatabase::strcmpElementCharArrayRegular;
 
+	strncmpElementElement = &CommanderDatabase::strncmpElementElementRegular;
+	strncmpElementCharArray = &CommanderDatabase::strncmpElementCharArrayRegular;
+
     if( ( debugChannel != NULL ) && ( debugLevel >= DEBUG_DEBUG ) ){
         debugChannel -> println( __CONST_TXT__( "Database init start" ) );
         debugChannel -> println( __CONST_TXT__( "Creating alphabetical order..." ) );
@@ -641,6 +670,113 @@ int CommanderDatabase< T >::strcmpDB( const char *p1, const char* p2 ){
     return c2 - c1;
 
 }
+
+template< typename T >
+int CommanderDatabase< T >::strncmpDB( const char *p1, const char* p2, size_t num ){
+    const unsigned char *s1 = (const unsigned char *) p1;
+    const unsigned char *s2 = (const unsigned char *) p2;
+
+    unsigned char c1;
+    unsigned char c2;
+
+    size_t counter = 0;
+
+    do{
+        c1 = (unsigned char) *s1;
+        c2 = (unsigned char) *s2;
+
+        s1++;
+        s2++;
+
+        if( ( c1 == ' ' ) || ( c2 == ' ' ) ){
+            c1 = '\0';
+            c2 = '\0';
+        }
+
+        if( c1 == '\0' ){
+            return c2 - c1;
+        }
+
+        counter++;
+        if( counter >= num ){
+            return c2 - c1;
+        }
+
+    } while( c1 == c2 );
+
+    return c2 - c1;
+
+}
+
+template< typename T >
+int CommanderDatabase< T >::completeFragment( const char* fragment, char* buffer, int buffer_size ){
+
+	// Stores the next elements address in the tree
+	dataRecord_t *next;
+
+	// Stores the previous elements address in the tree
+	dataRecord_t *prev;
+
+	// It will store string compersation result
+	int comp_res;
+
+    int fragment_len;
+
+    if( initFlag == false ){
+        return 0;
+    }
+
+    if( fragment[ 0 ] == '\0' ){
+        return 0;
+    }
+
+    fragment_len = strlen( fragment );
+
+    // Thee roo node will be the first element.
+	prev = &dataTree[ 0 ];
+
+	comp_res = ( this ->* strncmpElementCharArray )( prev, fragment, fragment_len );
+    if( comp_res == 0 ){
+        strncpy( buffer, prev -> name, buffer_size );
+        return 1;
+    }
+
+	comp_res = ( this ->* strcmpElementCharArray )( prev, fragment );
+	(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
+
+	// Go through the binary tree until you find a match, or until you find the
+	// end of the tree.
+	while( ( comp_res != 0 ) && ( next != NULL ) ){
+
+		prev = next;
+
+		comp_res = ( this ->* strncmpElementCharArray )( prev, fragment, fragment_len );
+        if( comp_res == 0 ){
+            strncpy( buffer, prev -> name, buffer_size );
+            return 1;
+        }
+
+    	comp_res = ( this ->* strcmpElementCharArray )( prev, fragment );
+		(comp_res > 0) ? (next = (prev->left)) : ( next = (prev->right));
+
+	}
+
+	// If comp_res variable has a zero in it, that means in the last iteration
+	// we had a match.
+	if( comp_res == 0 ){
+
+        strncpy( buffer, prev -> name, buffer_size );
+		return 1;
+
+	}
+
+	// If we did not found the command we return NULL.
+	return 0;
+
+
+
+}
+
 
 
 #endif

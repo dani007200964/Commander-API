@@ -51,6 +51,8 @@ set( SOURCES
     src/Commander-DefaultSettings.hpp
     src/Commander-Caller-Interface.hpp
     src/Commander-Caller-Interface.cpp
+    src/Commander-Autocomplete.hpp
+    src/Commander-Autocomplete.cpp
 
     extras/simulator/Arduino.h
     extras/simulator/Print.cpp

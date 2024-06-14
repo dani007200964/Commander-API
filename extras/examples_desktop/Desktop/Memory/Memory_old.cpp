@@ -45,6 +45,13 @@ bool cat_func( char *args, CommandCaller* caller );
 bool dog_func( char *args, CommandCaller* caller );
 bool sum_func( char *args, CommandCaller* caller );
 
+// Add echo and env commands to the API tree.
+Commander::systemCommand_t API_tree[] = {
+    systemCommand( "cat", "Description for cat command.", cat_func ),
+    systemCommand( "dog", "Description for dog command.", dog_func ),
+    systemCommand( "sum", "This function sums two number from the argument list.", sum_func )    
+};
+
 char commandBuffer[ COMMAND_SIZE ];
 
 char pipeBuffer[ COMMANDER_PIPE_BUFFER_SIZE ];
@@ -150,16 +157,11 @@ AutoComplete::TrieElement_t trie[] = {
 	{ '"', true, 0, NULL }
 };
 
-AutoComplete help_test( trie );
 
 
-// Add echo and env commands to the API tree.
-Commander::systemCommand_t API_tree[] = {
-    systemCommandWithHelp( "cat", "Description for cat command.", cat_func, &help_test ),
-    systemCommandWithHelp( "dog", "Description for dog command.", dog_func, &help_test ),
-    systemCommandWithHelp( "sum", "This function sums two number from the argument list.", sum_func, &help_test )    
-};
 
+
+AutoComplete test( trie );
 
 // Main program.
 int main(){
@@ -171,15 +173,192 @@ int main(){
 
     }
 
+    /*
+    trie[ 0 ].c = '\0';
+    trie[ 0 ].word_end = false;
+    trie[ 0 ].num_of_childs = 2;
+    trie[ 0 ].child_indexes = trie_indexes_element_0;
+
+    trie[ 1 ].c = 'a';
+    trie[ 1 ].word_end = false;
+    trie[ 1 ].num_of_childs = 1;
+    trie[ 1 ].child_indexes = trie_indexes_element_1;
+
+    trie[ 2 ].c = 'd';
+    trie[ 2 ].word_end = false;
+    trie[ 2 ].num_of_childs = 2;
+    trie[ 2 ].child_indexes = trie_indexes_element_2;
+
+    trie[ 3 ].c = 'n';
+    trie[ 3 ].word_end = false;
+    trie[ 3 ].num_of_childs = 2;
+    trie[ 3 ].child_indexes = trie_indexes_element_3;
+
+    trie[ 4 ].c = 'a';
+    trie[ 4 ].word_end = false;
+    trie[ 4 ].num_of_childs = 1;
+    trie[ 4 ].child_indexes = trie_indexes_element_4;
+
+    trie[ 5 ].c = 'o';
+    trie[ 5 ].word_end = true;
+    trie[ 5 ].num_of_childs = 0;
+    trie[ 5 ].child_indexes = NULL;
+
+    trie[ 6 ].c = 'd';
+    trie[ 6 ].word_end = true;
+    trie[ 6 ].num_of_childs = 0;
+    trie[ 6 ].child_indexes = NULL;
+
+    trie[ 7 ].c = 't';
+    trie[ 7 ].word_end = true;
+    trie[ 7 ].num_of_childs = 0;
+    trie[ 7 ].child_indexes = NULL;
+
+    trie[ 8 ].c = 'd';
+    trie[ 8 ].word_end = true;
+    trie[ 8 ].num_of_childs = 0;
+    trie[ 8 ].child_indexes = NULL;
+    */
+
+    char buffer[ 200 ];
+    const char* key = "d";
+    int buffer_size = sizeof( buffer );
+
+    /*
+    stdioChannel.print( "Search start for d: " );
+    stdioChannel.println( test.searchLastMatchingNode( "d" ) );
+
+    stdioChannel.print( "Search start for da: " );
+    stdioChannel.println( test.searchLastMatchingNode( "da" ) );
+
+    stdioChannel.print( "Search start for dad: " );
+    stdioChannel.println( test.searchLastMatchingNode( "dad" ) );
+
+    stdioChannel.print( "Search start for do: " );
+    stdioChannel.println( test.searchLastMatchingNode( "do" ) );
+
+    stdioChannel.print( "Search start for a: " );
+    stdioChannel.println( test.searchLastMatchingNode( "a" ) );
+
+    stdioChannel.print( "Search start for an: " );
+    stdioChannel.println( test.searchLastMatchingNode( "an" ) );
+
+    stdioChannel.print( "Search start for and: " );
+    stdioChannel.println( test.searchLastMatchingNode( "and" ) );
+
+    stdioChannel.print( "Search start for ant: " );
+    stdioChannel.println( test.searchLastMatchingNode( "ant" ) );
+
+    stdioChannel.print( "Search start for ank: " );
+    stdioChannel.println( test.searchLastMatchingNode( "ank" ) );
+
+    stdioChannel.print( "Search start for b: " );
+    stdioChannel.println( test.searchLastMatchingNode( "b" ) );
+
+    */
+
+    int num;
+
+    /*
+    stdioChannel.println( "Search start for d: " );
+    int num = test.generateHint( "d", buffer, buffer_size );
+    stdioChannel.print( "\tnumber of hits: " );
+    stdioChannel.println( num );
+
+    for( int i = 0; i < num; i++ ){
+        stdioChannel.print( "\t" );
+        stdioChannel.println( test.getResult( i ) );
+    }
+
+
+    stdioChannel.println( "Search start for da: " );
+    num = test.generateHint( "da", buffer, buffer_size );
+    stdioChannel.print( "\tnumber of hits: " );
+    stdioChannel.println( num );
+
+    for( int i = 0; i < num; i++ ){
+        stdioChannel.print( "\t" );
+        stdioChannel.println( test.getResult( i ) );
+    }
+
+
+    stdioChannel.println( "Search start for a: " );
+    num = test.generateHint( "a", buffer, buffer_size );
+    stdioChannel.print( "\tnumber of hits: " );
+    stdioChannel.println( num );
+
+    for( int i = 0; i < num; i++ ){
+        stdioChannel.print( "\t" );
+        stdioChannel.println( test.getResult( i ) );
+    }
+
+
+    stdioChannel.println( "Search start for an: " );
+    num = test.generateHint( "an", buffer, buffer_size );
+    stdioChannel.print( "\tnumber of hits: " );
+    stdioChannel.println( num );
+
+    for( int i = 0; i < num; i++ ){
+        stdioChannel.print( "\t" );
+        stdioChannel.println( test.getResult( i ) );
+    }
+
+
+    stdioChannel.println( "Search start for and: " );
+    num = test.generateHint( "and", buffer, buffer_size );
+    stdioChannel.print( "\tnumber of hits: " );
+    stdioChannel.println( num );
+
+    for( int i = 0; i < num; i++ ){
+        stdioChannel.print( "\t" );
+        stdioChannel.println( test.getResult( i ) );
+    }
+
+
+    stdioChannel.println( "Search start for ab: " );
+    num = test.generateHint( "ab", buffer, buffer_size );
+    stdioChannel.print( "\tnumber of hits: " );
+    stdioChannel.println( num );
+
+    for( int i = 0; i < num; i++ ){
+        stdioChannel.print( "\t" );
+        stdioChannel.println( test.getResult( i ) );
+    }
+
+
+    stdioChannel.println( "Search start for b: " );
+    num = test.generateHint( "b", buffer, buffer_size );
+    stdioChannel.print( "\tnumber of hits: " );
+    stdioChannel.println( num );
+
+    for( int i = 0; i < num; i++ ){
+        stdioChannel.print( "\t" );
+        stdioChannel.println( test.getResult( i ) );
+    }
+
+    */
+
+    stdioChannel.println( "Search start for ' ': " );
+    num = test.generateHint( " ", buffer, buffer_size );
+    stdioChannel.print( "\tnumber of hits: " );
+    stdioChannel.println( num );
+
+    for( int i = 0; i < num; i++ ){
+        stdioChannel.print( "\t" );
+        stdioChannel.println( test.getResult( i ) );
+    }
+
+    stdioChannel.println( "END" );
+
     // There is an option to attach a debug channel to Commander.
     // It can be handy to find any problems during the initialization
     // phase. In this example, we will use stdioChannel for this.
-    commander.attachDebugChannel( &stdioChannel );
+    // commander.attachDebugChannel( &stdioChannel );
 
     // At start, Commander does not know anything about our commands.
     // We have to attach the API_tree array from the previous steps
     // to Commander to work properly.
-    commander.attachTree( API_tree );
+    // commander.attachTree( API_tree );
 
     // After we attached the API_tree, Commander has to initialize
     // itself for the fastest runtime possible. It creates a balanced
@@ -187,42 +366,13 @@ int main(){
     // This part uses some recursion, to make the code space small.
     // But recursion is a bit stack hungry, so pleacatse initialize
     // Commander at the beginning of your code to prevent stack-overlow.
-    commander.init();
+    // commander.init();
 
     // commander.enablePipeModule( pipeBuffer, &pipeChannel );
 
-    stdioChannel.println();
-    stdioChannel.println( "---- Init Finished ----" );
-    stdioChannel.println();
-
-    char buffer[ 200 ];
-    int buffer_size = sizeof( buffer );
-    int num_of_hints;
-    int i;
-
-    num_of_hints = commander.generateHint( "cat --reboot ", buffer, buffer_size );
-    stdioChannel.print( "number of hints: " );
-    stdioChannel.println( num_of_hints );
-    for( i = 0; i < num_of_hints; i++ ){
-        stdioChannel.print( "\t" );
-        stdioChannel.println( commander.getHint( i ) );
-    }
-
-    num_of_hints = commander.generateHint( "cat --rebo", buffer, buffer_size );
-    stdioChannel.print( "number of hints: " );
-    stdioChannel.println( num_of_hints );
-    for( i = 0; i < num_of_hints; i++ ){
-        stdioChannel.print( "\t" );
-        stdioChannel.println( commander.getHint( i, true ) );
-    }
-
-    num_of_hints = commander.generateHint( "c", buffer, buffer_size );
-    stdioChannel.print( "number of hints: " );
-    stdioChannel.println( num_of_hints );
-    for( i = 0; i < num_of_hints; i++ ){
-        stdioChannel.print( "\t" );
-        stdioChannel.println( commander.getHint( i, true ) );
-    }
+    // stdioChannel.println();
+    // stdioChannel.println( "---- Init Finished ----" );
+    // stdioChannel.println();
 
     // stdioChannel.println( "Type something" );
     // stdioChannel.print( "$: " );

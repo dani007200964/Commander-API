@@ -49,6 +49,7 @@ SOFTWARE.
 #include "Commander-Database.hpp"
 
 #include "Commander-Caller-Interface.hpp"
+#include "Commander-Autocomplete.hpp"
 
 /// Arduino detection
 #ifdef ARDUINO
@@ -83,8 +84,10 @@ SOFTWARE.
 /// @param name The name of the command. The best practice is to use a const char array.
 /// @param desc The description of the command. The best practice is to use a const char array.
 /// @param func This function will be called, when this command gets executed.
-#define systemCommand( name, desc, func ) { 0, NULL, NULL, (const char*)name, { (const char*)desc, func } }
+#define systemCommand( name, desc, func ) { 0, NULL, NULL, (const char*)name, { (const char*)desc, func, NULL } }
 //#define apiElement( name, desc, func ) { 0, NULL, NULL, (const char*)name, (const char*)desc, func }
+
+#define systemCommandWithHelp( name, desc, func, help ) { 0, NULL, NULL, (const char*)name, { (const char*)desc, func, help } }
 
 #ifdef __AVR__
 
@@ -213,6 +216,8 @@ public:
 	  	const char *desc;                                       ///<  Description of the command
 
 	  	bool(*func)( char*, CommandCaller* caller );   ///<  Function pointer to the command function
+
+        AutoComplete* help;
 
 		#ifdef __AVR__
 		__FlashStringHelper *desc_P;							///< Description of the command( stored in PROGMEM )
@@ -398,6 +403,13 @@ public:
     // 2 decimal point.
     static int floatToString( float number, char* buffer, int bufferSize );
 
+    bool commandExists( const char* cmd, systemCommand_t** cmd_ptr = NULL );
+    int generateHint( const char *fraction, char *buffer_p, int buffer_size_p );
+    AutoComplete* lastHint = NULL;
+    const char* lastCommandHint = NULL;
+    int lastCommandHintOffset = 0;
+    const char* getHint( int index, bool only_remaining_chars = false );
+
 private:
 
 	/// Starting address of the API-tree.
@@ -501,6 +513,8 @@ private:
 
     /// This variable tracks the next free elements index in the update functions buffer.
     int updateBufferCounter = 0;
+
+    static const char empty_string;
 
     /// For unit testing.
     friend class CommanderUT;

@@ -38,6 +38,8 @@ const char *Commander::version = COMMANDER_API_VERSION;
 
 Commander::debugLevel_t Commander::debugLevel = Commander::DEBUG_OFF;
 
+const char Commander::empty_string = '\0';
+
 void Commander::attachTreeFunction( Commander::systemCommand_t* API_tree_p, uint32_t API_tree_size_p ){
 
 	regularCommands = CommanderDatabase<API_t>( API_tree_p, API_tree_size_p );
@@ -121,7 +123,7 @@ bool Commander::executeCommand( const char *cmd ){
         if( pipeArgBuffer == NULL ){
 
             //if( caller -> channel != NULL ){
-                caller -> print( __CONST_TXT__( "The command contains piping but the pipe module is disabled!" ) );
+                caller -> println( __CONST_TXT__( "The command contains piping but the pipe module is disabled!" ) );
             //}
             return false;
         }
@@ -400,7 +402,7 @@ bool Commander::executeCommand( const char *cmd ){
             // we have to notice the user abut the problem. Maybe a Type-O
             caller -> print( __CONST_TXT__( "Command \'" ) );
             caller -> print( tempBuff );
-            caller -> print( __CONST_TXT__( "\' not found!" ) );
+            caller -> println( __CONST_TXT__( "\' not found!" ) );
 
         //}
         return false;
@@ -930,5 +932,124 @@ void Commander::printBrokenPipe(){
         //}
 
     }
+
+}
+
+bool Commander::commandExists( const char* cmd, Commander::systemCommand_t** cmd_ptr ){
+	// Pointer to the selected command data.
+	systemCommand_t* commandData_ptr;
+    commandData_ptr = regularCommands[ cmd ];
+
+    if( commandData_ptr ){
+        if( cmd_ptr ){
+            *cmd_ptr = commandData_ptr;
+        }
+        return true;
+    }
+
+    return false;
+}
+
+const char* Commander::getHint( int index, bool only_remaining_chars ){
+    if( lastCommandHint && ( lastHint == NULL ) ){
+        if( only_remaining_chars ){
+            return lastCommandHint + lastCommandHintOffset;
+        }
+        return lastCommandHint;
+    }
+
+    if( lastHint ){
+        return lastHint -> getResult( index, only_remaining_chars );
+    }
+    return &empty_string;
+}
+
+int Commander::generateHint( const char *fraction, char *buffer_p, int buffer_size_p ){
+
+    int char_index;
+    int prev_char_index;
+    int i;
+    int number_of_hints;
+
+	// Pointer to the selected command data.
+	systemCommand_t* commandData_ptr;
+
+    lastHint = NULL;
+    lastCommandHint = NULL;
+    lastCommandHintOffset = 0;
+
+    // Check if we have an empty string.
+    if( fraction[ 0 ] == '\0' ){
+        return 0;
+    }
+
+	// Copy the command data to the internal buffer.
+	// It is necessary because we have to modify the content
+	// of it. If it is points to a const char array we will
+	// get a bus-fault error without a buffer.
+	strncpy( tempBuff, fraction, COMMANDER_MAX_COMMAND_SIZE );
+
+    // According to the finding in issue #19 this has to be added to make things more safe.
+    tempBuff[ sizeof( tempBuff ) - 1 ] = '\0';
+
+    // Try to find the first space character.
+    // If we have at least one space characters, that
+    // means, we have a command typed in already.
+    char_index = hasChar( tempBuff, ' ' );
+    if( char_index >= 0 ){
+        tempBuff[ char_index ] = '\0';
+        if( !commandExists( tempBuff, &commandData_ptr ) ){
+            return 0;
+        }
+
+        // If we are here, that means, we found a valid command.
+        // Let's try to extract some help to the command.
+        // Check if help data is added to the object.
+        lastHint = commandData_ptr -> data.help;
+        if( lastHint == NULL ){
+            return 0;
+        }
+
+        // If we have some help, we need to find the second last
+        // space character.        
+
+        // Change back the \0 character to the original state.
+        tempBuff[ char_index ] = ' ';
+
+        i = char_index;
+        while( tempBuff[ i ] ){
+            if( tempBuff[ i ] == ' ' ){
+                prev_char_index = char_index;
+                char_index = i;
+            }
+            i++;
+        }
+
+        // Try to generate a hint from the second last space position. For example 'cat -d '.
+        number_of_hints = lastHint -> generateHint( &tempBuff[ prev_char_index ], buffer_p, buffer_size_p );
+
+        // Check if we gat any help. If not, try with the last space character. For example ' cat -d "txt" '.
+        if( number_of_hints <= 0 ){
+            number_of_hints = lastHint -> generateHint( &tempBuff[ char_index ], buffer_p, buffer_size_p );
+        }
+
+        // Check if we gat any help. If not, try to list anything at all.
+        if( number_of_hints <= 0 ){
+            number_of_hints = lastHint -> generateHint( " ", buffer_p, buffer_size_p );
+        }
+
+        return number_of_hints;
+
+    }
+
+    // If we are here, that means, we has a command which is not
+    // typed fully.
+
+    lastCommandHintOffset = strlen( tempBuff );
+    number_of_hints = regularCommands.completeFragment( tempBuff, buffer_p, buffer_size_p );
+    if( number_of_hints > 0 ){
+        lastCommandHint = buffer_p;
+    }
+    return number_of_hints;
 
 }
