@@ -76,10 +76,6 @@ public:
 
         T data;                             ///< Stored data. It comes from the template, so it can be any type of data.
 
-		#ifdef __AVR__
-		__FlashStringHelper *name_P;        ///< Name of the element( stored in PROGMEM )
-		#endif
-
 	};
 
     /// Empty constructor.
@@ -159,7 +155,7 @@ public:
 
     int completeFragment( const char* fragment, char* buffer, int buffer_size );
 
-private:
+protected:
 	/// Starting address of the API-tree.
 	dataRecord_t* dataTree = NULL;
 
@@ -223,7 +219,11 @@ CommanderDatabase< T >::CommanderDatabase(){
     debugChannel = NULL;
     debugLevel = DEBUG_OFF;
     initFlag = false;
+	strcmpElementElement = &CommanderDatabase::strcmpElementElementRegular;
+	strcmpElementCharArray = &CommanderDatabase::strcmpElementCharArrayRegular;
 
+	strncmpElementElement = &CommanderDatabase::strncmpElementElementRegular;
+	strncmpElementCharArray = &CommanderDatabase::strncmpElementCharArrayRegular;
 }
 
 template< typename T >
@@ -234,7 +234,11 @@ CommanderDatabase< T >::CommanderDatabase( struct dataRecord_t* dataTree_p, uint
     debugChannel = NULL;
     debugLevel = DEBUG_OFF;
     initFlag = false;
+	strcmpElementElement = &CommanderDatabase::strcmpElementElementRegular;
+	strcmpElementCharArray = &CommanderDatabase::strcmpElementCharArrayRegular;
 
+	strncmpElementElement = &CommanderDatabase::strncmpElementElementRegular;
+	strncmpElementCharArray = &CommanderDatabase::strncmpElementCharArrayRegular;
 }
 
 template< typename T >
@@ -497,12 +501,6 @@ bool CommanderDatabase< T >::init(){
     bool swapped;
     int compareResult;
 
-	strcmpElementElement = &CommanderDatabase::strcmpElementElementRegular;
-	strcmpElementCharArray = &CommanderDatabase::strcmpElementCharArrayRegular;
-
-	strncmpElementElement = &CommanderDatabase::strncmpElementElementRegular;
-	strncmpElementCharArray = &CommanderDatabase::strncmpElementCharArrayRegular;
-
     if( ( debugChannel != NULL ) && ( debugLevel >= DEBUG_DEBUG ) ){
         debugChannel -> println( __CONST_TXT__( "Database init start" ) );
         debugChannel -> println( __CONST_TXT__( "Creating alphabetical order..." ) );
@@ -732,7 +730,7 @@ int CommanderDatabase< T >::completeFragment( const char* fragment, char* buffer
 
     fragment_len = strlen( fragment );
 
-    // Thee roo node will be the first element.
+    // Thee root node will be the first element.
 	prev = &dataTree[ 0 ];
 
 	comp_res = ( this ->* strncmpElementCharArray )( prev, fragment, fragment_len );

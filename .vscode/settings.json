@@ -12,7 +12,8 @@
         "xlocale": "cpp",
         "ios": "cpp",
         "xmemory": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "typeinfo": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

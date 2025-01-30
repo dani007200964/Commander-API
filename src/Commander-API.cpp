@@ -181,38 +181,23 @@ bool Commander::executeCommand( const char *cmd ){
 		// If show_description flag is set, than we have to print the description.
 		if( show_description ){
 
-			if( memoryType == MEMORY_REGULAR ){
-
-                //if( caller -> channel != NULL ){
-
-                    // Print the description text to the output channel.
-                    caller -> print( commandData_ptr -> name );
-                    caller -> print( ':' );
-                    caller -> print( ' ' );
-                    caller -> println( commandData_ptr -> data.desc );
-
-                //}
-
-			}
-
-			#ifdef __AVR__
-
-			else if( memoryType == MEMORY_PROGMEM ){
-
-                //if( response != NULL ){
-
-                    // Print the description text to the output channel.
-                    caller -> print( commandData_ptr -> name_P );
-                    caller -> print( ':' );
-                    caller -> print( ' ' );
-                    caller -> println( commandData_ptr -> data.desc_P );
-
-                //}
-
-			}
-
-			#endif
-
+            #ifdef __AVR__
+                caller -> print( commandData_ptr -> name );
+                caller -> print( ':' );
+                caller -> print( ' ' );
+                if( commandData_ptr -> data.desc ){
+                    caller -> print( commandData_ptr -> data.desc );
+                }
+                else if( commandData_ptr -> data.desc_P ){
+                    caller -> print( commandData_ptr -> data.desc_P );
+                }
+                caller -> println();
+            #else
+                caller -> print( commandData_ptr -> name );
+                caller -> print( ':' );
+                caller -> print( ' ' );
+                caller -> println( commandData_ptr -> data.desc );
+            #endif
 
 		}
 
@@ -475,15 +460,8 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
             out -> print( __CONST_TXT__( "\033[1;32m" ) );
         }
 
-        if( memoryType == MEMORY_REGULAR ){
-            //out -> print( API_tree[ find_api_index_by_place( i ) ].name );
-            out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> name );
-        }
-        #ifdef __AVR__
-        else if( memoryType == MEMORY_PROGMEM ){
-            out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> name_P );
-        }
-        #endif
+        //out -> print( API_tree[ find_api_index_by_place( i ) ].name );
+        out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> name );
 
         if( style ){
             out -> print( __CONST_TXT__( "\033[0;37m" ) );
@@ -497,13 +475,15 @@ void Commander::printHelp( Stream* out, bool description, bool style ){
 
         out -> print( __CONST_TXT__( ": " ) );
 
-        if( memoryType == MEMORY_REGULAR ){
-            out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> data.desc );
-        }
         #ifdef __AVR__
-        else if( memoryType == MEMORY_PROGMEM ){
-            out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> data.desc_P );
-        }
+            if( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> data.desc ){
+                out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> data.desc );
+            }
+            else if( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> data.desc_P ){
+                out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> data.desc_P );
+            }
+        #else
+            out -> print( regularCommands[ regularCommands.findIndexByPlace( i ) ] -> data.desc );
         #endif
 
         out -> println();
@@ -571,25 +551,6 @@ int Commander::hasChar( const char* str, char c, int number, bool ignoreString )
     return cntr - 1;
 
 }
-
-/*
-#ifdef __AVR__
-
-int Commander::commander_strcmp_progmem( API_t* element1, API_t* element2 ){
-
-	strncpy_P( progmemBuffer, (	PGM_P ) element1 -> name_P, COMMANDER_MAX_COMMAND_SIZE );
-	return strcmp_P( progmemBuffer, (	PGM_P )element2 -> name_P );
-
-}
-
-int Commander::commander_strcmp_tree_ram_progmem( API_t* element1, const char* element2 ){
-
-	return strcmp_P( element2, (PGM_P)element1 -> name_P ) * -1;
-
-}
-
-#endif
-*/
 
 void Commander::enableFormatting(){
 	formatting = true;

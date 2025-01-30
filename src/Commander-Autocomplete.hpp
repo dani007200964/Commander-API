@@ -37,9 +37,11 @@ SOFTWARE.
 #include <stdint.h>
 #include <string.h>
 
+/*
 #include <wchar.h>
 #include <stdlib.h>
 #include <locale.h>
+*/
 
 #define AUTOCOMPLETE_RESULT_SIZE    10
 

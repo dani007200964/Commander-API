@@ -99,14 +99,24 @@ SOFTWARE.
 /// @param name The name of the command. The best practice is to use a const char array.
 /// @param desc The description of the command. The best practice is to use a const char array.
 /// @param func_arg This function will be called, when this command gets executed.
-#define systemCommand_P( element, name_p, desc_p, func_P ) {  element.place = 0;                              \
+#define systemCommand_P( element, name_p, desc_progmem, func_p ) {  element.place = 0;                              \
                                                             element.left = NULL;                            \
                                                             element.right = NULL;                           \
-                                                            element.name_p = __CONST_TXT__( name );         \
-                                                            element.data.desc_P = __CONST_TXT__( desc );    \
-                                                            element.data.func_p = func;                     \
+                                                            element.name = name_p;         \
+                                                            element.data.desc = NULL;         \
+                                                            element.data.desc_P = __CONST_TXT__( desc_progmem );    \
+                                                            element.data.func = func_p;                     \
                                                          }
-//#define apiElement_P( element, name, desc, func_arg ) { element.name_P = __CONST_TXT__( name ); element.desc_P = __CONST_TXT__( desc ); element.func = func_arg; }
+
+#else
+#define systemCommand_P( element, name_p, desc_progmem, func_p ) {  element.place = 0;                              \
+                                                            element.left = NULL;                            \
+                                                            element.right = NULL;                           \
+                                                            element.name = name_p;         \
+                                                            element.data.desc = __CONST_TXT__( desc_progmem );         \
+                                                            element.data.func = func_p;                     \
+                                                         }
+
 
 #endif
 
@@ -248,14 +258,6 @@ public:
     } systemVariableData_t;
 
     typedef CommanderDatabase<systemVariableData_t>::dataRecord_t systemVariable_t;
-
-	enum memoryType_t{
-		MEMORY_REGULAR,		///< Regular memory implementation
-		MEMORY_PROGMEM		///< Progmem memory implementation
-	};
-
-	/// Flag for memory type.
-	memoryType_t memoryType = MEMORY_REGULAR;
 
 	/// Attach API-tree to the object.
 	///
@@ -435,32 +437,6 @@ private:
     const char* originalCommandData;
 
 	bool formatting = false;
-
-	#ifdef __AVR__
-
-	/// With the PROGMEM implementation we need to copy the
-	/// data from the PROGMEM area to a buffer for compersation.
-	char progmemBuffer[ COMMANDER_MAX_COMMAND_SIZE + 1 ];
-
-	/// Compare two API-tree element's name.
-	///
-	/// It compares two API-tree element's name like a regular strcmp.
-	/// It compares the names stored in the name_P
-	/// variable. This names are stored in PROGMEM space.
-	/// @param element1 Pointer to an API-tree element.
-	/// @param element2 Pointer to an API-tree element.
-	/// @returns Returns an int value indicating the [relationship](https://cplusplus.com/reference/cstring/strcmp/) between the strings.
-	int commander_strcmp_progmem( API_t* element1, API_t* element2 );
-
-	/// Compare an API-tree element's name with a regular string.
-	///
-	/// It compares an API-tree element's name with a regular string like a regular strcmp.
-	/// @param element1 Pointer to an API-tree element.
-	/// @param element2 Character array.
-	/// @returns Returns an int value indicating the [relationship](https://cplusplus.com/reference/cstring/strcmp/) between the strings.
-	int commander_strcmp_tree_ram_progmem( API_t* element1, const char* element2 );
-
-	#endif
 
 	/// Flag to enable or disable debug messages.
 	static debugLevel_t debugLevel;

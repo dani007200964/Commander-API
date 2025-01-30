@@ -200,7 +200,7 @@ int main(){
     int num_of_hints;
     int i;
 
-    num_of_hints = commander.generateHint( "cat --reboot ", buffer, buffer_size );
+    num_of_hints = commander.generateHint( "cat --reboot", buffer, buffer_size );
     stdioChannel.print( "number of hints: " );
     stdioChannel.println( num_of_hints );
     for( i = 0; i < num_of_hints; i++ ){
