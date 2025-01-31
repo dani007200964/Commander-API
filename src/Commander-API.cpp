@@ -813,7 +813,7 @@ int Commander::floatToString( float number, char* buffer, int bufferSize ){
         bufferSize--;
     }
     else{
-        status = snprintf( buffer, bufferSize, "%d.%0*d", decimalPart, 2, fractionPart );
+        status = snprintf( buffer, bufferSize, "%d.%02d", decimalPart, fractionPart );
     }
 
     // If we had to print a '-' character because a negative number,

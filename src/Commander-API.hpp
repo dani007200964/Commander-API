@@ -139,42 +139,14 @@ SOFTWARE.
 /// With this macro you can fill the system variable table easily.
 /// @param name The name of the int variable.
 /// @note Do not use & operator before the name. Just use the name, the macro will handle the rest.
-#define systemVariableInt( name ) { 0, NULL, NULL, #name, { Commander::VARIABLE_INT, { (float*)&name } } }
+#define systemVariableInt( name ) { 0, NULL, NULL, #name, { Commander::VARIABLE_INT, { (float*)&name } } } // It is an union, this is why (float*) casting required.
 
 /// This macro simplifies the char* or const char* type system variable creation.
 ///
 /// With this macro you can fill the system variable table easily.
 /// @param name The name of the char* or const char* variable.
 /// @note Do not use & operator before the name. Just use the name, the macro will handle the rest. Also, no const casting is needed.
-#define systemVariableString( name ) { 0, NULL, NULL, #name, { Commander::VARIABLE_STRING, { (float*)name } } }
-
-#ifdef __AVR__
-
-/// This macro simplifies the float type system variable creation for PROGMEM implementation.
-///
-/// With this macro you can fill the system variable table easily.
-/// @param element One element in the system variables table.
-/// @param name The name of the float variable.
-/// @note Do not use & operator before the name. Just use the name, the macro will handle the rest.
-#define systemVariableFloat_P( element, name ) { element.name_P = __CONST_TXT__( name ); element.floatData = &name; element.intData = NULL; element.strData = NULL; element.name = NULL; }
-
-/// This macro simplifies the int type system variable creation for PROGMEM implementation.
-///
-/// With this macro you can fill the system variable table easily.
-/// @param element One element in the system variables table.
-/// @param name The name of the char* or const char* variable.
-/// @note Do not use & operator before the name. Just use the name, the macro will handle the rest. Also, no const casting is needed.
-#define systemVariableInt_P( element, name ) { element.name_P = __CONST_TXT__( name ); element.floatData = NULL; element.intData = &name; element.strData = NULL; element.name = NULL; }
-
-/// This macro simplifies the char* or const char* type system variable creation for PROGMEM implementation.
-///
-/// With this macro you can fill the system variable table easily.
-/// @param element One element in the system variables table.
-/// @param name The name of the int variable.
-/// @note Do not use & operator before the name. Just use the name, the macro will handle the rest.
-#define systemVariableString_P( element, name ) { element.name_P = __CONST_TXT__( name ); element.floatData = NULL; element.intData = NULL; element.strData = (char*)name; element.name = NULL; }
-
-#endif
+#define systemVariableString( name ) { 0, NULL, NULL, #name, { Commander::VARIABLE_STRING, { (float*)name } } } // It is an union, this is why (float*) casting required.
 
 /// This macro simplifies the attachment of the system variable table.
 ///
