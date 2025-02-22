@@ -6,23 +6,23 @@ Commander-API is an easy-to-use command parser library designed for microcontrol
 
 # 🔄 What’s New?  
 
-### 🏗 Argument Handling  
+### </> Argument Handling  
 We’re really proud of this feature! Now you can easily and efficiently add arguments to your commands. The argument parser extracts the parameters you need from the raw argument string and even **automatically parses them into strings, floats, and integers** for convenience.  
 
 ### 🌍 Environment Variables  
-Access and modify C++ variables directly! This makes it much easier to tweak system parameters at runtime. Hopefully, tuning your **PID controller** just got a whole lot easier. 😉  
+Access and modify variables from the command parser in the C++ domain directly! This makes it much easier to tweak system parameters at runtime. Hopefully, tuning your **PID controller** just got a whole lot easier. 😉  
 
 ### 🔧 Major Refactoring  
 We know "refactoring" isn’t the most exciting word—especially when it affects backward compatibility—but we believe in improving the project. We put a **huge amount of effort** into optimizing the internal structure (including a new **template-based database**—more on that later) to make Commander-API **faster, cleaner, and more scalable**.  
 
 ### 📂 Database Overhaul  
-This was one of our biggest tasks! The command storage system, previously tied to Commander, has been modularized for **broader use cases** (like environment variables). We also removed **recursion** entirely—even during initialization—so **embedded developers can breathe a sigh of relief**.  
+This was one of our biggest tasks! The command storage system, previously tied to Commander class, has been modularized for **broader use cases** (like environment variables). We also removed **recursion** entirely—even during initialization—so **embedded developers can breathe a sigh of relief**.  
 
 ### ⌨️ Auto-Complete (Experimental)  
 We’re working on it! Early results are promising, but for now, **we don’t recommend using it yet**. Stay tuned!  
 
 ### 🔌 Abstraction Layers  
-As the project grew, we realized it was time to **increase abstraction** for better integration into complex systems. That’s why we introduced the **CommandCaller interface**, making it easier to integrate Commander-API into larger projects.  
+As the project grew, we realized it was time to **increase abstraction** for better integration into complex systems. For example, that’s why we introduced the **CommandCaller interface**, making it easier to integrate Commander-API into larger projects.  
 
 ### 📡 Pipe Module (Almost Ready!)  
 We’re finalizing a **refactored version** of the Pipe module, which should be **more stable, easier to configure, and more flexible** than before. We just need a bit more time to document it—stay tuned for updates!  
@@ -35,7 +35,7 @@ We had to say goodbye to built-in system commands. 😢 The reason? It was nearl
 
 # 📚 Documentation  
 
-Commander-API has its own [technical documentation](https://www.commanderapi.org/html/index.html), but **most of the examples are found in the Shellminator documentation**. The Commander-specific docs are for those who want to **dive deep** into how it works under the hood. If you’re impatient, you might even find some **spoilers** about upcoming features!  
+Commander-API has its own [technical documentation](https://www.commanderapi.org/html/index.html), but [most of the examples are found in the Shellminator documentation](https://www.shellminator.org/html/index.html). The Commander-specific docs are for those who want to **dive deep** into how it works under the hood. If you’re impatient, you might even find some **spoilers** about upcoming features!  
 
 # 🤝 Feedback and Contributions  
 
@@ -54,6 +54,13 @@ Every contribution, big or small, helps us grow!
 
 If this project has been helpful to you and you’d like to **buy us a coffee**, we’d really appreciate it! ☕ Every little bit helps keep this small team motivated.
 [![Support](extras/Assets/DocuImages/support.png)](https://ko-fi.com/danielhajnal)
+
+# 🌐 Useful Links  
+
+- [Discussions](https://github.com/dani007200964/Commander-API/discussions) – Join the conversation and share your ideas!  
+- [Technical Documentation](https://www.commanderapi.org/html/index.html) – Deep dive into Commander-API.  
+- [Shellminator](https://www.shellminator.org/html/index.html) – Companion project with additional resources.  
+- [Discord](https://discord.gg/GhMGqhBS) – Part of the Shellminator Discord server. Come chat with us!  
 
 # 🗨️ Contact  
 
