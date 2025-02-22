@@ -7,6 +7,13 @@
         "utility": "cpp",
         "xutility": "cpp",
         "cmath": "cpp",
-        "initializer_list": "cpp"
-    }
+        "initializer_list": "cpp",
+        "xstring": "cpp",
+        "xlocale": "cpp",
+        "ios": "cpp",
+        "xmemory": "cpp",
+        "system_error": "cpp",
+        "typeinfo": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

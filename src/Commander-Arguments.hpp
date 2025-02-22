@@ -165,7 +165,7 @@ public:
     bool parseStringFunction( char* buffer, int bufferSize );
     bool find();
     bool isFound();
-    Commander::SystemVariable_t* getSystemVariable();
+    Commander::systemVariable_t* getSystemVariable();
 
 private:
 
@@ -202,11 +202,10 @@ private:
     // If long named argument is used, this will store pointer to its long name.
     const char* longName = NULL;
 
-    Commander::SystemVariable_t* systemVariable = NULL;
+    // Pointer to a system variable if it is found.
+    // If not, it will be NULL.
+    Commander::systemVariable_t* systemVariable = NULL;
 
-
-    //bool parsed = false;
-    //bool found = false;
 
     boolFields bFields;
 
@@ -216,15 +215,49 @@ private:
     //char* outStringBuffer = NULL;
     static const char failedString;
 
+    /// Find the start position of a short named argument.
+    ///
+    /// This function will return the position( index ) of the
+    /// start location of a short named argument, if the argument
+    /// is found in the source string.
+    /// @returns The index of the argument. If the argument is not found,
+    ///          it will return a negative number.
+    /// @note If the short argument name is found, it will return the index
+    ///       of the first character of the argument. If the first character
+    ///       is a string terminator, it will return its index as well. It is
+    ///       necessary to find arguments without argument data( flags ).
     int findShortName();
+
+    /// Find the start position of a long named argument.
+    ///
+    /// This function will return the position( index ) of the
+    /// start location of a long named argument, if the argument
+    /// is found in the source string.
+    /// @returns The index of the argument. If the argument is not found,
+    ///          it will return a negative number.
+    /// @note If the short argument name is found, it will return the index
+    ///       of the first character of the argument. If the first character
+    ///       is a string terminator, it will return its index as well. It is
+    ///       necessary to find arguments without argument data( flags ).
     int findLongName();
-    int findPlace();
+
+    /// Find the start position of a place dependent argument.
+    ///
+    /// This function will return the position( index ) of the
+    /// start location of a place dependent argument, if the argument
+    /// is found in the source string.
+    /// @returns The index of the argument. If the argument is not found,
+    ///          it will return a negative number.
+    int findByPlace();
 
     int findStart();
 
     bool inString( int index );
 
     int substring( char* str1, char* str2 );
+
+    // For unit testing.
+    friend class ArgumentUT;
 
 };
 

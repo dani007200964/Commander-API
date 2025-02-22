@@ -1,7 +1,0 @@
-<map id="Commander::executeCommand" name="Commander::executeCommand">
-<area shape="rect" id="node1" title="Command execution." alt="" coords="5,35,211,60"/>
-<area shape="rect" id="node2" href="$class_commander.html#a9b8d9afbf4e766034a2161109387c7ff" title="Search for a character in a string." alt="" coords="260,8,408,33"/>
-<area shape="rect" id="node4" href="$class_commander.html#a0fab647689fcd4557145386ff585aec1" title="Print the help text to a specified Stream." alt="" coords="259,59,409,84"/>
-<area shape="rect" id="node3" href="$class_commander.html#a80f04d459243886a6d92bce2a15eea5e" title="Detect if character is in the string." alt="" coords="457,5,601,31"/>
-<area shape="rect" id="node5" href="$class_commander.html#a8634a1c3c680d0a598fa8b6b5445ca39" title="Find an API element in the tree by alphabetical place." alt="" coords="457,55,601,95"/>
-</map>

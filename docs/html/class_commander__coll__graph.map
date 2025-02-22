@@ -1,8 +1,0 @@
-<map id="Commander" name="Commander">
-<area shape="rect" id="node1" title="Commander class." alt="" coords="291,344,506,1117"/>
-<area shape="rect" id="node2" href="$struct_commander_1_1_a_p_i__t.html" title="Structure for command data." alt="" coords="5,117,141,245"/>
-<area shape="rect" id="node3" href="$struct_commander_1_1_system_variable__t.html" title="Structure for system variable data." alt="" coords="223,124,430,237"/>
-<area shape="rect" id="node4" href="$classcommand_response.html" title="Default response class." alt="" coords="455,124,596,237"/>
-<area shape="rect" id="node5" title=" " alt="" coords="579,5,647,45"/>
-<area shape="rect" id="node6" href="$classcommander_pipe_channel.html" title=" " alt="" coords="621,95,787,267"/>
-</map>

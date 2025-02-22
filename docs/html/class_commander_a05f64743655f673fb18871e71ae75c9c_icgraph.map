@@ -1,6 +1,0 @@
-<map id="Commander::swap_api_elements" name="Commander::swap_api_elements">
-<area shape="rect" id="node1" title="Swap two API elements in the tree." alt="" coords="567,29,721,69"/>
-<area shape="rect" id="node2" href="$class_commander.html#a8415264e9cdf820c7ad1872cc36811bd" title="Recursive function optimize a section in the tree." alt="" coords="368,29,519,69"/>
-<area shape="rect" id="node3" href="$class_commander.html#ad435a3490d9ae4b4dda2c88e2fbf0421" title="Optimizes the tree to make it balanced." alt="" coords="171,29,320,69"/>
-<area shape="rect" id="node4" href="$class_commander.html#a5d9d12c3d15cf350593f4c2b11ec05d8" title="Initializer." alt="" coords="5,37,123,62"/>
-</map>
