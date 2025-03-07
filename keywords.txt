@@ -4,35 +4,67 @@
 # Class
 #######################################
 
-Commander	                    KEYWORD1
-commandResponse                 KEYWORD1
-commandResponseSerial           KEYWORD1
-commandResponseArduinoSerial    KEYWORD1
-commandResponseWiFiClient       KEYWORD1
+Commander   KEYWORD1
+Argument    KEYWORD1
+AutoComplete    KEYWORD1
+CommandCaller   KEYWORD1
+commanderPipeChannel    KEYWORD1
 
 #######################################
 # Methods and Functions
 #######################################
 
-apiElement          KEYWORD2
-attachTree          KEYWORD2
-attachTreeFunction  KEYWORD2
-init                KEYWORD2
-execute             KEYWORD2
-attachDebugChannel  KEYWORD2
-enableDebug         KEYWORD2
-disableDebug        KEYWORD2
+systemCommand  KEYWORD2
+attachTree  KEYWORD2
+systemCommand_P  KEYWORD2
+systemVariableFloat    KEYWORD2
+systemVariableInt KEYWORD2
+systemVariableString  KEYWORD2
+attachVariables KEYWORD2
+enablePipeModule    KEYWORD2
+attachTreeFunction    KEYWORD2
+attachVariablesFunction    KEYWORD2
+getSystemVariable    KEYWORD2
+printSystemVariable    KEYWORD2
+printSystemVariables    KEYWORD2
+init    KEYWORD2
+execute    KEYWORD2
+attachDebugChannel    KEYWORD2
+setDebugLevel    KEYWORD2
+printHelp    KEYWORD2
+enablePipeModuleFunc    KEYWORD2
+enableFormatting    KEYWORD2
+disableFormatting    KEYWORD2
+printArgumentError    KEYWORD2
+inString    KEYWORD2
+update    KEYWORD2
+floatToString    KEYWORD2
+commandExists    KEYWORD2
+generateHint    KEYWORD2
+getHint    KEYWORD2
+parseInt    KEYWORD2
+parseFloat    KEYWORD2
+parseStringFunction    KEYWORD2
+find    KEYWORD2
+isFound    KEYWORD2
+getSystemVariable    KEYWORD2
 
 
 #######################################
 # Structures
 #######################################
 
-API_t               KEYWORD2
+debugLevel_t   KEYWORD2
+API_t   KEYWORD2
+systemCommand_t   KEYWORD2
+systemVariableType_t   KEYWORD2
+systemVariablePointer_t   KEYWORD2
+systemVariableData_t   KEYWORD2
+systemVariable_t   KEYWORD2
 
 #######################################
 # Constants
 #######################################
 
-COMMANDER_MAX_COMMAND_SIZE      LITERAL1
-COMMAND_PRINTF_BUFF_LEN         LITERAL1
+COMMANDER_MAX_COMMAND_SIZE  LITERAL1
+COMMAND_PRINTF_BUFF_LEN LITERAL1

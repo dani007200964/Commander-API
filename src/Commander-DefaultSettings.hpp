@@ -78,7 +78,7 @@ SOFTWARE.
 
 /// Maximum length of the terminal command.
 #ifndef COMMANDER_MAX_COMMAND_SIZE
-  #define COMMANDER_MAX_COMMAND_SIZE 100
+  #define COMMANDER_MAX_COMMAND_SIZE 40
 #endif
 
 /// This macro can be used create a buffer for piping.

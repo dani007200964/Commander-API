@@ -21,7 +21,7 @@ This was one of our biggest tasks! The command storage system, previously tied t
 ### ⌨️ Auto-Complete (Experimental)  
 We’re working on it! Early results are promising, but for now, **we don’t recommend using it yet**. Stay tuned!  
 
-### 🔌 Abstraction Layers  
+### 📦 Abstraction Layers  
 As the project grew, we realized it was time to **increase abstraction** for better integration into complex systems. For example, that’s why we introduced the **CommandCaller interface**, making it easier to integrate Commander-API into larger projects.  
 
 ### 📡 Pipe Module (Almost Ready!)  
@@ -66,7 +66,7 @@ If this project has been helpful to you and you’d like to **buy us a coffee**,
 
 Have a question? Need help? Just want to say hi?  
 - 🗨️ [Join the discussions](https://github.com/dani007200964/Commander-API/discussions)
-- 🎧 [Find us on Discord](https://github.com/dani007200964/Commander-API/discussions)
+- 🎧 [Find us on Discord](https://discord.gg/GhMGqhBS)
 
 We’d love to hear from you! 🚀
 
