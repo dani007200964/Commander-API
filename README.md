@@ -1,43 +1,79 @@
-## Commander-API library
-**Version V2.1.1**
+[![Commander-API](extras/Assets/DocuImages/banner.png)](https://www.commanderapi.org/html/index.html)
 
-Commander-API is a simple-to-use parser library, and you can easily use it to process character based commands and link them to a specified function. It is designed mainly to work with low memory capacity devices, for example, __small ARM or AVR processors__.
+# 🚀 About  
 
-__Key changes in V2.1.1:__
-* AVR PROGMEM support.
-* Piping
-* Ready to use built-in commands
-* Fixes compatibility with Risc-V based ESP32 platforms
+Commander-API is an easy-to-use command parser library designed for microcontroller environments. Thanks to its low resource requirements, it runs on almost any microcontroller. It’s **Arduino-compatible out of the box**, making it accessible for hobbyists and beginner programmers alike.  
 
-__Breaking changes in V2.1.1:__
-* The response channel is now uses the Stream class.
-  This way it is more flexible and you doesn't have to
-  create a class for every peripheral.
+# 🔄 What’s New?  
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+### </> Argument Handling  
+We’re really proud of this feature! Now you can easily and efficiently add arguments to your commands. The argument parser extracts the parameters you need from the raw argument string and even **automatically parses them into strings, floats, and integers** for convenience.  
 
-Please make sure to update tests as appropriate.
+### 🌍 Environment Variables  
+Access and modify variables from the command parser in the C++ domain directly! This makes it much easier to tweak system parameters at runtime. Hopefully, tuning your **PID controller** just got a whole lot easier. 😉  
 
-## Video Tutorial
+### 🔧 Major Refactoring  
+We know "refactoring" isn’t the most exciting word—especially when it affects backward compatibility—but we believe in improving the project. We put a **huge amount of effort** into optimizing the internal structure (including a new **template-based database**—more on that later) to make Commander-API **faster, cleaner, and more scalable**.  
 
-[![Tutorial VIdeo](https://img.youtube.com/vi/O2su8kXg1X8/0.jpg)](https://www.youtube.com/watch?v=O2su8kXg1X8)
+### 📂 Database Overhaul  
+This was one of our biggest tasks! The command storage system, previously tied to Commander class, has been modularized for **broader use cases** (like environment variables). We also removed **recursion** entirely—even during initialization—so **embedded developers can breathe a sigh of relief**.  
 
-## Documentation
+### ⌨️ Auto-Complete (Experimental)  
+We’re working on it! Early results are promising, but for now, **we don’t recommend using it yet**. Stay tuned!  
 
-The full documentation can be found [here](https://dani007200964.github.io/Commander-API/html/index.html).
+### 📦 Abstraction Layers  
+As the project grew, we realized it was time to **increase abstraction** for better integration into complex systems. For example, that’s why we introduced the **CommandCaller interface**, making it easier to integrate Commander-API into larger projects.  
 
-## Donation
-If this project help you reduce time to develop, you can give me a cup of coffee :coffee: :coffee: :coffee:
+### 📡 Pipe Module (Almost Ready!)  
+We’re finalizing a **refactored version** of the Pipe module, which should be **more stable, easier to configure, and more flexible** than before. We just need a bit more time to document it—stay tuned for updates!  
 
-[<img src="docs/images/ko_fi_button.png" height="48">](https://ko-fi.com/danielhajnal)
+### 📖 Better Documentation  
+We finally invested the time to create **a user-friendly, well-organized, and example-rich documentation**. It’s available as part of the **Shellminator documentation**, so check it out!  
 
+### ❌ Removal of Built-in Commands  
+We had to say goodbye to built-in system commands. 😢 The reason? It was nearly impossible to create a **one-size-fits-all** solution for every microcontroller. The implementation became messy, and it wasn’t fun to look at. **The good news:** We have a new approach in mind, and we’re actively working on a solution!  
 
-## License & copyright
+# 📚 Documentation  
+
+Commander-API has its own [technical documentation](https://www.commanderapi.org/html/index.html), but [most of the examples are found in the Shellminator documentation](https://www.shellminator.org/html/index.html). The Commander-specific docs are for those who want to **dive deep** into how it works under the hood. If you’re impatient, you might even find some **spoilers** about upcoming features!  
+
+# 🤝 Feedback and Contributions  
+
+We've poured **a lot of time and effort** into making this project **stable and easy to use**, but no software is perfect. Bugs happen. Features can improve. And that’s where you come in!  
+
+If you have **feature suggestions, bug reports, or ideas for enhancements**, we’d love to hear from you. Your feedback makes Commander-API better for everyone!  
+
+**Ways to contribute:**  
+- 🐛 [Submit an issue](https://github.com/dani007200964/Commander-API/issues/new?template=bug_report.md) 
+- 💬 [Join discussions](https://github.com/dani007200964/Commander-API/discussions)
+- 🛠 [Share your use cases](https://github.com/dani007200964/Commander-API/discussions/categories/show-and-tell) 
+
+Every contribution, big or small, helps us grow!  
+
+# ❤️ Support  
+
+If this project has been helpful to you and you’d like to **buy us a coffee**, we’d really appreciate it! ☕ Every little bit helps keep this small team motivated.
+[![Support](extras/Assets/DocuImages/support.png)](https://ko-fi.com/danielhajnal)
+
+# 🌐 Useful Links  
+
+- [Discussions](https://github.com/dani007200964/Commander-API/discussions) – Join the conversation and share your ideas!  
+- [Technical Documentation](https://www.commanderapi.org/html/index.html) – Deep dive into Commander-API.  
+- [Shellminator](https://www.shellminator.org/html/index.html) – Companion project with additional resources.  
+- [Discord](https://discord.gg/GhMGqhBS) – Part of the Shellminator Discord server. Come chat with us!  
+
+# 🗨️ Contact  
+
+Have a question? Need help? Just want to say hi?  
+- 🗨️ [Join the discussions](https://github.com/dani007200964/Commander-API/discussions)
+- 🎧 [Find us on Discord](https://discord.gg/GhMGqhBS)
+
+We’d love to hear from you! 🚀
+
+# 📃 License  
+
+Commander-API is licensed under the **MIT License**.
+
 © Daniel Hajnal
 
-:email: hajnal.daniel96@gmail.com
-
-Licensed under the MIT License
-
-![](/docs/images/footer_image.png)
+✉️ hajnal.daniel96@gmail.com

@@ -1,8 +1,0 @@
-<map id="Commander::execute" name="Commander::execute">
-<area shape="rect" id="node1" title="Execution function for Serial response." alt="" coords="5,107,152,133"/>
-<area shape="rect" id="node2" href="$class_commander.html#a31be5be6e4b41cec2f2f836969fe7932" title="Command execution." alt="" coords="200,107,405,133"/>
-<area shape="rect" id="node3" href="$classcommander_pipe_channel.html#ad67f75499feea46a4f1cb71a0b98587b" title="Available bytes in the channel." alt="" coords="459,5,622,45"/>
-<area shape="rect" id="node4" href="$class_commander.html#a79a36c570d33547d859fa0c9c6fc99d6" title="Search for a character in a string." alt="" coords="467,70,615,95"/>
-<area shape="rect" id="node5" href="$class_commander.html#a578efc09c061fd0c784fabc2844d2c40" title="Help function." alt="" coords="453,143,628,169"/>
-<area shape="rect" id="node6" href="$classcommander_pipe_channel.html#ac94b25ee07795603b3197f4c289efe92" title="Read one byte form the channel." alt="" coords="459,193,622,233"/>
-</map>

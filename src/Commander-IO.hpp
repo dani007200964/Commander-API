@@ -39,7 +39,7 @@ SOFTWARE.
 #include <stddef.h>
 #include <stdarg.h>
 
-#include "Commander-Settings.hpp"
+#include "Commander-DefaultSettings.hpp"
 
 #include "Stream.h"
 
@@ -57,83 +57,42 @@ SOFTWARE.
 	#endif
 #endif
 
-/// Default response class.
-///
-/// This base class is responsible to create a communication
-/// channel between the function associated with a command
-/// and the sender entity. This entity can be anything like
-/// Serial, Client...
-/// Because every function in this class is virtual, it means
-/// that they can be overridden with subclasses. It is useful,
-/// because if we make a subclass for every entity that can
-/// communicate with Commander, we can automatically pair the
-/// right function for that entity. The base class doesn't do
-/// much. To make it any use, we have to create a subclass
-/// for it like below.
-class commandResponse : public Stream{
-
-public:
-
-	/// Available bytes in the channel.
-  ///
-  /// @returns The available bytes in the channel. Because it is the base class, it returns 0.
-  int    available()                               	{ return 0;  }
-
-  /// Read one byte form the channel.
-  ///
-  /// @returns Read and return one byte form the channel. The byte will be removed from the channel. Because it is the base class, it returns -1.
-  int    read()                                    	{ return -1; }
-
-  /// Peek the firtst byte from the channel.
-  ///
-  /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel. Because it is the base class, it returns 0.
-  int    peek()                                    	{ return 0;  }
-
-  /// Flush the channel.
-  void   flush()                                   	{ return;    }
-
-  /// Write one byte to the channel.
-  ///
-  /// @param b The value that has to be written to the channel.
-  /// @returns The number of bytes that has been sucessfully written to the channel. Because it is the base class, it returns 0.
-  size_t write( uint8_t b )                        	{ return 0;  }
-
-};
-
 class commanderPipeChannel : public Stream{
 
 public:
 
-  /// Available bytes in the channel.
-  ///
-  /// @returns The available bytes in the channel.
-  int    available() override;
+    /// Available bytes in the channel.
+    ///
+    /// @returns The available bytes in the channel.
+    int available() override;
 
-  /// Read one byte form the channel.
-  ///
-  /// @returns Read and return one byte form the channel. The byte will be removed from the channel.
-	int    read() override;
+    /// Read one byte form the channel.
+    ///
+    /// @returns Read and return one byte form the channel. The byte will be removed from the channel.
+	int read() override;
 
-  /// Peek the firtst byte from the channel.
-  ///
-  /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel.
-	int    peek() override;
+    /// Peek the firtst byte from the channel.
+    ///
+    /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel.
+	int peek() override;
 
-  /// Flush the channel.
-	void   flush() override;
+    /// Flush the channel.
+	void flush() override;
 
-  /// Write one byte to the channel.
-  ///
-  /// @param b The value that has to be written to the channel.
-  /// @returns The number of bytes that has been sucessfully written to the channel. Because it is the base class, it returns 0.
+    /// Write one byte to the channel.
+    ///
+    /// @param b The value that has to be written to the channel.
+    /// @returns The number of bytes that has been successfully written to the channel. Because it is the base class, it returns 0.
 	size_t write( uint8_t b ) override;
 
 	size_t write( const uint8_t *buffer, size_t size ) override;
 
 private:
-	uint8_t buffer[ COMMANDER_MAX_COMMAND_SIZE ];
+	uint8_t buffer[ COMMANDER_MAX_COMMAND_SIZE + 1 ];
 	uint32_t readPointer = 0;
 	uint32_t writePointer = 0;
+
+    friend class commanderPipeChannelUT;
 
 };
 

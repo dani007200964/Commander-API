@@ -1,5 +1,0 @@
-<map id="commandResponseArduino32U4Serial::select" name="commandResponseArduino32U4Serial::select">
-<area shape="rect" id="node1" title=" " alt="" coords="273,23,468,63"/>
-<area shape="rect" id="node2" href="$class_commander.html#a6e6a11fc834ba36355363231a930287d" title="Debug channel for Arduino Serial." alt="" coords="5,5,225,31"/>
-<area shape="rect" id="node3" href="$class_commander.html#a54cf671149f35864fceb1ef1646f8db6" title="Execution function for Arduino Serial response." alt="" coords="42,55,189,80"/>
-</map>

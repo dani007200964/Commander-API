@@ -1,7 +1,0 @@
-<map id="Commander::find_api_index_by_place" name="Commander::find_api_index_by_place">
-<area shape="rect" id="node1" title="Find an API element in the tree by alphabetical place." alt="" coords="769,29,913,69"/>
-<area shape="rect" id="node2" href="$class_commander.html#a05f64743655f673fb18871e71ae75c9c" title="Swap two API elements in the tree." alt="" coords="567,29,721,69"/>
-<area shape="rect" id="node3" href="$class_commander.html#a8415264e9cdf820c7ad1872cc36811bd" title="Recursive function optimize a section in the tree." alt="" coords="368,29,519,69"/>
-<area shape="rect" id="node4" href="$class_commander.html#ad435a3490d9ae4b4dda2c88e2fbf0421" title="Optimizes the tree to make it balanced." alt="" coords="171,29,320,69"/>
-<area shape="rect" id="node5" href="$class_commander.html#a5d9d12c3d15cf350593f4c2b11ec05d8" title="Initializer." alt="" coords="5,37,123,62"/>
-</map>
